@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/server/LootTableRegistry.java	2016-06-04 07:22:36.317601223 -0700
++++ src/main/java/net/minecraft/server/LootTableRegistry.java	2016-06-04 09:30:31.247760700 -0700
+@@ -126,8 +126,8 @@
+             }
+         }
+ 
+-        public Object load(Object object) throws Exception {
+-            return this.a((MinecraftKey) object);
++        public LootTable load(MinecraftKey object) throws Exception { // Fountain: Fix decompiler error
++            return this.a(object);
+         }
+ 
+         a(LootTableRegistry.SyntheticClass_1 loottableregistry_syntheticclass_1) {

@@ -1,0 +1,29 @@
+--- minecraft/src/net/minecraft/server/World.java	2016-06-04 07:22:29.137580291 -0700
++++ src/main/java/net/minecraft/server/World.java	2016-06-04 08:53:45.426349291 -0700
+@@ -2067,7 +2067,7 @@
+         while (iterator.hasNext()) {
+             Entity entity = (Entity) iterator.next();
+ 
+-            if (oclass.isAssignableFrom(entity.getClass()) && predicate.apply(entity)) {
++            if (oclass.isAssignableFrom(entity.getClass()) && predicate.apply((T) entity)) { // Fountain: Fix decompiler error
+                 arraylist.add(entity);
+             }
+         }
+@@ -2082,7 +2082,7 @@
+         while (iterator.hasNext()) {
+             Entity entity = (Entity) iterator.next();
+ 
+-            if (oclass.isAssignableFrom(entity.getClass()) && predicate.apply(entity)) {
++            if (oclass.isAssignableFrom(entity.getClass()) && predicate.apply((T) entity)) { // Fountain: Fix decompiler error
+                 arraylist.add(entity);
+             }
+         }
+@@ -2131,7 +2131,7 @@
+             }
+         }
+ 
+-        return entity;
++        return (T) entity;
+     }
+ 
+     @Nullable

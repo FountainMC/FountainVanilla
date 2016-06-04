@@ -1,0 +1,3 @@
+[submodule "builddata"]
+	path = builddata
+	url = https://hub.spigotmc.org/stash/scm/spigot/builddata.git

@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/server/MethodProfiler.java	2016-06-04 07:22:27.589575781 -0700
++++ src/main/java/net/minecraft/server/MethodProfiler.java	2016-06-04 09:31:53.592126784 -0700
+@@ -152,8 +152,8 @@
+             return methodprofiler_profilerinfo.a < this.a ? -1 : (methodprofiler_profilerinfo.a > this.a ? 1 : methodprofiler_profilerinfo.c.compareTo(this.c));
+         }
+ 
+-        public int compareTo(Object object) {
+-            return this.a((MethodProfiler.ProfilerInfo) object);
++        public int compareTo(MethodProfiler.ProfilerInfo object) { // Fountain: Fix decompiler error
++            return this.a(object);
+         }
+     }
+ }

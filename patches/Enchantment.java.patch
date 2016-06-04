@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/Enchantment.java	2016-06-04 07:22:41.249615610 -0700
++++ src/main/java/net/minecraft/server/Enchantment.java	2016-06-04 09:18:24.903853584 -0700
+@@ -18,7 +18,7 @@
+     }
+ 
+     public static int getId(Enchantment enchantment) {
+-        return Enchantment.enchantments.a((Object) enchantment);
++        return Enchantment.enchantments.a(enchantment); // Fountain: Fix decompiler error
+     }
+ 
+     @Nullable

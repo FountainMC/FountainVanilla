@@ -1,0 +1,19 @@
+--- minecraft/src/net/minecraft/server/Scoreboard.java	2016-06-04 07:22:34.585596173 -0700
++++ src/main/java/net/minecraft/server/Scoreboard.java	2016-06-04 09:33:14.596478891 -0700
+@@ -37,14 +37,14 @@
+                 throw new IllegalArgumentException("An objective with the name \'" + s + "\' already exists!");
+             } else {
+                 scoreboardobjective = new ScoreboardObjective(this, s, iscoreboardcriteria);
+-                Object object = (List) this.objectivesByCriteria.get(iscoreboardcriteria);
++                List<ScoreboardObjective> object = this.objectivesByCriteria.get(iscoreboardcriteria); // Fountain: Fix decompiler error
+ 
+                 if (object == null) {
+                     object = Lists.newArrayList();
+                     this.objectivesByCriteria.put(iscoreboardcriteria, object);
+                 }
+ 
+-                ((List) object).add(scoreboardobjective);
++                object.add(scoreboardobjective); // Fountain: Fix decompiler error
+                 this.objectivesByName.put(s, scoreboardobjective);
+                 this.handleObjectiveAdded(scoreboardobjective);
+                 return scoreboardobjective;

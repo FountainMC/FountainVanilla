@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/server/EntityInsentient.java	2016-06-04 07:22:39.929611759 -0700
++++ src/main/java/net/minecraft/server/EntityInsentient.java	2016-06-04 08:45:36.630056875 -0700
+@@ -75,9 +75,8 @@
+     }
+ 
+     public float a(PathType pathtype) {
+-        Float float = (Float) this.bA.get(pathtype);
+-
+-        return float == null ? pathtype.a() : float.floatValue();
++        float f = (float) this.bA.get(pathtype); // Fountain: Fix decompiler error
++        return f == null ? pathtype.a() : f.floatValue();
+     }
+ 
+     public void a(PathType pathtype, float f) {

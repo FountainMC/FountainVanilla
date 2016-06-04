@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/server/DataWatcherRegistry.java	2016-06-04 07:22:15.705541171 -0700
++++ src/main/java/net/minecraft/server/DataWatcherRegistry.java	2016-06-04 08:20:56.391669633 -0700
+@@ -42,8 +42,8 @@
+         }
+     };
+     public static final DataWatcherSerializer<Float> c = new DataWatcherSerializer() {
+-        public void a(PacketDataSerializer packetdataserializer, Float float) {
+-            packetdataserializer.writeFloat(float.floatValue());
++        public void a(PacketDataSerializer packetdataserializer, Float f) { // Fountain: Fix decompiler error
++            packetdataserializer.writeFloat(f.floatValue());
+         }
+ 
+         public Float b(PacketDataSerializer packetdataserializer) {
