@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/item/crafting/ShapelessRecipes.java	2016-06-05 00:35:46.249221266 -0700
++++ src/main/java/net/minecraft/item/crafting/ShapelessRecipes.java	2016-06-05 12:27:08.744170098 -0700
+@@ -37,7 +37,7 @@
+    }
+ 
+    public boolean matches(InventoryCrafting var1, World var2) {
+-      ArrayList var3 = Lists.newArrayList(this.recipeItems);
++      ArrayList<ItemStack> var3 = Lists.newArrayList(this.recipeItems);
+ 
+       for(int var4 = 0; var4 < var1.getHeight(); ++var4) {
+          for(int var5 = 0; var5 < var1.getWidth(); ++var5) {

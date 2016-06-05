@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/profiler/Snooper.java	2016-06-05 00:35:22.609175446 -0700
++++ src/main/java/net/minecraft/profiler/Snooper.java	2016-06-05 12:28:40.752538747 -0700
+@@ -78,7 +78,7 @@
+ 
+    private void addJvmArgsToSnooper() {
+       RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
+-      List var2 = var1.getInputArguments();
++      List<String> var2 = var1.getInputArguments();
+       int var3 = 0;
+ 
+       for(String var5 : var2) {

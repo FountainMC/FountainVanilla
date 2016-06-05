@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/command/server/CommandAchievement.java	2016-06-04 22:54:42.209731970 -0700
-+++ src/main/java/net/minecraft/command/server/CommandAchievement.java	2016-06-04 23:35:22.810932314 -0700
+--- minecraft/src/net/minecraft/command/server/CommandAchievement.java	2016-06-05 00:35:07.341147011 -0700
++++ src/main/java/net/minecraft/command/server/CommandAchievement.java	2016-06-05 12:01:57.736657497 -0700
 @@ -68,7 +68,7 @@
                             throw new CommandException("commands.achievement.alreadyHave", new Object[]{var5.getName(), var4.createChatComponent()});
                          }
@@ -9,7 +9,7 @@
                          for(var9 = Lists.newArrayList(); var8.parentAchievement != null && !var5.getStatFile().hasAchievementUnlocked(var8.parentAchievement); var8 = var8.parentAchievement) {
                             var9.add(var8.parentAchievement);
                          }
-@@ -81,17 +81,12 @@
+@@ -81,12 +81,12 @@
                             throw new CommandException("commands.achievement.dontHave", new Object[]{var5.getName(), var4.createChatComponent()});
                          }
  
@@ -18,11 +18,6 @@
                             public boolean apply(@Nullable Achievement var1) {
                                return var5.getStatFile().hasAchievementUnlocked(var1) && var1 != var4;
                             }
--
--                           // $FF: synthetic method
--                           public boolean apply(Object var1) {
--                              return this.apply((Achievement)var1);
--                           }
                          }));
 -                        ArrayList var20 = Lists.newArrayList(var17);
 +                        ArrayList<Achievement> var20 = Lists.newArrayList(var17);

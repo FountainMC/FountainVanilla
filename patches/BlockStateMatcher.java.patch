@@ -1,18 +1,6 @@
---- minecraft/src/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-04 22:55:00.753727749 -0700
-+++ src/main/java/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-04 23:20:11.288478322 -0700
-@@ -15,11 +15,6 @@
-       public boolean apply(@Nullable IBlockState var1) {
-          return true;
-       }
--
--      // $FF: synthetic method
--      public boolean apply(Object var1) {
--         return this.apply((IBlockState)var1);
--      }
-    };
-    private final BlockStateContainer blockstate;
-    private final Map<IProperty<?>, Predicate<?>> propertyPredicates = Maps.newHashMap();
-@@ -46,7 +41,7 @@
+--- minecraft/src/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-05 00:35:30.161189850 -0700
++++ src/main/java/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-05 11:47:29.680004796 -0700
+@@ -41,7 +41,7 @@
        }
     }
  
@@ -21,13 +9,3 @@
        return var3.apply(var1.getValue(var2));
     }
  
-@@ -58,9 +53,4 @@
-          return this;
-       }
-    }
--
--   // $FF: synthetic method
--   public boolean apply(Object var1) {
--      return this.apply((IBlockState)var1);
--   }
- }

@@ -1,0 +1,34 @@
+--- minecraft/src/net/minecraft/scoreboard/Scoreboard.java	2016-06-05 00:35:26.581182994 -0700
++++ src/main/java/net/minecraft/scoreboard/Scoreboard.java	2016-06-05 12:30:30.740976081 -0700
+@@ -42,7 +42,7 @@
+             throw new IllegalArgumentException("An objective with the name \'" + var1 + "\' already exists!");
+          } else {
+             var3 = new ScoreObjective(this, var1, var2);
+-            Object var4 = (List)this.scoreObjectiveCriterias.get(var2);
++            List<ScoreObjective> var4 = this.scoreObjectiveCriterias.get(var2);
+             if(var4 == null) {
+                var4 = Lists.newArrayList();
+                this.scoreObjectiveCriterias.put(var2, var4);
+@@ -75,7 +75,7 @@
+       if(var1.length() > 40) {
+          throw new IllegalArgumentException("The player name \'" + var1 + "\' is too long!");
+       } else {
+-         Object var3 = (Map)this.entitiesScoreObjectives.get(var1);
++         Map<ScoreObjective, Score> var3 = this.entitiesScoreObjectives.get(var1);
+          if(var3 == null) {
+             var3 = Maps.newHashMap();
+             this.entitiesScoreObjectives.put(var1, var3);
+@@ -137,10 +137,10 @@
+    }
+ 
+    public Collection<Score> getScores() {
+-      Collection var1 = this.entitiesScoreObjectives.values();
+-      ArrayList var2 = Lists.newArrayList();
++      Collection<Map<ScoreObjective, Score>> var1 = this.entitiesScoreObjectives.values();
++      ArrayList<Score> var2 = Lists.newArrayList();
+ 
+-      for(Map var4 : var1) {
++      for(Map<ScoreObjective, Score> var4 : var1) {
+          var2.addAll(var4.values());
+       }
+ 

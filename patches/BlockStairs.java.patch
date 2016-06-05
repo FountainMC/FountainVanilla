@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/block/BlockStairs.java	2016-06-04 22:54:44.965731215 -0700
-+++ src/main/java/net/minecraft/block/BlockStairs.java	2016-06-04 23:33:00.270542612 -0700
+--- minecraft/src/net/minecraft/block/BlockStairs.java	2016-06-05 00:35:10.317152481 -0700
++++ src/main/java/net/minecraft/block/BlockStairs.java	2016-06-05 11:59:24.699439762 -0700
 @@ -222,7 +222,7 @@
  
     @Nullable

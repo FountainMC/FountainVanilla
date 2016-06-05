@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/command/CommandClone.java	2016-06-04 22:55:00.557727783 -0700
-+++ src/main/java/net/minecraft/command/CommandClone.java	2016-06-04 23:39:30.651612209 -0700
+--- minecraft/src/net/minecraft/command/CommandClone.java	2016-06-05 00:35:29.913189374 -0700
++++ src/main/java/net/minecraft/command/CommandClone.java	2016-06-05 12:23:58.335396795 -0700
 @@ -82,10 +82,10 @@
                          }
                       }

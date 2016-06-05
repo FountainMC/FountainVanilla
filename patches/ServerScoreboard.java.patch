@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/scoreboard/ServerScoreboard.java	2016-06-05 00:35:26.641183108 -0700
++++ src/main/java/net/minecraft/scoreboard/ServerScoreboard.java	2016-06-05 12:31:31.553213052 -0700
+@@ -158,10 +158,10 @@
+    }
+ 
+    public void addObjective(ScoreObjective var1) {
+-      List var2 = this.getCreatePackets(var1);
++      List<Packet<?>> var2 = this.getCreatePackets(var1);
+ 
+       for(EntityPlayerMP var4 : this.scoreboardMCServer.getPlayerList().getPlayerList()) {
+-         for(Packet var6 : var2) {
++         for(Packet<?> var6 : var2) {
+             var4.connection.sendPacket(var6);
+          }
+       }
+@@ -183,10 +183,10 @@
+    }
+ 
+    public void sendDisplaySlotRemovalPackets(ScoreObjective var1) {
+-      List var2 = this.getDestroyPackets(var1);
++      List<Packet<?>> var2 = this.getDestroyPackets(var1);
+ 
+       for(EntityPlayerMP var4 : this.scoreboardMCServer.getPlayerList().getPlayerList()) {
+-         for(Packet var6 : var2) {
++         for(Packet<?> var6 : var2) {
+             var4.connection.sendPacket(var6);
+          }
+       }

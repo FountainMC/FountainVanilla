@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/block/BlockPressurePlate.java	2016-06-04 22:54:44.853731245 -0700
-+++ src/main/java/net/minecraft/block/BlockPressurePlate.java	2016-06-04 23:31:06.646232923 -0700
+--- minecraft/src/net/minecraft/block/BlockPressurePlate.java	2016-06-05 00:35:10.193152252 -0700
++++ src/main/java/net/minecraft/block/BlockPressurePlate.java	2016-06-05 12:00:32.968006367 -0700
 @@ -54,7 +54,7 @@
  
     protected int computeRedstoneStrength(World var1, BlockPos var2) {

@@ -1,0 +1,26 @@
+--- minecraft/src/net/minecraft/server/management/UserList.java	2016-06-05 00:35:06.401145292 -0700
++++ src/main/java/net/minecraft/server/management/UserList.java	2016-06-05 12:34:22.529877543 -0700
+@@ -149,12 +149,12 @@
+    }
+ 
+    public void readSavedFile() throws FileNotFoundException {
+-      Collection var1 = null;
++      Collection<UserListEntry> var1 = null;
+       BufferedReader var2 = null;
+ 
+       try {
+          var2 = Files.newReader(this.saveFile, Charsets.UTF_8);
+-         var1 = (Collection)this.gson.fromJson(var2, USER_LIST_ENTRY_TYPE);
++         var1 = this.gson.fromJson(var2, USER_LIST_ENTRY_TYPE);
+       } finally {
+          IOUtils.closeQuietly(var2);
+       }
+@@ -164,7 +164,7 @@
+ 
+          for(UserListEntry var4 : var1) {
+             if(var4.getValue() != null) {
+-               this.values.put(this.getObjectKey(var4.getValue()), var4);
++               this.values.put(this.getObjectKey((K) var4.getValue()), (V) var4);
+             }
+          }
+       }

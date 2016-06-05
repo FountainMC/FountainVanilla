@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
++++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-05 12:35:10.094062012 -0700
+@@ -786,7 +786,7 @@
+          return var5;
+       } else {
+          boolean var7 = !var2.contains(" ");
+-         List var8 = this.commandManager.getTabCompletionOptions(var1, var2, var3);
++         List<String> var8 = this.commandManager.getTabCompletionOptions(var1, var2, var3);
+          if(!var8.isEmpty()) {
+             for(String var10 : var8) {
+                if(var7) {

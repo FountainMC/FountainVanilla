@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/inventory/ContainerRepair.java	2016-06-04 22:54:55.777728684 -0700
-+++ src/main/java/net/minecraft/inventory/ContainerRepair.java	2016-06-04 23:57:00.726507238 -0700
+--- minecraft/src/net/minecraft/inventory/ContainerRepair.java	2016-06-05 00:35:24.309178668 -0700
++++ src/main/java/net/minecraft/inventory/ContainerRepair.java	2016-06-05 12:26:30.248014981 -0700
 @@ -123,7 +123,7 @@
        } else {
           ItemStack var5 = var1.copy();

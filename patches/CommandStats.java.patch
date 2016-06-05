@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/command/CommandStats.java	2016-06-04 22:55:00.389727813 -0700
-+++ src/main/java/net/minecraft/command/CommandStats.java	2016-06-04 23:40:31.451779333 -0700
+--- minecraft/src/net/minecraft/command/CommandStats.java	2016-06-05 00:35:29.685188936 -0700
++++ src/main/java/net/minecraft/command/CommandStats.java	2016-06-05 12:13:08.280551296 -0700
 @@ -145,8 +145,8 @@
     }
  

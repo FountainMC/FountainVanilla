@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/block/BlockTripWire.java	2016-06-04 22:54:43.369731647 -0700
-+++ src/main/java/net/minecraft/block/BlockTripWire.java	2016-06-04 23:33:27.466616872 -0700
+--- minecraft/src/net/minecraft/block/BlockTripWire.java	2016-06-05 00:35:08.693149493 -0700
++++ src/main/java/net/minecraft/block/BlockTripWire.java	2016-06-05 11:59:40.723576450 -0700
 @@ -132,7 +132,7 @@
        IBlockState var3 = var1.getBlockState(var2);
        boolean var4 = ((Boolean)var3.getValue(POWERED)).booleanValue();

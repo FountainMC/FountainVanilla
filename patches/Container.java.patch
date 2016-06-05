@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/inventory/Container.java	2016-06-04 22:54:56.117728615 -0700
-+++ src/main/java/net/minecraft/inventory/Container.java	2016-06-04 23:56:23.054403203 -0700
+--- minecraft/src/net/minecraft/inventory/Container.java	2016-06-05 00:35:24.621179262 -0700
++++ src/main/java/net/minecraft/inventory/Container.java	2016-06-05 12:25:55.003872464 -0700
 @@ -33,7 +33,7 @@
     protected Slot addSlotToContainer(Slot var1) {
        var1.slotNumber = this.inventorySlots.size();
@@ -9,3 +9,12 @@
        return var1;
     }
  
+@@ -48,7 +48,7 @@
+    }
+ 
+    public List<ItemStack> getInventory() {
+-      ArrayList var1 = Lists.newArrayList();
++      ArrayList<ItemStack> var1 = Lists.newArrayList();
+ 
+       for(int var2 = 0; var2 < this.inventorySlots.size(); ++var2) {
+          var1.add(((Slot)this.inventorySlots.get(var2)).getStack());

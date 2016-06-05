@@ -1,14 +1,5 @@
---- minecraft/src/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-04 22:55:08.813726534 -0700
-+++ src/main/java/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-04 23:56:03.038347929 -0700
-@@ -56,7 +56,7 @@
-    }
- 
-    public static Map<Enchantment, Integer> getEnchantments(ItemStack var0) {
--      LinkedHashMap var1 = Maps.newLinkedHashMap();
-+      LinkedHashMap<Enchantment, Integer> var1 = Maps.newLinkedHashMap();
-       NBTTagList var2 = var0.getItem() == Items.ENCHANTED_BOOK?Items.ENCHANTED_BOOK.getEnchantments(var0):var0.getEnchantmentTagList();
-       if(var2 != null) {
-          for(int var3 = 0; var3 < var2.tagCount(); ++var3) {
+--- minecraft/src/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-05 00:35:44.061216937 -0700
++++ src/main/java/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-05 12:25:25.119751218 -0700
 @@ -160,7 +160,7 @@
     }
  
@@ -18,7 +9,7 @@
        if(var2 == null) {
           return 0;
        } else {
-@@ -215,7 +215,7 @@
+@@ -215,11 +215,11 @@
  
     @Nullable
     public static ItemStack getEnchantedItem(Enchantment var0, EntityLivingBase var1) {
@@ -27,6 +18,11 @@
        if(var2 == null) {
           return null;
        } else {
+-         ArrayList var3 = Lists.newArrayList();
++         ArrayList<ItemStack> var3 = Lists.newArrayList();
+ 
+          for(ItemStack var5 : var2) {
+             if(var5 != null && getEnchantmentLevel(var0, var5) > 0) {
 @@ -248,7 +248,7 @@
  
     public static ItemStack addRandomEnchantment(Random var0, ItemStack var1, int var2, boolean var3) {

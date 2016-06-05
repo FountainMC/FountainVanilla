@@ -29,4 +29,4 @@ mv $dir/minecraft/bin/assets/ $dir/minecraft/
 
 echo "Decompiling Minecraft classes..."
 mkdir -p $dir/minecraft/src/
-java -jar "$dir/bin/fernflower.jar" -dgs=1 -hdc=0 -asc=1 -udv=0 $dir/minecraft/bin/ $dir/minecraft/src/ >/dev/null
+java -jar "$dir/bin/fernflower.jar" -dgs=1 -hdc=0 -asc=1 -udv=0 -din=1 -rbr=0 -rsy=1 $dir/minecraft/bin/ $dir/minecraft/src/ >/dev/null

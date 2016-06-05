@@ -1,27 +1,22 @@
---- minecraft/src/net/minecraft/block/state/BlockStateBase.java	2016-06-04 22:54:55.629728714 -0700
-+++ src/main/java/net/minecraft/block/state/BlockStateBase.java	2016-06-04 23:24:06.593099732 -0700
-@@ -24,13 +24,8 @@
+--- minecraft/src/net/minecraft/block/state/BlockStateBase.java	2016-06-05 00:35:24.157178380 -0700
++++ src/main/java/net/minecraft/block/state/BlockStateBase.java	2016-06-05 11:49:53.540471205 -0700
+@@ -24,8 +24,8 @@
           }
        }
  
 -      private <T extends Comparable<T>> String getPropertyName(IProperty<T> var1, Comparable<?> var2) {
 -         return var1.getName(var2);
--      }
--
--      // $FF: synthetic method
--      public Object apply(Object var1) {
--         return this.apply((Entry)var1);
 +      private <T extends Comparable<T>> String getPropertyName(IProperty<T> var1, Comparable<T> var2) {
 +         return var1.getName((T) var2);
        }
     };
  
-@@ -38,7 +33,7 @@
+@@ -33,7 +33,7 @@
     }
  
     public <T extends Comparable<T>> IBlockState cycleProperty(IProperty<T> var1) {
 -      return this.withProperty(var1, (Comparable)cyclePropertyValue(var1.getAllowedValues(), this.getValue(var1)));
-+      return this.withProperty(var1, (T)cyclePropertyValue(var1.getAllowedValues(), this.getValue(var1)));
++      return this.withProperty(var1, cyclePropertyValue(var1.getAllowedValues(), this.getValue(var1)));
     }
  
     protected static <T> T cyclePropertyValue(Collection<T> var0, T var1) {

@@ -1,18 +1,6 @@
---- minecraft/src/net/minecraft/block/state/BlockStateContainer.java	2016-06-04 22:54:55.609728719 -0700
-+++ src/main/java/net/minecraft/block/state/BlockStateContainer.java	2016-06-04 23:29:35.493985250 -0700
-@@ -49,11 +49,6 @@
-       public String apply(@Nullable IProperty<?> var1) {
-          return var1 == null?"<NULL>":var1.getName();
-       }
--
--      // $FF: synthetic method
--      public Object apply(Object var1) {
--         return this.apply((IProperty)var1);
--      }
-    };
-    private final Block block;
-    private final ImmutableSortedMap<String, IProperty<?>> properties;
-@@ -70,7 +65,7 @@
+--- minecraft/src/net/minecraft/block/state/BlockStateContainer.java	2016-06-05 00:35:24.133178334 -0700
++++ src/main/java/net/minecraft/block/state/BlockStateContainer.java	2016-06-05 11:57:22.966317518 -0700
+@@ -65,7 +65,7 @@
  
        this.properties = ImmutableSortedMap.copyOf(var3);
        LinkedHashMap var11 = Maps.newLinkedHashMap();
@@ -21,32 +9,28 @@
  
        for(List var8 : Cartesian.cartesianProduct(this.getAllowedValues())) {
           Map var9 = MapPopulator.createMap(this.properties.values(), var8);
-@@ -91,7 +86,7 @@
+@@ -86,8 +86,8 @@
        if(!NAME_PATTERN.matcher(var2).matches()) {
           throw new IllegalArgumentException("Block: " + var0.getClass() + " has invalidly named property: " + var2);
        } else {
 -         for(Comparable var4 : var1.getAllowedValues()) {
-+         for(T var4 : var1.getAllowedValues()) {
-             String var5 = var1.getName(var4);
+-            String var5 = var1.getName(var4);
++         for(Comparable<T> var4 : var1.getAllowedValues()) {
++            String var5 = var1.getName((T) var4);
              if(!NAME_PATTERN.matcher(var5).matches()) {
                 throw new IllegalArgumentException("Block: " + var0.getClass() + " has property: " + var2 + " with invalidly named value: " + var5);
-@@ -187,16 +182,16 @@
-          return this.properties.hashCode();
-       }
- 
--      public void buildPropertyValueTable(Map<Map<IProperty<?>, Comparable<?>>, BlockStateContainer.a> var1) {
-+      public <T extends Comparable<T>> void buildPropertyValueTable(Map<Map<IProperty<T>, Comparable<T>>, BlockStateContainer.a> var1) {
-          if(this.propertyValueTable != null) {
-             throw new IllegalStateException();
+             }
+@@ -188,10 +188,10 @@
           } else {
              HashBasedTable var2 = HashBasedTable.create();
  
-             for(Entry var4 : this.properties.entrySet()) {
+-            for(Entry var4 : this.properties.entrySet()) {
 -               IProperty var5 = (IProperty)var4.getKey();
-+               IProperty<T> var5 = (IProperty<T>)var4.getKey();
++            for(Entry<IProperty<?>, Comparable<?>> var4 : this.properties.entrySet()) {
++               IProperty<?> var5 = var4.getKey();
  
 -               for(Comparable var7 : var5.getAllowedValues()) {
-+               for(T var7 : var5.getAllowedValues()) {
++               for(Comparable<?> var7 : var5.getAllowedValues()) {
                    if(var7 != var4.getValue()) {
                       var2.put(var5, var7, var1.get(this.getPropertiesWithValue(var5, var7)));
                    }

@@ -1,5 +1,5 @@
---- minecraft/src/net/minecraft/command/server/CommandScoreboard.java	2016-06-04 22:54:42.057732013 -0700
-+++ src/main/java/net/minecraft/command/server/CommandScoreboard.java	2016-06-04 23:38:09.735389972 -0700
+--- minecraft/src/net/minecraft/command/server/CommandScoreboard.java	2016-06-05 00:35:07.153146667 -0700
++++ src/main/java/net/minecraft/command/server/CommandScoreboard.java	2016-06-05 12:12:35.068391140 -0700
 @@ -228,9 +228,9 @@
        if(var4 < 0) {
           return false;
@@ -21,6 +21,17 @@
           var1.setCommandStat(CommandResultStats.a.QUERY_RESULT, var10.size());
           if(var10.isEmpty()) {
              throw new CommandException("commands.scoreboard.teams.list.empty", new Object[0]);
+@@ -464,8 +464,8 @@
+    protected void joinTeam(ICommandSender var1, String[] var2, int var3, MinecraftServer var4) throws CommandException {
+       Scoreboard var5 = this.getScoreboard(var4);
+       String var6 = var2[var3++];
+-      HashSet var7 = Sets.newHashSet();
+-      HashSet var8 = Sets.newHashSet();
++      HashSet<String> var7 = Sets.newHashSet();
++      HashSet<String> var8 = Sets.newHashSet();
+       if(var1 instanceof EntityPlayer && var3 == var2.length) {
+          String var15 = getCommandSenderAsPlayer(var1).getName();
+          if(var5.addPlayerToTeam(var15, var6)) {
 @@ -554,7 +554,7 @@
        Scoreboard var5 = this.getScoreboard(var4);
        ScorePlayerTeam var6 = this.convertToTeam(var2[var3], var4);
