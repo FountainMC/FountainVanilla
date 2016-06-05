@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 dir=$(pwd -P)
-mkdir -p src/main/java/net/minecraft/server/
-rm -rf src/main/java/net/minecraft/server/
+mkdir -p src/main/java/net/minecraft/
+rm -rf src/main/java/net/minecraft/
 
 echo "Copying Minecraft sources..."
 cp -r $dir/minecraft/src/**/ "$dir/src/main/java/"

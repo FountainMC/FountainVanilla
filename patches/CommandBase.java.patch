@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/command/CommandBase.java	2016-06-04 22:54:59.585727955 -0700
++++ src/main/java/net/minecraft/command/CommandBase.java	2016-06-04 23:38:25.991434602 -0700
+@@ -538,11 +538,6 @@
+       return this.getCommandName().compareTo(var1.getCommandName());
+    }
+ 
+-   // $FF: synthetic method
+-   public int compareTo(Object var1) {
+-      return this.compareTo((ICommand)var1);
+-   }
+-
+    public static class a {
+       private final double result;
+       private final double amount;

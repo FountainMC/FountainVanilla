@@ -1,0 +1,26 @@
+--- minecraft/src/net/minecraft/block/state/BlockWorldState.java	2016-06-04 22:54:55.617728718 -0700
++++ src/main/java/net/minecraft/block/state/BlockWorldState.java	2016-06-04 23:09:31.070904620 -0700
+@@ -48,11 +48,6 @@
+          public boolean apply(@Nullable BlockWorldState var1) {
+             return var1 != null && var0.apply(var1.getBlockState());
+          }
+-
+-         // $FF: synthetic method
+-         public boolean apply(Object var1) {
+-            return this.apply((BlockWorldState)var1);
+-         }
+       };
+    }
+ 
+@@ -61,11 +56,6 @@
+          public boolean apply(@Nullable BlockWorldState var1) {
+             return var1 != null && var1.getBlockState().equals(var0);
+          }
+-
+-         // $FF: synthetic method
+-         public boolean apply(Object var1) {
+-            return this.apply((BlockWorldState)var1);
+-         }
+       };
+    }
+ }

@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/block/BlockRedstoneWire.java	2016-06-04 22:54:45.629731040 -0700
++++ src/main/java/net/minecraft/block/BlockRedstoneWire.java	2016-06-04 23:32:02.166384126 -0700
+@@ -122,7 +122,7 @@
+ 
+    private IBlockState updateSurroundingRedstone(World var1, BlockPos var2, IBlockState var3) {
+       var3 = this.calculateCurrentChanges(var1, var2, var2, var3);
+-      ArrayList var4 = Lists.newArrayList(this.blocksNeedingUpdate);
++      ArrayList<BlockPos> var4 = Lists.newArrayList(this.blocksNeedingUpdate);
+       this.blocksNeedingUpdate.clear();
+ 
+       for(BlockPos var6 : var4) {

@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/block/BlockRedstoneComparator.java	2016-06-04 22:54:44.557731324 -0700
++++ src/main/java/net/minecraft/block/BlockRedstoneComparator.java	2016-06-04 23:31:41.174326928 -0700
+@@ -132,11 +132,6 @@
+          public boolean apply(@Nullable Entity var1) {
+             return var1 != null && var1.getHorizontalFacing() == var2;
+          }
+-
+-         // $FF: synthetic method
+-         public boolean apply(Object var1) {
+-            return this.apply((Entity)var1);
+-         }
+       });
+       return var4.size() == 1?(EntityItemFrame)var4.get(0):null;
+    }

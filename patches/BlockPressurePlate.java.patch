@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/block/BlockPressurePlate.java	2016-06-04 22:54:44.853731245 -0700
++++ src/main/java/net/minecraft/block/BlockPressurePlate.java	2016-06-04 23:31:06.646232923 -0700
+@@ -54,7 +54,7 @@
+ 
+    protected int computeRedstoneStrength(World var1, BlockPos var2) {
+       AxisAlignedBB var3 = PRESSURE_AABB.offset(var2);
+-      List var4;
++      List<Entity> var4;
+       switch(this.sensitivity) {
+       case EVERYTHING:
+          var4 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3);

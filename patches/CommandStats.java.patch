@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/command/CommandStats.java	2016-06-04 22:55:00.389727813 -0700
++++ src/main/java/net/minecraft/command/CommandStats.java	2016-06-04 23:40:31.451779333 -0700
+@@ -145,8 +145,8 @@
+    }
+ 
+    protected List<String> getObjectiveNames(MinecraftServer var1) {
+-      Collection var2 = var1.worldServerForDimension(0).getScoreboard().getScoreObjectives();
+-      ArrayList var3 = Lists.newArrayList();
++      Collection<ScoreObjective> var2 = var1.worldServerForDimension(0).getScoreboard().getScoreObjectives();
++      ArrayList<String> var3 = Lists.newArrayList();
+ 
+       for(ScoreObjective var5 : var2) {
+          if(!var5.getCriteria().isReadOnly()) {

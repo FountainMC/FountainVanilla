@@ -1,11 +1,11 @@
---- minecraft/src/net/minecraft/server/Container.java	2016-06-04 07:22:22.285560329 -0700
-+++ src/main/java/net/minecraft/server/Container.java	2016-06-04 09:22:22.873323527 -0700
-@@ -24,7 +24,7 @@
-     protected Slot a(Slot slot) {
-         slot.rawSlotIndex = this.c.size();
-         this.c.add(slot);
--        this.b.add((Object) null);
-+        this.b.add(null); // Fountain: Fix decompiler error
-         return slot;
-     }
+--- minecraft/src/net/minecraft/inventory/Container.java	2016-06-04 22:54:56.117728615 -0700
++++ src/main/java/net/minecraft/inventory/Container.java	2016-06-04 23:56:23.054403203 -0700
+@@ -33,7 +33,7 @@
+    protected Slot addSlotToContainer(Slot var1) {
+       var1.slotNumber = this.inventorySlots.size();
+       this.inventorySlots.add(var1);
+-      this.inventoryItemStacks.add((Object)null);
++      this.inventoryItemStacks.add(null);
+       return var1;
+    }
  

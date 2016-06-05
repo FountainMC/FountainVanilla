@@ -1,0 +1,22 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFindEntityNearestPlayer.java	2016-06-04 22:54:40.233732539 -0700
++++ src/main/java/net/minecraft/entity/ai/EntityAIFindEntityNearestPlayer.java	2016-06-05 00:01:48.416785218 -0700
+@@ -56,18 +56,13 @@
+                return (double)var1.getDistanceToEntity(EntityAIFindEntityNearestPlayer.this.entityLiving) > var2?false:EntityAITarget.isSuitableTarget(EntityAIFindEntityNearestPlayer.this.entityLiving, (EntityLivingBase)var1, false, true);
+             }
+          }
+-
+-         // $FF: synthetic method
+-         public boolean apply(Object var1) {
+-            return this.apply((Entity)var1);
+-         }
+       };
+       this.sorter = new EntityAINearestAttackableTarget.a(var1);
+    }
+ 
+    public boolean shouldExecute() {
+       double var1 = this.maxTargetRange();
+-      List var3 = this.entityLiving.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.entityLiving.getEntityBoundingBox().expand(var1, 4.0D, var1), this.predicate);
++      List<EntityPlayer> var3 = this.entityLiving.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.entityLiving.getEntityBoundingBox().expand(var1, 4.0D, var1), this.predicate);
+       Collections.sort(var3, this.sorter);
+       if(var3.isEmpty()) {
+          return false;

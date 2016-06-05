@@ -1,0 +1,20 @@
+--- minecraft/src/net/minecraft/inventory/ContainerRepair.java	2016-06-04 22:54:55.777728684 -0700
++++ src/main/java/net/minecraft/inventory/ContainerRepair.java	2016-06-04 23:57:00.726507238 -0700
+@@ -123,7 +123,7 @@
+       } else {
+          ItemStack var5 = var1.copy();
+          ItemStack var6 = this.inputSlots.getStackInSlot(1);
+-         Map var7 = EnchantmentHelper.getEnchantments(var5);
++         Map<Enchantment, Integer> var7 = EnchantmentHelper.getEnchantments(var5);
+          var3 = var3 + var1.getRepairCost() + (var6 == null?0:var6.getRepairCost());
+          this.materialCost = 0;
+          if(var6 != null) {
+@@ -168,7 +168,7 @@
+                   }
+                }
+ 
+-               Map var19 = EnchantmentHelper.getEnchantments(var6);
++               Map<Enchantment, Integer> var19 = EnchantmentHelper.getEnchantments(var6);
+ 
+                for(Enchantment var23 : var19.keySet()) {
+                   if(var23 != null) {

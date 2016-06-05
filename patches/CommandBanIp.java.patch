@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/command/server/CommandBanIp.java	2016-06-04 22:54:42.233731963 -0700
++++ src/main/java/net/minecraft/command/server/CommandBanIp.java	2016-06-04 23:35:37.706973103 -0700
+@@ -66,7 +66,7 @@
+    protected void banIp(MinecraftServer var1, ICommandSender var2, String var3, @Nullable String var4) {
+       UserListIPBansEntry var5 = new UserListIPBansEntry(var3, (Date)null, var2.getName(), (Date)null, var4);
+       var1.getPlayerList().getBannedIPs().addEntry(var5);
+-      List var6 = var1.getPlayerList().getPlayersMatchingAddress(var3);
++      List<EntityPlayerMP> var6 = var1.getPlayerList().getPlayersMatchingAddress(var3);
+       String[] var7 = new String[var6.size()];
+       int var8 = 0;
+ 

@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/block/BlockTripWire.java	2016-06-04 22:54:43.369731647 -0700
++++ src/main/java/net/minecraft/block/BlockTripWire.java	2016-06-04 23:33:27.466616872 -0700
+@@ -132,7 +132,7 @@
+       IBlockState var3 = var1.getBlockState(var2);
+       boolean var4 = ((Boolean)var3.getValue(POWERED)).booleanValue();
+       boolean var5 = false;
+-      List var6 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3.getBoundingBox(var1, var2).offset(var2));
++      List<Entity> var6 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3.getBoundingBox(var1, var2).offset(var2));
+       if(!var6.isEmpty()) {
+          for(Entity var8 : var6) {
+             if(!var8.doesEntityNotTriggerPressurePlate()) {

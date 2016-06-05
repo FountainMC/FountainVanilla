@@ -1,0 +1,84 @@
+--- minecraft/src/net/minecraft/crash/CrashReport.java	2016-06-04 22:54:50.589729814 -0700
++++ src/main/java/net/minecraft/crash/CrashReport.java	2016-06-04 23:53:51.673985216 -0700
+@@ -40,41 +40,21 @@
+          public String call() {
+             return "1.9.4";
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("Operating System", new ICrashReportDetail<String>() {
+          public String call() {
+             return System.getProperty("os.name") + " (" + System.getProperty("os.arch") + ") version " + System.getProperty("os.version");
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("Java Version", new ICrashReportDetail<String>() {
+          public String call() {
+             return System.getProperty("java.version") + ", " + System.getProperty("java.vendor");
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("Java VM Version", new ICrashReportDetail<String>() {
+          public String call() {
+             return System.getProperty("java.vm.name") + " (" + System.getProperty("java.vm.info") + "), " + System.getProperty("java.vm.vendor");
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("Memory", new ICrashReportDetail<String>() {
+          public String call() {
+@@ -87,16 +67,11 @@
+             long var12 = var6 / 1024L / 1024L;
+             return var6 + " bytes (" + var12 + " MB) / " + var4 + " bytes (" + var10 + " MB) up to " + var2 + " bytes (" + var8 + " MB)";
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("JVM Flags", new ICrashReportDetail<String>() {
+          public String call() {
+             RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
+-            List var2 = var1.getInputArguments();
++            List<String> var2 = var1.getInputArguments();
+             int var3 = 0;
+             StringBuilder var4 = new StringBuilder();
+ 
+@@ -112,21 +87,11 @@
+ 
+             return String.format("%d total; %s", new Object[]{Integer.valueOf(var3), var4.toString()});
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+       this.theReportCategory.setDetail("IntCache", new ICrashReportDetail<String>() {
+          public String call() throws Exception {
+             return IntCache.getCacheSizes();
+          }
+-
+-         // $FF: synthetic method
+-         public Object call() throws Exception {
+-            return this.call();
+-         }
+       });
+    }
+ 

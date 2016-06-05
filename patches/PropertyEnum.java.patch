@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/block/properties/PropertyEnum.java	2016-06-04 22:55:00.585727778 -0700
++++ src/main/java/net/minecraft/block/properties/PropertyEnum.java	2016-06-04 23:09:11.306860795 -0700
+@@ -19,7 +19,7 @@
+       super(var1, var2);
+       this.allowedValues = ImmutableSet.copyOf(var3);
+ 
+-      for(Enum var5 : var3) {
++      for(T var5 : var3) {
+          String var6 = ((IStringSerializable)var5).getName();
+          if(this.nameToValue.containsKey(var6)) {
+             throw new IllegalArgumentException("Multiple values have the same name \'" + var6 + "\'");

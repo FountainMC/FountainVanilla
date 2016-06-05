@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/block/state/pattern/FactoryBlockPattern.java	2016-06-04 22:55:00.741727751 -0700
++++ src/main/java/net/minecraft/block/state/pattern/FactoryBlockPattern.java	2016-06-04 23:21:18.888655445 -0700
+@@ -43,7 +43,7 @@
+ 
+                for(char var9 : var5.toCharArray()) {
+                   if(!this.symbolMap.containsKey(Character.valueOf(var9))) {
+-                     this.symbolMap.put(Character.valueOf(var9), (Object)null);
++                     this.symbolMap.put(Character.valueOf(var9), (Predicate<BlockWorldState>)null);
+                   }
+                }
+             }

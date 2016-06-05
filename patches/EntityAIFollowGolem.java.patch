@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFollowGolem.java	2016-06-04 22:54:40.273732527 -0700
++++ src/main/java/net/minecraft/entity/ai/EntityAIFollowGolem.java	2016-06-05 00:02:05.864994900 -0700
+@@ -22,7 +22,7 @@
+       } else if(!this.theVillager.worldObj.isDaytime()) {
+          return false;
+       } else {
+-         List var1 = this.theVillager.worldObj.getEntitiesWithinAABB(EntityIronGolem.class, this.theVillager.getEntityBoundingBox().expand(6.0D, 2.0D, 6.0D));
++         List<EntityIronGolem> var1 = this.theVillager.worldObj.getEntitiesWithinAABB(EntityIronGolem.class, this.theVillager.getEntityBoundingBox().expand(6.0D, 2.0D, 6.0D));
+          if(var1.isEmpty()) {
+             return false;
+          } else {

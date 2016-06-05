@@ -1,0 +1,20 @@
+--- minecraft/src/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java	2016-06-04 22:55:01.829727565 -0700
++++ src/main/java/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java	2016-06-04 23:59:22.970900108 -0700
+@@ -76,14 +76,14 @@
+       if(this.getModifier(var1.getID()) != null) {
+          throw new IllegalArgumentException("Modifier is already applied on this attribute!");
+       } else {
+-         Object var2 = (Set)this.mapByName.get(var1.getName());
++         Set<AttributeModifier> var2 = this.mapByName.get(var1.getName());
+          if(var2 == null) {
+             var2 = Sets.newHashSet();
+             this.mapByName.put(var1.getName(), var2);
+          }
+ 
+-         ((Set)this.mapByOperation.get(Integer.valueOf(var1.getOperation()))).add(var1);
+-         ((Set)var2).add(var1);
++         this.mapByOperation.get(Integer.valueOf(var1.getOperation())).add(var1);
++         var2.add(var1);
+          this.mapByUUID.put(var1.getID(), var1);
+          this.flagForUpdate();
+       }

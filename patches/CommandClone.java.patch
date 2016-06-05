@@ -1,0 +1,40 @@
+--- minecraft/src/net/minecraft/command/CommandClone.java	2016-06-04 22:55:00.557727783 -0700
++++ src/main/java/net/minecraft/command/CommandClone.java	2016-06-04 23:39:30.651612209 -0700
+@@ -82,10 +82,10 @@
+                         }
+                      }
+ 
+-                     ArrayList var15 = Lists.newArrayList();
+-                     ArrayList var16 = Lists.newArrayList();
+-                     ArrayList var17 = Lists.newArrayList();
+-                     LinkedList var18 = Lists.newLinkedList();
++                     ArrayList<CommandClone.a> var15 = Lists.newArrayList();
++                     ArrayList<CommandClone.a> var16 = Lists.newArrayList();
++                     ArrayList<CommandClone.a> var17 = Lists.newArrayList();
++                     LinkedList<BlockPos> var18 = Lists.newLinkedList();
+                      BlockPos var19 = new BlockPos(var8.minX - var7.minX, var8.minY - var7.minY, var8.minZ - var7.minZ);
+ 
+                      for(int var20 = var7.minZ; var20 <= var7.maxZ; ++var20) {
+@@ -127,11 +127,11 @@
+                         }
+                      }
+ 
+-                     ArrayList var31 = Lists.newArrayList();
++                     ArrayList<CommandClone.a> var31 = Lists.newArrayList();
+                      var31.addAll(var15);
+                      var31.addAll(var16);
+                      var31.addAll(var17);
+-                     List var34 = Lists.reverse(var31);
++                     List<CommandClone.a> var34 = Lists.reverse(var31);
+ 
+                      for(CommandClone.a var41 : var34) {
+                         TileEntity var46 = var13.getTileEntity(var41.pos);
+@@ -167,7 +167,7 @@
+                         var13.notifyNeighborsRespectDebug(var44.pos, var44.blockState.getBlock());
+                      }
+ 
+-                     List var40 = var13.getPendingBlockUpdates(var7, false);
++                     List<NextTickListEntry> var40 = var13.getPendingBlockUpdates(var7, false);
+                      if(var40 != null) {
+                         for(NextTickListEntry var48 : var40) {
+                            if(var7.isVecInside(var48.position)) {

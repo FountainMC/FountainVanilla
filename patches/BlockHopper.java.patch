@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/block/BlockHopper.java	2016-06-04 22:54:44.581731318 -0700
++++ src/main/java/net/minecraft/block/BlockHopper.java	2016-06-04 23:30:22.998114231 -0700
+@@ -37,11 +37,6 @@
+       public boolean apply(@Nullable EnumFacing var1) {
+          return var1 != EnumFacing.UP;
+       }
+-
+-      // $FF: synthetic method
+-      public boolean apply(Object var1) {
+-         return this.apply((EnumFacing)var1);
+-      }
+    });
+    public static final PropertyBool ENABLED = PropertyBool.create("enabled");
+    protected static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D);
