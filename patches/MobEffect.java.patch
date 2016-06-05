@@ -1,0 +1,12 @@
+--- minecraft/src/net/minecraft/server/MobEffect.java	2016-06-04 07:22:44.725625754 -0700
++++ src/main/java/net/minecraft/server/MobEffect.java	2016-06-04 21:30:53.832430237 -0700
+@@ -183,7 +183,7 @@
+         return (this.getDuration() <= 32147 || mobeffect.getDuration() <= 32147) && (!this.isAmbient() || !mobeffect.isAmbient()) ? ComparisonChain.start().compare(Boolean.valueOf(this.isAmbient()), Boolean.valueOf(mobeffect.isAmbient())).compare(this.getDuration(), mobeffect.getDuration()).compare(this.getMobEffect().getColor(), mobeffect.getMobEffect().getColor()).result() : ComparisonChain.start().compare(Boolean.valueOf(this.isAmbient()), Boolean.valueOf(mobeffect.isAmbient())).compare(this.getMobEffect().getColor(), mobeffect.getMobEffect().getColor()).result();
+     }
+ 
+-    public int compareTo(Object object) {
+-        return this.b((MobEffect) object);
++    public int compareTo(MobEffect object) { // Fountain: Fix decompiler error
++        return this.b(object);
+     }
+ }

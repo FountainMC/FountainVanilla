@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/ContainerPlayer.java	2016-06-04 07:22:43.517622228 -0700
++++ src/main/java/net/minecraft/server/ContainerPlayer.java	2016-06-04 20:41:45.264249548 -0700
+@@ -36,7 +36,7 @@
+                     if (itemstack == null) {
+                         return false;
+                     } else {
+-                        EnumItemSlot enumitemslot = EntityInsentient.d(itemstack);
++                        EnumItemSlot enumitemslot1 = EntityInsentient.d(itemstack); // Fountain: Fix decompiler error
+ 
+                         return enumitemslot == enumitemslot1;
+                     }

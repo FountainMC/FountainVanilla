@@ -1,0 +1,45 @@
+--- minecraft/src/net/minecraft/server/IteratorUtils.java	2016-06-04 07:22:39.281609868 -0700
++++ src/main/java/net/minecraft/server/IteratorUtils.java	2016-06-04 21:12:19.211461455 -0700
+@@ -37,11 +37,11 @@
+             arraylist.add(object);
+         }
+ 
+-        return (Object[]) arraylist.toArray(b(oclass, arraylist.size()));
++        return (T[]) arraylist.toArray(b(oclass, arraylist.size())); // Fountain: Fix decompiler error
+     }
+ 
+     private static <T> T[] b(Class<? super T> oclass, int i) {
+-        return (Object[]) ((Object[]) Array.newInstance(oclass, i));
++        return (T[]) Array.newInstance(oclass, i); // Fountain: Fix decompiler error
+     }
+ 
+     static class SyntheticClass_1 {    }
+@@ -141,11 +141,11 @@
+                         ++this.a;
+                     }
+ 
+-                    return (Object[]) this.d.clone();
++                    return (T[]) this.d.clone(); // Fountain: Fix decompiler error
+                 }
+             }
+ 
+-            public Object next() {
++            public T[] next() { // Fountain: Fix decompiler error
+                 return this.a();
+             }
+ 
+@@ -160,11 +160,11 @@
+         private ArrayToList() {}
+ 
+         public List<T> a(@Nullable Object[] aobject) {
+-            return Arrays.asList((Object[]) aobject);
++            return Arrays.asList((T[]) aobject); // Fountain: Fix decompiler error
+         }
+ 
+-        public Object apply(Object object) {
+-            return this.a((Object[]) object);
++        public List<T> apply(Object[] object) { // Fountain: Fix decompiler error
++            return this.a( object);
+         }
+ 
+         ArrayToList(IteratorUtils.SyntheticClass_1 iteratorutils_syntheticclass_1) {

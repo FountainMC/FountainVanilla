@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/LootItemFunctionSetData.java	2016-06-04 07:22:42.025617874 -0700
++++ src/main/java/net/minecraft/server/LootItemFunctionSetData.java	2016-06-04 21:26:24.723342459 -0700
+@@ -41,7 +41,7 @@
+             return new LootItemFunctionSetData(alootitemcondition, (LootValueBounds) ChatDeserializer.a(jsonobject, "data", jsondeserializationcontext, LootValueBounds.class));
+         }
+ 
+-        public LootItemFunction b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) {
++        public LootItemFunctionSetData b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) { // Fountain: Fix decompiler error
+             return this.a(jsonobject, jsondeserializationcontext, alootitemcondition);
+         }
+     }

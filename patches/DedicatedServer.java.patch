@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/DedicatedServer.java	2016-06-04 07:22:16.685544024 -0700
++++ src/main/java/net/minecraft/server/DedicatedServer.java	2016-06-04 20:54:10.635103906 -0700
+@@ -297,7 +297,7 @@
+         System.exit(0);
+     }
+ 
+-    protected void D() {
++    public void D() { // Fountain: Fix decompiler error
+         super.D();
+         this.aL();
+     }

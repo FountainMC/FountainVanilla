@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/LootItemFunctionSetCount.java	2016-06-04 07:22:12.985533256 -0700
++++ src/main/java/net/minecraft/server/LootItemFunctionSetCount.java	2016-06-04 21:26:01.279245919 -0700
+@@ -33,7 +33,7 @@
+             return new LootItemFunctionSetCount(alootitemcondition, (LootValueBounds) ChatDeserializer.a(jsonobject, "count", jsondeserializationcontext, LootValueBounds.class));
+         }
+ 
+-        public LootItemFunction b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) {
++        public LootItemFunctionSetCount b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) { // Fountain: Fix decompiler error
+             return this.a(jsonobject, jsondeserializationcontext, alootitemcondition);
+         }
+     }

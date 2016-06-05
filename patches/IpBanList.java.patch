@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/IpBanList.java	2016-06-04 07:22:32.829591053 -0700
++++ src/main/java/net/minecraft/server/IpBanList.java	2016-06-04 21:08:57.918298817 -0700
+@@ -23,7 +23,7 @@
+     public IpBanEntry get(SocketAddress socketaddress) {
+         String s = this.c(socketaddress);
+ 
+-        return (IpBanEntry) this.get((Object) s);
++        return (IpBanEntry) this.get(s); // Fountain: Fix decompiler error
+     }
+ 
+     private String c(SocketAddress socketaddress) {

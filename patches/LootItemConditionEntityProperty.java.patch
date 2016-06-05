@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/LootItemConditionEntityProperty.java	2016-06-04 07:22:27.977576911 -0700
++++ src/main/java/net/minecraft/server/LootItemConditionEntityProperty.java	2016-06-04 21:21:33.686114931 -0700
+@@ -73,7 +73,7 @@
+             return new LootItemConditionEntityProperty(alootentityproperty, (LootTableInfo.EntityTarget) ChatDeserializer.a(jsonobject, "entity", jsondeserializationcontext, LootTableInfo.EntityTarget.class));
+         }
+ 
+-        public LootItemCondition b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) {
++        public LootItemConditionEntityProperty b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) {
+             return this.a(jsonobject, jsondeserializationcontext);
+         }
+     }

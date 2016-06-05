@@ -1,0 +1,25 @@
+--- minecraft/src/net/minecraft/server/BlockDataAbstract.java	2016-06-04 07:22:40.957614758 -0700
++++ src/main/java/net/minecraft/server/BlockDataAbstract.java	2016-06-04 20:30:08.977481553 -0700
+@@ -24,7 +24,7 @@
+         }
+ 
+         private <T extends Comparable<T>> String a(IBlockState<T> iblockstate, Comparable<?> comparable) {
+-            return iblockstate.a(comparable);
++            return iblockstate.a((T) comparable); // Fountain: Fix decompiler error
+         }
+ 
+         public Object apply(Object object) {
+@@ -35,11 +35,11 @@
+     public BlockDataAbstract() {}
+ 
+     public <T extends Comparable<T>> IBlockData a(IBlockState<T> iblockstate) {
+-        return this.set(iblockstate, (Comparable) a(iblockstate.c(), (Object) this.get(iblockstate)));
++        return this.set(iblockstate, a(iblockstate.c(), (T) this.get(iblockstate))); // Fountain: Fix decompiler error
+     }
+ 
+     protected static <T> T a(Collection<T> collection, T t0) {
+-        Iterator iterator = collection.iterator();
++        Iterator<T> iterator = collection.iterator(); // Fountain: Fix decompiler error
+ 
+         do {
+             if (!iterator.hasNext()) {

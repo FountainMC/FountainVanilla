@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/MapGeneratorUtils.java	2016-06-04 07:22:42.345618807 -0700
++++ src/main/java/net/minecraft/server/MapGeneratorUtils.java	2016-06-04 21:30:21.828302528 -0700
+@@ -18,7 +18,7 @@
+         while (iterator1.hasNext()) {
+             Object object = iterator1.next();
+ 
+-            map.put(object, iterator.next());
++            map.put((K) object, (V) iterator.next()); // Fountain: Fix decompiler error
+         }
+ 
+         if (iterator.hasNext()) {

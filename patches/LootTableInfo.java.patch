@@ -1,0 +1,18 @@
+--- minecraft/src/net/minecraft/server/LootTableInfo.java	2016-06-04 07:22:26.557572774 -0700
++++ src/main/java/net/minecraft/server/LootTableInfo.java	2016-06-04 21:28:52.279943049 -0700
+@@ -141,12 +141,12 @@
+                 return LootTableInfo.EntityTarget.a(jsonreader.nextString());
+             }
+ 
+-            public Object read(JsonReader jsonreader) throws IOException {
++            public EntityTarget read(JsonReader jsonreader) throws IOException { // Fountain: Fix decompiler error
+                 return this.a(jsonreader);
+             }
+ 
+-            public void write(JsonWriter jsonwriter, Object object) throws IOException {
+-                this.a(jsonwriter, (LootTableInfo.EntityTarget) object);
++            public void write(JsonWriter jsonwriter, LootTableInfo.EntityTarget object) throws IOException { // Fountain: Fix decompiler error
++                this.a(jsonwriter, object);
+             }
+         }
+     }

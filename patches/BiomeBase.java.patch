@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/BiomeBase.java	2016-06-04 07:22:17.501546399 -0700
++++ src/main/java/net/minecraft/server/BiomeBase.java	2016-06-04 20:25:16.972565063 -0700
+@@ -49,7 +49,7 @@
+     protected List<BiomeBase.BiomeMeta> x;
+ 
+     public static int a(BiomeBase biomebase) {
+-        return BiomeBase.REGISTRY_ID.a((Object) biomebase);
++        return BiomeBase.REGISTRY_ID.a(biomebase);
+     }
+ 
+     @Nullable

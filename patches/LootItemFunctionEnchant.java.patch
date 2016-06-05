@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/LootItemFunctionEnchant.java	2016-06-04 07:22:24.297566189 -0700
++++ src/main/java/net/minecraft/server/LootItemFunctionEnchant.java	2016-06-04 21:20:03.913720127 -0700
+@@ -115,7 +115,7 @@
+             return new LootItemFunctionEnchant(alootitemcondition, arraylist);
+         }
+ 
+-        public LootItemFunction b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) {
++        public LootItemFunctionEnchant b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) {
+             return this.a(jsonobject, jsondeserializationcontext, alootitemcondition);
+         }
+     }

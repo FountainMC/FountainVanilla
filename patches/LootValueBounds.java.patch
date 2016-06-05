@@ -1,0 +1,17 @@
+--- minecraft/src/net/minecraft/server/LootValueBounds.java	2016-06-04 07:22:36.325601247 -0700
++++ src/main/java/net/minecraft/server/LootValueBounds.java	2016-06-04 21:29:18.452048461 -0700
+@@ -74,11 +74,11 @@
+             }
+         }
+ 
+-        public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonserializationcontext) {
+-            return this.a((LootValueBounds) object, type, jsonserializationcontext);
++        public JsonElement serialize(LootValueBounds object, Type type, JsonSerializationContext jsonserializationcontext) { // Fountain: Fix decompiler error
++            return this.a(object, type, jsonserializationcontext);
+         }
+ 
+-        public Object deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
++        public LootValueBounds deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // Fountain: Fix decompiler error
+             return this.a(jsonelement, type, jsondeserializationcontext);
+         }
+     }

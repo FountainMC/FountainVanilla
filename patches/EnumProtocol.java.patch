@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/EnumProtocol.java	2016-06-04 07:22:08.493520188 -0700
++++ src/main/java/net/minecraft/server/EnumProtocol.java	2016-06-04 21:03:51.169185423 -0700
+@@ -154,7 +154,7 @@
+     }
+ 
+     protected EnumProtocol a(EnumProtocolDirection enumprotocoldirection, Class<? extends Packet<?>> oclass) {
+-        Object object = (BiMap) this.j.get(enumprotocoldirection);
++        BiMap object = (BiMap) this.j.get(enumprotocoldirection); // Fountain: Fix decompiler error
+ 
+         if (object == null) {
+             object = HashBiMap.create();

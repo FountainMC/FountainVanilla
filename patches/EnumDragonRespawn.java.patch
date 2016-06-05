@@ -1,0 +1,38 @@
+--- minecraft/src/net/minecraft/server/EnumDragonRespawn.java	2016-06-04 07:22:27.541575640 -0700
++++ src/main/java/net/minecraft/server/EnumDragonRespawn.java	2016-06-04 21:02:52.860978559 -0700
+@@ -17,7 +17,7 @@
+                 entityendercrystal.setBeamTarget(blockposition1);
+             }
+ 
+-            enderdragonbattle.a(null.PREPARING_TO_SUMMON_PILLARS);
++            enderdragonbattle.a(PREPARING_TO_SUMMON_PILLARS); // Fountain: Fix decompiler error
+         }
+     }, PREPARING_TO_SUMMON_PILLARS {;
+     public void a(WorldServer worldserver, EnderDragonBattle enderdragonbattle, List<EntityEnderCrystal> list, int i, BlockPosition blockposition) {
+@@ -26,7 +26,7 @@
+                 worldserver.triggerEffect(3001, new BlockPosition(0, 128, 0), 0);
+             }
+         } else {
+-            enderdragonbattle.a(null.SUMMONING_PILLARS);
++            enderdragonbattle.a(SUMMONING_PILLARS); // Fountain: Fix decompiler error
+         }
+ 
+     }
+@@ -70,7 +70,7 @@
+                     worldgenender.generate(worldserver, new Random(), new BlockPosition(worldgenender_spike.a(), 45, worldgenender_spike.b()));
+                 }
+             } else if (flag) {
+-                enderdragonbattle.a(null.SUMMONING_DRAGON);
++                enderdragonbattle.a(SUMMONING_DRAGON); // Fountain: Fix decompiler error
+             }
+         }
+ 
+@@ -81,7 +81,7 @@
+         EntityEnderCrystal entityendercrystal;
+ 
+         if (i >= 100) {
+-            enderdragonbattle.a(null.END);
++            enderdragonbattle.a(END); // Fountain: Fix decompiler error
+             enderdragonbattle.f();
+             iterator = list.iterator();
+ 

@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/server/Achievement.java	2016-06-04 07:22:21.105556893 -0700
++++ src/main/java/net/minecraft/server/Achievement.java	2016-06-04 20:23:29.928233411 -0700
+@@ -2,8 +2,8 @@
+ 
+ public class Achievement extends Statistic {
+ 
+-    public final int a;
+-    public final int b;
++    public int a;
++    public int b;
+     public final Achievement c;
+     private final String k;
+     public final ItemStack d;

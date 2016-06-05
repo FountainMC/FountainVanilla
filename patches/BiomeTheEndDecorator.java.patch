@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/server/BiomeTheEndDecorator.java	2016-06-04 07:22:36.233600979 -0700
++++ src/main/java/net/minecraft/server/BiomeTheEndDecorator.java	2016-06-04 20:26:48.912852006 -0700
+@@ -69,8 +69,8 @@
+             return aworldgenender_spike;
+         }
+ 
+-        public Object load(Object object) throws Exception {
+-            return this.a((Long) object);
++        public WorldGenEnder.Spike[] load(Long object) throws Exception { // Fountain: Fix decompiler error
++            return this.a(object);
+         }
+ 
+         SpikeCache(BiomeTheEndDecorator.SyntheticClass_1 biometheenddecorator_syntheticclass_1) {

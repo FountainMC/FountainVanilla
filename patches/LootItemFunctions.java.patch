@@ -1,0 +1,17 @@
+--- minecraft/src/net/minecraft/server/LootItemFunctions.java	2016-06-04 07:22:38.149606567 -0700
++++ src/main/java/net/minecraft/server/LootItemFunctions.java	2016-06-04 21:20:49.541921965 -0700
+@@ -95,11 +95,11 @@
+             return jsonobject;
+         }
+ 
+-        public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonserializationcontext) {
+-            return this.a((LootItemFunction) object, type, jsonserializationcontext);
++        public JsonElement serialize(LootItemFunction object, Type type, JsonSerializationContext jsonserializationcontext) { // Fountain: Fix decompiler error
++            return this.a(object, type, jsonserializationcontext);
+         }
+ 
+-        public Object deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
++        public LootItemFunction deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
+             return this.a(jsonelement, type, jsondeserializationcontext);
+         }
+     }

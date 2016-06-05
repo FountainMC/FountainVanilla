@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/server/Chunk.java	2016-06-04 07:22:15.613540903 -0700
++++ src/main/java/net/minecraft/server/Chunk.java	2016-06-04 20:39:31.299684487 -0700
+@@ -733,10 +733,10 @@
+         j = MathHelper.clamp(j, 0, this.entitySlices.length - 1);
+ 
+         for (int k = i; k <= j; ++k) {
+-            Iterator iterator = this.entitySlices[k].c(oclass).iterator();
++            Iterator<? extends T> iterator = this.entitySlices[k].c(oclass).iterator(); // Fountain: Fix decompiler error
+ 
+             while (iterator.hasNext()) {
+-                Entity entity = (Entity) iterator.next();
++                T entity = iterator.next(); // Fountain: Fix decompiler error
+ 
+                 if (entity.getBoundingBox().b(axisalignedbb) && (predicate == null || predicate.apply(entity))) {
+                     list.add(entity);

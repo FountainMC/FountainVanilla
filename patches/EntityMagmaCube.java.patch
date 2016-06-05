@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/EntityMagmaCube.java	2016-06-04 07:22:32.917591309 -0700
++++ src/main/java/net/minecraft/server/EntityMagmaCube.java	2016-06-04 20:56:35.415628820 -0700
+@@ -22,7 +22,7 @@
+         return this.world.a(this.getBoundingBox(), (Entity) this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && !this.world.containsLiquid(this.getBoundingBox());
+     }
+ 
+-    protected void setSize(int i) {
++    public void setSize(int i) { // Fountain: Fix decompiler error
+         super.setSize(i);
+         this.getAttributeInstance(GenericAttributes.g).setValue((double) (i * 3));
+     }

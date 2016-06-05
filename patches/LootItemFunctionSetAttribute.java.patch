@@ -1,0 +1,20 @@
+--- minecraft/src/net/minecraft/server/LootItemFunctionSetAttribute.java	2016-06-04 07:22:41.921617570 -0700
++++ src/main/java/net/minecraft/server/LootItemFunctionSetAttribute.java	2016-06-04 21:25:53.439213557 -0700
+@@ -16,7 +16,7 @@
+ 
+ public class LootItemFunctionSetAttribute extends LootItemFunction {
+ 
+-    private static final Logger a = LogManager.getLogger();
++    private static final Logger aL = LogManager.getLogger(); // Fountain: Fix decompiler error
+     private final LootItemFunctionSetAttribute.a[] b;
+ 
+     public LootItemFunctionSetAttribute(LootItemCondition[] alootitemcondition, LootItemFunctionSetAttribute.a[] alootitemfunctionsetattribute_a) {
+@@ -204,7 +204,7 @@
+             }
+         }
+ 
+-        public LootItemFunction b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) {
++        public LootItemFunctionSetAttribute b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext, LootItemCondition[] alootitemcondition) { // Fountain: Fix decompiler error
+             return this.a(jsonobject, jsondeserializationcontext, alootitemcondition);
+         }
+     }

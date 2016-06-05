@@ -1,11 +1,11 @@
 --- minecraft/src/net/minecraft/server/Block.java	2016-06-04 07:22:17.165545421 -0700
-+++ src/main/java/net/minecraft/server/Block.java	2016-06-04 09:07:45.468020784 -0700
++++ src/main/java/net/minecraft/server/Block.java	2016-06-04 20:27:46.009031021 -0700
 @@ -35,7 +35,7 @@
      private String name;
  
      public static int getId(Block block) {
 -        return Block.REGISTRY.a((Object) block);
-+        return Block.REGISTRY.a((block); // Fountain: Fix decompiler error
++        return Block.REGISTRY.a(block); // Fountain: Fix decompiler error
      }
  
      public static int getCombinedId(IBlockData iblockdata) {
@@ -14,7 +14,7 @@
              if (hashset.contains(block16)) {
                  for (int i = 0; i < 15; ++i) {
 -                    int j = Block.REGISTRY.a((Object) block16) << 4 | i;
-+                    int j = Block.REGISTRY.a((block16) << 4 | i; // Fountain: Fix decompiler error
++                    int j = Block.REGISTRY.a(block16) << 4 | i; // Fountain: Fix decompiler error
  
                      Block.REGISTRY_ID.a(block16.fromLegacyData(i), j);
                  }

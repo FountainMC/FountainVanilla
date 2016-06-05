@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/MobEffectList.java	2016-06-04 07:22:09.509523143 -0700
++++ src/main/java/net/minecraft/server/MobEffectList.java	2016-06-04 21:31:15.028514615 -0700
+@@ -24,7 +24,7 @@
+     }
+ 
+     public static int getId(MobEffectList mobeffectlist) {
+-        return MobEffectList.REGISTRY.a((Object) mobeffectlist);
++        return MobEffectList.REGISTRY.a(mobeffectlist); // Fountain: Fix decompiler error
+     }
+ 
+     @Nullable

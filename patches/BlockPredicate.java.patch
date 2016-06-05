@@ -1,0 +1,12 @@
+--- minecraft/src/net/minecraft/server/BlockPredicate.java	2016-06-04 07:22:32.477590027 -0700
++++ src/main/java/net/minecraft/server/BlockPredicate.java	2016-06-04 20:30:58.617638631 -0700
+@@ -19,7 +19,7 @@
+         return iblockdata != null && iblockdata.getBlock() == this.a;
+     }
+ 
+-    public boolean apply(Object object) {
+-        return this.a((IBlockData) object);
++    public boolean apply(IBlockData object) { // Fountain: Fix decompiler error
++        return this.a(object);
+     }
+ }

@@ -1,0 +1,35 @@
+--- minecraft/src/net/minecraft/server/JsonList.java	2016-06-04 07:22:16.717544118 -0700
++++ src/main/java/net/minecraft/server/JsonList.java	2016-06-04 21:16:53.460846140 -0700
+@@ -83,7 +83,7 @@
+ 
+     public V get(K k0) {
+         this.h();
+-        return (JsonListEntry) this.d.get(this.a(k0));
++        return (V) this.d.get(this.a(k0)); // Fountain: Fix decompiler error
+     }
+ 
+     public void remove(K k0) {
+@@ -176,7 +176,7 @@
+                 JsonListEntry jsonlistentry = (JsonListEntry) iterator.next();
+ 
+                 if (jsonlistentry.getKey() != null) {
+-                    this.d.put(this.a(jsonlistentry.getKey()), jsonlistentry);
++                    this.d.put(this.a((K)jsonlistentry.getKey()), (V) jsonlistentry); // Fountain: Fix decompiler error
+                 }
+             }
+         }
+@@ -204,11 +204,11 @@
+             }
+         }
+ 
+-        public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonserializationcontext) {
+-            return this.a((JsonListEntry) object, type, jsonserializationcontext);
++        public JsonElement serialize(JsonListEntry object, Type type, JsonSerializationContext jsonserializationcontext) { // Fountain: Fix decompiler error
++            return this.a(object, type, jsonserializationcontext);
+         }
+ 
+-        public Object deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
++        public JsonListEntry<K> deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // Fountain: Fix decompiler error
+             return this.a(jsonelement, type, jsondeserializationcontext);
+         }
+ 

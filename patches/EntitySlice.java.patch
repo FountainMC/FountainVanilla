@@ -1,0 +1,24 @@
+--- minecraft/src/net/minecraft/server/EntitySlice.java	2016-06-04 07:22:24.185565863 -0700
++++ src/main/java/net/minecraft/server/EntitySlice.java	2016-06-04 21:01:02.980587740 -0700
+@@ -40,7 +40,7 @@
+             Object object = iterator.next();
+ 
+             if (oclass.isAssignableFrom(object.getClass())) {
+-                this.a(object, oclass);
++                this.a((T) object, oclass); // Fountain: Fix decompiler error
+             }
+         }
+ 
+@@ -74,10 +74,10 @@
+     }
+ 
+     private void a(T t0, Class<?> oclass) {
+-        List list = (List) this.b.get(oclass);
++        List<T> list = this.b.get(oclass);
+ 
+         if (list == null) {
+-            this.b.put(oclass, Lists.newArrayList(new Object[] { t0}));
++            this.b.put(oclass, Lists.newArrayList(t0)); // Fountain: Fix decompiler error
+         } else {
+             list.add(t0);
+         }

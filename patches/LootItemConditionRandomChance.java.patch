@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/server/LootItemConditionRandomChance.java	2016-06-04 07:22:40.369613043 -0700
++++ src/main/java/net/minecraft/server/LootItemConditionRandomChance.java	2016-06-04 21:22:28.142350134 -0700
+@@ -31,7 +31,7 @@
+             return new LootItemConditionRandomChance(ChatDeserializer.l(jsonobject, "chance"));
+         }
+ 
+-        public LootItemCondition b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) {
++        public LootItemConditionRandomChance b(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) { // Fountain: Fix decompiler error
+             return this.a(jsonobject, jsondeserializationcontext);
+         }
+     }
