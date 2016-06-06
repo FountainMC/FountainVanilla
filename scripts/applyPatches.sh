@@ -3,8 +3,9 @@
 dir=$(pwd -P)
 
 echo "Applying patches..."
-for f in $(find $dir/minecraft/src/net/minecraft/ -name '*.java'); do
+cd $dir/minecraft/src/net/
+for f in $(find minecraft/ -name '*.java'); do
   if [ -f "$dir/patches/$f.patch" ]; then
-    patch "$f" "$dir/patches/$f.patch"
+    patch "$dir/src/main/java/net/$f" "$dir/patches/$f.patch"
   fi
 done
