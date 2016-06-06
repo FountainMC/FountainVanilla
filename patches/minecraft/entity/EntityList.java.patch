@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/EntityList.java	2016-06-05 00:35:03.193139449 -0700
++++ src/main/java/net/minecraft/entity/EntityList.java	2016-06-05 20:16:15.421500836 -0700
+@@ -207,7 +207,7 @@
+    }
+ 
+    public static List<String> getEntityNameList() {
+-      Set var0 = NAME_TO_CLASS.keySet();
++      Set<String> var0 = NAME_TO_CLASS.keySet();
+       ArrayList var1 = Lists.newArrayList();
+ 
+       for(String var3 : var0) {

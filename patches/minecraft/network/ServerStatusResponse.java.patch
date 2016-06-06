@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/network/ServerStatusResponse.java	2016-06-05 00:35:25.121180212 -0700
++++ src/main/java/net/minecraft/network/ServerStatusResponse.java	2016-06-05 20:18:34.754164059 -0700
+@@ -81,8 +81,8 @@
+          this.players = var1;
+       }
+ 
+-      public static class a implements JsonDeserializer<ServerStatusResponse.a>, JsonSerializer<ServerStatusResponse.a> {
+-         public a() {
++      public static class d implements JsonDeserializer<ServerStatusResponse.a>, JsonSerializer<ServerStatusResponse.a> {
++         public d() {
+          }
+ 
+          public ServerStatusResponse.a deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {

@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/world/chunk/storage/AnvilChunkLoader.java	2016-06-05 00:35:18.717168110 -0700
++++ src/main/java/net/minecraft/world/chunk/storage/AnvilChunkLoader.java	2016-06-05 20:35:52.983562127 -0700
+@@ -229,7 +229,7 @@
+       }
+ 
+       var3.setTag("TileEntities", var19);
+-      List var22 = var2.getPendingBlockUpdates(var1, false);
++      List<NextTickListEntry> var22 = var2.getPendingBlockUpdates(var1, false);
+       if(var22 != null) {
+          long var25 = var2.getTotalWorldTime();
+          NBTTagList var28 = new NBTTagList();

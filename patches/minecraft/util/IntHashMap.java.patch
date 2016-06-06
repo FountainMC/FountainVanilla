@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/util/IntHashMap.java	2016-06-05 00:35:23.805177713 -0700
++++ src/main/java/net/minecraft/util/IntHashMap.java	2016-06-05 20:33:42.606828278 -0700
+@@ -24,7 +24,7 @@
+    public V lookup(int var1) {
+       int var2 = computeHash(var1);
+ 
+-      for(IntHashMap.a var3 = this.slots[getSlotIndex(var2, this.slots.length)]; var3 != null; var3 = var3.nextEntry) {
++      for(IntHashMap.a<V> var3 = this.slots[getSlotIndex(var2, this.slots.length)]; var3 != null; var3 = var3.nextEntry) {
+          if(var3.hashEntry == var1) {
+             return var3.valueEntry;
+          }

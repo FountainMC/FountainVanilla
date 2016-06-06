@@ -1,0 +1,33 @@
+--- minecraft/src/net/minecraft/network/EnumConnectionState.java	2016-06-05 00:35:25.169180304 -0700
++++ src/main/java/net/minecraft/network/EnumConnectionState.java	2016-06-05 20:21:32.242990552 -0700
+@@ -267,18 +267,18 @@
+    }
+ 
+    protected EnumConnectionState registerPacket(EnumPacketDirection var1, Class<? extends Packet<?>> var2) {
+-      Object var3 = (BiMap)this.directionMaps.get(var1);
++      BiMap<Integer, Class<? extends Packet<?>>> var3 = this.directionMaps.get(var1);
+       if(var3 == null) {
+          var3 = HashBiMap.create();
+          this.directionMaps.put(var1, var3);
+       }
+ 
+-      if(((BiMap)var3).containsValue(var2)) {
++      if(var3.containsValue(var2)) {
+          String var4 = var1 + " packet " + var2 + " is already known to ID " + ((BiMap)var3).inverse().get(var2);
+          LogManager.getLogger().fatal(var4);
+          throw new IllegalArgumentException(var4);
+       } else {
+-         ((BiMap)var3).put(Integer.valueOf(((BiMap)var3).size()), var2);
++         var3.put(Integer.valueOf(((BiMap)var3).size()), var2);
+          return this;
+       }
+    }
+@@ -315,7 +315,7 @@
+          STATES_BY_ID[var4 - MIN_PROTOCOL_ID] = var3;
+ 
+          for(EnumPacketDirection var6 : var3.directionMaps.keySet()) {
+-            for(Class var8 : ((BiMap)var3.directionMaps.get(var6)).values()) {
++            for(Class var8 : var3.directionMaps.get(var6).values()) {
+                if(STATES_BY_CLASS.containsKey(var8) && STATES_BY_CLASS.get(var8) != var3) {
+                   throw new Error("Packet " + var8 + " is already assigned to protocol " + STATES_BY_CLASS.get(var8) + " - can\'t reassign to " + var3);
+                }

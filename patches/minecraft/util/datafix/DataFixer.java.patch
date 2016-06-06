@@ -1,0 +1,17 @@
+--- minecraft/src/net/minecraft/util/datafix/DataFixer.java	2016-06-05 00:35:32.009193408 -0700
++++ src/main/java/net/minecraft/util/datafix/DataFixer.java	2016-06-05 20:29:55.929456228 -0700
+@@ -92,12 +92,12 @@
+    }
+ 
+    private <V> List<V> getTypeList(Map<IFixType, List<V>> var1, IFixType var2) {
+-      Object var3 = (List)var1.get(var2);
++      List<V> var3 = var1.get(var2);
+       if(var3 == null) {
+          var3 = Lists.newArrayList();
+          var1.put(var2, var3);
+       }
+ 
+-      return (List<V>)var3;
++      return var3;
+    }
+ }

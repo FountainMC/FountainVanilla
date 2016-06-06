@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/boss/EntityDragon.java	2016-06-05 00:35:27.145184071 -0700
++++ src/main/java/net/minecraft/entity/boss/EntityDragon.java	2016-06-05 20:06:21.966408027 -0700
+@@ -325,7 +325,7 @@
+       }
+ 
+       if(this.rand.nextInt(10) == 0) {
+-         List var1 = this.worldObj.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().expandXyz(32.0D));
++         List<EntityEnderCrystal> var1 = this.worldObj.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().expandXyz(32.0D));
+          EntityEnderCrystal var2 = null;
+          double var3 = Double.MAX_VALUE;
+ 

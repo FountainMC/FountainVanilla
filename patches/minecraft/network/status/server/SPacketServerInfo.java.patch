@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/network/status/server/SPacketServerInfo.java	2016-06-05 00:35:26.725183269 -0700
++++ src/main/java/net/minecraft/network/status/server/SPacketServerInfo.java	2016-06-05 20:19:39.534467789 -0700
+@@ -13,7 +13,7 @@
+ import net.minecraft.util.text.Style;
+ 
+ public class SPacketServerInfo implements Packet<INetHandlerStatusClient> {
+-   private static final Gson GSON = (new GsonBuilder()).registerTypeAdapter(ServerStatusResponse.c.class, new ServerStatusResponse.c.a()).registerTypeAdapter(ServerStatusResponse.a.class, new ServerStatusResponse.a.a()).registerTypeAdapter(ServerStatusResponse.class, new ServerStatusResponse.b()).registerTypeHierarchyAdapter(ITextComponent.class, new ITextComponent.a()).registerTypeHierarchyAdapter(Style.class, new Style.a()).registerTypeAdapterFactory(new EnumTypeAdapterFactory()).create();
++   private static final Gson GSON = (new GsonBuilder()).registerTypeAdapter(ServerStatusResponse.c.class, new ServerStatusResponse.c.a()).registerTypeAdapter(ServerStatusResponse.a.class, new ServerStatusResponse.a.d()).registerTypeAdapter(ServerStatusResponse.class, new ServerStatusResponse.b()).registerTypeHierarchyAdapter(ITextComponent.class, new ITextComponent.a()).registerTypeHierarchyAdapter(Style.class, new Style.a()).registerTypeAdapterFactory(new EnumTypeAdapterFactory()).create();
+    private ServerStatusResponse response;
+ 
+    public SPacketServerInfo() {

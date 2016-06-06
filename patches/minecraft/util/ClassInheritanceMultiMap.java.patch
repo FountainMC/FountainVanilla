@@ -1,0 +1,23 @@
+--- minecraft/src/net/minecraft/util/ClassInheritanceMultiMap.java	2016-06-05 00:35:23.865177826 -0700
++++ src/main/java/net/minecraft/util/ClassInheritanceMultiMap.java	2016-06-05 20:33:00.778585314 -0700
+@@ -31,7 +31,7 @@
+    protected void createLookup(Class<?> var1) {
+       ALL_KNOWN.add(var1);
+ 
+-      for(Object var3 : this.values) {
++      for(T var3 : this.values) {
+          if(var1.isAssignableFrom(var3.getClass())) {
+             this.addForClass(var3, var1);
+          }
+@@ -63,9 +63,9 @@
+    }
+ 
+    private void addForClass(T var1, Class<?> var2) {
+-      List var3 = (List)this.map.get(var2);
++      List<T> var3 = this.map.get(var2);
+       if(var3 == null) {
+-         this.map.put(var2, Lists.newArrayList(new Object[]{var1}));
++         this.map.put(var2, Lists.newArrayList((T)new Object[]{var1}));
+       } else {
+          var3.add(var1);
+       }

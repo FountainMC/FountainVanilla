@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasScore.java	2016-06-05 00:35:26.701183224 -0700
++++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasScore.java	2016-06-05 20:42:42.713706621 -0700
+@@ -73,10 +73,10 @@
+       }
+ 
+       public EntityHasScore deserialize(JsonObject var1, JsonDeserializationContext var2) {
+-         Set var3 = JsonUtils.getJsonObject(var1, "scores").entrySet();
++         Set<Entry<String, JsonElement>> var3 = JsonUtils.getJsonObject(var1, "scores").entrySet();
+          LinkedHashMap var4 = Maps.newLinkedHashMap();
+ 
+-         for(Entry var6 : var3) {
++         for(Entry<String, JsonElement> var6 : var3) {
+             var4.put(var6.getKey(), JsonUtils.deserializeClass((JsonElement)var6.getValue(), "score", var2, RandomValueRange.class));
+          }
+ 

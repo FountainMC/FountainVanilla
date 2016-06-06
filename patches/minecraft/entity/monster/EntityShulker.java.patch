@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityShulker.java	2016-06-05 00:35:01.929137158 -0700
++++ src/main/java/net/minecraft/entity/monster/EntityShulker.java	2016-06-05 20:09:42.711521423 -0700
+@@ -266,7 +266,7 @@
+          }
+ 
+          if(var27 > 0.0D) {
+-            List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox());
++            List<Entity> var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox());
+             if(!var16.isEmpty()) {
+                for(Entity var18 : var16) {
+                   if(!(var18 instanceof EntityShulker) && !var18.noClip) {

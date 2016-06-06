@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/util/MapPopulator.java	2016-06-05 00:35:23.505177144 -0700
++++ src/main/java/net/minecraft/util/MapPopulator.java	2016-06-05 20:35:10.579327025 -0700
+@@ -11,9 +11,9 @@
+    }
+ 
+    public static <K, V> Map<K, V> populateMap(Iterable<K> var0, Iterable<V> var1, Map<K, V> var2) {
+-      Iterator var3 = var1.iterator();
++      Iterator<V> var3 = var1.iterator();
+ 
+-      for(Object var5 : var0) {
++      for(K var5 : var0) {
+          var2.put(var5, var3.next());
+       }
+ 

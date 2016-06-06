@@ -1,0 +1,20 @@
+--- minecraft/src/net/minecraft/entity/projectile/EntityPotion.java	2016-06-05 00:35:22.333174924 -0700
++++ src/main/java/net/minecraft/entity/projectile/EntityPotion.java	2016-06-05 20:14:00.552842696 -0700
+@@ -78,7 +78,7 @@
+       if(!this.worldObj.isRemote) {
+          ItemStack var2 = this.getPotion();
+          PotionType var3 = PotionUtils.getPotionFromItem(var2);
+-         List var4 = PotionUtils.getEffectsFromStack(var2);
++         List<PotionEffect> var4 = PotionUtils.getEffectsFromStack(var2);
+          if(var1.typeOfHit == RayTraceResult.a.BLOCK && var3 == PotionTypes.WATER && var4.isEmpty()) {
+             BlockPos var18 = var1.getBlockPos().offset(var1.sideHit);
+             this.extinguishFires(var18);
+@@ -107,7 +107,7 @@
+                   this.worldObj.spawnEntityInWorld(var5);
+                } else {
+                   AxisAlignedBB var17 = this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D);
+-                  List var19 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var17);
++                  List<EntityLivingBase> var19 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var17);
+                   if(!var19.isEmpty()) {
+                      for(EntityLivingBase var8 : var19) {
+                         if(var8.canBeHitWithPotion()) {

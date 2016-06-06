@@ -1,0 +1,16 @@
+--- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java	2016-06-05 00:35:26.677183177 -0700
++++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java	2016-06-05 20:42:16.109572670 -0700
+@@ -59,11 +59,11 @@
+       }
+ 
+       public EntityHasProperty deserialize(JsonObject var1, JsonDeserializationContext var2) {
+-         Set var3 = JsonUtils.getJsonObject(var1, "properties").entrySet();
++         Set<Entry<String, JsonElement>> var3 = JsonUtils.getJsonObject(var1, "properties").entrySet();
+          EntityProperty[] var4 = new EntityProperty[var3.size()];
+          int var5 = 0;
+ 
+-         for(Entry var7 : var3) {
++         for(Entry<String, JsonElement> var7 : var3) {
+             var4[var5++] = EntityPropertyManager.getSerializerForName(new ResourceLocation((String)var7.getKey())).deserialize((JsonElement)var7.getValue(), var2);
+          }
+ 

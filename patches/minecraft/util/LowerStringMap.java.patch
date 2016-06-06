@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/util/LowerStringMap.java	2016-06-05 00:35:23.685177485 -0700
++++ src/main/java/net/minecraft/util/LowerStringMap.java	2016-06-05 20:34:48.099201049 -0700
+@@ -41,7 +41,7 @@
+    }
+ 
+    public void putAll(Map<? extends String, ? extends V> var1) {
+-      for(Entry var3 : var1.entrySet()) {
++      for(Entry<? extends String, ? extends V> var3 : var1.entrySet()) {
+          this.put((String)var3.getKey(), var3.getValue());
+       }
+ 

@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/world/storage/loot/LootPool.java	2016-06-05 00:35:46.529221823 -0700
++++ src/main/java/net/minecraft/world/storage/loot/LootPool.java	2016-06-05 20:43:00.737797061 -0700
+@@ -36,7 +36,7 @@
+    }
+ 
+    protected void createLootRoll(Collection<ItemStack> var1, Random var2, LootContext var3) {
+-      ArrayList var4 = Lists.newArrayList();
++      ArrayList<LootEntry> var4 = Lists.newArrayList();
+       int var5 = 0;
+ 
+       for(LootEntry var9 : this.lootEntries) {

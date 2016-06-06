@@ -1,0 +1,17 @@
+--- minecraft/src/net/minecraft/world/gen/structure/ComponentScatteredFeaturePieces.java	2016-06-05 00:35:15.905162846 -0700
++++ src/main/java/net/minecraft/world/gen/structure/ComponentScatteredFeaturePieces.java	2016-06-05 20:38:34.396430905 -0700
+@@ -368,11 +368,11 @@
+ 
+                BlockPos var21 = var5.add(var10.calculateConnectedPos(var9, new BlockPos(3, -1 - var13 * 3, 5), var9, new BlockPos(3, 5, 7)));
+                var12.addBlocksToWorldChunk(var1, var21, var9);
+-               Map var22 = var12.getDataBlocks(var21, var9);
++               Map<BlockPos, String> var22 = var12.getDataBlocks(var21, var9);
+ 
+-               for(Entry var17 : var22.entrySet()) {
++               for(Entry<BlockPos, String> var17 : var22.entrySet()) {
+                   if("chest".equals(var17.getValue())) {
+-                     BlockPos var18 = (BlockPos)var17.getKey();
++                     BlockPos var18 = var17.getKey();
+                      var1.setBlockState(var18, Blocks.AIR.getDefaultState(), 3);
+                      TileEntity var19 = var1.getTileEntity(var18.down());
+                      if(var19 instanceof TileEntityChest) {

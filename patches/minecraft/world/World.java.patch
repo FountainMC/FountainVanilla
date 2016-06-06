@@ -1,0 +1,32 @@
+--- minecraft/src/net/minecraft/world/World.java	2016-06-05 00:35:34.765198740 -0700
++++ src/main/java/net/minecraft/world/World.java	2016-06-05 20:44:39.530288708 -0700
+@@ -1984,11 +1984,11 @@
+    }
+ 
+    public <T extends Entity> List<T> getEntities(Class<? extends T> var1, Predicate<? super T> var2) {
+-      ArrayList var3 = Lists.newArrayList();
++      ArrayList<T> var3 = Lists.newArrayList();
+ 
+       for(Entity var5 : this.loadedEntityList) {
+-         if(var1.isAssignableFrom(var5.getClass()) && var2.apply(var5)) {
+-            var3.add(var5);
++         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T) var5)) {
++            var3.add((T) var5);
+          }
+       }
+ 
+@@ -1996,11 +1996,11 @@
+    }
+ 
+    public <T extends Entity> List<T> getPlayers(Class<? extends T> var1, Predicate<? super T> var2) {
+-      ArrayList var3 = Lists.newArrayList();
++      ArrayList<T> var3 = Lists.newArrayList();
+ 
+       for(Entity var5 : this.playerEntities) {
+-         if(var1.isAssignableFrom(var5.getClass()) && var2.apply(var5)) {
+-            var3.add(var5);
++         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T) var5)) {
++            var3.add((T) var5);
+          }
+       }
+ 

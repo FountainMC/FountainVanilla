@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/SharedMonsterAttributes.java	2016-06-05 00:35:03.221139499 -0700
++++ src/main/java/net/minecraft/entity/SharedMonsterAttributes.java	2016-06-05 20:16:46.381649517 -0700
+@@ -40,7 +40,7 @@
+       IAttribute var2 = var0.getAttribute();
+       var1.setString("Name", var2.getAttributeUnlocalizedName());
+       var1.setDouble("Base", var0.getBaseValue());
+-      Collection var3 = var0.getModifiers();
++      Collection<AttributeModifier> var3 = var0.getModifiers();
+       if(var3 != null && !var3.isEmpty()) {
+          NBTTagList var4 = new NBTTagList();
+ 

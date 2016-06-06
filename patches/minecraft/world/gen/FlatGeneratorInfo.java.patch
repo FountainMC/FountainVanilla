@@ -1,0 +1,25 @@
+--- minecraft/src/net/minecraft/world/gen/FlatGeneratorInfo.java	2016-06-05 00:35:48.305225352 -0700
++++ src/main/java/net/minecraft/world/gen/FlatGeneratorInfo.java	2016-06-05 20:41:23.585306501 -0700
+@@ -67,18 +67,18 @@
+          var1.append(";");
+          int var9 = 0;
+ 
+-         for(Entry var4 : this.worldFeatures.entrySet()) {
++         for(Entry<String, Map<String, String>> var4 : this.worldFeatures.entrySet()) {
+             if(var9++ > 0) {
+                var1.append(",");
+             }
+ 
+-            var1.append(((String)var4.getKey()).toLowerCase());
+-            Map var5 = (Map)var4.getValue();
++            var1.append(var4.getKey().toLowerCase());
++            Map<String, String> var5 = var4.getValue();
+             if(!var5.isEmpty()) {
+                var1.append("(");
+                int var6 = 0;
+ 
+-               for(Entry var8 : var5.entrySet()) {
++               for(Entry<String, String> var8 : var5.entrySet()) {
+                   if(var6++ > 0) {
+                      var1.append(" ");
+                   }

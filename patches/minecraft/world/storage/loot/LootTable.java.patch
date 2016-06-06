@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/world/storage/loot/LootTable.java	2016-06-05 00:35:46.669222100 -0700
++++ src/main/java/net/minecraft/world/storage/loot/LootTable.java	2016-06-05 20:43:21.265899772 -0700
+@@ -48,8 +48,8 @@
+    }
+ 
+    public void fillInventory(IInventory var1, Random var2, LootContext var3) {
+-      List var4 = this.generateLootForPools(var2, var3);
+-      List var5 = this.getEmptySlotsRandomized(var1, var2);
++      List<ItemStack> var4 = this.generateLootForPools(var2, var3);
++      List<Integer> var5 = this.getEmptySlotsRandomized(var1, var2);
+       this.shuffleItems(var4, var5.size(), var2);
+ 
+       for(ItemStack var7 : var4) {

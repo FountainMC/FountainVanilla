@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/world/gen/structure/template/Template.java	2016-06-05 00:35:18.317167360 -0700
++++ src/main/java/net/minecraft/world/gen/structure/template/Template.java	2016-06-05 20:37:44.568166705 -0700
+@@ -96,7 +96,7 @@
+    }
+ 
+    private void takeEntitiesFromWorld(World var1, BlockPos var2, BlockPos var3) {
+-      List var4 = var1.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
++      List<Entity> var4 = var1.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
+          public boolean apply(@Nullable Entity var1) {
+             return !(var1 instanceof EntityPlayer);
+          }

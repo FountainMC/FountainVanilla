@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/world/gen/layer/GenLayer.java	2016-06-05 00:34:59.461132704 -0700
++++ src/main/java/net/minecraft/world/gen/layer/GenLayer.java	2016-06-05 20:37:28.316079809 -0700
+@@ -69,7 +69,7 @@
+       GenLayer var37 = GenLayerZoom.magnify(1000L, var9, 2);
+       GenLayerBiomeEdge var38 = new GenLayerBiomeEdge(1000L, var37);
+       GenLayer var10 = GenLayerZoom.magnify(1000L, var32, 2);
+-      GenLayerHills var39 = new GenLayerHills(1000L, var38, var10);
++      GenLayer var39 = new GenLayerHills(1000L, var38, var10);
+       GenLayer var33 = GenLayerZoom.magnify(1000L, var32, 2);
+       var33 = GenLayerZoom.magnify(1000L, var33, var7);
+       GenLayerRiver var35 = new GenLayerRiver(1L, var33);

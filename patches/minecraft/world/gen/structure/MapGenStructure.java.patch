@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/world/gen/structure/MapGenStructure.java	2016-06-05 00:35:17.189165245 -0700
++++ src/main/java/net/minecraft/world/gen/structure/MapGenStructure.java	2016-06-05 20:40:34.985058019 -0700
+@@ -156,7 +156,7 @@
+       if(var13 != null) {
+          return var13;
+       } else {
+-         List var20 = this.getCoordList();
++         List<BlockPos> var20 = this.getCoordList();
+          if(var20 != null) {
+             BlockPos var21 = null;
+ 

@@ -1,0 +1,29 @@
+--- minecraft/src/net/minecraft/util/IntIdentityHashBiMap.java	2016-06-05 00:35:23.757177621 -0700
++++ src/main/java/net/minecraft/util/IntIdentityHashBiMap.java	2016-06-05 20:34:18.123031531 -0700
+@@ -17,9 +17,9 @@
+ 
+    public IntIdentityHashBiMap(int var1) {
+       var1 = (int)((float)var1 / 0.8F);
+-      this.values = (Object[])(new Object[var1]);
++      this.values = (K[])(new Object[var1]);
+       this.intKeys = new int[var1];
+-      this.byId = (Object[])(new Object[var1]);
++      this.byId = (K[])(new Object[var1]);
+    }
+ 
+    public int getId(K var1) {
+@@ -50,11 +50,11 @@
+    }
+ 
+    private void grow(int var1) {
+-      Object[] var2 = this.values;
++      K[] var2 = this.values;
+       int[] var3 = this.intKeys;
+-      this.values = (Object[])(new Object[var1]);
++      this.values = (K[])(new Object[var1]);
+       this.intKeys = new int[var1];
+-      this.byId = (Object[])(new Object[var1]);
++      this.byId = (K[])(new Object[var1]);
+       this.nextFreeIndex = 0;
+       this.mapSize = 0;
+ 

@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/world/chunk/Chunk.java	2016-06-05 00:35:43.753216329 -0700
++++ src/main/java/net/minecraft/world/chunk/Chunk.java	2016-06-05 20:36:31.435772651 -0700
+@@ -690,8 +690,8 @@
+ 
+       for(int var7 = var5; var7 <= var6; ++var7) {
+          for(Entity var9 : this.entityLists[var7].getByClass(var1)) {
+-            if(var9.getEntityBoundingBox().intersectsWith(var2) && (var4 == null || var4.apply(var9))) {
+-               var3.add(var9);
++            if(var9.getEntityBoundingBox().intersectsWith(var2) && (var4 == null || var4.apply((T) var9))) {
++               var3.add((T) var9);
+             }
+          }
+       }

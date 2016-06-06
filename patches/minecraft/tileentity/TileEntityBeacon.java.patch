@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/tileentity/TileEntityBeacon.java	2016-06-05 00:35:44.729218256 -0700
++++ src/main/java/net/minecraft/tileentity/TileEntityBeacon.java	2016-06-05 20:29:28.725281069 -0700
+@@ -77,7 +77,7 @@
+          int var6 = this.pos.getY();
+          int var7 = this.pos.getZ();
+          AxisAlignedBB var8 = (new AxisAlignedBB((double)var5, (double)var6, (double)var7, (double)(var5 + 1), (double)(var6 + 1), (double)(var7 + 1))).expandXyz(var1).addCoord(0.0D, (double)this.worldObj.getHeight(), 0.0D);
+-         List var9 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, var8);
++         List<EntityPlayer> var9 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, var8);
+ 
+          for(EntityPlayer var11 : var9) {
+             var11.addPotionEffect(new PotionEffect(this.primaryEffect, var4, var3, true, true));

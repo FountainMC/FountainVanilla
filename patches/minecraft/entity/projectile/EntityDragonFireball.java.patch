@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/projectile/EntityDragonFireball.java	2016-06-05 00:35:22.421175090 -0700
++++ src/main/java/net/minecraft/entity/projectile/EntityDragonFireball.java	2016-06-05 20:12:44.932464959 -0700
+@@ -25,7 +25,7 @@
+ 
+    protected void onImpact(RayTraceResult var1) {
+       if(!this.worldObj.isRemote) {
+-         List var2 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D));
++         List<EntityLivingBase> var2 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D));
+          EntityAreaEffectCloud var3 = new EntityAreaEffectCloud(this.worldObj, this.posX, this.posY, this.posZ);
+          var3.setOwner(this.shootingEntity);
+          var3.setParticle(EnumParticleTypes.DRAGON_BREATH);
