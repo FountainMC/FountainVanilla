@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>xyz.jadonfowler</groupId>
+  <groupId>com.github.phase</groupId>
   <artifactId>fountain</artifactId>
   <packaging>jar</packaging>
   <version>1.9.4-0.0.0</version>
@@ -16,6 +16,10 @@
   </properties>
 
   <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
     <repository>
       <id>mojang</id>
       <name>Mojang Libraries</name>
@@ -59,12 +63,12 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
-      <version>4.1.0.Final</version>
+      <version>4.0.36.Final</version>
     </dependency>
     <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>19.0</version>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>19.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -77,16 +81,21 @@
       <version>2.6</version>
     </dependency>
     <dependency>
-			<groupId>com.mojang</groupId>
-			<artifactId>authlib</artifactId>
-			<version>1.5.17</version>
+      <groupId>com.mojang</groupId>
+      <artifactId>authlib</artifactId>
+      <version>1.5.17</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.phase</groupId>
+      <artifactId>fountain-api</artifactId>
+      <version>master-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
   <build>
     <resources>
       <resource>
-        <directory>src/assets</directory>
+        <directory>src/res</directory>
       </resource>
     </resources>
     <plugins>
