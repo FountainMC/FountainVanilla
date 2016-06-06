@@ -1,0 +1,31 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java	2016-06-05 00:35:05.077142875 -0700
++++ src/main/java/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java	2016-06-05 19:50:48.328241616 -0700
+@@ -53,16 +53,16 @@
+       if(this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
+          return false;
+       } else if(this.targetClass != EntityPlayer.class && this.targetClass != EntityPlayerMP.class) {
+-         List var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
++         List<T> var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
+          if(var1.isEmpty()) {
+             return false;
+          } else {
+             Collections.sort(var1, this.theNearestAttackableTargetSorter);
+-            this.targetEntity = (EntityLivingBase)var1.get(0);
++            this.targetEntity = var1.get(0);
+             return true;
+          }
+       } else {
+-         this.targetEntity = this.taskOwner.worldObj.getNearestAttackablePlayer(this.taskOwner.posX, this.taskOwner.posY + (double)this.taskOwner.getEyeHeight(), this.taskOwner.posZ, this.getTargetDistance(), this.getTargetDistance(), new Function<EntityPlayer, Double>() {
++         this.targetEntity = (T) this.taskOwner.worldObj.getNearestAttackablePlayer(this.taskOwner.posX, this.taskOwner.posY + (double)this.taskOwner.getEyeHeight(), this.taskOwner.posZ, this.getTargetDistance(), this.getTargetDistance(), new Function<EntityPlayer, Double>() {
+             @Nullable
+             public Double apply(@Nullable EntityPlayer var1) {
+                ItemStack var2 = var1.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+@@ -78,7 +78,7 @@
+ 
+                return Double.valueOf(1.0D);
+             }
+-         }, this.targetEntitySelector);
++         }, (Predicate<EntityPlayer>)((Predicate<T>) this.targetEntitySelector));
+          return this.targetEntity != null;
+       }
+    }

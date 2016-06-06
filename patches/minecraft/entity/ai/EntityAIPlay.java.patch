@@ -1,0 +1,11 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIPlay.java	2016-06-05 00:35:05.169143042 -0700
++++ src/main/java/net/minecraft/entity/ai/EntityAIPlay.java	2016-06-05 19:51:13.052327472 -0700
+@@ -25,7 +25,7 @@
+       } else if(this.villagerObj.getRNG().nextInt(400) != 0) {
+          return false;
+       } else {
+-         List var1 = this.villagerObj.worldObj.getEntitiesWithinAABB(EntityVillager.class, this.villagerObj.getEntityBoundingBox().expand(6.0D, 3.0D, 6.0D));
++         List<EntityVillager> var1 = this.villagerObj.worldObj.getEntitiesWithinAABB(EntityVillager.class, this.villagerObj.getEntityBoundingBox().expand(6.0D, 3.0D, 6.0D));
+          double var2 = Double.MAX_VALUE;
+ 
+          for(EntityVillager var5 : var1) {

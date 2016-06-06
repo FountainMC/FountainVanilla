@@ -1,4 +1,4 @@
-minecraft/
-src/main/java/net/minecraft/server/
-src/assets/minecraft/
-target/
+/minecraft/
+/src/main/java/net/minecraft/
+/src/assets/minecraft/
+/target/

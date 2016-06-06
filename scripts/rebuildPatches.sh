@@ -10,7 +10,9 @@ for f in $(find minecraft/ -name '*.java'); do
   if ! cmp "$dir/minecraft/src/net/$f" "$dir/src/main/java/net/$f" >/dev/null 2>&1; then
     echo $f
     cd $dir
-    diff -u "minecraft/src/net/$f" "src/main/java/net/$f" > "$dir/patches/$file.patch"
+    d=$(dirname "$f")
+    mkdir -p "patches/$d"
+    diff -u "minecraft/src/net/$f" "src/main/java/net/$f" > "$dir/patches/$f.patch"
     cd $dir/src/main/java/net/
   fi
 done
