@@ -1,6 +1,27 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
-+++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-05 12:35:10.094062012 -0700
-@@ -786,7 +786,7 @@
++++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-06 20:53:48.759270452 -0700
+@@ -137,6 +137,12 @@
+    private Thread serverThread;
+    private long currentTime = getCurrentTimeMillis();
+ 
++   private static DedicatedServer dedicatedServer = null;
++
++   public static DedicatedServer getDedicatedServer() {
++       return dedicatedServer;
++   }
++
+    public MinecraftServer(File var1, Proxy var2, DataFixer var3, YggdrasilAuthenticationService var4, MinecraftSessionService var5, GameProfileRepository var6, PlayerProfileCache var7) {
+       this.serverProxy = var2;
+       this.authService = var4;
+@@ -683,6 +689,7 @@
+                var12.stopServer();
+             }
+          });
++         dedicatedServer = var12;
+       } catch (Exception var14) {
+          LOG.fatal("Failed to start the minecraft server", var14);
+       }
+@@ -786,7 +793,7 @@
           return var5;
        } else {
           boolean var7 = !var2.contains(" ");
