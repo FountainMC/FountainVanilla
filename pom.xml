@@ -17,6 +17,10 @@
 
   <repositories>
     <repository>
+      <id>techcable</id>
+      <url>repo.techcable.net</url>
+    </repository>
+    <repository>
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
@@ -90,6 +94,16 @@
       <artifactId>fountain-api</artifactId>
       <version>master-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>net.techable</groupId>
+      <artifactId>event4j</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-all</artifactId>
+      <version>5.0.4</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -125,7 +139,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>xyz.jadonfowler.fountain.Main</mainClass>
+                  <mainClass>xyz.jadonfowler.fountain.Fountain</mainClass>
                 </transformer>
               </transformers>
             </configuration>
