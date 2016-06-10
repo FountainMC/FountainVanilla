@@ -1,5 +1,5 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
-+++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-06 20:53:48.759270452 -0700
++++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-06 23:43:42.756581475 -0700
 @@ -137,6 +137,12 @@
     private Thread serverThread;
     private long currentTime = getCurrentTimeMillis();
@@ -13,7 +13,14 @@
     public MinecraftServer(File var1, Proxy var2, DataFixer var3, YggdrasilAuthenticationService var4, MinecraftSessionService var5, GameProfileRepository var6, PlayerProfileCache var7) {
        this.serverProxy = var2;
        this.authService = var4;
-@@ -683,6 +689,7 @@
+@@ -678,11 +684,14 @@
+          }
+ 
+          var12.startServerThread();
++         xyz.jadonfowler.fountain.api.Fountain.getServer().getPluginManager().getEventBus()
++                 .fire(new xyz.jadonfowler.fountain.api.event.server.ServerStartEvent(var7, var2, var0));
+          Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
+             public void run() {
                 var12.stopServer();
              }
           });
@@ -21,7 +28,7 @@
        } catch (Exception var14) {
           LOG.fatal("Failed to start the minecraft server", var14);
        }
-@@ -786,7 +793,7 @@
+@@ -786,7 +795,7 @@
           return var5;
        } else {
           boolean var7 = !var2.contains(" ");

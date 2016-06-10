@@ -1,5 +1,5 @@
 --- minecraft/src/net/minecraft/server/dedicated/DedicatedServer.java	2016-06-05 00:35:27.433184622 -0700
-+++ src/main/java/net/minecraft/server/dedicated/DedicatedServer.java	2016-06-05 12:31:57.821315302 -0700
++++ src/main/java/net/minecraft/server/dedicated/DedicatedServer.java	2016-06-06 21:44:32.223813814 -0700
 @@ -304,7 +304,7 @@
        System.exit(0);
     }
