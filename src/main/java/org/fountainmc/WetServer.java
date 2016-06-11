@@ -1,10 +1,10 @@
-package xyz.jadonfowler.fountain;
+package org.fountainmc;
 
 import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import net.minecraft.server.MinecraftServer;
-import xyz.jadonfowler.fountain.api.Server;
-import xyz.jadonfowler.fountain.api.plugin.PluginManager;
+import org.fountainmc.api.Server;
+import org.fountainmc.api.plugin.PluginManager;
 
 public class WetServer implements Server {
 

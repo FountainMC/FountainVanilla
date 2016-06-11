@@ -1,8 +1,8 @@
-package xyz.jadonfowler.fountain;
+package org.fountainmc;
 
 import org.apache.logging.log4j.LogManager;
 import net.minecraft.server.MinecraftServer;
-import xyz.jadonfowler.fountain.api.Fountain;
+import org.fountainmc.api.Fountain;
 
 public class Main {
 

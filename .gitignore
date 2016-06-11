@@ -1,4 +1,6 @@
 /minecraft/
 /src/main/java/net/minecraft/
-/src/assets/minecraft/
+/src/res/
 /target/
+.idea
+*.iml

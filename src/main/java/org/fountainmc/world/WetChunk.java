@@ -1,9 +1,8 @@
-package xyz.jadonfowler.fountain.world;
+package org.fountainmc.world;
 
-import xyz.jadonfowler.fountain.api.world.Chunk;
-import xyz.jadonfowler.fountain.api.world.World;
-import xyz.jadonfowler.fountain.api.world.block.Block;
-import xyz.jadonfowler.fountain.world.block.WetBlock;
+import org.fountainmc.api.world.Chunk;
+import org.fountainmc.api.world.World;
+import org.fountainmc.api.world.Block;
 
 public class WetChunk implements Chunk {
     
@@ -33,7 +32,7 @@ public class WetChunk implements Chunk {
     }
 
     @Override public Block getBlockAt(int x, int y, int z) {
-        return new WetBlock(this, x, y, z);
+        return new Block(getWorld(), x, y, z);
     }
     
     public net.minecraft.world.chunk.Chunk getHandle() {
