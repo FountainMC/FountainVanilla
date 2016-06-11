@@ -1,0 +1,12 @@
+--- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-05 00:35:06.357145211 -0700
++++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 03:14:44.523565810 -0700
+@@ -197,6 +197,9 @@
+    }
+ 
+    public boolean tryHarvestBlock(BlockPos var1) {
++      org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(
++              new org.fountainmc.api.event.world.BlockBreakEvent(
++                      new org.fountainmc.api.world.BlockPosition(new org.fountainmc.world.WetWorld(theWorld), var1.getX(), var1.getY(), var1.getZ())));
+       if(this.gameType.isCreative() && this.thisPlayerMP.getHeldItemMainhand() != null && this.thisPlayerMP.getHeldItemMainhand().getItem() instanceof ItemSword) {
+          return false;
+       } else {

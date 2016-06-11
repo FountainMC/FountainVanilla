@@ -1,5 +1,5 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
-+++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-10 20:12:33.668544571 -0700
++++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-11 03:13:47.370670226 -0700
 @@ -137,6 +137,12 @@
     private Thread serverThread;
     private long currentTime = getCurrentTimeMillis();
@@ -17,8 +17,8 @@
     }
  
     protected void stopServer() {
-+      xyz.jadonfowler.fountain.api.Fountain.getServer().getPluginManager().getEventBus()
-+              .fire(new xyz.jadonfowler.fountain.api.event.server.ServerStopEvent());
++      org.fountainmc.api.Fountain.getServer().getPluginManager()
++              .fireEvent(new org.fountainmc.api.event.server.ServerStopEvent());
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
@@ -26,8 +26,8 @@
           }
  
           var12.startServerThread();
-+         xyz.jadonfowler.fountain.api.Fountain.getServer().getPluginManager().getEventBus()
-+                 .fire(new xyz.jadonfowler.fountain.api.event.server.ServerStartEvent(var12.getServerPort(), var12.getServerOwner(), var0));
++         org.fountainmc.api.Fountain.getServer().getPluginManager()
++                 .fireEvent(new org.fountainmc.api.event.server.ServerStartEvent(var12.getServerPort(), var12.getServerOwner(), var0));
           Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
              public void run() {
                 var12.stopServer();
