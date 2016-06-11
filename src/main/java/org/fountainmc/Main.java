@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         LogManager.getLogger().info("Starting Fountain...");
-        WetServer server = new WetServer();
+        WetServer server = new WetServer(args);
         Fountain.setServer(server);
         MinecraftServer.main(args);
     }
