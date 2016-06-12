@@ -1,5 +1,5 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
-+++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-11 14:30:22.578759545 -0700
++++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-11 21:47:10.332809002 -0700
 @@ -137,6 +137,12 @@
     private Thread serverThread;
     private long currentTime = getCurrentTimeMillis();
@@ -13,7 +13,18 @@
     public MinecraftServer(File var1, Proxy var2, DataFixer var3, YggdrasilAuthenticationService var4, MinecraftSessionService var5, GameProfileRepository var6, PlayerProfileCache var7) {
        this.serverProxy = var2;
        this.authService = var4;
-@@ -324,6 +330,8 @@
+@@ -245,10 +251,6 @@
+    }
+ 
+    protected void initialWorldChunkLoad() {
+-      boolean var1 = true;
+-      boolean var2 = true;
+-      boolean var3 = true;
+-      boolean var4 = true;
+       int var5 = 0;
+       this.setUserMessage("menu.generatingTerrain");
+       byte var6 = 0;
+@@ -324,6 +326,8 @@
     }
  
     protected void stopServer() {
@@ -22,7 +33,16 @@
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
-@@ -678,11 +686,14 @@
+@@ -534,7 +538,7 @@
+       this.theProfiler.startSection("jobs");
+       synchronized(this.futureTaskQueue) {
+          while(!this.futureTaskQueue.isEmpty()) {
+-            Util.runTask((FutureTask)this.futureTaskQueue.poll(), LOG);
++            Util.runTask((FutureTask<?>)this.futureTaskQueue.poll(), LOG);
+          }
+       }
+ 
+@@ -678,11 +682,14 @@
           }
  
           var12.startServerThread();
@@ -37,7 +57,16 @@
        } catch (Exception var14) {
           LOG.fatal("Failed to start the minecraft server", var14);
        }
-@@ -786,7 +797,7 @@
+@@ -767,7 +774,7 @@
+    }
+ 
+    public List<String> getTabCompletions(ICommandSender var1, String var2, @Nullable BlockPos var3, boolean var4) {
+-      ArrayList var5 = Lists.newArrayList();
++      ArrayList<String> var5 = Lists.newArrayList();
+       boolean var6 = var2.startsWith("/");
+       if(var6) {
+          var2 = var2.substring(1);
+@@ -786,7 +793,7 @@
           return var5;
        } else {
           boolean var7 = !var2.contains(" ");
@@ -46,3 +75,12 @@
           if(!var8.isEmpty()) {
              for(String var10 : var8) {
                 if(var7) {
+@@ -1162,7 +1169,7 @@
+    public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
+       Validate.notNull(var1);
+       if(!this.isCallingFromMinecraftThread() && !this.isServerStopped()) {
+-         ListenableFutureTask var2 = ListenableFutureTask.create(var1);
++         ListenableFutureTask<V> var2 = ListenableFutureTask.create(var1);
+          synchronized(this.futureTaskQueue) {
+             this.futureTaskQueue.add(var2);
+             return var2;

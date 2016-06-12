@@ -1,5 +1,5 @@
 --- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-05 00:35:06.357145211 -0700
-+++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 03:14:44.523565810 -0700
++++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 21:50:48.255398150 -0700
 @@ -197,6 +197,9 @@
     }
  
@@ -10,3 +10,12 @@
        if(this.gameType.isCreative() && this.thisPlayerMP.getHeldItemMainhand() != null && this.thisPlayerMP.getHeldItemMainhand().getItem() instanceof ItemSword) {
           return false;
        } else {
+@@ -256,7 +259,7 @@
+       } else {
+          int var5 = var3.stackSize;
+          int var6 = var3.getMetadata();
+-         ActionResult var7 = var3.useItemRightClick(var2, var1, var4);
++         ActionResult<ItemStack> var7 = var3.useItemRightClick(var2, var1, var4);
+          ItemStack var8 = (ItemStack)var7.getResult();
+          if(var8 == var3 && var8.stackSize == var5 && var8.getMaxItemUseDuration() <= 0 && var8.getMetadata() == var6) {
+             return var7.getType();
