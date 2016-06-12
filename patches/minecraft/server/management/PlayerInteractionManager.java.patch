@@ -1,16 +1,20 @@
 --- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-05 00:35:06.357145211 -0700
-+++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 21:50:48.255398150 -0700
-@@ -197,6 +197,9 @@
++++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 22:10:23.007598730 -0700
+@@ -197,6 +197,13 @@
     }
  
     public boolean tryHarvestBlock(BlockPos var1) {
-+      org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(
-+              new org.fountainmc.api.event.world.BlockBreakEvent(
-+                      new org.fountainmc.api.world.BlockPosition(new org.fountainmc.world.WetWorld(theWorld), var1.getX(), var1.getY(), var1.getZ())));
++      org.fountainmc.api.event.world.BlockBreakEvent event = new org.fountainmc.api.event.world.BlockBreakEvent(
++          new org.fountainmc.api.world.BlockPosition(new org.fountainmc.world.WetWorld(theWorld), var1.getX(), var1.getY(), var1.getZ()));
++      org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(event);
++      if(event.isCancelled()) {
++          thisPlayerMP.connection.sendPacket(new SPacketBlockChange(theWorld, var1));
++          return false;
++      }
        if(this.gameType.isCreative() && this.thisPlayerMP.getHeldItemMainhand() != null && this.thisPlayerMP.getHeldItemMainhand().getItem() instanceof ItemSword) {
           return false;
        } else {
-@@ -256,7 +259,7 @@
+@@ -256,7 +263,7 @@
        } else {
           int var5 = var3.stackSize;
           int var6 = var3.getMetadata();
