@@ -2,10 +2,16 @@
 
 dir=$(pwd -P)
 
+echo "Removing existing sources"
+./setupWorkspace.sh
+
 echo "Applying patches..."
-cd $dir/minecraft/src/net/
-for f in $(find minecraft/ -name '*.java'); do
+cd $dir/minecraft/src/
+for f in $(find net/minecraft/ -name '*.java'); do
   if [ -f "$dir/patches/$f.patch" ]; then
-    patch "$dir/src/main/java/net/$f" "$dir/patches/$f.patch"
+        patched="$dir/src/main/java/$f"
+        mkdir -p $(dirname $patched)
+        cp "$f" "$patched"
+        patch "$patched" "$dir/patches/$f.patch"
   fi
 done

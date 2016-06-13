@@ -2,5 +2,7 @@
 /src/main/java/net/minecraft/
 /src/res/
 /target/
+work
 .idea
 *.iml
+__pycache__
