@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/scoreboard/ServerScoreboard.java	2016-06-05 00:35:26.641183108 -0700
-+++ src/main/java/net/minecraft/scoreboard/ServerScoreboard.java	2016-06-05 12:31:31.553213052 -0700
-@@ -158,10 +158,10 @@
+--- minecraft/src/net/minecraft/scoreboard/ServerScoreboard.java
++++ src/main/java/net/minecraft/scoreboard/ServerScoreboard.java
+@@ -156,14 +156,14 @@
+ 
+       return var2;
     }
  
     public void addObjective(ScoreObjective var1) {
@@ -13,7 +15,11 @@
              var4.connection.sendPacket(var6);
           }
        }
-@@ -183,10 +183,10 @@
+ 
+       this.addedObjectives.add(var1);
+@@ -181,14 +181,14 @@
+ 
+       return var2;
     }
  
     public void sendDisplaySlotRemovalPackets(ScoreObjective var1) {
@@ -26,3 +32,5 @@
              var4.connection.sendPacket(var6);
           }
        }
+ 
+       this.addedObjectives.remove(var1);

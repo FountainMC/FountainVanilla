@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/server/CommandAchievement.java	2016-06-05 00:35:07.341147011 -0700
-+++ src/main/java/net/minecraft/command/server/CommandAchievement.java	2016-06-05 12:01:57.736657497 -0700
-@@ -68,7 +68,7 @@
+--- minecraft/src/net/minecraft/command/server/CommandAchievement.java
++++ src/main/java/net/minecraft/command/server/CommandAchievement.java
+@@ -66,11 +66,11 @@
+                      if(var6) {
+                         if(var5.getStatFile().hasAchievementUnlocked(var8)) {
                             throw new CommandException("commands.achievement.alreadyHave", new Object[]{var5.getName(), var4.createChatComponent()});
                          }
  
@@ -9,7 +11,11 @@
                          for(var9 = Lists.newArrayList(); var8.parentAchievement != null && !var5.getStatFile().hasAchievementUnlocked(var8.parentAchievement); var8 = var8.parentAchievement) {
                             var9.add(var8.parentAchievement);
                          }
-@@ -81,12 +81,12 @@
+ 
+                         for(Achievement var11 : Lists.reverse(var9)) {
+@@ -79,16 +79,16 @@
+                      } else if(var7) {
+                         if(!var5.getStatFile().hasAchievementUnlocked(var8)) {
                             throw new CommandException("commands.achievement.dontHave", new Object[]{var5.getName(), var4.createChatComponent()});
                          }
  
@@ -24,3 +30,5 @@
  
                          for(Achievement var12 : var17) {
                             Achievement var13 = var12;
+ 
+                            boolean var14;

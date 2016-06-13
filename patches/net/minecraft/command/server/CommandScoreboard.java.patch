@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/server/CommandScoreboard.java	2016-06-05 00:35:07.153146667 -0700
-+++ src/main/java/net/minecraft/command/server/CommandScoreboard.java	2016-06-05 12:12:35.068391140 -0700
-@@ -228,9 +228,9 @@
+--- minecraft/src/net/minecraft/command/server/CommandScoreboard.java
++++ src/main/java/net/minecraft/command/server/CommandScoreboard.java
+@@ -226,13 +226,13 @@
+       }
+ 
        if(var4 < 0) {
           return false;
        } else {
@@ -12,7 +14,11 @@
  
           for(String var9 : var13) {
              var3[var4] = var9;
-@@ -444,7 +444,7 @@
+ 
+             try {
+@@ -442,11 +442,11 @@
+          TextComponentTranslation var8 = new TextComponentTranslation("commands.scoreboard.teams.list.player.count", new Object[]{Integer.valueOf(var7.size()), var6.getRegisteredName()});
+          var8.getStyle().setColor(TextFormatting.DARK_GREEN);
           var1.addChatMessage(var8);
           var1.addChatMessage(new TextComponentString(joinNiceString(var7.toArray())));
        } else {
@@ -21,7 +27,11 @@
           var1.setCommandStat(CommandResultStats.a.QUERY_RESULT, var10.size());
           if(var10.isEmpty()) {
              throw new CommandException("commands.scoreboard.teams.list.empty", new Object[0]);
-@@ -464,8 +464,8 @@
+          }
+ 
+@@ -462,12 +462,12 @@
+    }
+ 
     protected void joinTeam(ICommandSender var1, String[] var2, int var3, MinecraftServer var4) throws CommandException {
        Scoreboard var5 = this.getScoreboard(var4);
        String var6 = var2[var3++];
@@ -32,7 +42,11 @@
        if(var1 instanceof EntityPlayer && var3 == var2.length) {
           String var15 = getCommandSenderAsPlayer(var1).getName();
           if(var5.addPlayerToTeam(var15, var6)) {
-@@ -554,7 +554,7 @@
+             var7.add(var15);
+          } else {
+@@ -552,11 +552,11 @@
+ 
+    protected void emptyTeam(ICommandSender var1, String[] var2, int var3, MinecraftServer var4) throws CommandException {
        Scoreboard var5 = this.getScoreboard(var4);
        ScorePlayerTeam var6 = this.convertToTeam(var2[var3], var4);
        if(var6 != null) {
@@ -41,7 +55,11 @@
           var1.setCommandStat(CommandResultStats.a.AFFECTED_ENTITIES, var7.size());
           if(var7.isEmpty()) {
              throw new CommandException("commands.scoreboard.teams.empty.alreadyEmpty", new Object[]{var6.getRegisteredName()});
-@@ -577,7 +577,7 @@
+          } else {
+             for(String var9 : var7) {
+@@ -575,11 +575,11 @@
+       notifyCommandListener(var1, this, "commands.scoreboard.objectives.remove.success", new Object[]{var2});
+    }
  
     protected void listObjectives(ICommandSender var1, MinecraftServer var2) throws CommandException {
        Scoreboard var3 = this.getScoreboard(var2);
@@ -50,7 +68,11 @@
        if(var4.isEmpty()) {
           throw new CommandException("commands.scoreboard.objectives.list.empty", new Object[0]);
        } else {
-@@ -618,7 +618,7 @@
+          TextComponentTranslation var5 = new TextComponentTranslation("commands.scoreboard.objectives.list.count", new Object[]{Integer.valueOf(var4.size())});
+          var5.getStyle().setColor(TextFormatting.DARK_GREEN);
+@@ -616,11 +616,11 @@
+ 
+    protected void listPlayers(ICommandSender var1, String[] var2, int var3, MinecraftServer var4) throws CommandException {
        Scoreboard var5 = this.getScoreboard(var4);
        if(var2.length > var3) {
           String var6 = getEntityName(var4, var1, var2[var3]);
@@ -59,7 +81,11 @@
           var1.setCommandStat(CommandResultStats.a.QUERY_RESULT, var7.size());
           if(var7.isEmpty()) {
              throw new CommandException("commands.scoreboard.players.list.player.empty", new Object[]{var6});
-@@ -986,8 +986,8 @@
+          }
+ 
+@@ -984,12 +984,12 @@
+          return Collections.emptyList();
+       }
     }
  
     protected List<String> getObjectiveNames(boolean var1, MinecraftServer var2) {
@@ -70,7 +96,11 @@
  
        for(ScoreObjective var6 : var3) {
           if(!var1 || !var6.getCriteria().isReadOnly()) {
-@@ -999,8 +999,8 @@
+             var4.add(var6.getName());
+          }
+@@ -997,12 +997,12 @@
+ 
+       return var4;
     }
  
     protected List<String> getTriggerNames(MinecraftServer var1) {
@@ -81,3 +111,5 @@
  
        for(ScoreObjective var5 : var2) {
           if(var5.getCriteria() == IScoreCriteria.TRIGGER) {
+             var3.add(var5.getName());
+          }

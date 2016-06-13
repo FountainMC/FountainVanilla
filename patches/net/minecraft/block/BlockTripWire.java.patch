@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/BlockTripWire.java	2016-06-05 00:35:08.693149493 -0700
-+++ src/main/java/net/minecraft/block/BlockTripWire.java	2016-06-05 11:59:40.723576450 -0700
-@@ -132,7 +132,7 @@
+--- minecraft/src/net/minecraft/block/BlockTripWire.java
++++ src/main/java/net/minecraft/block/BlockTripWire.java
+@@ -130,11 +130,11 @@
+ 
+    private void updateState(World var1, BlockPos var2) {
        IBlockState var3 = var1.getBlockState(var2);
        boolean var4 = ((Boolean)var3.getValue(POWERED)).booleanValue();
        boolean var5 = false;
@@ -9,3 +11,5 @@
        if(!var6.isEmpty()) {
           for(Entity var8 : var6) {
              if(!var8.doesEntityNotTriggerPressurePlate()) {
+                var5 = true;
+                break;

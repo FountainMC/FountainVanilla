@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/boss/EntityDragon.java	2016-06-05 00:35:27.145184071 -0700
-+++ src/main/java/net/minecraft/entity/boss/EntityDragon.java	2016-06-05 20:06:21.966408027 -0700
-@@ -325,7 +325,7 @@
+--- minecraft/src/net/minecraft/entity/boss/EntityDragon.java
++++ src/main/java/net/minecraft/entity/boss/EntityDragon.java
+@@ -323,11 +323,11 @@
+             this.setHealth(this.getHealth() + 1.0F);
+          }
        }
  
        if(this.rand.nextInt(10) == 0) {
@@ -9,3 +11,5 @@
           EntityEnderCrystal var2 = null;
           double var3 = Double.MAX_VALUE;
  
+          for(EntityEnderCrystal var6 : var1) {
+             double var7 = var6.getDistanceSqToEntity(this);

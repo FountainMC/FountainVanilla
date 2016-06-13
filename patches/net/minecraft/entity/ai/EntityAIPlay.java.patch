@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAIPlay.java	2016-06-05 00:35:05.169143042 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAIPlay.java	2016-06-05 19:51:13.052327472 -0700
-@@ -25,7 +25,7 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIPlay.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIPlay.java
+@@ -23,11 +23,11 @@
+       if(this.villagerObj.getGrowingAge() >= 0) {
+          return false;
        } else if(this.villagerObj.getRNG().nextInt(400) != 0) {
           return false;
        } else {
@@ -9,3 +11,5 @@
           double var2 = Double.MAX_VALUE;
  
           for(EntityVillager var5 : var1) {
+             if(var5 != this.villagerObj && !var5.isPlaying() && var5.getGrowingAge() < 0) {
+                double var6 = var5.getDistanceSqToEntity(this.villagerObj);

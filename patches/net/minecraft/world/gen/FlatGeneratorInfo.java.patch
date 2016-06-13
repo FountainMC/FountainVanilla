@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/gen/FlatGeneratorInfo.java	2016-06-05 00:35:48.305225352 -0700
-+++ src/main/java/net/minecraft/world/gen/FlatGeneratorInfo.java	2016-06-05 20:41:23.585306501 -0700
-@@ -67,18 +67,18 @@
+--- minecraft/src/net/minecraft/world/gen/FlatGeneratorInfo.java
++++ src/main/java/net/minecraft/world/gen/FlatGeneratorInfo.java
+@@ -65,22 +65,22 @@
+       var1.append(this.biomeToUse);
+       if(!this.worldFeatures.isEmpty()) {
           var1.append(";");
           int var9 = 0;
  
@@ -23,3 +25,5 @@
                    if(var6++ > 0) {
                       var1.append(" ");
                    }
+ 
+                   var1.append((String)var8.getKey());

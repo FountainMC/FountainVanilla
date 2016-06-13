@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/inventory/Container.java	2016-06-05 00:35:24.621179262 -0700
-+++ src/main/java/net/minecraft/inventory/Container.java	2016-06-05 12:25:55.003872464 -0700
-@@ -33,7 +33,7 @@
+--- minecraft/src/net/minecraft/inventory/Container.java
++++ src/main/java/net/minecraft/inventory/Container.java
+@@ -31,11 +31,11 @@
+    }
+ 
     protected Slot addSlotToContainer(Slot var1) {
        var1.slotNumber = this.inventorySlots.size();
        this.inventorySlots.add(var1);
@@ -9,7 +11,11 @@
        return var1;
     }
  
-@@ -48,7 +48,7 @@
+    public void addListener(IContainerListener var1) {
+       if(this.listeners.contains(var1)) {
+@@ -46,11 +46,11 @@
+          this.detectAndSendChanges();
+       }
     }
  
     public List<ItemStack> getInventory() {
@@ -18,3 +24,5 @@
  
        for(int var2 = 0; var2 < this.inventorySlots.size(); ++var2) {
           var1.add(((Slot)this.inventorySlots.get(var2)).getStack());
+       }
+ 

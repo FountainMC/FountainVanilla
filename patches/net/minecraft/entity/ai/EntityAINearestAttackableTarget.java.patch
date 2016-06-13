@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java	2016-06-05 00:35:05.077142875 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java	2016-06-05 19:50:48.328241616 -0700
-@@ -53,16 +53,16 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java
++++ src/main/java/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java
+@@ -51,20 +51,20 @@
+ 
+    public boolean shouldExecute() {
        if(this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
           return false;
        } else if(this.targetClass != EntityPlayer.class && this.targetClass != EntityPlayerMP.class) {
@@ -20,7 +22,11 @@
              @Nullable
              public Double apply(@Nullable EntityPlayer var1) {
                 ItemStack var2 = var1.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-@@ -78,7 +78,7 @@
+                if(var2 != null && var2.getItem() == Items.SKULL) {
+                   int var3 = var2.getItemDamage();
+@@ -76,11 +76,11 @@
+                   }
+                }
  
                 return Double.valueOf(1.0D);
              }
@@ -29,3 +35,5 @@
           return this.targetEntity != null;
        }
     }
+ 
+    protected AxisAlignedBB getTargetableArea(double var1) {

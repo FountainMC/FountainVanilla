@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/util/ObjectIntIdentityMap.java	2016-06-05 00:35:23.821177743 -0700
-+++ src/main/java/net/minecraft/util/ObjectIntIdentityMap.java	2016-06-05 20:35:27.103419023 -0700
-@@ -26,7 +26,7 @@
+--- minecraft/src/net/minecraft/util/ObjectIntIdentityMap.java
++++ src/main/java/net/minecraft/util/ObjectIntIdentityMap.java
+@@ -24,11 +24,11 @@
+ 
+    public void put(T var1, int var2) {
        this.identityMap.put(var1, Integer.valueOf(var2));
  
        while(this.objectList.size() <= var2) {
@@ -9,3 +11,5 @@
        }
  
        this.objectList.set(var2, var1);
+    }
+ 

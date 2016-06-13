@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/EntitySelector.java	2016-06-05 00:35:29.609188789 -0700
-+++ src/main/java/net/minecraft/command/EntitySelector.java	2016-06-05 12:21:48.718859884 -0700
-@@ -58,11 +58,11 @@
+--- minecraft/src/net/minecraft/command/EntitySelector.java
++++ src/main/java/net/minecraft/command/EntitySelector.java
+@@ -56,15 +56,15 @@
+       return (T)(var3.size() == 1?(Entity)var3.get(0):null);
+    }
  
     @Nullable
     public static ITextComponent matchEntitiesToTextComponent(ICommandSender var0, String var1) {
@@ -14,7 +16,11 @@
  
           for(Entity var5 : var2) {
              var3.add(var5.getDisplayName());
-@@ -75,19 +75,19 @@
+          }
+ 
+@@ -73,23 +73,23 @@
+    }
+ 
     public static <T extends Entity> List<T> matchEntities(ICommandSender var0, String var1, Class<? extends T> var2) {
        Matcher var3 = TOKEN_PATTERN.matcher(var1);
        if(var3.matches() && var0.canCommandSenderUseCommand(1, "@")) {
@@ -38,7 +44,11 @@
                    var12.addAll(getTypePredicates(var4, var5));
                    var12.addAll(getXpLevelPredicates(var4));
                    var12.addAll(getGamemodePredicates(var4));
-@@ -101,7 +101,7 @@
+                   var12.addAll(getTeamPredicates(var4));
+                   var12.addAll(getScorePredicates(var0, var4));
+@@ -99,11 +99,11 @@
+                   var12.addAll(getRotationsPredicates(var4));
+                   var9.addAll(filterResults(var4, var2, var12, var5, var11, var6));
                 }
              }
  
@@ -47,7 +57,11 @@
           }
        } else {
           return Collections.emptyList();
-@@ -134,12 +134,12 @@
+       }
+    }
+@@ -132,16 +132,16 @@
+       }
+    }
  
     private static List<Predicate<Entity>> getTypePredicates(Map<String, String> var0, String var1) {
        ArrayList var2 = Lists.newArrayList();
@@ -62,7 +76,11 @@
        boolean var6 = !var1.equals("e");
        boolean var7 = var1.equals("r") && var3 != null;
        if((var3 == null || !var1.equals("e")) && !var7) {
-@@ -153,7 +153,7 @@
+          if(var6) {
+             var2.add(new Predicate<Entity>() {
+@@ -151,11 +151,11 @@
+             });
+          }
        } else {
           var2.add(new Predicate<Entity>() {
              public boolean apply(@Nullable Entity var1) {
@@ -71,7 +89,11 @@
              }
           });
        }
-@@ -192,7 +192,7 @@
+ 
+       return var2;
+@@ -190,61 +190,62 @@
+          final boolean var3 = var2.startsWith("!");
+          if(var3) {
              var2 = var2.substring(1);
           }
  
@@ -80,7 +102,7 @@
           try {
              int var5 = Integer.parseInt(var2);
              var4 = WorldSettings.a.parseGameTypeWithDefault(var5, WorldSettings.a.NOT_SET);
-@@ -200,6 +200,7 @@
+          } catch (Throwable var6) {
              var4 = WorldSettings.a.parseGameTypeWithDefault(var2, WorldSettings.a.NOT_SET);
           }
  
@@ -88,7 +110,7 @@
           var1.add(new Predicate<Entity>() {
              public boolean apply(@Nullable Entity var1) {
                 if(!(var1 instanceof EntityPlayerMP)) {
-@@ -207,7 +208,7 @@
+                   return false;
                 } else {
                    EntityPlayerMP var2 = (EntityPlayerMP)var1;
                    WorldSettings.a var3x = var2.interactionManager.getGameType();
@@ -97,7 +119,9 @@
                 }
              }
           });
-@@ -217,12 +218,12 @@
+          return var1;
+       }
+    }
  
     private static List<Predicate<Entity>> getTeamPredicates(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
@@ -112,7 +136,9 @@
        if(var2 != null) {
           var1.add(new Predicate<Entity>() {
              public boolean apply(@Nullable Entity var1) {
-@@ -232,7 +233,7 @@
+                if(!(var1 instanceof EntityLivingBase)) {
+                   return false;
+                } else {
                    EntityLivingBase var2x = (EntityLivingBase)var1;
                    Team var3x = var2x.getTeam();
                    String var4 = var3x == null?"":var3x.getRegisteredName();
@@ -121,7 +147,9 @@
                 }
              }
           });
-@@ -242,7 +243,7 @@
+       }
+ 
+       return var1;
     }
  
     private static List<Predicate<Entity>> getScorePredicates(final ICommandSender var0, Map<String, String> var1) {
@@ -130,7 +158,11 @@
        return (List<Predicate<Entity>>)(var2.isEmpty()?Collections.emptyList():Lists.newArrayList(new Predicate[]{new Predicate<Entity>() {
           public boolean apply(@Nullable Entity var1) {
              if(var1 == null) {
-@@ -287,16 +288,16 @@
+                return false;
+             } else {
+@@ -285,39 +286,39 @@
+       }}));
+    }
  
     private static List<Predicate<Entity>> getNamePredicates(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
@@ -150,7 +182,9 @@
              }
           });
        }
-@@ -306,16 +307,16 @@
+ 
+       return var1;
+    }
  
     private static List<Predicate<Entity>> getTagPredicates(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
@@ -170,7 +204,11 @@
              }
           });
        }
-@@ -446,7 +447,7 @@
+ 
+       return var1;
+@@ -444,11 +445,11 @@
+          });
+       }
  
        Entity var7 = var2.getCommandSenderEntity();
        if(var7 != null && var3.isAssignableFrom(var7.getClass()) && var6 == 1 && ((List)var0).contains(var7) && !"r".equals(var4)) {
@@ -179,3 +217,5 @@
        }
  
        if(var6 != 0) {
+          if(var6 < 0) {
+             Collections.reverse((List)var0);

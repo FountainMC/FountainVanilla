@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/BlockSponge.java	2016-06-05 00:35:11.209154127 -0700
-+++ src/main/java/net/minecraft/block/BlockSponge.java	2016-06-05 11:59:07.971294516 -0700
-@@ -52,13 +52,13 @@
+--- minecraft/src/net/minecraft/block/BlockSponge.java
++++ src/main/java/net/minecraft/block/BlockSponge.java
+@@ -50,28 +50,28 @@
+       }
+ 
     }
  
     private boolean absorb(World var1, BlockPos var2) {
@@ -18,7 +20,10 @@
           BlockPos var7 = (BlockPos)var6.getFirst();
           int var8 = ((Integer)var6.getSecond()).intValue();
  
-@@ -69,7 +69,7 @@
+          for(EnumFacing var12 : EnumFacing.values()) {
+             BlockPos var13 = var7.offset(var12);
+             if(var1.getBlockState(var13).getMaterial() == Material.WATER) {
+                var1.setBlockState(var13, Blocks.AIR.getDefaultState(), 2);
                 var4.add(var13);
                 ++var5;
                 if(var8 < 6) {
@@ -27,3 +32,5 @@
                 }
              }
           }
+ 
+          if(var5 > 64) {

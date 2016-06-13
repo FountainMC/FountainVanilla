@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/EntityTracker.java	2016-06-05 00:35:03.909140749 -0700
-+++ src/main/java/net/minecraft/entity/EntityTracker.java	2016-06-05 20:16:33.845589412 -0700
-@@ -250,8 +250,8 @@
+--- minecraft/src/net/minecraft/entity/EntityTracker.java
++++ src/main/java/net/minecraft/entity/EntityTracker.java
+@@ -248,12 +248,12 @@
+       }
+ 
     }
  
     public void sendLeashedEntitiesInChunk(EntityPlayerMP var1, Chunk var2) {
@@ -11,3 +13,5 @@
  
        for(EntityTrackerEntry var6 : this.trackedEntities) {
           Entity var7 = var6.getTrackedEntity();
+          if(var7 != var1 && var7.chunkCoordX == var2.xPosition && var7.chunkCoordZ == var2.zPosition) {
+             var6.updatePlayerEntity(var1);

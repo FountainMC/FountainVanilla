@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/monster/EntityWitch.java	2016-06-05 00:35:01.633136622 -0700
-+++ src/main/java/net/minecraft/entity/monster/EntityWitch.java	2016-06-05 20:09:28.879447509 -0700
-@@ -98,7 +98,7 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityWitch.java
++++ src/main/java/net/minecraft/entity/monster/EntityWitch.java
+@@ -96,11 +96,11 @@
+             if(this.witchAttackTimer-- <= 0) {
+                this.setAggressive(false);
                 ItemStack var5 = this.getHeldItemMainhand();
                 this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (ItemStack)null);
                 if(var5 != null && var5.getItem() == Items.POTIONITEM) {
@@ -9,3 +11,5 @@
                    if(var6 != null) {
                       for(PotionEffect var4 : var6) {
                          this.addPotionEffect(new PotionEffect(var4));
+                      }
+                   }

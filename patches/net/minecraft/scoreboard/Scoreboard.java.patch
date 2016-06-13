@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/scoreboard/Scoreboard.java	2016-06-05 00:35:26.581182994 -0700
-+++ src/main/java/net/minecraft/scoreboard/Scoreboard.java	2016-06-05 12:30:30.740976081 -0700
-@@ -42,7 +42,7 @@
+--- minecraft/src/net/minecraft/scoreboard/Scoreboard.java
++++ src/main/java/net/minecraft/scoreboard/Scoreboard.java
+@@ -40,11 +40,11 @@
+          ScoreObjective var3 = this.getObjective(var1);
+          if(var3 != null) {
              throw new IllegalArgumentException("An objective with the name \'" + var1 + "\' already exists!");
           } else {
              var3 = new ScoreObjective(this, var1, var2);
@@ -9,7 +11,11 @@
              if(var4 == null) {
                 var4 = Lists.newArrayList();
                 this.scoreObjectiveCriterias.put(var2, var4);
-@@ -75,7 +75,7 @@
+             }
+ 
+@@ -73,11 +73,11 @@
+ 
+    public Score getOrCreateScore(String var1, ScoreObjective var2) {
        if(var1.length() > 40) {
           throw new IllegalArgumentException("The player name \'" + var1 + "\' is too long!");
        } else {
@@ -18,7 +24,11 @@
           if(var3 == null) {
              var3 = Maps.newHashMap();
              this.entitiesScoreObjectives.put(var1, var3);
-@@ -137,10 +137,10 @@
+          }
+ 
+@@ -135,14 +135,14 @@
+       }
+ 
     }
  
     public Collection<Score> getScores() {
@@ -32,3 +42,5 @@
           var2.addAll(var4.values());
        }
  
+       return var2;
+    }

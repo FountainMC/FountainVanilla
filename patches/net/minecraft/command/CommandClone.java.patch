@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/CommandClone.java	2016-06-05 00:35:29.913189374 -0700
-+++ src/main/java/net/minecraft/command/CommandClone.java	2016-06-05 12:23:58.335396795 -0700
-@@ -82,10 +82,10 @@
+--- minecraft/src/net/minecraft/command/CommandClone.java
++++ src/main/java/net/minecraft/command/CommandClone.java
+@@ -80,14 +80,14 @@
+                               var12 = parseInt(var3[12], 0, 15);
+                            }
                          }
                       }
  
@@ -15,7 +17,11 @@
                       BlockPos var19 = new BlockPos(var8.minX - var7.minX, var8.minY - var7.minY, var8.minZ - var7.minZ);
  
                       for(int var20 = var7.minZ; var20 <= var7.maxZ; ++var20) {
-@@ -127,11 +127,11 @@
+                         for(int var21 = var7.minY; var21 <= var7.maxY; ++var21) {
+                            for(int var22 = var7.minX; var22 <= var7.maxX; ++var22) {
+@@ -125,15 +125,15 @@
+                         for(BlockPos var33 : var18) {
+                            var13.setBlockState(var33, Blocks.AIR.getDefaultState(), 3);
                          }
                       }
  
@@ -29,7 +35,11 @@
  
                       for(CommandClone.a var41 : var34) {
                          TileEntity var46 = var13.getTileEntity(var41.pos);
-@@ -167,7 +167,7 @@
+                         if(var46 instanceof IInventory) {
+                            ((IInventory)var46).clear();
+@@ -165,11 +165,11 @@
+ 
+                      for(CommandClone.a var44 : var34) {
                          var13.notifyNeighborsRespectDebug(var44.pos, var44.blockState.getBlock());
                       }
  
@@ -38,3 +48,5 @@
                       if(var40 != null) {
                          for(NextTickListEntry var48 : var40) {
                             if(var7.isVecInside(var48.position)) {
+                               BlockPos var49 = var48.position.add(var19);
+                               var13.scheduleBlockUpdate(var49, var48.getBlock(), (int)(var48.scheduledTime - var13.getWorldInfo().getWorldTotalTime()), var48.priority);

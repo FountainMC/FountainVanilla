@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/network/status/server/SPacketServerInfo.java	2016-06-05 00:35:26.725183269 -0700
-+++ src/main/java/net/minecraft/network/status/server/SPacketServerInfo.java	2016-06-05 20:19:39.534467789 -0700
-@@ -13,7 +13,7 @@
+--- minecraft/src/net/minecraft/network/status/server/SPacketServerInfo.java
++++ src/main/java/net/minecraft/network/status/server/SPacketServerInfo.java
+@@ -11,11 +11,11 @@
+ import net.minecraft.util.JsonUtils;
+ import net.minecraft.util.text.ITextComponent;
  import net.minecraft.util.text.Style;
  
  public class SPacketServerInfo implements Packet<INetHandlerStatusClient> {
@@ -9,3 +11,5 @@
     private ServerStatusResponse response;
  
     public SPacketServerInfo() {
+    }
+ 

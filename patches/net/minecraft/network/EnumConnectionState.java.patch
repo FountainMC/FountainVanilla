@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/network/EnumConnectionState.java	2016-06-05 00:35:25.169180304 -0700
-+++ src/main/java/net/minecraft/network/EnumConnectionState.java	2016-06-05 20:21:32.242990552 -0700
-@@ -267,18 +267,18 @@
+--- minecraft/src/net/minecraft/network/EnumConnectionState.java
++++ src/main/java/net/minecraft/network/EnumConnectionState.java
+@@ -265,22 +265,22 @@
+       this.directionMaps = Maps.newEnumMap(EnumPacketDirection.class);
+       this.id = var3;
     }
  
     protected EnumConnectionState registerPacket(EnumPacketDirection var1, Class<? extends Packet<?>> var2) {
@@ -22,7 +24,11 @@
           return this;
        }
     }
-@@ -315,7 +315,7 @@
+ 
+    public Integer getPacketId(EnumPacketDirection var1, Packet<?> var2) {
+@@ -313,11 +313,11 @@
+          }
+ 
           STATES_BY_ID[var4 - MIN_PROTOCOL_ID] = var3;
  
           for(EnumPacketDirection var6 : var3.directionMaps.keySet()) {
@@ -31,3 +37,5 @@
                 if(STATES_BY_CLASS.containsKey(var8) && STATES_BY_CLASS.get(var8) != var3) {
                    throw new Error("Packet " + var8 + " is already assigned to protocol " + STATES_BY_CLASS.get(var8) + " - can\'t reassign to " + var3);
                 }
+ 
+                try {

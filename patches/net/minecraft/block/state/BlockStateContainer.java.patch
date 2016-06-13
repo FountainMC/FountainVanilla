@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/state/BlockStateContainer.java	2016-06-05 00:35:24.133178334 -0700
-+++ src/main/java/net/minecraft/block/state/BlockStateContainer.java	2016-06-05 11:57:22.966317518 -0700
-@@ -65,7 +65,7 @@
+--- minecraft/src/net/minecraft/block/state/BlockStateContainer.java
++++ src/main/java/net/minecraft/block/state/BlockStateContainer.java
+@@ -63,11 +63,11 @@
+          var3.put(var7.getName(), var7);
+       }
  
        this.properties = ImmutableSortedMap.copyOf(var3);
        LinkedHashMap var11 = Maps.newLinkedHashMap();
@@ -9,7 +11,11 @@
  
        for(List var8 : Cartesian.cartesianProduct(this.getAllowedValues())) {
           Map var9 = MapPopulator.createMap(this.properties.values(), var8);
-@@ -86,8 +86,8 @@
+          BlockStateContainer.a var10 = new BlockStateContainer.a(var1, ImmutableMap.copyOf(var9));
+          var11.put(var9, var10);
+@@ -84,12 +84,12 @@
+    public static <T extends Comparable<T>> String validateProperty(Block var0, IProperty<T> var1) {
+       String var2 = var1.getName();
        if(!NAME_PATTERN.matcher(var2).matches()) {
           throw new IllegalArgumentException("Block: " + var0.getClass() + " has invalidly named property: " + var2);
        } else {
@@ -20,7 +26,11 @@
              if(!NAME_PATTERN.matcher(var5).matches()) {
                 throw new IllegalArgumentException("Block: " + var0.getClass() + " has property: " + var2 + " with invalidly named value: " + var5);
              }
-@@ -188,10 +188,10 @@
+          }
+ 
+@@ -186,14 +186,14 @@
+          if(this.propertyValueTable != null) {
+             throw new IllegalStateException();
           } else {
              HashBasedTable var2 = HashBasedTable.create();
  
@@ -34,3 +44,5 @@
                    if(var7 != var4.getValue()) {
                       var2.put(var5, var7, var1.get(this.getPropertiesWithValue(var5, var7)));
                    }
+                }
+             }

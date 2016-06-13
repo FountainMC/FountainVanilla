@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-05 00:35:44.061216937 -0700
-+++ src/main/java/net/minecraft/enchantment/EnchantmentHelper.java	2016-06-05 12:25:25.119751218 -0700
-@@ -160,7 +160,7 @@
+--- minecraft/src/net/minecraft/enchantment/EnchantmentHelper.java
++++ src/main/java/net/minecraft/enchantment/EnchantmentHelper.java
+@@ -158,11 +158,11 @@
+       }
+ 
     }
  
     public static int getMaxEnchantmentLevel(Enchantment var0, EntityLivingBase var1) {
@@ -9,7 +11,11 @@
        if(var2 == null) {
           return 0;
        } else {
-@@ -215,11 +215,11 @@
+          int var3 = 0;
+ 
+@@ -213,15 +213,15 @@
+       return getMaxEnchantmentLevel(Enchantments.AQUA_AFFINITY, var0) > 0;
+    }
  
     @Nullable
     public static ItemStack getEnchantedItem(Enchantment var0, EntityLivingBase var1) {
@@ -23,7 +29,11 @@
  
           for(ItemStack var5 : var2) {
              if(var5 != null && getEnchantmentLevel(var0, var5) > 0) {
-@@ -248,7 +248,7 @@
+                var3.add(var5);
+             }
+@@ -246,11 +246,11 @@
+       }
+    }
  
     public static ItemStack addRandomEnchantment(Random var0, ItemStack var1, int var2, boolean var3) {
        boolean var4 = var1.getItem() == Items.BOOK;
@@ -32,3 +42,5 @@
        if(var4) {
           var1.setItem(Items.ENCHANTED_BOOK);
        }
+ 
+       for(EnchantmentData var7 : var5) {

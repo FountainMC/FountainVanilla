@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/BlockStairs.java	2016-06-05 00:35:10.317152481 -0700
-+++ src/main/java/net/minecraft/block/BlockStairs.java	2016-06-05 11:59:24.699439762 -0700
-@@ -222,7 +222,7 @@
+--- minecraft/src/net/minecraft/block/BlockStairs.java
++++ src/main/java/net/minecraft/block/BlockStairs.java
+@@ -220,11 +220,11 @@
+       return var3 != EnumFacing.DOWN && (var3 == EnumFacing.UP || (double)var5 <= 0.5D)?var9.withProperty(HALF, BlockStairs.a.BOTTOM):var9.withProperty(HALF, BlockStairs.a.TOP);
+    }
  
     @Nullable
     public RayTraceResult collisionRayTrace(IBlockState var1, World var2, BlockPos var3, Vec3d var4, Vec3d var5) {
@@ -9,3 +11,5 @@
  
        for(AxisAlignedBB var8 : getCollisionBoxList(this.getActualState(var1, var2, var3))) {
           var6.add(this.rayTrace(var3, var4, var5, var8));
+       }
+ 

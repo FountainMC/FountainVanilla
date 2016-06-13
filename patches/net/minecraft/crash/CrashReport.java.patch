@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/crash/CrashReport.java	2016-06-05 00:35:18.021166804 -0700
-+++ src/main/java/net/minecraft/crash/CrashReport.java	2016-06-05 12:24:15.583467529 -0700
-@@ -71,7 +71,7 @@
+--- minecraft/src/net/minecraft/crash/CrashReport.java
++++ src/main/java/net/minecraft/crash/CrashReport.java
+@@ -69,11 +69,11 @@
+          }
+       });
        this.theReportCategory.setDetail("JVM Flags", new ICrashReportDetail<String>() {
           public String call() {
              RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
@@ -9,3 +11,5 @@
              int var3 = 0;
              StringBuilder var4 = new StringBuilder();
  
+             for(String var6 : var2) {
+                if(var6.startsWith("-X")) {

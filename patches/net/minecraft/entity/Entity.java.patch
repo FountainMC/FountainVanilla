@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/Entity.java	2016-06-05 00:35:03.089139260 -0700
-+++ src/main/java/net/minecraft/entity/Entity.java	2016-06-05 20:15:31.289287441 -0700
-@@ -486,7 +486,7 @@
+--- minecraft/src/net/minecraft/entity/Entity.java
++++ src/main/java/net/minecraft/entity/Entity.java
+@@ -484,11 +484,11 @@
+          for(int var23 = var54.size(); var22 < var23; ++var22) {
+             var3 = ((AxisAlignedBB)var54.get(var22)).calculateYOffset(this.getEntityBoundingBox(), var3);
           }
  
           this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0D, var3, 0.0D));
@@ -9,7 +11,11 @@
           int var56 = 0;
  
           for(int var24 = var54.size(); var56 < var24; ++var56) {
-@@ -501,7 +501,7 @@
+             var1 = ((AxisAlignedBB)var54.get(var56)).calculateXOffset(this.getEntityBoundingBox(), var1);
+          }
+@@ -499,11 +499,11 @@
+          for(int var60 = var54.size(); var56 < var60; ++var56) {
+             var5 = ((AxisAlignedBB)var54.get(var56)).calculateZOffset(this.getEntityBoundingBox(), var5);
           }
  
           this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0D, 0.0D, var5));
@@ -18,7 +24,11 @@
              double var58 = var1;
              double var25 = var3;
              double var27 = var5;
-@@ -2060,7 +2060,7 @@
+             AxisAlignedBB var29 = this.getEntityBoundingBox();
+             this.setEntityBoundingBox(var21);
+@@ -2058,11 +2058,11 @@
+    }
+ 
     private <T extends Entity> void getRecursivePassengersByType(Class<T> var1, Set<T> var2) {
        for(Entity var4 : this.getPassengers()) {
           if(var1.isAssignableFrom(var4.getClass())) {
@@ -27,3 +37,5 @@
           }
  
           var4.getRecursivePassengersByType(var1, var2);
+       }
+ 

@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/EntityAreaEffectCloud.java	2016-06-05 00:35:03.821140590 -0700
-+++ src/main/java/net/minecraft/entity/EntityAreaEffectCloud.java	2016-06-05 20:17:07.425750125 -0700
-@@ -220,7 +220,7 @@
+--- minecraft/src/net/minecraft/entity/EntityAreaEffectCloud.java
++++ src/main/java/net/minecraft/entity/EntityAreaEffectCloud.java
+@@ -218,21 +218,21 @@
+                if(this.ticksExisted >= ((Integer)var21.getValue()).intValue()) {
+                   var18.remove();
                 }
              }
  
@@ -9,7 +11,9 @@
  
              for(PotionEffect var25 : this.potion.getEffects()) {
                 var19.add(new PotionEffect(var25.getPotion(), var25.getDuration() / 4, var25.getAmplifier(), var25.getIsAmbient(), var25.doesShowParticles()));
-@@ -230,7 +230,7 @@
+             }
+ 
+             var19.addAll(this.effects);
              if(var19.isEmpty()) {
                 this.reapplicationDelayMap.clear();
              } else {
@@ -18,3 +22,5 @@
                 if(!var23.isEmpty()) {
                    for(EntityLivingBase var28 : var23) {
                       if(!this.reapplicationDelayMap.containsKey(var28) && var28.canBeHitWithPotion()) {
+                         double var30 = var28.posX - this.posX;
+                         double var33 = var28.posZ - this.posZ;

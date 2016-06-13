@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAIMate.java	2016-06-05 00:35:05.785144166 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAIMate.java	2016-06-05 19:51:36.984410762 -0700
-@@ -56,7 +56,7 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIMate.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIMate.java
+@@ -54,11 +54,11 @@
+       }
+ 
     }
  
     private EntityAnimal getNearbyMate() {
@@ -9,3 +11,5 @@
        double var2 = Double.MAX_VALUE;
        EntityAnimal var4 = null;
  
+       for(EntityAnimal var6 : var1) {
+          if(this.theAnimal.canMateWith(var6) && this.theAnimal.getDistanceSqToEntity(var6) < var2) {

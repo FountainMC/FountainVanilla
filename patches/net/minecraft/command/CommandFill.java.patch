@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/CommandFill.java	2016-06-05 00:35:29.265188130 -0700
-+++ src/main/java/net/minecraft/command/CommandFill.java	2016-06-05 12:22:07.146936847 -0700
-@@ -80,7 +80,7 @@
+--- minecraft/src/net/minecraft/command/CommandFill.java
++++ src/main/java/net/minecraft/command/CommandFill.java
+@@ -78,11 +78,11 @@
+                } catch (NBTException var22) {
+                   throw new CommandException("commands.fill.tagError", new Object[]{var22.getMessage()});
                 }
              }
  
@@ -9,3 +11,5 @@
              var10 = 0;
  
              for(int var15 = var8.getZ(); var15 <= var9.getZ(); ++var15) {
+                for(int var16 = var8.getY(); var16 <= var9.getY(); ++var16) {
+                   for(int var17 = var8.getX(); var17 <= var9.getX(); ++var17) {

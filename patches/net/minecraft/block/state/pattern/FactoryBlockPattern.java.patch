@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/state/pattern/FactoryBlockPattern.java	2016-06-05 00:35:30.149189827 -0700
-+++ src/main/java/net/minecraft/block/state/pattern/FactoryBlockPattern.java	2016-06-05 11:47:47.988064744 -0700
-@@ -43,7 +43,7 @@
+--- minecraft/src/net/minecraft/block/state/pattern/FactoryBlockPattern.java
++++ src/main/java/net/minecraft/block/state/pattern/FactoryBlockPattern.java
+@@ -41,11 +41,11 @@
+                   throw new IllegalArgumentException("Not all rows in the given aisle are the correct width (expected " + this.rowWidth + ", found one with " + var5.length() + ")");
+                }
  
                 for(char var9 : var5.toCharArray()) {
                    if(!this.symbolMap.containsKey(Character.valueOf(var9))) {
@@ -9,3 +11,5 @@
                    }
                 }
              }
+ 
+             this.depth.add(var1);

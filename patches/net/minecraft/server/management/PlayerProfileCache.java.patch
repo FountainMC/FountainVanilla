@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/server/management/PlayerProfileCache.java	2016-06-05 00:35:06.265145043 -0700
-+++ src/main/java/net/minecraft/server/management/PlayerProfileCache.java	2016-06-05 12:32:54.769536763 -0700
-@@ -181,7 +181,7 @@
+--- minecraft/src/net/minecraft/server/management/PlayerProfileCache.java
++++ src/main/java/net/minecraft/server/management/PlayerProfileCache.java
+@@ -179,11 +179,11 @@
+    public void load() {
+       BufferedReader var1 = null;
  
        try {
           var1 = Files.newReader(this.usercacheFile, Charsets.UTF_8);
@@ -9,3 +11,5 @@
           this.usernameToProfileEntryMap.clear();
           this.uuidToProfileEntryMap.clear();
           this.gameProfiles.clear();
+          if(var2 != null) {
+             for(PlayerProfileCache.a var4 : Lists.reverse(var2)) {

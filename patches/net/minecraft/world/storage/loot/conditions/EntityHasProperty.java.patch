@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java	2016-06-05 00:35:26.677183177 -0700
-+++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java	2016-06-05 20:42:16.109572670 -0700
-@@ -59,11 +59,11 @@
+--- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java
++++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java
+@@ -57,15 +57,15 @@
+          var1.add("properties", var4);
+          var1.add("entity", var3.serialize(var2.target));
        }
  
        public EntityHasProperty deserialize(JsonObject var1, JsonDeserializationContext var2) {
@@ -14,3 +16,5 @@
              var4[var5++] = EntityPropertyManager.getSerializerForName(new ResourceLocation((String)var7.getKey())).deserialize((JsonElement)var7.getValue(), var2);
           }
  
+          return new EntityHasProperty(var4, (LootContext.b)JsonUtils.deserializeClass(var1, "entity", var2, LootContext.b.class));
+       }

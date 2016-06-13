@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/stats/StatList.java	2016-06-05 00:35:40.421209773 -0700
-+++ src/main/java/net/minecraft/stats/StatList.java	2016-06-05 20:29:13.421181362 -0700
-@@ -128,7 +128,7 @@
+--- minecraft/src/net/minecraft/stats/StatList.java
++++ src/main/java/net/minecraft/stats/StatList.java
+@@ -126,11 +126,11 @@
+       AchievementList.init();
+       EntityList.init();
     }
  
     private static void initCraftableStats() {
@@ -9,3 +11,5 @@
  
        for(IRecipe var2 : CraftingManager.getInstance().getRecipeList()) {
           if(var2.getRecipeOutput() != null) {
+             var0.add(var2.getRecipeOutput().getItem());
+          }

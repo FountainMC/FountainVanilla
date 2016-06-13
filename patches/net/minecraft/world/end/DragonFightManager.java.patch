@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/end/DragonFightManager.java	2016-06-05 00:35:13.501158372 -0700
-+++ src/main/java/net/minecraft/world/end/DragonFightManager.java	2016-06-05 20:36:53.959894866 -0700
-@@ -289,7 +289,7 @@
+--- minecraft/src/net/minecraft/world/end/DragonFightManager.java
++++ src/main/java/net/minecraft/world/end/DragonFightManager.java
+@@ -287,11 +287,11 @@
+       for(EntityPlayerMP var3 : this.world.getPlayers(EntityPlayerMP.class, VALID_PLAYER)) {
+          this.bossInfo.addPlayer(var3);
           var1.add(var3);
        }
  
@@ -9,3 +11,5 @@
        var5.removeAll(var1);
  
        for(EntityPlayerMP var4 : var5) {
+          this.bossInfo.removePlayer(var4);
+       }

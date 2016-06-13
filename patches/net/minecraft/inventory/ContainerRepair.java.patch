@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/inventory/ContainerRepair.java	2016-06-05 00:35:24.309178668 -0700
-+++ src/main/java/net/minecraft/inventory/ContainerRepair.java	2016-06-05 12:26:30.248014981 -0700
-@@ -123,7 +123,7 @@
+--- minecraft/src/net/minecraft/inventory/ContainerRepair.java
++++ src/main/java/net/minecraft/inventory/ContainerRepair.java
+@@ -121,11 +121,11 @@
+          this.outputSlot.setInventorySlotContents(0, (ItemStack)null);
+          this.maximumCost = 0;
        } else {
           ItemStack var5 = var1.copy();
           ItemStack var6 = this.inputSlots.getStackInSlot(1);
@@ -9,7 +11,11 @@
           var3 = var3 + var1.getRepairCost() + (var6 == null?0:var6.getRepairCost());
           this.materialCost = 0;
           if(var6 != null) {
-@@ -168,7 +168,7 @@
+             boolean var8 = var6.getItem() == Items.ENCHANTED_BOOK && !Items.ENCHANTED_BOOK.getEnchantments(var6).hasNoTags();
+             if(var5.isItemStackDamageable() && var5.getItem().getIsRepairable(var1, var6)) {
+@@ -166,11 +166,11 @@
+                      var5.setItemDamage(var13);
+                      var2 += 2;
                    }
                 }
  
@@ -18,3 +24,5 @@
  
                 for(Enchantment var23 : var19.keySet()) {
                    if(var23 != null) {
+                      int var25 = var7.containsKey(var23)?((Integer)var7.get(var23)).intValue():0;
+                      int var26 = ((Integer)var19.get(var23)).intValue();

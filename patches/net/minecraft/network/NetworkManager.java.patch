@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/network/NetworkManager.java	2016-06-05 00:35:26.413182674 -0700
-+++ src/main/java/net/minecraft/network/NetworkManager.java	2016-06-05 20:28:27.108874188 -0700
-@@ -43,7 +43,7 @@
+--- minecraft/src/net/minecraft/network/NetworkManager.java
++++ src/main/java/net/minecraft/network/NetworkManager.java
+@@ -41,11 +41,11 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Marker;
  import org.apache.logging.log4j.MarkerManager;
  
@@ -9,7 +11,11 @@
     private static final Logger LOGGER = LogManager.getLogger();
     public static final Marker NETWORK_MARKER = MarkerManager.getMarker("NETWORK");
     public static final Marker NETWORK_PACKETS_MARKER = MarkerManager.getMarker("NETWORK_PACKETS", NETWORK_MARKER);
-@@ -112,10 +112,10 @@
+    public static final AttributeKey<EnumConnectionState> PROTOCOL_ATTRIBUTE_KEY = AttributeKey.valueOf("protocol");
+    public static final LazyLoadBase<NioEventLoopGroup> CLIENT_NIO_EVENTLOOP = new LazyLoadBase<NioEventLoopGroup>() {
+@@ -110,14 +110,14 @@
+ 
+       LOGGER.debug(var2);
        this.closeChannel(var3);
     }
  
@@ -22,3 +28,5 @@
           } catch (ThreadQuickExitException var4) {
              ;
           }
+       }
+ 

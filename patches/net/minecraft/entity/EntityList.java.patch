@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/EntityList.java	2016-06-05 00:35:03.193139449 -0700
-+++ src/main/java/net/minecraft/entity/EntityList.java	2016-06-05 20:16:15.421500836 -0700
-@@ -207,7 +207,7 @@
+--- minecraft/src/net/minecraft/entity/EntityList.java
++++ src/main/java/net/minecraft/entity/EntityList.java
+@@ -205,11 +205,11 @@
+ 
+    public static void init() {
     }
  
     public static List<String> getEntityNameList() {
@@ -9,3 +11,5 @@
        ArrayList var1 = Lists.newArrayList();
  
        for(String var3 : var0) {
+          Class var4 = (Class)NAME_TO_CLASS.get(var3);
+          if((var4.getModifiers() & 1024) != 1024) {

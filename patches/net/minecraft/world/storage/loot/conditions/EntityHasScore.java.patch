@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasScore.java	2016-06-05 00:35:26.701183224 -0700
-+++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasScore.java	2016-06-05 20:42:42.713706621 -0700
-@@ -73,10 +73,10 @@
+--- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasScore.java
++++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasScore.java
+@@ -71,14 +71,14 @@
+          var1.add("scores", var4);
+          var1.add("entity", var3.serialize(var2.target));
        }
  
        public EntityHasScore deserialize(JsonObject var1, JsonDeserializationContext var2) {
@@ -13,3 +15,5 @@
              var4.put(var6.getKey(), JsonUtils.deserializeClass((JsonElement)var6.getValue(), "score", var2, RandomValueRange.class));
           }
  
+          return new EntityHasScore(var4, (LootContext.b)JsonUtils.deserializeClass(var1, "entity", var2, LootContext.b.class));
+       }

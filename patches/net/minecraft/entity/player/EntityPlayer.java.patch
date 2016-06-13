@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/player/EntityPlayer.java	2016-06-05 00:35:27.897185509 -0700
-+++ src/main/java/net/minecraft/entity/player/EntityPlayer.java	2016-06-05 20:12:10.460290332 -0700
-@@ -486,7 +486,7 @@
+--- minecraft/src/net/minecraft/entity/player/EntityPlayer.java
++++ src/main/java/net/minecraft/entity/player/EntityPlayer.java
+@@ -484,11 +484,11 @@
+    }
+ 
     public void addToPlayerScore(Entity var1, int var2) {
        if(var1 != this) {
           this.addScore(var2);
@@ -9,3 +11,5 @@
           if(var1 instanceof EntityPlayer) {
              this.addStat(StatList.PLAYER_KILLS);
              var3.addAll(this.getWorldScoreboard().getObjectivesFromCriteria(IScoreCriteria.PLAYER_KILL_COUNT));
+          } else {
+             this.addStat(StatList.MOB_KILLS);

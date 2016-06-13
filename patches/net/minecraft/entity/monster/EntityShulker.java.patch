@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/monster/EntityShulker.java	2016-06-05 00:35:01.929137158 -0700
-+++ src/main/java/net/minecraft/entity/monster/EntityShulker.java	2016-06-05 20:09:42.711521423 -0700
-@@ -266,7 +266,7 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityShulker.java
++++ src/main/java/net/minecraft/entity/monster/EntityShulker.java
+@@ -264,11 +264,11 @@
+             this.setEntityBoundingBox(new AxisAlignedBB(this.posX - 0.5D - var24, this.posY, this.posZ - 0.5D, this.posX + 0.5D, this.posY + 1.0D, this.posZ + 0.5D));
+             var9 = -var27;
           }
  
           if(var27 > 0.0D) {
@@ -9,3 +11,5 @@
              if(!var16.isEmpty()) {
                 for(Entity var18 : var16) {
                    if(!(var18 instanceof EntityShulker) && !var18.noClip) {
+                      var18.moveEntity(var9, var11, var13);
+                   }

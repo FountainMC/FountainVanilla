@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/item/ItemSlab.java	2016-06-05 00:35:20.469171405 -0700
-+++ src/main/java/net/minecraft/item/ItemSlab.java	2016-06-05 12:27:43.244308659 -0700
-@@ -83,7 +83,7 @@
+--- minecraft/src/net/minecraft/item/ItemSlab.java
++++ src/main/java/net/minecraft/item/ItemSlab.java
+@@ -81,9 +81,9 @@
+       }
+ 
        return false;
     }
  

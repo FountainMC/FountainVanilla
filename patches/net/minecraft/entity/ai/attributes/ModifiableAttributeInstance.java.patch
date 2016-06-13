@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java	2016-06-05 00:35:31.885193170 -0700
-+++ src/main/java/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java	2016-06-05 19:41:35.994400813 -0700
-@@ -76,14 +76,14 @@
+--- minecraft/src/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java
++++ src/main/java/net/minecraft/entity/ai/attributes/ModifiableAttributeInstance.java
+@@ -74,18 +74,18 @@
+ 
+    public void applyModifier(AttributeModifier var1) {
        if(this.getModifier(var1.getID()) != null) {
           throw new IllegalArgumentException("Modifier is already applied on this attribute!");
        } else {
@@ -18,3 +20,5 @@
           this.mapByUUID.put(var1.getID(), var1);
           this.flagForUpdate();
        }
+    }
+ 

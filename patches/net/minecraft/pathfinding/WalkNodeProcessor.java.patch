@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/pathfinding/WalkNodeProcessor.java	2016-06-05 00:35:20.785172001 -0700
-+++ src/main/java/net/minecraft/pathfinding/WalkNodeProcessor.java	2016-06-05 12:28:28.092488185 -0700
-@@ -62,7 +62,7 @@
+--- minecraft/src/net/minecraft/pathfinding/WalkNodeProcessor.java
++++ src/main/java/net/minecraft/pathfinding/WalkNodeProcessor.java
+@@ -60,11 +60,11 @@
+       }
+ 
        BlockPos var9 = new BlockPos(this.entity);
        PathNodeType var10 = this.getPathNodeType(this.entity, var9.getX(), var1, var9.getZ());
        if(this.entity.getPathPriority(var10) < 0.0F) {
@@ -9,7 +11,11 @@
           var4.add(new BlockPos(this.entity.getEntityBoundingBox().minX, (double)var1, this.entity.getEntityBoundingBox().minZ));
           var4.add(new BlockPos(this.entity.getEntityBoundingBox().minX, (double)var1, this.entity.getEntityBoundingBox().maxZ));
           var4.add(new BlockPos(this.entity.getEntityBoundingBox().maxX, (double)var1, this.entity.getEntityBoundingBox().minZ));
-@@ -228,7 +228,7 @@
+          var4.add(new BlockPos(this.entity.getEntityBoundingBox().maxX, (double)var1, this.entity.getEntityBoundingBox().maxZ));
+ 
+@@ -226,11 +226,11 @@
+          }
+       }
     }
  
     public PathNodeType getPathNodeType(IBlockAccess var1, int var2, int var3, int var4, EntityLiving var5, int var6, int var7, int var8, boolean var9, boolean var10) {
@@ -18,3 +24,5 @@
        PathNodeType var12 = PathNodeType.BLOCKED;
        double var13 = (double)var5.width / 2.0D;
        BlockPos var15 = new BlockPos(var5);
+ 
+       for(int var16 = 0; var16 < var6; ++var16) {

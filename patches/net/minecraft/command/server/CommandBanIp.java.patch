@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/command/server/CommandBanIp.java	2016-06-05 00:35:07.369147063 -0700
-+++ src/main/java/net/minecraft/command/server/CommandBanIp.java	2016-06-05 12:07:44.510878315 -0700
-@@ -66,7 +66,7 @@
+--- minecraft/src/net/minecraft/command/server/CommandBanIp.java
++++ src/main/java/net/minecraft/command/server/CommandBanIp.java
+@@ -64,11 +64,11 @@
+    }
+ 
     protected void banIp(MinecraftServer var1, ICommandSender var2, String var3, @Nullable String var4) {
        UserListIPBansEntry var5 = new UserListIPBansEntry(var3, (Date)null, var2.getName(), (Date)null, var4);
        var1.getPlayerList().getBannedIPs().addEntry(var5);
@@ -9,3 +11,5 @@
        String[] var7 = new String[var6.size()];
        int var8 = 0;
  
+       for(EntityPlayerMP var10 : var6) {
+          var10.connection.kickPlayerFromServer("You have been IP banned.");

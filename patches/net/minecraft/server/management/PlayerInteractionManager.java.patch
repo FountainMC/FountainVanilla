@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-05 00:35:06.357145211 -0700
-+++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java	2016-06-11 22:10:23.007598730 -0700
-@@ -197,6 +197,13 @@
+--- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java
++++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java
+@@ -195,10 +195,17 @@
+ 
+       return var3;
     }
  
     public boolean tryHarvestBlock(BlockPos var1) {
@@ -14,7 +16,11 @@
        if(this.gameType.isCreative() && this.thisPlayerMP.getHeldItemMainhand() != null && this.thisPlayerMP.getHeldItemMainhand().getItem() instanceof ItemSword) {
           return false;
        } else {
-@@ -256,7 +263,7 @@
+          IBlockState var2 = this.theWorld.getBlockState(var1);
+          TileEntity var3 = this.theWorld.getTileEntity(var1);
+@@ -254,11 +261,11 @@
+       } else if(var1.getCooldownTracker().hasCooldown(var3.getItem())) {
+          return EnumActionResult.PASS;
        } else {
           int var5 = var3.stackSize;
           int var6 = var3.getMetadata();
@@ -23,3 +29,5 @@
           ItemStack var8 = (ItemStack)var7.getResult();
           if(var8 == var3 && var8.stackSize == var5 && var8.getMaxItemUseDuration() <= 0 && var8.getMetadata() == var6) {
              return var7.getType();
+          } else {
+             var1.setHeldItem(var4, var8);

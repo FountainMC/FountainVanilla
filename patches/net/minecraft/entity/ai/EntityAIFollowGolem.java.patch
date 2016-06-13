@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAIFollowGolem.java	2016-06-05 00:35:05.345143363 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAIFollowGolem.java	2016-06-05 19:45:48.227219040 -0700
-@@ -22,7 +22,7 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFollowGolem.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIFollowGolem.java
+@@ -20,11 +20,11 @@
+       if(this.theVillager.getGrowingAge() >= 0) {
+          return false;
        } else if(!this.theVillager.worldObj.isDaytime()) {
           return false;
        } else {
@@ -9,3 +11,5 @@
           if(var1.isEmpty()) {
              return false;
           } else {
+             for(EntityIronGolem var3 : var1) {
+                if(var3.getHoldRoseTick() > 0) {

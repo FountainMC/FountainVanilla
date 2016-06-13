@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAIFollowParent.java	2016-06-05 00:35:05.693143999 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAIFollowParent.java	2016-06-05 19:46:06.775280965 -0700
-@@ -19,7 +19,7 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFollowParent.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIFollowParent.java
+@@ -17,11 +17,11 @@
+ 
+    public boolean shouldExecute() {
        if(this.childAnimal.getGrowingAge() >= 0) {
           return false;
        } else {
@@ -9,3 +11,5 @@
           EntityAnimal var2 = null;
           double var3 = Double.MAX_VALUE;
  
+          for(EntityAnimal var6 : var1) {
+             if(var6.getGrowingAge() >= 0) {

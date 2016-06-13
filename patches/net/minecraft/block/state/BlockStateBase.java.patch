@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/state/BlockStateBase.java	2016-06-05 00:35:24.157178380 -0700
-+++ src/main/java/net/minecraft/block/state/BlockStateBase.java	2016-06-05 11:49:53.540471205 -0700
-@@ -24,8 +24,8 @@
+--- minecraft/src/net/minecraft/block/state/BlockStateBase.java
++++ src/main/java/net/minecraft/block/state/BlockStateBase.java
+@@ -22,20 +22,20 @@
+             IProperty var2 = (IProperty)var1.getKey();
+             return var2.getName() + "=" + this.getPropertyName(var2, (Comparable)var1.getValue());
           }
        }
  
@@ -11,7 +13,7 @@
        }
     };
  
-@@ -33,7 +33,7 @@
+    public BlockStateBase() {
     }
  
     public <T extends Comparable<T>> IBlockState cycleProperty(IProperty<T> var1) {
@@ -20,3 +22,5 @@
     }
  
     protected static <T> T cyclePropertyValue(Collection<T> var0, T var1) {
+       Iterator var2 = var0.iterator();
+ 

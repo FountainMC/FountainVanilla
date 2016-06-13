@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/server/MinecraftServer.java	2016-06-05 00:34:58.813131539 -0700
-+++ src/main/java/net/minecraft/server/MinecraftServer.java	2016-06-11 21:47:10.332809002 -0700
-@@ -137,6 +137,12 @@
+--- minecraft/src/net/minecraft/server/MinecraftServer.java
++++ src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -135,10 +135,16 @@
+    private long nanoTimeSinceStatusRefresh = 0L;
+    protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
     private Thread serverThread;
     private long currentTime = getCurrentTimeMillis();
  
@@ -13,7 +15,11 @@
     public MinecraftServer(File var1, Proxy var2, DataFixer var3, YggdrasilAuthenticationService var4, MinecraftSessionService var5, GameProfileRepository var6, PlayerProfileCache var7) {
        this.serverProxy = var2;
        this.authService = var4;
-@@ -245,10 +251,6 @@
+       this.sessionService = var5;
+       this.profileRepo = var6;
+@@ -243,14 +249,10 @@
+       this.setDifficultyForAllWorlds(this.getDifficulty());
+       this.initialWorldChunkLoad();
     }
  
     protected void initialWorldChunkLoad() {
@@ -24,7 +30,11 @@
        int var5 = 0;
        this.setUserMessage("menu.generatingTerrain");
        byte var6 = 0;
-@@ -324,6 +326,8 @@
+       LOG.info("Preparing start region for level " + var6);
+       WorldServer var7 = this.worldServers[var6];
+@@ -322,10 +324,12 @@
+       }
+ 
     }
  
     protected void stopServer() {
@@ -33,7 +43,11 @@
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
-@@ -534,7 +538,7 @@
+       }
+ 
+@@ -532,11 +536,11 @@
+ 
+    public void updateTimeLightAndEntities() {
        this.theProfiler.startSection("jobs");
        synchronized(this.futureTaskQueue) {
           while(!this.futureTaskQueue.isEmpty()) {
@@ -42,7 +56,11 @@
           }
        }
  
-@@ -678,11 +682,14 @@
+       this.theProfiler.endStartSection("levels");
+ 
+@@ -676,15 +680,18 @@
+          if(var1 && !GraphicsEnvironment.isHeadless()) {
+             var12.setGuiEnabled();
           }
  
           var12.startServerThread();
@@ -57,7 +75,11 @@
        } catch (Exception var14) {
           LOG.fatal("Failed to start the minecraft server", var14);
        }
-@@ -767,7 +774,7 @@
+ 
+    }
+@@ -765,11 +772,11 @@
+ 
+       return var1;
     }
  
     public List<String> getTabCompletions(ICommandSender var1, String var2, @Nullable BlockPos var3, boolean var4) {
@@ -66,7 +88,11 @@
        boolean var6 = var2.startsWith("/");
        if(var6) {
           var2 = var2.substring(1);
-@@ -786,7 +793,7 @@
+       }
+ 
+@@ -784,11 +791,11 @@
+          }
+ 
           return var5;
        } else {
           boolean var7 = !var2.contains(" ");
@@ -75,7 +101,11 @@
           if(!var8.isEmpty()) {
              for(String var10 : var8) {
                 if(var7) {
-@@ -1162,7 +1169,7 @@
+                   var5.add("/" + var10);
+                } else {
+@@ -1160,11 +1167,11 @@
+    }
+ 
     public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
        Validate.notNull(var1);
        if(!this.isCallingFromMinecraftThread() && !this.isServerStopped()) {
@@ -84,3 +114,5 @@
           synchronized(this.futureTaskQueue) {
              this.futureTaskQueue.add(var2);
              return var2;
+          }
+       } else {

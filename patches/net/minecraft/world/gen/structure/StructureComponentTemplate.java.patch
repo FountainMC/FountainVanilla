@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/gen/structure/StructureComponentTemplate.java	2016-06-05 00:35:17.677166159 -0700
-+++ src/main/java/net/minecraft/world/gen/structure/StructureComponentTemplate.java	2016-06-05 20:39:17.608657506 -0700
-@@ -49,7 +49,7 @@
+--- minecraft/src/net/minecraft/world/gen/structure/StructureComponentTemplate.java
++++ src/main/java/net/minecraft/world/gen/structure/StructureComponentTemplate.java
+@@ -47,11 +47,11 @@
+    }
+ 
     public boolean addComponentParts(World var1, Random var2, StructureBoundingBox var3) {
        this.placeSettings.setBoundingBox(var3);
        this.template.addBlocksToWorld(var1, this.templatePosition, this.placeSettings);
@@ -9,3 +11,5 @@
  
        for(BlockPos var6 : var4.keySet()) {
           String var7 = (String)var4.get(var6);
+          this.handleDataMarker(var7, var6, var1, var2, var3);
+       }

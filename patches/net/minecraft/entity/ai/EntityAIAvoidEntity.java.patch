@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/ai/EntityAIAvoidEntity.java	2016-06-05 00:35:05.473143597 -0700
-+++ src/main/java/net/minecraft/entity/ai/EntityAIAvoidEntity.java	2016-06-05 19:45:28.423153148 -0700
-@@ -46,11 +46,11 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIAvoidEntity.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIAvoidEntity.java
+@@ -44,15 +44,15 @@
+       this.entityPathNavigate = var1.getNavigator();
+       this.setMutexBits(1);
     }
  
     public boolean shouldExecute() {
@@ -13,4 +15,6 @@
 +         this.closestLivingEntity = var1.get(0);
           Vec3d var2 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, new Vec3d(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
           if(var2 == null) {
+             return false;
+          } else if(this.closestLivingEntity.getDistanceSq(var2.xCoord, var2.yCoord, var2.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
              return false;

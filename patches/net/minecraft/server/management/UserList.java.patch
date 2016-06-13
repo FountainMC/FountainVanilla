@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/server/management/UserList.java	2016-06-05 00:35:06.401145292 -0700
-+++ src/main/java/net/minecraft/server/management/UserList.java	2016-06-05 12:34:22.529877543 -0700
-@@ -149,12 +149,12 @@
+--- minecraft/src/net/minecraft/server/management/UserList.java
++++ src/main/java/net/minecraft/server/management/UserList.java
+@@ -147,26 +147,26 @@
+       }
+ 
     }
  
     public void readSavedFile() throws FileNotFoundException {
@@ -15,7 +17,9 @@
        } finally {
           IOUtils.closeQuietly(var2);
        }
-@@ -164,7 +164,7 @@
+ 
+       if(var1 != null) {
+          this.values.clear();
  
           for(UserListEntry var4 : var1) {
              if(var4.getValue() != null) {
@@ -24,3 +28,5 @@
              }
           }
        }
+ 
+    }

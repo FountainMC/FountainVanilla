@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/util/math/Cartesian.java	2016-06-05 00:35:32.305193980 -0700
-+++ src/main/java/net/minecraft/util/math/Cartesian.java	2016-06-05 20:30:31.113679008 -0700
-@@ -45,7 +45,7 @@
+--- minecraft/src/net/minecraft/util/math/Cartesian.java
++++ src/main/java/net/minecraft/util/math/Cartesian.java
+@@ -43,11 +43,11 @@
+    static class a<T> implements Function<Object[], List<T>> {
+       private a() {
        }
  
        public List<T> apply(@Nullable Object[] var1) {
@@ -9,3 +11,5 @@
        }
     }
  
+    static class b<T> implements Iterable<T[]> {
+       private final Class<T> clazz;

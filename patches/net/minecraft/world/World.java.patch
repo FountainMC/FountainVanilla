@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/World.java	2016-06-05 00:35:34.765198740 -0700
-+++ src/main/java/net/minecraft/world/World.java	2016-06-05 20:44:39.530288708 -0700
-@@ -1984,11 +1984,11 @@
+--- minecraft/src/net/minecraft/world/World.java
++++ src/main/java/net/minecraft/world/World.java
+@@ -1982,27 +1982,27 @@
+ 
+       return var4;
     }
  
     public <T extends Entity> List<T> getEntities(Class<? extends T> var1, Predicate<? super T> var2) {
@@ -15,7 +17,7 @@
           }
        }
  
-@@ -1996,11 +1996,11 @@
+       return var3;
     }
  
     public <T extends Entity> List<T> getPlayers(Class<? extends T> var1, Predicate<? super T> var2) {
@@ -30,3 +32,5 @@
           }
        }
  
+       return var3;
+    }

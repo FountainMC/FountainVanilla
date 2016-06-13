@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-05 00:35:30.161189850 -0700
-+++ src/main/java/net/minecraft/block/state/pattern/BlockStateMatcher.java	2016-06-05 11:47:29.680004796 -0700
-@@ -41,7 +41,7 @@
+--- minecraft/src/net/minecraft/block/state/pattern/BlockStateMatcher.java
++++ src/main/java/net/minecraft/block/state/pattern/BlockStateMatcher.java
+@@ -39,11 +39,11 @@
+       } else {
+          return false;
        }
     }
  
@@ -9,3 +11,5 @@
        return var3.apply(var1.getValue(var2));
     }
  
+    public <V extends Comparable<V>> BlockStateMatcher where(IProperty<V> var1, Predicate<? extends V> var2) {
+       if(!this.blockstate.getProperties().contains(var1)) {

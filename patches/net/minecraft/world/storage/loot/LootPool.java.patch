@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/world/storage/loot/LootPool.java	2016-06-05 00:35:46.529221823 -0700
-+++ src/main/java/net/minecraft/world/storage/loot/LootPool.java	2016-06-05 20:43:00.737797061 -0700
-@@ -36,7 +36,7 @@
+--- minecraft/src/net/minecraft/world/storage/loot/LootPool.java
++++ src/main/java/net/minecraft/world/storage/loot/LootPool.java
+@@ -34,11 +34,11 @@
+       this.rolls = var3;
+       this.bonusRolls = var4;
     }
  
     protected void createLootRoll(Collection<ItemStack> var1, Random var2, LootContext var3) {
@@ -9,3 +11,5 @@
        int var5 = 0;
  
        for(LootEntry var9 : this.lootEntries) {
+          if(LootConditionManager.testAllConditions(var9.conditions, var2, var3)) {
+             int var10 = var9.getEffectiveWeight(var3.getLuck());

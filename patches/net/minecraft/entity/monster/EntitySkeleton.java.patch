@@ -1,6 +1,8 @@
---- minecraft/src/net/minecraft/entity/monster/EntitySkeleton.java	2016-06-05 00:35:01.373136152 -0700
-+++ src/main/java/net/minecraft/entity/monster/EntitySkeleton.java	2016-06-05 20:11:46.632168656 -0700
-@@ -58,7 +58,7 @@
+--- minecraft/src/net/minecraft/entity/monster/EntitySkeleton.java
++++ src/main/java/net/minecraft/entity/monster/EntitySkeleton.java
+@@ -56,11 +56,11 @@
+ 
+ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
     private static final DataParameter<Integer> SKELETON_VARIANT = EntityDataManager.<Integer>createKey(EntitySkeleton.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntitySkeleton.class, DataSerializers.BOOLEAN);
     private final EntityAIAttackRangedBow aiArrowAttack = new EntityAIAttackRangedBow(this, 1.0D, 20, 15.0F);
@@ -9,3 +11,5 @@
        public void resetTask() {
           super.resetTask();
           EntitySkeleton.this.setSwingingArms(false);
+       }
+ 
