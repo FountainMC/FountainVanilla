@@ -26,8 +26,10 @@ with ZipFile("minecraft/{0}-mapped.jar".format(minecraft_version), "r") as minec
     minecraftJar.extractall("minecraft/bin", [entry for entry in minecraftJar.namelist() if entry.startswith("net/minecraft") or entry.startswith("assets") or entry == "log4j2.xml"])
 
 print("Moving assets...")
-rmtree("minecraft/assets/")
-os.remove("minecraft/log4j2.xml")
+if path.exists("minecraft/assets/"):
+    rmtree("minecraft/assets/")
+if path.exists("minecraft/log4j2.xml"):
+    os.remove("minecraft/log4j2.xml")
 move("minecraft/bin/assets", "minecraft")
 move("minecraft/bin/log4j2.xml", "minecraft")
 
