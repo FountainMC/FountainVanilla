@@ -41,3 +41,16 @@
     }
  
     public static int getStateId(IBlockState var0) {
+@@ -1009,11 +1020,11 @@
+ 
+             var16.useNeighborBrightness = var17;
+          }
+       }
+ 
+-      HashSet var23 = Sets.newHashSet(new Block[]{(Block)REGISTRY.getObject(new ResourceLocation("tripwire"))});
++      HashSet<Block> var23 = Sets.newHashSet(new Block[]{(Block)REGISTRY.getObject(new ResourceLocation("tripwire"))});
+ 
+       for(Block var25 : REGISTRY) {
+          if(var23.contains(var25)) {
+             for(int var27 = 0; var27 < 15; ++var27) {
+                int var29 = REGISTRY.getIDForObject(var25) << 4 | var27;

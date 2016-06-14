@@ -1,23 +1,23 @@
 package org.fountainmc;
 
-import java.io.File;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.net.InetSocketAddress;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.collect.ImmutableList;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.server.MinecraftServer;
-
-import org.apache.logging.log4j.LogManager;
 import org.fountainmc.api.Fountain;
 import org.fountainmc.api.Material;
 import org.fountainmc.api.Server;
 import org.fountainmc.api.command.CommandManager;
 import org.fountainmc.api.plugin.PluginManager;
 
-import static com.google.common.base.Preconditions.*;
+import com.google.common.collect.ImmutableList;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.server.MinecraftServer;
 
 @ParametersAreNonnullByDefault
 public class WetServer implements Server {
@@ -27,8 +27,6 @@ public class WetServer implements Server {
     public WetServer(String[] args) {
         pluginManager = new PluginManager();
         this.launchArguments = ImmutableList.copyOf(args);
-        LogManager.getLogger().info("Loading plugins...");
-        pluginManager.loadPlugins(new File("plugins"));
     }
 
     @Override
