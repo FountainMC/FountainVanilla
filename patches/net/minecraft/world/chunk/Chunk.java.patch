@@ -1,6 +1,44 @@
 --- minecraft/src/net/minecraft/world/chunk/Chunk.java
 +++ src/main/java/net/minecraft/world/chunk/Chunk.java
-@@ -688,12 +688,12 @@
+@@ -37,10 +37,11 @@
+ import net.minecraft.world.chunk.IChunkProvider;
+ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+ import net.minecraft.world.gen.ChunkProviderDebug;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
++import org.fountainmc.world.WetChunk;
+ 
+ public class Chunk {
+    private static final Logger LOGGER = LogManager.getLogger();
+    public static final ExtendedBlockStorage NULL_BLOCK_STORAGE = null;
+    private final ExtendedBlockStorage[] storageArrays;
+@@ -64,10 +65,13 @@
+    private int heightMapMinimum;
+    private long inhabitedTime;
+    private int queuedLightChecks;
+    private ConcurrentLinkedQueue<BlockPos> tileEntityPosQueue;
+    public boolean unloaded;
++   // Fountain start
++   private final WetChunk fountainChunk;
++   // Fountain end
+ 
+    public Chunk(World var1, int var2, int var3) {
+       this.storageArrays = new ExtendedBlockStorage[16];
+       this.blockBiomeArray = new byte[256];
+       this.precipitationHeightMap = new int[256];
+@@ -85,10 +89,11 @@
+          this.entityLists[var4] = new ClassInheritanceMultiMap(Entity.class);
+       }
+ 
+       Arrays.fill(this.precipitationHeightMap, -999);
+       Arrays.fill(this.blockBiomeArray, (byte)-1);
++      this.fountainChunk = new WetChunk(var1.getFountainWorld(), this); // Fountain
+    }
+ 
+    public Chunk(World var1, ChunkPrimer var2, int var3, int var4) {
+       this(var1, var3, var4);
+       short var5 = 256;
+@@ -688,12 +693,12 @@
        var5 = MathHelper.clamp_int(var5, 0, this.entityLists.length - 1);
        var6 = MathHelper.clamp_int(var6, 0, this.entityLists.length - 1);
  

@@ -1,24 +1,40 @@
 --- minecraft/src/net/minecraft/server/management/PlayerInteractionManager.java
 +++ src/main/java/net/minecraft/server/management/PlayerInteractionManager.java
-@@ -195,10 +195,17 @@
+@@ -24,10 +24,13 @@
+ import net.minecraft.world.ILockableContainer;
+ import net.minecraft.world.World;
+ import net.minecraft.world.WorldServer;
+ import net.minecraft.world.WorldSettings;
  
-       return var3;
-    }
++import org.fountainmc.api.event.world.BlockBreakEvent;
++import org.fountainmc.api.world.BlockPosition;
++
+ public class PlayerInteractionManager {
+    public World theWorld;
+    public EntityPlayerMP thisPlayerMP;
+    private WorldSettings.a gameType = WorldSettings.a.NOT_SET;
+    private boolean isDestroyingBlock;
+@@ -221,10 +224,19 @@
+                      return false;
+                   }
+                }
+             }
  
-    public boolean tryHarvestBlock(BlockPos var1) {
-+      org.fountainmc.api.event.world.BlockBreakEvent event = new org.fountainmc.api.event.world.BlockBreakEvent(
-+          new org.fountainmc.api.world.BlockPosition(new org.fountainmc.world.WetWorld(theWorld), var1.getX(), var1.getY(), var1.getZ()));
-+      org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(event);
-+      if(event.isCancelled()) {
-+          thisPlayerMP.connection.sendPacket(new SPacketBlockChange(theWorld, var1));
-+          return false;
-+      }
-       if(this.gameType.isCreative() && this.thisPlayerMP.getHeldItemMainhand() != null && this.thisPlayerMP.getHeldItemMainhand().getItem() instanceof ItemSword) {
-          return false;
-       } else {
-          IBlockState var2 = this.theWorld.getBlockState(var1);
-          TileEntity var3 = this.theWorld.getTileEntity(var1);
-@@ -254,11 +261,11 @@
++            // Fountain start
++            BlockBreakEvent event = new BlockBreakEvent(theWorld.getBlockState(var1).getFountainState(), new BlockPosition(theWorld.getFountainWorld(), var1.getX(), var1.getY(), var1.getZ()));
++            org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(event);
++            if (event.isCancelled()) {
++               thisPlayerMP.connection.sendPacket(new SPacketBlockChange(theWorld, var1));
++               return false;
++            }
++            // Fountain end
++
+             this.theWorld.playEvent(this.thisPlayerMP, 2001, var1, Block.getStateId(var2));
+             boolean var8 = this.removeBlock(var1);
+             if(this.isCreative()) {
+                this.thisPlayerMP.connection.sendPacket(new SPacketBlockChange(this.theWorld, var1));
+             } else {
+@@ -254,11 +266,11 @@
        } else if(var1.getCooldownTracker().hasCooldown(var3.getItem())) {
           return EnumActionResult.PASS;
        } else {

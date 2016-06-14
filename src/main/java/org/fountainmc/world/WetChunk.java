@@ -1,40 +1,52 @@
 package org.fountainmc.world;
 
-import org.fountainmc.api.world.Chunk;
-import org.fountainmc.api.world.World;
-import org.fountainmc.api.world.BlockPosition;
+import net.minecraft.world.chunk.Chunk;
 
-public class WetChunk implements Chunk {
+import org.fountainmc.AsyncCatcher;
+import org.fountainmc.world.block.WetBlockState;
 
-    private final net.minecraft.world.chunk.Chunk chunk;
-    private final net.minecraft.world.World world;
-    private final int x;
-    private final int z;
+import static com.google.common.base.Preconditions.checkArgument;
 
-    public WetChunk(net.minecraft.world.chunk.Chunk chunk) {
-        this.chunk = chunk;
-        this.world = chunk.getWorld();
-        this.x = chunk.xPosition;
-        this.z = chunk.zPosition;
+public class WetChunk implements org.fountainmc.api.world.Chunk {
+
+    private final Chunk handle;
+    private final WetWorld world;
+
+    public WetChunk(WetWorld world, Chunk handle) {
+        this.handle = handle;
+        this.world = world;
     }
 
-    @Override public int getX() {
-        return x;
+    @Override
+    public int getX() {
+        return handle.xPosition;
     }
 
-    @Override public int getZ() {
-        return z;
+    @Override
+    public int getZ() {
+        return handle.zPosition;
     }
 
-    @Override public World getWorld() {
-        return new WetWorld(world);
+    @Override
+    public WetWorld getWorld() {
+        return world;
     }
 
-    @Override public BlockPosition getBlockAt(int x, int y, int z) {
-        return new BlockPosition(getWorld(), x, y, z);
+    @Override
+    public WetBlockState getBlockAt(int x, int y, int z) {
+        checkArgument(x >> 4 == this.getX(), "X position %s isn't in chunk %s", x, this);
+        checkArgument(z >> 4 == this.getZ(), "Z position %s isn't in chunk %s", z, this);
+        checkArgument(y > 0, "Negative y position %s", y);
+        AsyncCatcher.checkAsyncOp("block access");
+        return handle.getBlockState(x, y, z).getFountainState();
     }
 
-    public net.minecraft.world.chunk.Chunk getHandle() {
-        return chunk;
+    public Chunk getHandle() {
+        return handle;
+    }
+
+    @Override
+    public String toString() {
+        return getWorld().getName() + ":" + getX() + "," + getZ();
     }
 }

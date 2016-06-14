@@ -1,0 +1,35 @@
+--- minecraft/src/net/minecraft/item/Item.java
++++ src/main/java/net/minecraft/item/Item.java
+@@ -130,10 +130,13 @@
+ import net.minecraft.util.registry.RegistryNamespaced;
+ import net.minecraft.util.registry.RegistrySimple;
+ import net.minecraft.util.text.translation.I18n;
+ import net.minecraft.world.World;
+ 
++import org.fountainmc.WetItemType;
++import org.fountainmc.WetServer;
++
+ public class Item {
+    public static final RegistryNamespaced<ResourceLocation, Item> REGISTRY = new RegistryNamespaced();
+    private static final Map<Block, Item> BLOCK_TO_ITEM = Maps.newHashMap();
+    private static final IItemPropertyGetter DAMAGED_GETTER = new IItemPropertyGetter() {
+    };
+@@ -152,11 +155,18 @@
+    private int maxDamage;
+    protected boolean bFull3D;
+    protected boolean hasSubtypes;
+    private Item containerItem;
+    private String unlocalizedName;
++   // Fountain start
++   private final WetItemType fountainType = new WetItemType(WetServer.getInstance(), this);
+ 
++   public WetItemType getFountainType() {
++      return fountainType;
++   }
++   // Fountain end
++
+    public static int getIdFromItem(Item var0) {
+       return var0 == null?0:REGISTRY.getIDForObject(var0);
+    }
+ 
+    public static Item getItemById(int var0) {

@@ -1,0 +1,56 @@
+--- minecraft/src/net/minecraft/block/Block.java
++++ src/main/java/net/minecraft/block/Block.java
+@@ -182,10 +182,13 @@
+ import net.minecraft.util.text.translation.I18n;
+ import net.minecraft.world.Explosion;
+ import net.minecraft.world.IBlockAccess;
+ import net.minecraft.world.World;
+ 
++import org.fountainmc.WetBlockType;
++import org.fountainmc.WetServer;
++
+ public class Block {
+    private static final ResourceLocation AIR_ID = new ResourceLocation("air");
+    public static final RegistryNamespacedDefaultedByKey<ResourceLocation, Block> REGISTRY = new RegistryNamespacedDefaultedByKey(AIR_ID);
+    public static final ObjectIntIdentityMap<IBlockState> BLOCK_STATE_IDS = new ObjectIntIdentityMap();
+    public static final AxisAlignedBB FULL_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+@@ -201,17 +204,25 @@
+    protected boolean enableStats;
+    protected boolean needsRandomTick;
+    protected boolean isBlockContainer;
+    protected SoundType blockSoundType;
+    public float blockParticleGravity;
+-   protected final Material blockMaterial;
++   public final Material blockMaterial; // Fountain - public
+    protected final MapColor blockMapColor;
+    public float slipperiness;
+    protected final BlockStateContainer blockState;
+    private IBlockState defaultBlockState;
+    private String unlocalizedName;
+ 
++   // Fountain start
++   private final WetBlockType fountainType = new WetBlockType(WetServer.getInstance(), this);
++
++   public WetBlockType getFountainType() {
++      return fountainType;
++   }
++   // Fountain end
++
+    public static int getIdFromBlock(Block var0) {
+       return REGISTRY.getIDForObject(var0);
+    }
+ 
+    public static int getStateId(IBlockState var0) {
+@@ -726,11 +737,11 @@
+    public static boolean isEqualTo(Block var0, Block var1) {
+       return var0 != null && var1 != null?(var0 == var1?true:var0.isAssociatedBlock(var1)):false;
+    }
+ 
+    @Deprecated
+-   public boolean hasComparatorInputOverride(IBlockState var1) {
++      public boolean hasComparatorInputOverride(IBlockState var1) {
+       return false;
+    }
+ 
+    @Deprecated
+    public int getComparatorInputOverride(IBlockState var1, World var2, BlockPos var3) {

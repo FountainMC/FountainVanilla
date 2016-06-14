@@ -1,6 +1,39 @@
 --- minecraft/src/net/minecraft/world/World.java
 +++ src/main/java/net/minecraft/world/World.java
-@@ -1982,27 +1982,27 @@
+@@ -68,10 +68,13 @@
+ import net.minecraft.world.storage.ISaveHandler;
+ import net.minecraft.world.storage.MapStorage;
+ import net.minecraft.world.storage.WorldInfo;
+ import net.minecraft.world.storage.loot.LootTableManager;
+ 
++import org.fountainmc.WetServer;
++import org.fountainmc.world.WetWorld;
++
+ public abstract class World implements IBlockAccess {
+    private int seaLevel = 63;
+    protected boolean scheduledUpdatesAreImmediate;
+    public final List<Entity> loadedEntityList = Lists.newArrayList();
+    protected final List<Entity> unloadedEntityList = Lists.newArrayList();
+@@ -109,11 +112,18 @@
+    protected boolean spawnHostileMobs;
+    protected boolean spawnPeacefulMobs;
+    private boolean processingLoadedTiles;
+    private final WorldBorder worldBorder;
+    int[] lightUpdateBlockList;
++   // Fountain start
++   private final WetWorld fountainWorld = new WetWorld(WetServer.getInstance(), this);
+ 
++   public WetWorld getFountainWorld() {
++      return fountainWorld;
++   }
++   // Fountain end
++
+    protected World(ISaveHandler var1, WorldInfo var2, WorldProvider var3, Profiler var4, boolean var5) {
+       this.eventListeners = Lists.newArrayList(new IWorldEventListener[]{this.pathListener});
+       this.theCalendar = Calendar.getInstance();
+       this.worldScoreboard = new Scoreboard();
+       this.spawnHostileMobs = true;
+@@ -1982,27 +1992,27 @@
  
        return var4;
     }

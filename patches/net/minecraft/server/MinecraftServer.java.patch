@@ -1,6 +1,20 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java
 +++ src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -135,10 +135,16 @@
+@@ -80,10 +80,13 @@
+ import net.minecraft.world.storage.ISaveHandler;
+ import net.minecraft.world.storage.WorldInfo;
+ import org.apache.commons.lang3.Validate;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
++import org.fountainmc.WetServer;
++import org.fountainmc.api.Fountain;
++import org.fountainmc.api.event.server.ServerStartEvent;
+ 
+ public abstract class MinecraftServer implements Runnable, ICommandSender, IThreadListener, ISnooperInfo {
+    private static final Logger LOG = LogManager.getLogger();
+    public static final File USER_CACHE_FILE = new File("usercache.json");
+    private final ISaveFormat anvilConverterForAnvilFile;
+@@ -135,10 +138,16 @@
     private long nanoTimeSinceStatusRefresh = 0L;
     protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
     private Thread serverThread;
@@ -17,7 +31,7 @@
        this.authService = var4;
        this.sessionService = var5;
        this.profileRepo = var6;
-@@ -243,14 +249,10 @@
+@@ -243,14 +252,10 @@
        this.setDifficultyForAllWorlds(this.getDifficulty());
        this.initialWorldChunkLoad();
     }
@@ -32,20 +46,20 @@
        byte var6 = 0;
        LOG.info("Preparing start region for level " + var6);
        WorldServer var7 = this.worldServers[var6];
-@@ -322,10 +324,12 @@
+@@ -322,10 +327,12 @@
        }
  
     }
  
     protected void stopServer() {
-+      org.fountainmc.api.Fountain.getServer().getPluginManager()
++      Fountain.getServer().getPluginManager()
 +              .fireEvent(new org.fountainmc.api.event.server.ServerStopEvent());
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
        }
  
-@@ -532,11 +536,11 @@
+@@ -532,11 +539,11 @@
  
     public void updateTimeLightAndEntities() {
        this.theProfiler.startSection("jobs");
@@ -58,14 +72,13 @@
  
        this.theProfiler.endStartSection("levels");
  
-@@ -676,15 +680,18 @@
+@@ -676,15 +683,17 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();
           }
  
           var12.startServerThread();
-+         org.fountainmc.api.Fountain.getServer().getPluginManager()
-+                 .fireEvent(new org.fountainmc.api.event.server.ServerStartEvent(org.fountainmc.api.Fountain.getServer()));
++         Fountain.getServer().getPluginManager().fireEvent(new ServerStartEvent(Fountain.getServer())); // Fountain
           Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
              public void run() {
                 var12.stopServer();
@@ -77,7 +90,7 @@
        }
  
     }
-@@ -765,11 +772,11 @@
+@@ -765,11 +774,11 @@
  
        return var1;
     }
@@ -90,7 +103,7 @@
           var2 = var2.substring(1);
        }
  
-@@ -784,11 +791,11 @@
+@@ -784,11 +793,11 @@
           }
  
           return var5;
@@ -103,7 +116,7 @@
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
-@@ -1160,11 +1167,11 @@
+@@ -1160,11 +1169,11 @@
     }
  
     public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {

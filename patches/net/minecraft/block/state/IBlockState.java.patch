@@ -1,0 +1,24 @@
+--- minecraft/src/net/minecraft/block/state/IBlockState.java
++++ src/main/java/net/minecraft/block/state/IBlockState.java
+@@ -5,10 +5,12 @@
+ import net.minecraft.block.Block;
+ import net.minecraft.block.properties.IProperty;
+ import net.minecraft.block.state.IBlockBehaviors;
+ import net.minecraft.block.state.IBlockProperties;
+ 
++import org.fountainmc.world.block.WetBlockState;
++
+ public interface IBlockState extends IBlockBehaviors, IBlockProperties {
+    Collection<IProperty<?>> getPropertyNames();
+ 
+    <T extends Comparable<T>> T getValue(IProperty<T> var1);
+ 
+@@ -17,6 +19,8 @@
+    <T extends Comparable<T>> IBlockState cycleProperty(IProperty<T> var1);
+ 
+    ImmutableMap<IProperty<?>, Comparable<?>> getProperties();
+ 
+    Block getBlock();
++
++   public WetBlockState getFountainState(); // Fountain
+ }

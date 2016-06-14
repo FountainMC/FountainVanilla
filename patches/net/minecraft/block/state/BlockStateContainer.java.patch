@@ -1,6 +1,20 @@
 --- minecraft/src/net/minecraft/block/state/BlockStateContainer.java
 +++ src/main/java/net/minecraft/block/state/BlockStateContainer.java
-@@ -63,11 +63,11 @@
+@@ -40,10 +40,13 @@
+ import net.minecraft.util.math.RayTraceResult;
+ import net.minecraft.util.math.Vec3d;
+ import net.minecraft.world.IBlockAccess;
+ import net.minecraft.world.World;
+ 
++import org.fountainmc.WetServer;
++import org.fountainmc.world.block.WetBlockState;
++
+ public class BlockStateContainer {
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-z0-9_]+$");
+    private static final Function<IProperty<?>, String> GET_NAME_FUNC = new Function<IProperty<?>, String>() {
+       @Nullable
+       public String apply(@Nullable IProperty<?> var1) {
+@@ -63,11 +66,11 @@
           var3.put(var7.getName(), var7);
        }
  
@@ -13,7 +27,7 @@
           Map var9 = MapPopulator.createMap(this.properties.values(), var8);
           BlockStateContainer.a var10 = new BlockStateContainer.a(var1, ImmutableMap.copyOf(var9));
           var11.put(var9, var10);
-@@ -84,12 +84,12 @@
+@@ -84,12 +87,12 @@
     public static <T extends Comparable<T>> String validateProperty(Block var0, IProperty<T> var1) {
        String var2 = var1.getName();
        if(!NAME_PATTERN.matcher(var2).matches()) {
@@ -28,7 +42,27 @@
              }
           }
  
-@@ -186,14 +186,14 @@
+@@ -172,10 +175,19 @@
+ 
+       public Block getBlock() {
+          return this.block;
+       }
+ 
++      // Fountain start
++      private final WetBlockState fountainState = WetBlockState.createState(WetServer.getInstance(), this);
++
++      @Override
++      public WetBlockState getFountainState() {
++         return fountainState;
++      }
++      // Fountain end
++
+       public boolean equals(Object var1) {
+          return this == var1;
+       }
+ 
+       public int hashCode() {
+@@ -186,14 +198,14 @@
           if(this.propertyValueTable != null) {
              throw new IllegalStateException();
           } else {

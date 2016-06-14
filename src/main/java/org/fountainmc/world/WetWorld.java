@@ -1,27 +1,39 @@
 package org.fountainmc.world;
 
-import org.fountainmc.api.world.World;
-import org.fountainmc.api.world.BlockPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import org.fountainmc.AsyncCatcher;
+import org.fountainmc.WetServer;
 import org.fountainmc.api.world.Chunk;
+import org.fountainmc.world.block.WetBlockState;
 
-public class WetWorld implements World {
+import static com.google.common.base.Preconditions.*;
 
-    private net.minecraft.world.World world;
-    
-    public WetWorld(net.minecraft.world.World world) {
-        this.world = world;
+public class WetWorld implements org.fountainmc.api.world.World {
+    private final WetServer server;
+    private World world;
+
+    public WetWorld(WetServer server, World world) {
+        this.server = checkNotNull(server, "Null server");
+        this.world = checkNotNull(world, "Null world");
     }
 
-    @Override public String getName() {
-        return "world";
+    @Override
+    public String getName() {
+        return world.getWorldInfo().getWorldName();
     }
 
-    @Override public Chunk getChunk(int x, int y) {
-        return new WetChunk(world.getChunkFromChunkCoords(x, y));
+    @Override
+    public Chunk getChunk(int x, int y) {
+        AsyncCatcher.checkAsyncOp("chunk access");
+        return new WetChunk(this, world.getChunkFromChunkCoords(x, y));
     }
 
-    @Override public BlockPosition getBlockAt(int x, int y, int z) {
-        return new BlockPosition(this, x, y, z);
+    @Override
+    public WetBlockState getBlockAt(int x, int y, int z) {
+        AsyncCatcher.checkAsyncOp("block access");
+        return world.getBlockState(new BlockPos(x, y, z)).getFountainState();
     }
 
 }
