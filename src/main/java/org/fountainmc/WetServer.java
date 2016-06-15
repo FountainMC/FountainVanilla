@@ -3,7 +3,10 @@ package org.fountainmc;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.UUID;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -14,6 +17,11 @@ import org.fountainmc.api.command.CommandManager;
 import org.fountainmc.api.plugin.PluginManager;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -24,9 +32,33 @@ public class WetServer implements Server {
     private final PluginManager pluginManager;
     private final ImmutableList<String> launchArguments;
 
+    public static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .setLenient()
+            .registerTypeAdapter(UUID.class, new TypeAdapter<UUID>() {
+                @Override
+                public void write(JsonWriter out, UUID value) throws IOException {
+                    out.value(value.toString());
+                }
+
+                @Override
+                public UUID read(JsonReader in) throws IOException {
+                    return UUID.fromString(in.nextString());
+                }
+            })
+            .create();
+    public static final String VERSION = "1.9.4-alpha1-SNAPSHOT";
+
     public WetServer(String[] args) {
         pluginManager = new PluginManager();
         this.launchArguments = ImmutableList.copyOf(args);
+        try {
+            FountainConfig.load(new File("fountain.json"));
+        } catch (IOException e) {
+            System.err.println("Couldn't load fountain.json!");
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @Override

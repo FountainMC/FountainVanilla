@@ -1,5 +1,8 @@
 package org.fountainmc;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.apache.logging.log4j.LogManager;
 import net.minecraft.server.MinecraftServer;
 import org.fountainmc.api.Fountain;
