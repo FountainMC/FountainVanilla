@@ -16,7 +16,7 @@ os.makedirs("minecraft/bin")
 vanillaJar=path.join("minecraft", minecraft_version + ".jar")
 if not path.exists(vanillaJar):
     print("Downloading", minecraft_version)
-    urlretrieve("https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar".format(minecraft_version), )
+    urlretrieve("https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar".format(minecraft_version), "minecraft/" + minecraft_version + ".jar")
 
 print("Applying mappings...")
 run(["java", "-XX:+UseG1GC", "-jar", "lib/SpecialSource.jar", "map", "-i", "minecraft/{}.jar".format(minecraft_version), "-m", "mappings/obf2mcp.srg", "-o", "minecraft/{0}-mapped.jar".format(minecraft_version)], check=True, stdout=DEVNULL)
