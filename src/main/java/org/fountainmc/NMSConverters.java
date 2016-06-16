@@ -32,8 +32,4 @@ public class NMSConverters {
     public static EnumFacing fromFountainDirection(Direction facing) {
         return DIRECTIONS_BY_FOUNTAIN.get(checkNotNull(facing, "Null facing"));
     }
-
-    public static Location toFountainLocation(World world, BlockPos blockPos) {
-        return new Location(new WetWorld(WetServer.getInstance(), world), blockPos.getX(), blockPos.getY(), blockPos.getZ());
-    }
 }

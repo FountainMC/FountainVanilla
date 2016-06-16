@@ -35,7 +35,9 @@
        this.theCalendar = Calendar.getInstance();
        this.worldScoreboard = new Scoreboard();
        this.spawnHostileMobs = true;
-@@ -1982,27 +1992,27 @@
+       this.spawnPeacefulMobs = true;
+       this.lightUpdateBlockList = new int['\u8000'];
+@@ -1982,27 +1993,27 @@
  
        return var4;
     }

@@ -1,0 +1,33 @@
+--- minecraft/src/net/minecraft/entity/player/EntityPlayerMP.java
++++ src/main/java/net/minecraft/entity/player/EntityPlayerMP.java
+@@ -103,10 +103,12 @@
+ import net.minecraft.world.WorldSettings;
+ import net.minecraft.world.biome.Biome;
+ import net.minecraft.world.storage.loot.ILootContainer;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
++import org.fountainmc.entity.WetEntity;
++import org.fountainmc.entity.WetEntityPlayer;
+ 
+ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private String language = "en_US";
+    public NetHandlerPlayServer connection;
+@@ -135,10 +137,17 @@
+    private int currentWindowId;
+    public boolean isChangingQuantityOnly;
+    public int ping;
+    public boolean playerConqueredTheEnd;
+ 
++   // Fountain start
++   @Override
++   public WetEntityPlayer getFountainEntity() {
++      return (WetEntityPlayer) super.getFountainEntity();
++   }
++   // Fountain end
++
+    public EntityPlayerMP(MinecraftServer var1, WorldServer var2, GameProfile var3, PlayerInteractionManager var4) {
+       super(var2, var3);
+       var4.thisPlayerMP = this;
+       this.interactionManager = var4;
+       BlockPos var5 = var2.getSpawnPoint();

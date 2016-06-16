@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/entity/EntityTrackerEntry.java
++++ src/main/java/net/minecraft/entity/EntityTrackerEntry.java
+@@ -311,10 +311,11 @@
+ 
+    public void updatePlayerEntity(EntityPlayerMP var1) {
+       if(var1 != this.trackedEntity) {
+          if(this.isVisibleTo(var1)) {
+             if(!this.trackingPlayers.contains(var1) && (this.isPlayerWatchingThisChunk(var1) || this.trackedEntity.forceSpawn)) {
++               if (!((EntityPlayerMP) trackedEntity).getFountainEntity().canSee(var1)) return; // Fountain - do nothing if we can't see the entity
+                this.trackingPlayers.add(var1);
+                Packet var2 = this.createSpawnPacket();
+                var1.connection.sendPacket(var2);
+                if(!this.trackedEntity.getDataManager().isEmpty()) {
+                   var1.connection.sendPacket(new SPacketEntityMetadata(this.trackedEntity.getEntityId(), this.trackedEntity.getDataManager(), true));

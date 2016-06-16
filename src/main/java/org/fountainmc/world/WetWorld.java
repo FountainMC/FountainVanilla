@@ -1,5 +1,7 @@
 package org.fountainmc.world;
 
+import lombok.*;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.fountainmc.AsyncCatcher;
@@ -12,8 +14,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WetWorld implements org.fountainmc.api.world.World {
 
+    @Getter
     private final WetServer server;
-    private World world;
+    private final World world;
+
+    @NonNull
+    public World getHandle() {
+        return world;
+    }
 
     public WetWorld(WetServer server, World world) {
         this.server = checkNotNull(server, "Null server");
@@ -42,4 +50,8 @@ public class WetWorld implements org.fountainmc.api.world.World {
         world.setBlockState(new BlockPos(x, y, z), ((WetBlockState) state).getHandle());
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

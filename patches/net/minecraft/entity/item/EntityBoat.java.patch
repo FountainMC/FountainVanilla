@@ -1,0 +1,19 @@
+--- minecraft/src/net/minecraft/entity/item/EntityBoat.java
++++ src/main/java/net/minecraft/entity/item/EntityBoat.java
+@@ -653,12 +653,14 @@
+ 
+    public EntityBoat.b getBoatType() {
+       return EntityBoat.b.byId(((Integer)this.dataManager.get(BOAT_TYPE)).intValue());
+    }
+ 
+-   protected boolean canFitPassenger(Entity var1) {
+-      return this.getPassengers().size() < 2;
++   // Fountain start - override getMaxPassengers instead of canFitPassenger
++   public int getMaxPassengers() {
++      return 2;
++      // Fountain end
+    }
+ 
+    @Nullable
+    public Entity getControllingPassenger() {
+       List var1 = this.getPassengers();

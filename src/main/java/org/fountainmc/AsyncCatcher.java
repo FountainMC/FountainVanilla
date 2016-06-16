@@ -16,7 +16,7 @@ public class AsyncCatcher {
     }
 
     private static String illegalAsyncOpMessage(String reason) {
-        return "A plugin tried to do " + checkNotNull(reason, "Null reason") + " asynchronously!";
+        return "A plugin tried to " + checkNotNull(reason, "Null reason") + " asynchronously!";
     }
 
 }

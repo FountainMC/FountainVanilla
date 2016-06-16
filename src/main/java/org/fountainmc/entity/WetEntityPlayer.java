@@ -1,52 +1,89 @@
 package org.fountainmc.entity;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
-
+import java.util.WeakHashMap;
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityTrackerEntry;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.SPacketPlayerListItem;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.WorldServer;
+import net.techcable.pineapple.collect.ImmutableSets;
+
 import org.fountainmc.api.entity.EntityType;
 import org.fountainmc.api.entity.Player;
 
-public class WetEntityPlayer extends WetLivingEntity implements Player {
+import static com.google.common.base.Preconditions.*;
 
-    ArrayList<org.fountainmc.api.entity.Entity> hiddenEntities = new ArrayList<org.fountainmc.api.entity.Entity>();
+@ParametersAreNonnullByDefault
+public class WetEntityPlayer extends WetEntityLiving implements Player {
 
-    protected final EntityPlayerMP entityPlayerMP = (EntityPlayerMP) handle;
-
-    public WetEntityPlayer(Entity handle) {
+    public WetEntityPlayer(EntityPlayerMP handle) {
         super(handle);
+    }
+
+    public EntityPlayerMP getHandle() {
+        return (EntityPlayerMP) super.getHandle();
     }
 
     @Nonnull
     @Override
     public String getName() {
-        return entityPlayerMP.getName();
+        return getHandle().getName();
     }
 
     @Nonnull
     @Override
     public UUID getUUID() {
-        return entityPlayerMP.getUniqueID();
+        return getHandle().getUniqueID();
     }
 
     @Override
     public void sendMessage(String s) {
-        entityPlayerMP.addChatMessage(new TextComponentString(s));
+        getHandle().addChatMessage(new TextComponentString(s));
+    }
+
+    private final Set<Entity> hiddenEntities = Collections.newSetFromMap(new WeakHashMap<>()); // Weak hash map for no memory leaks
+
+    @Override
+    public void hide(org.fountainmc.api.entity.Entity fountainToHide) {
+        Entity toHide = ((WetEntity) checkNotNull(fountainToHide, "Null entity")).getHandle();
+        checkArgument(!toHide.equals(getHandle()), "Cant hide player %s from itself!", this);
+        if (isConnected() && hiddenEntities.add(toHide) && getHandle().worldObj.equals(toHide.worldObj)) {
+            EntityTrackerEntry trackerEntry = ((WorldServer) getHandle().worldObj).theEntityTracker.getTrackerEntry(toHide);
+            if (trackerEntry != null) {
+                trackerEntry.removeTrackedPlayerSymmetric(this.getHandle());
+                if (toHide instanceof Player) {
+                    ((EntityPlayerMP) toHide).connection.sendPacket(new SPacketPlayerListItem(SPacketPlayerListItem.a.REMOVE_PLAYER, (EntityPlayerMP) toHide));
+                }
+            }
+        }
     }
 
     @Override
-    public void hide(org.fountainmc.api.entity.Entity entity) {
-        hiddenEntities.add(entity);
+    public boolean canSee(org.fountainmc.api.entity.Entity entity) {
+        return this.canSee(((WetEntity) entity).getHandle());
+    }
+
+    public boolean canSee(Entity entity) {
+        return hiddenEntities.contains(checkNotNull(entity, "Null entity"));
     }
 
     @Override
-    public ImmutableList<? extends org.fountainmc.api.entity.Entity> getHiddenEntities() {
-        return (ImmutableList<? extends org.fountainmc.api.entity.Entity>) ImmutableList.of(hiddenEntities);
+    public ImmutableSet<WetEntity> getHiddenEntities() {
+        return ImmutableSets.transform(hiddenEntities, Entity::getFountainEntity);
+    }
+
+    @Override
+    public boolean isConnected() {
+        return getHandle().connection != null;
     }
 
     @Override
