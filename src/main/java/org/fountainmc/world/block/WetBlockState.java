@@ -35,8 +35,7 @@ public class WetBlockState implements BlockState {
     private final WetServer server;
     @Getter private final IBlockState handle;
 
-    @Getter(lazy = true) private static final ImmutableMap<Block, BiFunction<WetServer, IBlockState, ? extends WetBlockState>> factories =
-            scanClasspath();
+    @Getter private static ImmutableMap<Block, BiFunction<WetServer, IBlockState, ? extends WetBlockState>> factories;
 
     @SneakyThrows(IllegalAccessException.class)
     private static ImmutableMap<Block, BiFunction<WetServer, IBlockState, ? extends WetBlockState>> scanClasspath() {
@@ -47,8 +46,6 @@ public class WetBlockState implements BlockState {
             for (Class<?> type : types) {
                 Verify.verify(WetBlockState.class.isAssignableFrom(type), "Class %s isn't instanceof WetBlockState", type.getTypeName());
                 for (String blockName : ImmutableList.copyOf(type.getAnnotation(BlockStateImpl.class).value())) {
-                    System.out.println(Block.getBlockFromName("minecraft:chest"));
-                    System.out.println(Block.getBlockFromName("minecraft:"+blockName));
                     Block block = Verify.verifyNotNull(Block.getBlockFromName(blockName),
                             "Class %s specified unknown block name minecraft:%s.", type.getTypeName(), blockName);
                     final MethodHandle constructorHandle;
@@ -76,6 +73,10 @@ public class WetBlockState implements BlockState {
                 .addUrls(ClasspathHelper.forPackage(packageName))
                 .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(packageName + ".")))
                 .setScanners(new TypeElementsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
+    }
+    
+    public static void createFactories() {
+        factories = scanClasspath();
     }
 
     public static WetBlockState createState(WetServer server, IBlockState handle) {

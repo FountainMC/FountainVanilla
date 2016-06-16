@@ -1,6 +1,6 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java
 +++ src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -80,10 +80,13 @@
+@@ -80,10 +80,14 @@
  import net.minecraft.world.storage.ISaveHandler;
  import net.minecraft.world.storage.WorldInfo;
  import org.apache.commons.lang3.Validate;
@@ -9,12 +9,13 @@
 +import org.fountainmc.api.Blocks;
 +import org.fountainmc.api.Fountain;
 +import org.fountainmc.api.event.server.ServerStartEvent;
++import org.fountainmc.world.block.WetBlockState;
  
  public abstract class MinecraftServer implements Runnable, ICommandSender, IThreadListener, ISnooperInfo {
     private static final Logger LOG = LogManager.getLogger();
     public static final File USER_CACHE_FILE = new File("usercache.json");
     private final ISaveFormat anvilConverterForAnvilFile;
-@@ -135,10 +138,16 @@
+@@ -135,10 +139,16 @@
     private long nanoTimeSinceStatusRefresh = 0L;
     protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
     private Thread serverThread;
@@ -31,7 +32,7 @@
        this.authService = var4;
        this.sessionService = var5;
        this.profileRepo = var6;
-@@ -243,14 +252,10 @@
+@@ -243,14 +253,10 @@
        this.setDifficultyForAllWorlds(this.getDifficulty());
        this.initialWorldChunkLoad();
     }
@@ -46,7 +47,7 @@
        byte var6 = 0;
        LOG.info("Preparing start region for level " + var6);
        WorldServer var7 = this.worldServers[var6];
-@@ -322,10 +327,12 @@
+@@ -322,10 +328,12 @@
        }
  
     }
@@ -59,7 +60,7 @@
           this.getNetworkSystem().terminateEndpoints();
        }
  
-@@ -532,11 +539,11 @@
+@@ -532,11 +540,11 @@
  
     public void updateTimeLightAndEntities() {
        this.theProfiler.startSection("jobs");
@@ -72,7 +73,7 @@
  
        this.theProfiler.endStartSection("levels");
  
-@@ -602,11 +609,11 @@
+@@ -602,11 +610,11 @@
  
     public static void main(String[] var0) {
        Bootstrap.register();
@@ -85,7 +86,7 @@
           String var4 = null;
           boolean var5 = false;
           boolean var6 = false;
-@@ -614,11 +621,11 @@
+@@ -614,11 +622,11 @@
  
           for(int var8 = 0; var8 < var0.length; ++var8) {
              String var9 = var0[var8];
@@ -98,13 +99,14 @@
  
                    try {
                       var7 = Integer.parseInt(var10);
-@@ -676,15 +683,22 @@
+@@ -676,15 +684,23 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();
           }
  
           var12.startServerThread();
 +         // Fountain start
++         WetBlockState.createFactories();
 +         Blocks.registerBlocks();
 +         LogManager.getLogger().info("Loading plugins...");
 +         Fountain.getServer().getPluginManager().loadPlugins(new File("plugins"));
@@ -121,7 +123,7 @@
        }
  
     }
-@@ -744,11 +758,11 @@
+@@ -744,11 +760,11 @@
        }
  
     }
@@ -134,7 +136,7 @@
     public CrashReport addServerInfoToCrashReport(CrashReport var1) {
        var1.getCategory().setDetail("Profiler Position", new ICrashReportDetail<String>() {
           public String call() throws Exception {
-@@ -765,11 +779,11 @@
+@@ -765,11 +781,11 @@
  
        return var1;
     }
@@ -147,7 +149,7 @@
           var2 = var2.substring(1);
        }
  
-@@ -784,11 +798,11 @@
+@@ -784,11 +800,11 @@
           }
  
           return var5;
@@ -160,7 +162,7 @@
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
-@@ -1160,11 +1174,11 @@
+@@ -1160,11 +1176,11 @@
     }
  
     public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
