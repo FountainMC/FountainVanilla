@@ -6,20 +6,12 @@ from urllib.request import urlretrieve
 import re
 from subprocess import run, PIPE
 
+
+minecraft_version="1.9.4"
+jdiff_jar=path.join("work", "JDiff.jar")
+
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
-
-minecraft_version=None
-# Parse decompile.sh for minecraft version
-with open(path.join(path.dirname(__file__), "decompile.sh"), "rt") as decompileScript:
-    versionPattern = re.compile("minecraftVersion=\"([\d\.]+)\"")
-    for line in decompileScript.readlines():
-        match = versionPattern.match(line)
-        if match:
-            minecraft_version=match.group(1)
-            break
-
-jdiff_jar=path.join("work", "JDiff.jar")
 
 def setup():
     if not path.exists("work"): os.mkdir("work")

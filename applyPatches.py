@@ -30,9 +30,4 @@ print("Applying patches")
 if len(os.listdir("patches")) == 0:
     exit()
 
-# Safety first
-if os.listdir("patches") != ["net"] or os.listdir("patches/net") != ["minecraft"]:
-    eprint("Found more than just minecraft patches!")
-    exit(1)
-
 core.runJDiff("patch", "patches", "minecraft/src", "src/main/java")
