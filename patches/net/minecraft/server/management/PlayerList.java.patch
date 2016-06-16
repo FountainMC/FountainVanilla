@@ -22,7 +22,7 @@
 -      for(int var1 = 0; var1 < this.playerEntityList.size(); ++var1) {
 -         ((EntityPlayerMP)this.playerEntityList.get(var1)).connection.kickPlayerFromServer("Server closed");
 +      // Fountain start
-+      for(EntityPlayerMP player : java.util.Collections.unmodifiableList(playerEntityList)) {
++      for(EntityPlayerMP player : com.google.common.collect.ImmutableList.copyOf(playerEntityList)) {
 +         player.connection.kickPlayerFromServer(org.fountainmc.FountainConfig.getInstance().getServerClosedMessage());
        }
 +      // Fountain end

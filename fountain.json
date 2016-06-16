@@ -1,0 +1,6 @@
+// This is the Fountain configuration file.
+// In here, you can optimize and customize your server.
+
+{
+    "serverClosedMessage": "Server Closed"
+}

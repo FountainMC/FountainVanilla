@@ -55,7 +55,6 @@ public class FountainConfig extends Metrics {
         } else {
             config = new FountainConfig();
         }
-        WetServer.GSON.toJson(config, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(configFile), Charsets.UTF_8)));
         instance = config;
         return config;
     }
