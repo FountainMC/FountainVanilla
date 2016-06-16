@@ -42,19 +42,14 @@
              }
           }
  
-@@ -172,10 +175,19 @@
+@@ -172,10 +175,14 @@
  
        public Block getBlock() {
           return this.block;
        }
  
 +      // Fountain start
-+      private final WetBlockState fountainState = WetBlockState.createState(WetServer.getInstance(), this);
-+
-+      @Override
-+      public WetBlockState getFountainState() {
-+         return fountainState;
-+      }
++      @lombok.Getter(lazy=true) private final WetBlockState fountainState = WetBlockState.createState(WetServer.getInstance(), this);
 +      // Fountain end
 +
        public boolean equals(Object var1) {
@@ -62,7 +57,7 @@
        }
  
        public int hashCode() {
-@@ -186,14 +198,14 @@
+@@ -186,14 +193,14 @@
           if(this.propertyValueTable != null) {
              throw new IllegalStateException();
           } else {

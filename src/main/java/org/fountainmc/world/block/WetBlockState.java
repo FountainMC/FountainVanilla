@@ -3,6 +3,7 @@ package org.fountainmc.world.block;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 import javax.annotation.Nonnull;
@@ -20,6 +21,12 @@ import org.fountainmc.WetServer;
 import org.fountainmc.api.BlockType;
 import org.fountainmc.api.world.block.BlockState;
 import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.scanners.TypeElementsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,28 +41,41 @@ public class WetBlockState implements BlockState {
     @SneakyThrows(IllegalAccessException.class)
     private static ImmutableMap<Block, BiFunction<WetServer, IBlockState, ? extends WetBlockState>> scanClasspath() {
         ImmutableMap.Builder<Block, BiFunction<WetServer, IBlockState, ? extends WetBlockState>> builder = ImmutableMap.builder();
-        for (Class<?> type : Reflections.collect("org.fountainmc.world.block", (s) -> true).getTypesAnnotatedWith(BlockStateImpl.class)) {
-            Verify.verify(type.isAssignableFrom(WetBlockState.class), "Class %s isn't instanceof WetBlockState", type.getTypeName());
-            for (String blockName : ImmutableList.copyOf(type.getAnnotation(BlockStateImpl.class).value())) {
-                Block block = Verify.verifyNotNull(Block.getBlockFromName("minecraft:" + blockName),
-                        "Class %s specified unknown block name minecraft:%s.", type.getTypeName(), blockName);
-                final MethodHandle constructorHandle;
-                try {
-                    constructorHandle =
-                            MethodHandles.publicLookup().findConstructor(type, MethodType.methodType(type, WetServer.class, IBlockState.class));
-                } catch (NoSuchMethodException e) {
-                    throw new VerifyException("Can't find constructor for " + type.getTypeName());
-                }
-                builder.put(block, (server, state) -> {
+        Reflections reflections = new Reflections(getReflectionsConfiguration("org.fountainmc.world.block"));
+        Set<Class<?>> types = reflections.getTypesAnnotatedWith(BlockStateImpl.class);
+        if (types != null) {
+            for (Class<?> type : types) {
+                Verify.verify(WetBlockState.class.isAssignableFrom(type), "Class %s isn't instanceof WetBlockState", type.getTypeName());
+                for (String blockName : ImmutableList.copyOf(type.getAnnotation(BlockStateImpl.class).value())) {
+                    System.out.println(Block.getBlockFromName("minecraft:chest"));
+                    System.out.println(Block.getBlockFromName("minecraft:"+blockName));
+                    Block block = Verify.verifyNotNull(Block.getBlockFromName(blockName),
+                            "Class %s specified unknown block name minecraft:%s.", type.getTypeName(), blockName);
+                    final MethodHandle constructorHandle;
                     try {
-                        return (WetBlockState) constructorHandle.invoke(server, state);
-                    } catch (Throwable throwable) {
-                        throw SneakyThrow.sneakyThrow(throwable);
+                        constructorHandle =
+                                MethodHandles.publicLookup().findConstructor(type, MethodType.methodType(type, WetServer.class, IBlockState.class));
+                    } catch (NoSuchMethodException e) {
+                        throw new VerifyException("Can't find constructor for " + type.getTypeName());
                     }
-                });
+                    builder.put(block, (server, state) -> {
+                        try {
+                            return (WetBlockState) constructorHandle.invoke(server, state);
+                        } catch (Throwable throwable) {
+                            throw SneakyThrow.sneakyThrow(throwable);
+                        }
+                    });
+                }
             }
         }
         return builder.build();
+    }
+
+    public static ConfigurationBuilder getReflectionsConfiguration(String packageName) {
+        return new ConfigurationBuilder()
+                .addUrls(ClasspathHelper.forPackage(packageName))
+                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(packageName + ".")))
+                .setScanners(new TypeElementsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
     }
 
     public static WetBlockState createState(WetServer server, IBlockState handle) {

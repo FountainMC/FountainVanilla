@@ -72,6 +72,32 @@
  
        this.theProfiler.endStartSection("levels");
  
+@@ -602,11 +609,11 @@
+ 
+    public static void main(String[] var0) {
+       Bootstrap.register();
+ 
+       try {
+-         boolean var1 = true;
++         boolean var1 = false;
+          String var2 = null;
+          String var3 = ".";
+          String var4 = null;
+          boolean var5 = false;
+          boolean var6 = false;
+@@ -614,11 +621,11 @@
+ 
+          for(int var8 = 0; var8 < var0.length; ++var8) {
+             String var9 = var0[var8];
+             String var10 = var8 == var0.length - 1?null:var0[var8 + 1];
+             boolean var11 = false;
+-            if(!var9.equals("nogui") && !var9.equals("--nogui")) {
++            if(var9.equals("gui") && var9.equals("nogui")) {
+                if(var9.equals("--port") && var10 != null) {
+                   var11 = true;
+ 
+                   try {
+                      var7 = Integer.parseInt(var10);
 @@ -676,15 +683,22 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();

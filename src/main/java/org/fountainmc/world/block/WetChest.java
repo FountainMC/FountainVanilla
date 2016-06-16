@@ -12,6 +12,7 @@ import static com.google.common.base.Preconditions.*;
 
 @BlockStateImpl("chest")
 public class WetChest extends WetBlockState implements Chest {
+
     public WetChest(WetServer server, IBlockState handle) {
         super(server, handle);
     }
@@ -26,4 +27,5 @@ public class WetChest extends WetBlockState implements Chest {
         checkArgument(!checkNotNull(direction, "Null direction").isVertical(), "Direction %s is vertical");
         return (WetChest) getHandle().withProperty(BlockChest.FACING, NMSConverters.fromFountainDirection(direction)).getFountainState();
     }
+
 }
