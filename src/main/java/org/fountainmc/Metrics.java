@@ -135,11 +135,13 @@ public abstract class Metrics {
     public abstract int getPlayersOnline();
 
     /**
-     * Construct and create a Graph that can be used to separate specific plotters to their own graphs on the metrics
-     * website. Plotters can be added to the graph object returned.
+     * Construct and create a Graph that can be used to separate specific
+     * plotters to their own graphs on the metrics website. Plotters can be
+     * added to the graph object returned.
      *
      * @param name The name of the graph
-     * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
+     * @return Graph object created. Will never return NULL under normal
+     *         circumstances unless bad parameters are given
      */
     public Graph createGraph(final String name) {
         if (name == null) {
@@ -157,7 +159,8 @@ public abstract class Metrics {
     }
 
     /**
-     * Add a Graph object to SpoutMetrics that represents data for the plugin that should be sent to the backend
+     * Add a Graph object to SpoutMetrics that represents data for the plugin
+     * that should be sent to the backend
      *
      * @param graph The name of the graph
      */
@@ -170,9 +173,10 @@ public abstract class Metrics {
     }
 
     /**
-     * Start measuring statistics. This will immediately create an async repeating task as the plugin and send the
-     * initial data to the metrics backend, and then after that it will post in increments of PING_INTERVAL * 1200
-     * ticks.
+     * Start measuring statistics. This will immediately create an async
+     * repeating task as the plugin and send the initial data to the metrics
+     * backend, and then after that it will post in increments of PING_INTERVAL
+     * * 1200 ticks.
      *
      * @return True if statistics measuring is running, otherwise false.
      */
@@ -198,27 +202,35 @@ public abstract class Metrics {
                     while (thread != null) {
                         if (nextPost == 0L || System.currentTimeMillis() > nextPost) {
                             try {
-                                // This has to be synchronized or it can collide with the disable method.
+                                // This has to be synchronized or it can collide
+                                // with the disable method.
                                 synchronized (optOutLock) {
-                                    // Disable Task, if it is running and the server owner decided to opt-out
+                                    // Disable Task, if it is running and the
+                                    // server owner decided to opt-out
                                     if (isOptOut() && thread != null) {
                                         Thread temp = thread;
                                         thread = null;
-                                        // Tell all plotters to stop gathering information.
+                                        // Tell all plotters to stop gathering
+                                        // information.
                                         for (Graph graph : graphs) {
                                             graph.onOptOut();
                                         }
-                                        temp.interrupt(); // interrupting ourselves
+                                        temp.interrupt(); // interrupting
+                                                          // ourselves
                                         return;
                                     }
                                 }
 
-                                // We use the inverse of firstPost because if it is the first time we are posting,
-                                // it is not a interval ping, so it evaluates to FALSE
-                                // Each time thereafter it will evaluate to TRUE, i.e PING!
+                                // We use the inverse of firstPost because if it
+                                // is the first time we are posting,
+                                // it is not a interval ping, so it evaluates to
+                                // FALSE
+                                // Each time thereafter it will evaluate to
+                                // TRUE, i.e PING!
                                 postPlugin(!firstPost);
 
-                                // After the first post we set firstPost to false
+                                // After the first post we set firstPost to
+                                // false
                                 // Each post thereafter will be a ping
                                 firstPost = false;
                                 nextPost = System.currentTimeMillis() + (PING_INTERVAL * 60 * 1000);
@@ -260,13 +272,15 @@ public abstract class Metrics {
         String serverVersion = getFullServerVersion();
         int playersOnline = getPlayersOnline();
 
-        // END server software specific section -- all code below does not use any code outside of this class / Java
+        // END server software specific section -- all code below does not use
+        // any code outside of this class / Java
 
         // Construct the post data
         StringBuilder json = new StringBuilder(1024);
         json.append('{');
 
-        // The plugin's description file containg all of the plugin data such as name, version, author, etc
+        // The plugin's description file containg all of the plugin data such as
+        // name, version, author, etc
         appendJSONPair(json, "guid", guid);
         appendJSONPair(json, "plugin_version", pluginVersion);
         appendJSONPair(json, "server_version", serverVersion);
@@ -353,7 +367,6 @@ public abstract class Metrics {
             connection = url.openConnection();
         }
 
-
         byte[] uncompressed = json.toString().getBytes();
         byte[] compressed = gzip(json.toString());
 
@@ -368,7 +381,8 @@ public abstract class Metrics {
         connection.setDoOutput(true);
 
         if (debug) {
-            System.out.println("[Metrics] Prepared request for " + pluginName + " uncompressed=" + uncompressed.length + " compressed=" + compressed.length);
+            System.out.println(
+                    "[Metrics] Prepared request for " + pluginName + " uncompressed=" + uncompressed.length + " compressed=" + compressed.length);
         }
 
         // Write the data
@@ -426,17 +440,19 @@ public abstract class Metrics {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (gzos != null) try {
-                gzos.close();
-            } catch (IOException ignore) {
-            }
+            if (gzos != null)
+                try {
+                    gzos.close();
+                } catch (IOException ignore) {
+                }
         }
 
         return baos.toByteArray();
     }
 
     /**
-     * Check if mineshafter is present. If it is, we need to bypass it to send POST requests
+     * Check if mineshafter is present. If it is, we need to bypass it to send
+     * POST requests
      *
      * @return true if mineshafter is installed on the server
      */
@@ -545,8 +561,8 @@ public abstract class Metrics {
     public static class Graph {
 
         /**
-         * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is
-         * rejected
+         * The graph's name, alphanumeric and spaces only :) If it does not
+         * comply to the above when submitted, it is rejected
          */
         private final String name;
 
@@ -611,7 +627,8 @@ public abstract class Metrics {
         }
 
         /**
-         * Called when the server owner decides to opt-out of BukkitMetrics while the server is running.
+         * Called when the server owner decides to opt-out of BukkitMetrics
+         * while the server is running.
          */
         protected void onOptOut() {
         }
@@ -637,7 +654,8 @@ public abstract class Metrics {
         /**
          * Construct a plotter with a specific plot name
          *
-         * @param name the name of the plotter to use, which will show up on the website
+         * @param name the name of the plotter to use, which will show up on the
+         *        website
          */
         public Plotter(final String name) {
             this.name = name;
@@ -682,4 +700,5 @@ public abstract class Metrics {
             return plotter.name.equals(name) && plotter.getValue() == getValue();
         }
     }
+
 }

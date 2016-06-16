@@ -2,15 +2,15 @@ package org.fountainmc.world;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import org.fountainmc.AsyncCatcher;
 import org.fountainmc.WetServer;
 import org.fountainmc.api.world.Chunk;
 import org.fountainmc.world.block.WetBlockState;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WetWorld implements org.fountainmc.api.world.World {
+
     private final WetServer server;
     private World world;
 

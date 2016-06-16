@@ -1,8 +1,5 @@
 package org.fountainmc;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,25 +7,28 @@ import java.util.UUID;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.fountainmc.api.Fountain;
-import org.fountainmc.api.Material;
-import org.fountainmc.api.Server;
-import org.fountainmc.api.command.CommandManager;
-import org.fountainmc.api.plugin.PluginManager;
-
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
+import org.fountainmc.api.Fountain;
+import org.fountainmc.api.Material;
+import org.fountainmc.api.Server;
+import org.fountainmc.api.command.CommandManager;
+import org.fountainmc.api.entity.EntityType;
+import org.fountainmc.api.plugin.PluginManager;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @ParametersAreNonnullByDefault
 public class WetServer implements Server {
+
     private final PluginManager pluginManager;
     private final ImmutableList<String> launchArguments;
 
@@ -36,6 +36,7 @@ public class WetServer implements Server {
             .setPrettyPrinting()
             .setLenient()
             .registerTypeAdapter(UUID.class, new TypeAdapter<UUID>() {
+
                 @Override
                 public void write(JsonWriter out, UUID value) throws IOException {
                     out.value(value.toString());
@@ -137,4 +138,10 @@ public class WetServer implements Server {
     public static WetServer getInstance() {
         return (WetServer) Fountain.getServer();
     }
+
+    @Override
+    public EntityType<?> getEntityType(String name) {
+        return null;
+    }
+
 }

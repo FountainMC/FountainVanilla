@@ -1,17 +1,14 @@
 package org.fountainmc;
 
-import com.google.common.base.Preconditions;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
-
 import org.fountainmc.api.BlockType;
 import org.fountainmc.world.block.WetBlockState;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WetBlockType implements BlockType {
+
     private final WetServer server;
     private final Block block;
 
@@ -68,4 +65,5 @@ public class WetBlockType implements BlockType {
     public boolean isBlock() {
         return true;
     }
+
 }

@@ -1,10 +1,7 @@
 package org.fountainmc;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import org.apache.logging.log4j.LogManager;
 import net.minecraft.server.MinecraftServer;
+import org.apache.logging.log4j.LogManager;
 import org.fountainmc.api.Fountain;
 
 public class Main {
@@ -15,4 +12,5 @@ public class Main {
         Fountain.setServer(server);
         MinecraftServer.main(args);
     }
+
 }

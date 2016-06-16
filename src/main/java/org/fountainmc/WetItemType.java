@@ -1,15 +1,13 @@
 package org.fountainmc;
 
-import com.google.common.base.Verify;
-
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
-import static com.google.common.base.Preconditions.*;
-import static com.google.common.base.Verify.*;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Verify.verifyNotNull;
 
 public class WetItemType implements org.fountainmc.api.Material {
+
     private final WetServer server;
     private final Item item;
 
@@ -42,4 +40,5 @@ public class WetItemType implements org.fountainmc.api.Material {
     public boolean isVanilla() {
         return true;
     }
+
 }

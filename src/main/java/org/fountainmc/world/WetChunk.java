@@ -1,7 +1,6 @@
 package org.fountainmc.world;
 
 import net.minecraft.world.chunk.Chunk;
-
 import org.fountainmc.AsyncCatcher;
 import org.fountainmc.world.block.WetBlockState;
 
@@ -49,4 +48,5 @@ public class WetChunk implements org.fountainmc.api.world.Chunk {
     public String toString() {
         return getWorld().getName() + ":" + getX() + "," + getZ();
     }
+
 }
