@@ -164,6 +164,19 @@
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
+@@ -950,11 +970,11 @@
+       var1.addStatToSnooper("gui_supported", GraphicsEnvironment.isHeadless()?"headless":"supported");
+       var1.addStatToSnooper("dedicated", Boolean.valueOf(this.isDedicatedServer()));
+    }
+ 
+    public boolean isSnooperEnabled() {
+-      return true;
++      return org.fountainmc.FountainConfig.getInstance().isSnooperEnabled();
+    }
+ 
+    public abstract boolean isDedicatedServer();
+ 
+    public boolean isServerInOnlineMode() {
 @@ -1160,11 +1180,11 @@
     }
  

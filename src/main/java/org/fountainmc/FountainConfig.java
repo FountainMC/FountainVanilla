@@ -1,13 +1,10 @@
 package org.fountainmc;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +20,7 @@ public class FountainConfig extends Metrics {
 
     @Getter private transient static FountainConfig instance;
     @Getter @Expose private String serverClosedMessage = "Server Closed";
+    @Getter @Expose private boolean snooperEnabled = true;
 
     public FountainConfig() throws IOException {
         super("Fountain", WetServer.VERSION);

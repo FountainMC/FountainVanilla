@@ -2,5 +2,6 @@
 // In here, you can optimize and customize your server.
 
 {
-    "serverClosedMessage": "Server Closed"
+    "serverClosedMessage": "Server Closed",
+    "snooperEnabled": true
 }
