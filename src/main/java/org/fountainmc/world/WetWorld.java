@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 import org.fountainmc.AsyncCatcher;
 import org.fountainmc.WetServer;
 import org.fountainmc.api.world.Chunk;
+import org.fountainmc.api.world.block.BlockState;
 import org.fountainmc.world.block.WetBlockState;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -31,9 +32,14 @@ public class WetWorld implements org.fountainmc.api.world.World {
     }
 
     @Override
-    public WetBlockState getBlockAt(int x, int y, int z) {
+    public WetBlockState getBlock(int x, int y, int z) {
         AsyncCatcher.checkAsyncOp("block access");
         return world.getBlockState(new BlockPos(x, y, z)).getFountainState();
+    }
+
+    @Override
+    public void setBlock(int x, int y, int z, BlockState state) {
+        world.setBlockState(new BlockPos(x, y, z), ((WetBlockState) state).getHandle());
     }
 
 }
