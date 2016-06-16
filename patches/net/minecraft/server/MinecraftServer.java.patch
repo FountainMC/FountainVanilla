@@ -73,9 +73,16 @@
  
        this.theProfiler.endStartSection("levels");
  
-@@ -602,11 +610,11 @@
+@@ -599,14 +607,18 @@
+    public void registerTickable(ITickable var1) {
+       this.tickables.add(var1);
+    }
  
     public static void main(String[] var0) {
++      if (Fountain.getServer() == null) {
++          System.out.println("You ran the wrong class! You need to run org.fountainmc.Main");
++          return;
++      }
        Bootstrap.register();
  
        try {
@@ -86,7 +93,7 @@
           String var4 = null;
           boolean var5 = false;
           boolean var6 = false;
-@@ -614,11 +622,11 @@
+@@ -614,11 +626,11 @@
  
           for(int var8 = 0; var8 < var0.length; ++var8) {
              String var9 = var0[var8];
@@ -99,7 +106,7 @@
  
                    try {
                       var7 = Integer.parseInt(var10);
-@@ -676,10 +684,18 @@
+@@ -676,10 +688,18 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();
           }
@@ -118,7 +125,7 @@
                 var12.stopServer();
              }
           });
-@@ -744,11 +760,11 @@
+@@ -744,11 +764,11 @@
        }
  
     }
@@ -131,7 +138,7 @@
     public CrashReport addServerInfoToCrashReport(CrashReport var1) {
        var1.getCategory().setDetail("Profiler Position", new ICrashReportDetail<String>() {
           public String call() throws Exception {
-@@ -765,11 +781,11 @@
+@@ -765,11 +785,11 @@
  
        return var1;
     }
@@ -144,7 +151,7 @@
           var2 = var2.substring(1);
        }
  
-@@ -784,11 +800,11 @@
+@@ -784,11 +804,11 @@
           }
  
           return var5;
@@ -157,7 +164,7 @@
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
-@@ -1160,11 +1176,11 @@
+@@ -1160,11 +1180,11 @@
     }
  
     public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
