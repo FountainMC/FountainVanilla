@@ -14,7 +14,7 @@
     public EntityPlayerMP thisPlayerMP;
     private WorldSettings.a gameType = WorldSettings.a.NOT_SET;
     private boolean isDestroyingBlock;
-@@ -221,10 +224,19 @@
+@@ -221,10 +224,22 @@
                       return false;
                    }
                 }
@@ -25,6 +25,9 @@
 +            org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(event);
 +            if (event.isCancelled()) {
 +               thisPlayerMP.connection.sendPacket(new SPacketBlockChange(theWorld, var1));
++               TileEntity tileEntity = theWorld.getTileEntity(var1);
++               if (tileEntity != null)
++                   thisPlayerMP.connection.sendPacket(tileEntity.getUpdatePacket());
 +               return false;
 +            }
 +            // Fountain end
@@ -34,7 +37,7 @@
              if(this.isCreative()) {
                 this.thisPlayerMP.connection.sendPacket(new SPacketBlockChange(this.theWorld, var1));
              } else {
-@@ -254,11 +266,11 @@
+@@ -254,11 +269,11 @@
        } else if(var1.getCooldownTracker().hasCooldown(var3.getItem())) {
           return EnumActionResult.PASS;
        } else {
