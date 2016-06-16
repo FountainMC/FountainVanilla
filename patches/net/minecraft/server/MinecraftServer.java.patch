@@ -99,13 +99,14 @@
  
                    try {
                       var7 = Integer.parseInt(var10);
-@@ -676,15 +684,23 @@
+@@ -676,10 +684,18 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();
           }
  
           var12.startServerThread();
 +         // Fountain start
++         dedicatedServer = var12;
 +         WetBlockState.createFactories();
 +         Blocks.registerBlocks();
 +         LogManager.getLogger().info("Loading plugins...");
@@ -117,12 +118,6 @@
                 var12.stopServer();
              }
           });
-+         dedicatedServer = var12;
-       } catch (Exception var14) {
-          LOG.fatal("Failed to start the minecraft server", var14);
-       }
- 
-    }
 @@ -744,11 +760,11 @@
        }
  

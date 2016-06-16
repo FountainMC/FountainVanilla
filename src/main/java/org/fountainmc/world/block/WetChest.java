@@ -2,13 +2,13 @@ package org.fountainmc.world.block;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
-
 import org.fountainmc.NMSConverters;
 import org.fountainmc.WetServer;
 import org.fountainmc.api.Direction;
 import org.fountainmc.api.world.block.Chest;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @BlockStateImpl("chest")
 public class WetChest extends WetBlockState implements Chest {
