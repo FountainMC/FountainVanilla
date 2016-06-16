@@ -4,7 +4,11 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.fountainmc.api.Direction;
+import org.fountainmc.api.world.Location;
+import org.fountainmc.world.WetWorld;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,4 +33,7 @@ public class NMSConverters {
         return DIRECTIONS_BY_FOUNTAIN.get(checkNotNull(facing, "Null facing"));
     }
 
+    public static Location toFountainLocation(World world, BlockPos blockPos) {
+        return new Location(new WetWorld(WetServer.getInstance(), world), blockPos.getX(), blockPos.getY(), blockPos.getZ());
+    }
 }
