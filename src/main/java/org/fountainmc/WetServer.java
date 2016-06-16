@@ -52,14 +52,14 @@ public class WetServer implements Server {
 
     public WetServer(String[] args) {
         pluginManager = new PluginManager();
-        this.launchArguments = ImmutableList.copyOf(args);/*
+        this.launchArguments = ImmutableList.copyOf(args);
         try {
             FountainConfig.load(new File("fountain.json"));
         } catch (IOException e) {
             System.err.println("Couldn't load fountain.json!");
             e.printStackTrace();
             System.exit(1);
-        }*/
+        }
     }
 
     @Override

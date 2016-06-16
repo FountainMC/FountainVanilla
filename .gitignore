@@ -6,3 +6,26 @@ work
 .idea
 *.iml
 __pycache__
+
+.classpath
+.gradle/
+.project
+
+# Minecraft files
+banned-ips.json
+banned-players.json
+bin/
+build.gradle
+crash-reports/
+dependency-reduced-pom.xml
+eula.txt
+fountain.json
+log.txt
+logs/
+*.zip
+ops.json
+plugins/
+server.properties
+usercache.json
+whitelist.json
+world/
