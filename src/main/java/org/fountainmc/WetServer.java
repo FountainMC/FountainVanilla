@@ -123,6 +123,21 @@ public class WetServer implements Server {
     }
 
     @Override
+    public Material getMaterial(int id) {
+        Block block = Block.getBlockById(checkNotNull(id, "Null id"));
+        if (block == null) {
+            Item item = Item.getItemById(id);
+            if (item == null) {
+                throw new IllegalArgumentException("Unknown material id " + id);
+            } else {
+                return item.getFountainType();
+            }
+        } else {
+            return block.getFountainType();
+        }
+    }
+
+    @Override
     public WetBlockType getBlockType(String name) {
         Block block = Block.getBlockFromName(checkNotNull(name, "Null name"));
         checkArgument(block != null, "Unknown block name %s", name);
