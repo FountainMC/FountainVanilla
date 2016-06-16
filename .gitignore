@@ -19,7 +19,6 @@ build.gradle
 crash-reports/
 dependency-reduced-pom.xml
 eula.txt
-fountain.json
 log.txt
 logs/
 *.zip

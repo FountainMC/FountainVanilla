@@ -13,3 +13,21 @@
           EntityPlayerMP var5 = (EntityPlayerMP)this.playerEntityList.get(var4);
           if(var5.getUniqueID().equals(var2)) {
              var3.add(var5);
+@@ -802,13 +802,15 @@
+ 
+       var1.interactionManager.initializeGameType(var3.getWorldInfo().getGameType());
+    }
+ 
+    public void removeAllPlayers() {
+-      for(int var1 = 0; var1 < this.playerEntityList.size(); ++var1) {
+-         ((EntityPlayerMP)this.playerEntityList.get(var1)).connection.kickPlayerFromServer("Server closed");
++      // Fountain start
++      for(EntityPlayerMP player : java.util.Collections.unmodifiableList(playerEntityList)) {
++         player.connection.kickPlayerFromServer(org.fountainmc.FountainConfig.getInstance().getServerClosedMessage());
+       }
++      // Fountain end
+ 
+    }
+ 
+    public void sendChatMsgImpl(ITextComponent var1, boolean var2) {
+       this.mcServer.addChatMessage(var1);

@@ -33,6 +33,7 @@ public class WetServer implements Server {
     private final ImmutableList<String> launchArguments;
 
     public static final Gson GSON = new GsonBuilder()
+            .excludeFieldsWithoutExposeAnnotation()
             .setPrettyPrinting()
             .setLenient()
             .registerTypeAdapter(UUID.class, new TypeAdapter<UUID>() {
@@ -48,10 +49,11 @@ public class WetServer implements Server {
                 }
             })
             .create();
+
     public static final String VERSION = "1.9.4-alpha1-SNAPSHOT";
 
     public WetServer(String[] args) {
-        pluginManager = new PluginManager();
+        this.pluginManager = new PluginManager();
         this.launchArguments = ImmutableList.copyOf(args);
         try {
             FountainConfig.load(new File("fountain.json"));
