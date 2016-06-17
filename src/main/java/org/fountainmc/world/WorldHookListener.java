@@ -18,15 +18,15 @@ public class WorldHookListener implements IWorldEventListener {
 
     @Override
     public void onEntityAdded(Entity var1) {
-        WetServer.getInstance().getEventManager().fire(new EntitySpawnEvent(var1.getFountainEntity(), var1.getFountainEntity().getLocation()));
+        WetServer.getInstance().getEventManager()
+                .fire(EntitySpawnEvent.create(var1.getFountainEntity(), var1.getFountainEntity().getLocation()));
     }
 
     @Override
     public void onEntityRemoved(Entity var1) {
-        WetServer.getInstance().getEventManager().fire(new EntityRemovedEvent(var1.getFountainEntity(), var1.getFountainEntity().getLocation()));
+        WetServer.getInstance().getEventManager()
+                .fire(EntityRemovedEvent.create(var1.getFountainEntity(), var1.getFountainEntity().getLocation()));
     }
-
-    // No-ops
 
     @Override
     public void notifyBlockUpdate(World var1, BlockPos var2, IBlockState var3, IBlockState var4, int var5) {

@@ -1,6 +1,6 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java
 +++ src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -80,10 +80,15 @@
+@@ -80,10 +80,16 @@
  import net.minecraft.world.storage.ISaveHandler;
  import net.minecraft.world.storage.WorldInfo;
  import org.apache.commons.lang3.Validate;
@@ -9,6 +9,7 @@
 +import org.fountainmc.api.Blocks;
 +import org.fountainmc.api.Fountain;
 +import org.fountainmc.api.event.server.ServerStartEvent;
++import org.fountainmc.api.event.server.ServerStopEvent;
 +import org.fountainmc.plugin.WetPluginManager;
 +import org.fountainmc.world.block.WetBlockState;
  
@@ -16,7 +17,7 @@
     private static final Logger LOG = LogManager.getLogger();
     public static final File USER_CACHE_FILE = new File("usercache.json");
     private final ISaveFormat anvilConverterForAnvilFile;
-@@ -135,10 +140,16 @@
+@@ -135,10 +141,16 @@
     private long nanoTimeSinceStatusRefresh = 0L;
     protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
     private Thread serverThread;
@@ -33,7 +34,7 @@
        this.authService = var4;
        this.sessionService = var5;
        this.profileRepo = var6;
-@@ -243,14 +254,10 @@
+@@ -243,14 +255,10 @@
        this.setDifficultyForAllWorlds(this.getDifficulty());
        this.initialWorldChunkLoad();
     }
@@ -48,14 +49,13 @@
        byte var6 = 0;
        LOG.info("Preparing start region for level " + var6);
        WorldServer var7 = this.worldServers[var6];
-@@ -322,10 +329,12 @@
+@@ -322,10 +330,11 @@
        }
  
     }
  
     protected void stopServer() {
-+      Fountain.getServer().getEventManager()
-+              .fire(new org.fountainmc.api.event.server.ServerStopEvent());
++      Fountain.getServer().getEventManager().fire(ServerStopEvent.create(Fountain.getServer())); // Fountain - ServerStopEvent
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
@@ -119,7 +119,7 @@
 +         Blocks.registerBlocks();
 +         LogManager.getLogger().info("Loading plugins...");
 +         ((WetPluginManager)Fountain.getServer().getPluginManager()).loadPlugins(new File("plugins"));
-+         Fountain.getServer().getEventManager().fire(new ServerStartEvent(Fountain.getServer()));
++         Fountain.getServer().getEventManager().fire(ServerStartEvent.create(Fountain.getServer()));
 +         // Fountain end
           Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
              public void run() {
