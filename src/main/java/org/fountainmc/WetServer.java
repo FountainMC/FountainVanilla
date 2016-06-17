@@ -21,7 +21,10 @@ import org.fountainmc.api.Material;
 import org.fountainmc.api.Server;
 import org.fountainmc.api.command.CommandManager;
 import org.fountainmc.api.entity.EntityType;
+import org.fountainmc.api.event.EventManager;
 import org.fountainmc.api.plugin.PluginManager;
+import org.fountainmc.plugin.WetEventManager;
+import org.fountainmc.plugin.WetPluginManager;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -29,6 +32,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @ParametersAreNonnullByDefault
 public class WetServer implements Server {
 
+    private final EventManager eventManager;
     private final PluginManager pluginManager;
     private final ImmutableList<String> launchArguments;
 
@@ -47,13 +51,15 @@ public class WetServer implements Server {
                 public UUID read(JsonReader in) throws IOException {
                     return UUID.fromString(in.nextString());
                 }
+
             })
             .create();
 
     public static final String VERSION = "1.9.4-alpha1-SNAPSHOT";
 
     public WetServer(String[] args) {
-        this.pluginManager = new PluginManager();
+        this.eventManager = new WetEventManager();
+        this.pluginManager = new WetPluginManager();
         this.launchArguments = ImmutableList.copyOf(args);
         try {
             FountainConfig.load(new File("fountain.json"));
@@ -77,6 +83,11 @@ public class WetServer implements Server {
     @Override
     public String getMotd() {
         return MinecraftServer.getDedicatedServer().getMotd();
+    }
+
+    @Override
+    public EventManager getEventManager() {
+        return eventManager;
     }
 
     @Override

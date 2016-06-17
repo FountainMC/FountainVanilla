@@ -1,6 +1,6 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java
 +++ src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -80,10 +80,14 @@
+@@ -80,10 +80,15 @@
  import net.minecraft.world.storage.ISaveHandler;
  import net.minecraft.world.storage.WorldInfo;
  import org.apache.commons.lang3.Validate;
@@ -9,13 +9,14 @@
 +import org.fountainmc.api.Blocks;
 +import org.fountainmc.api.Fountain;
 +import org.fountainmc.api.event.server.ServerStartEvent;
++import org.fountainmc.plugin.WetPluginManager;
 +import org.fountainmc.world.block.WetBlockState;
  
  public abstract class MinecraftServer implements Runnable, ICommandSender, IThreadListener, ISnooperInfo {
     private static final Logger LOG = LogManager.getLogger();
     public static final File USER_CACHE_FILE = new File("usercache.json");
     private final ISaveFormat anvilConverterForAnvilFile;
-@@ -135,10 +139,16 @@
+@@ -135,10 +140,16 @@
     private long nanoTimeSinceStatusRefresh = 0L;
     protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
     private Thread serverThread;
@@ -32,7 +33,7 @@
        this.authService = var4;
        this.sessionService = var5;
        this.profileRepo = var6;
-@@ -243,14 +253,10 @@
+@@ -243,14 +254,10 @@
        this.setDifficultyForAllWorlds(this.getDifficulty());
        this.initialWorldChunkLoad();
     }
@@ -47,20 +48,20 @@
        byte var6 = 0;
        LOG.info("Preparing start region for level " + var6);
        WorldServer var7 = this.worldServers[var6];
-@@ -322,10 +328,12 @@
+@@ -322,10 +329,12 @@
        }
  
     }
  
     protected void stopServer() {
-+      Fountain.getServer().getPluginManager()
-+              .fireEvent(new org.fountainmc.api.event.server.ServerStopEvent());
++      Fountain.getServer().getEventManager()
++              .fire(new org.fountainmc.api.event.server.ServerStopEvent());
        LOG.info("Stopping server");
        if(this.getNetworkSystem() != null) {
           this.getNetworkSystem().terminateEndpoints();
        }
  
-@@ -532,11 +540,11 @@
+@@ -532,11 +541,11 @@
  
     public void updateTimeLightAndEntities() {
        this.theProfiler.startSection("jobs");
@@ -73,7 +74,7 @@
  
        this.theProfiler.endStartSection("levels");
  
-@@ -599,14 +607,18 @@
+@@ -599,14 +608,18 @@
     public void registerTickable(ITickable var1) {
        this.tickables.add(var1);
     }
@@ -93,7 +94,7 @@
           String var4 = null;
           boolean var5 = false;
           boolean var6 = false;
-@@ -614,11 +626,11 @@
+@@ -614,11 +627,11 @@
  
           for(int var8 = 0; var8 < var0.length; ++var8) {
              String var9 = var0[var8];
@@ -106,7 +107,7 @@
  
                    try {
                       var7 = Integer.parseInt(var10);
-@@ -676,10 +688,18 @@
+@@ -676,10 +689,18 @@
           if(var1 && !GraphicsEnvironment.isHeadless()) {
              var12.setGuiEnabled();
           }
@@ -117,15 +118,15 @@
 +         WetBlockState.createFactories();
 +         Blocks.registerBlocks();
 +         LogManager.getLogger().info("Loading plugins...");
-+         Fountain.getServer().getPluginManager().loadPlugins(new File("plugins"));
-+         Fountain.getServer().getPluginManager().fireEvent(new ServerStartEvent(Fountain.getServer()));
++         ((WetPluginManager)Fountain.getServer().getPluginManager()).loadPlugins(new File("plugins"));
++         Fountain.getServer().getEventManager().fire(new ServerStartEvent(Fountain.getServer()));
 +         // Fountain end
           Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
              public void run() {
                 var12.stopServer();
              }
           });
-@@ -744,11 +764,11 @@
+@@ -744,11 +765,11 @@
        }
  
     }
@@ -138,7 +139,7 @@
     public CrashReport addServerInfoToCrashReport(CrashReport var1) {
        var1.getCategory().setDetail("Profiler Position", new ICrashReportDetail<String>() {
           public String call() throws Exception {
-@@ -765,11 +785,11 @@
+@@ -765,11 +786,11 @@
  
        return var1;
     }
@@ -151,7 +152,7 @@
           var2 = var2.substring(1);
        }
  
-@@ -784,11 +804,11 @@
+@@ -784,11 +805,11 @@
           }
  
           return var5;
@@ -164,7 +165,7 @@
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
-@@ -950,11 +970,11 @@
+@@ -950,11 +971,11 @@
        var1.addStatToSnooper("gui_supported", GraphicsEnvironment.isHeadless()?"headless":"supported");
        var1.addStatToSnooper("dedicated", Boolean.valueOf(this.isDedicatedServer()));
     }
@@ -177,7 +178,7 @@
     public abstract boolean isDedicatedServer();
  
     public boolean isServerInOnlineMode() {
-@@ -1160,11 +1180,11 @@
+@@ -1160,11 +1181,11 @@
     }
  
     public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
