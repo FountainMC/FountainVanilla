@@ -1,6 +1,18 @@
 --- minecraft/src/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
 +++ src/main/java/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
-@@ -227,11 +227,11 @@
+@@ -160,10 +160,11 @@
+ 
+          while(true) {
+             if(this.writeNextIO()) {
+                continue;
+             }
++            break; // Fountain - Fix infinite loop
+          }
+       } finally {
+          this.savingExtraData = false;
+       }
+ 
+@@ -227,11 +228,11 @@
           NBTTagCompound var27 = var24.writeToNBT(new NBTTagCompound());
           var19.appendTag(var27);
        }
