@@ -22,7 +22,7 @@
  
 +            // Fountain start
 +            BlockBreakEvent event = new BlockBreakEvent(theWorld.getBlockState(var1).getFountainState(), new BlockPosition(theWorld.getFountainWorld(), var1.getX(), var1.getY(), var1.getZ()));
-+            org.fountainmc.api.Fountain.getServer().getPluginManager().fireEvent(event);
++            org.fountainmc.api.Fountain.getServer().getEventManager().fire(event);
 +            if (event.isCancelled()) {
 +               thisPlayerMP.connection.sendPacket(new SPacketBlockChange(theWorld, var1));
 +               TileEntity tileEntity = theWorld.getTileEntity(var1);
