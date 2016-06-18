@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityTameable.java
++++ src/main/java/net/minecraft/entity/passive/EntityTameable.java
+@@ -72,11 +72,11 @@
+ 
+       this.setSitting(var1.getBoolean("Sitting"));
+    }
+ 
+    public boolean a(EntityPlayer var1) {
+-      return this.isTamed() && this.d(var1);
++      return this.isTamed() && this.d((EntityLivingBase)var1);
+    }
+ 
+    protected void p(boolean var1) {
+       EnumParticleTypes var2 = EnumParticleTypes.HEART;
+       if(!var1) {

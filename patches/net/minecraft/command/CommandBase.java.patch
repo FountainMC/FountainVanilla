@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/command/CommandBase.java
++++ src/main/java/net/minecraft/command/CommandBase.java
+@@ -532,11 +532,11 @@
+ 
+    public static void a(ICommandListener var0) {
+       a = var0;
+    }
+ 
+-   public int a(ICommand var1) {
++   public int compareTo(ICommand var1) {
+       return this.getCommand().compareTo(var1.getCommand());
+    }
+ 
+    public static class CommandNumber {
+       private final double a;

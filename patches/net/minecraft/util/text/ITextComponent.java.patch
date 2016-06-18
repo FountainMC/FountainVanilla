@@ -1,0 +1,88 @@
+--- minecraft/src/net/minecraft/util/text/ITextComponent.java
++++ src/main/java/net/minecraft/util/text/ITextComponent.java
+@@ -43,20 +43,20 @@
+       private static final Gson a;
+ 
+       public ChatSerializer() {
+       }
+ 
+-      public ITextComponent a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public ITextComponent deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          if(var1.isJsonPrimitive()) {
+             return new TextComponentString(var1.getAsString());
+          } else if(!var1.isJsonObject()) {
+             if(var1.isJsonArray()) {
+                JsonArray var11 = var1.getAsJsonArray();
+                ITextComponent var12 = null;
+ 
+                for(JsonElement var17 : var11) {
+-                  ITextComponent var18 = this.a((JsonElement)var17, (Type)var17.getClass(), (JsonDeserializationContext)var3);
++                  ITextComponent var18 = this.deserialize((JsonElement)var17, (Type)var17.getClass(), (JsonDeserializationContext)var3);
+                   if(var12 == null) {
+                      var12 = var18;
+                   } else {
+                      var12.addSibling(var18);
+                   }
+@@ -76,11 +76,11 @@
+                if(var4.has("with")) {
+                   JsonArray var7 = var4.getAsJsonArray("with");
+                   Object[] var8 = new Object[var7.size()];
+ 
+                   for(int var9 = 0; var9 < var8.length; ++var9) {
+-                     var8[var9] = this.a(var7.get(var9), var2, var3);
++                     var8[var9] = this.deserialize(var7.get(var9), var2, var3);
+                      if(var8[var9] instanceof TextComponentString) {
+                         TextComponentString var10 = (TextComponentString)var8[var9];
+                         if(var10.getChatModifier().g() && var10.a().isEmpty()) {
+                            var8[var9] = var10.g();
+                         }
+@@ -114,11 +114,11 @@
+                if(var14.size() <= 0) {
+                   throw new JsonParseException("Unexpected empty array of components");
+                }
+ 
+                for(int var16 = 0; var16 < var14.size(); ++var16) {
+-                  ((ITextComponent)var5).addSibling(this.a(var14.get(var16), var2, var3));
++                  ((ITextComponent)var5).addSibling(this.deserialize(var14.get(var16), var2, var3));
+                }
+             }
+ 
+             ((ITextComponent)var5).setChatModifier((Style)var3.deserialize(var1, Style.class));
+             return (ITextComponent)var5;
+@@ -135,21 +135,21 @@
+             }
+          }
+ 
+       }
+ 
+-      public JsonElement a(ITextComponent var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(ITextComponent var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          if(!var1.getChatModifier().g()) {
+             this.a(var1.getChatModifier(), var4, var3);
+          }
+ 
+          if(!var1.a().isEmpty()) {
+             JsonArray var5 = new JsonArray();
+ 
+             for(ITextComponent var7 : var1.a()) {
+-               var5.add(this.a((ITextComponent)var7, (Type)var7.getClass(), (JsonSerializationContext)var3));
++               var5.add(this.serialize((ITextComponent)var7, (Type)var7.getClass(), (JsonSerializationContext)var3));
+             }
+ 
+             var4.add("extra", var5);
+          }
+ 
+@@ -161,11 +161,11 @@
+             if(var11.j() != null && var11.j().length > 0) {
+                JsonArray var14 = new JsonArray();
+ 
+                for(Object var10 : var11.j()) {
+                   if(var10 instanceof ITextComponent) {
+-                     var14.add(this.a((ITextComponent)((ITextComponent)var10), (Type)var10.getClass(), (JsonSerializationContext)var3));
++                     var14.add(this.serialize((ITextComponent)((ITextComponent)var10), (Type)var10.getClass(), (JsonSerializationContext)var3));
+                   } else {
+                      var14.add(new JsonPrimitive(String.valueOf(var10)));
+                   }
+                }
+ 

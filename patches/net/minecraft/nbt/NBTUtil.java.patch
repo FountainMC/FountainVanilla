@@ -1,0 +1,27 @@
+--- minecraft/src/net/minecraft/nbt/NBTUtil.java
++++ src/main/java/net/minecraft/nbt/NBTUtil.java
+@@ -193,11 +193,11 @@
+          return var2;
+       }
+    }
+ 
+    private static <T extends Comparable<T>> IBlockState a(IBlockState var0, IProperty<T> var1, String var2) {
+-      return var0.set(var1, (Comparable)var1.b(var2).get());
++      return var0.set(var1, var1.b(var2).get());
+    }
+ 
+    public static NBTTagCompound a(NBTTagCompound var0, IBlockState var1) {
+       var0.setString("Name", ((ResourceLocation)Block.REGISTRY.b(var1.getBlock())).toString());
+       if(!var1.s().isEmpty()) {
+@@ -212,9 +212,9 @@
+       }
+ 
+       return var0;
+    }
+ 
+-   private static <T extends Comparable<T>> String a(IProperty<T> var0, Comparable<?> var1) {
+-      return var0.a(var1);
++   private static <T extends Comparable<T>> String a(IProperty<T> var0, Comparable<T> var1) {
++      return var0.a((T) var1);
+    }
+ }

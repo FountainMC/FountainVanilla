@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/boss/EntityWither.java
++++ src/main/java/net/minecraft/entity/boss/EntityWither.java
+@@ -63,11 +63,11 @@
+    private final int[] bD = new int[2];
+    private final int[] bE = new int[2];
+    private int bF;
+    private final BossInfoServer bG = (BossInfoServer)(new BossInfoServer(this.getScoreboardDisplayName(), BossInfo.BarColor.PURPLE, BossInfo.BarStyle.PROGRESS)).setDarkenSky(true);
+    private static final Predicate<Entity> bH = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof EntityLivingBase && ((EntityLivingBase)var1).getMonsterType() != EnumCreatureAttribute.UNDEAD;
+       }
+    };
+ 
+    public EntityWither(World var1) {

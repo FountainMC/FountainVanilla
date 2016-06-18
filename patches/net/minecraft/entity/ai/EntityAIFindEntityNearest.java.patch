@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFindEntityNearest.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIFindEntityNearest.java
+@@ -30,11 +30,11 @@
+       if(var1 instanceof EntityCreature) {
+          a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
+       }
+ 
+       this.c = new Predicate<EntityLivingBase>() {
+-         public boolean a(@Nullable EntityLivingBase var1) {
++         public boolean apply(@Nullable EntityLivingBase var1) {
+             double var2 = EntityAIFindEntityNearest.this.f();
+             if(var1.isSneaking()) {
+                var2 *= 0.800000011920929D;
+             }
+ 

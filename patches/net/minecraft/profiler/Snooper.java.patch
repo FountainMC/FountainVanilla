@@ -1,10 +1,10 @@
 --- minecraft/src/net/minecraft/profiler/Snooper.java
 +++ src/main/java/net/minecraft/profiler/Snooper.java
 @@ -76,11 +76,11 @@
-       this.playerStatsCollector.addServerTypeToSnooper(this);
+       this.e.b(this);
     }
  
-    private void addJvmArgsToSnooper() {
+    private void i() {
        RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
 -      List var2 = var1.getInputArguments();
 +      List<String> var2 = var1.getInputArguments();
@@ -12,4 +12,4 @@
  
        for(String var5 : var2) {
           if(var5.startsWith("-X")) {
-             this.addClientStat("jvm_arg[" + var3++ + "]", var5);
+             this.a("jvm_arg[" + var3++ + "]", var5);

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/rcon/RConThreadQuery.java
++++ src/main/java/net/minecraft/network/rcon/RConThreadQuery.java
+@@ -44,11 +44,11 @@
+       this.i = var1.a("query.port", 0);
+       this.s = var1.d_();
+       this.j = var1.e_();
+       this.l = var1.f_();
+       this.k = var1.I();
+-      this.m = var1.S();
++      this.m = var1.getFolderName();
+       this.w = 0L;
+       this.r = "0.0.0.0";
+       if(!this.s.isEmpty() && !this.r.equals(this.s)) {
+          this.r = this.s;
+       } else {

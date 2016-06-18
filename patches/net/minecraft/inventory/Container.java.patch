@@ -3,26 +3,13 @@
 @@ -31,11 +31,11 @@
     }
  
-    protected Slot addSlotToContainer(Slot var1) {
-       var1.slotNumber = this.inventorySlots.size();
-       this.inventorySlots.add(var1);
--      this.inventoryItemStacks.add((Object)null);
-+      this.inventoryItemStacks.add(null);
+    protected Slot a(Slot var1) {
+       var1.rawSlotIndex = this.c.size();
+       this.c.add(var1);
+-      this.b.add((Object)null);
++      this.b.add(null);
        return var1;
     }
  
-    public void addListener(IContainerListener var1) {
+    public void addSlotListener(IContainerListener var1) {
        if(this.listeners.contains(var1)) {
-@@ -46,11 +46,11 @@
-          this.detectAndSendChanges();
-       }
-    }
- 
-    public List<ItemStack> getInventory() {
--      ArrayList var1 = Lists.newArrayList();
-+      ArrayList<ItemStack> var1 = Lists.newArrayList();
- 
-       for(int var2 = 0; var2 < this.inventorySlots.size(); ++var2) {
-          var1.add(((Slot)this.inventorySlots.get(var2)).getStack());
-       }
- 

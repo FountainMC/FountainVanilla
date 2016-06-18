@@ -1,14 +1,14 @@
 --- minecraft/src/net/minecraft/world/gen/structure/StructureEndCityPieces.java
 +++ src/main/java/net/minecraft/world/gen/structure/StructureEndCityPieces.java
-@@ -206,11 +206,11 @@
+@@ -197,11 +197,11 @@
  
-    private static boolean recursiveChildren(StructureEndCityPieces.b var0, int var1, StructureEndCityPieces.a var2, BlockPos var3, List<StructureComponent> var4, Random var5) {
+    private static boolean b(StructureEndCityPieces.PieceGenerator var0, int var1, StructureEndCityPieces.Piece var2, BlockPos var3, List<StructureComponent> var4, Random var5) {
        if(var1 > 8) {
           return false;
        } else {
 -         ArrayList var6 = Lists.newArrayList();
 +         ArrayList<StructureComponent> var6 = Lists.newArrayList();
-          if(var0.generate(var1, var2, var3, var6, var5)) {
+          if(var0.a(var1, var2, var3, var6, var5)) {
              boolean var7 = false;
              int var8 = var5.nextInt();
  

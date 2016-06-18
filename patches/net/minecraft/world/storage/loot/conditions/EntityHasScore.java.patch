@@ -1,19 +1,17 @@
 --- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasScore.java
 +++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasScore.java
-@@ -71,14 +71,14 @@
+@@ -70,12 +70,12 @@
+ 
           var1.add("scores", var4);
-          var1.add("entity", var3.serialize(var2.target));
+          var1.add("entity", var3.serialize(var2.b));
        }
  
-       public EntityHasScore deserialize(JsonObject var1, JsonDeserializationContext var2) {
--         Set var3 = JsonUtils.getJsonObject(var1, "scores").entrySet();
-+         Set<Entry<String, JsonElement>> var3 = JsonUtils.getJsonObject(var1, "scores").entrySet();
+-      public EntityHasScore a(JsonObject var1, JsonDeserializationContext var2) {
+-         Set var3 = JsonUtils.t(var1, "scores").entrySet();
++      public EntityHasScore b(JsonObject var1, JsonDeserializationContext var2) {
++         Set<Entry<String, JsonElement>> var3 = JsonUtils.t(var1, "scores").entrySet();
           LinkedHashMap var4 = Maps.newLinkedHashMap();
  
--         for(Entry var6 : var3) {
-+         for(Entry<String, JsonElement> var6 : var3) {
-             var4.put(var6.getKey(), JsonUtils.deserializeClass((JsonElement)var6.getValue(), "score", var2, RandomValueRange.class));
+          for(Entry var6 : var3) {
+             var4.put(var6.getKey(), JsonUtils.a((JsonElement)var6.getValue(), "score", var2, RandomValueRange.class));
           }
- 
-          return new EntityHasScore(var4, (LootContext.b)JsonUtils.deserializeClass(var1, "entity", var2, LootContext.b.class));
-       }

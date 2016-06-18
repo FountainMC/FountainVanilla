@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/EntityList.java
 +++ src/main/java/net/minecraft/entity/EntityList.java
-@@ -205,11 +205,11 @@
+@@ -206,11 +206,11 @@
  
-    public static void init() {
+    public static void a() {
     }
  
-    public static List<String> getEntityNameList() {
--      Set var0 = NAME_TO_CLASS.keySet();
-+      Set<String> var0 = NAME_TO_CLASS.keySet();
+    public static List<String> b() {
+-      Set var0 = c.keySet();
++      Set<String> var0 = c.keySet();
        ArrayList var1 = Lists.newArrayList();
  
        for(String var3 : var0) {
-          Class var4 = (Class)NAME_TO_CLASS.get(var3);
+          Class var4 = (Class)c.get(var3);
           if((var4.getModifiers() & 1024) != 1024) {

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/util/math/Vec3i.java
++++ src/main/java/net/minecraft/util/math/Vec3i.java
+@@ -34,11 +34,11 @@
+ 
+    public int hashCode() {
+       return (this.getY() + this.getZ() * 31) * 31 + this.getX();
+    }
+ 
+-   public int l(Vec3i var1) {
++   public int compareTo(Vec3i var1) {
+       return this.getY() == var1.getY()?(this.getZ() == var1.getZ()?this.getX() - var1.getX():this.getZ() - var1.getZ()):this.getY() - var1.getY();
+    }
+ 
+    public int getX() {
+       return this.a;

@@ -1,0 +1,24 @@
+--- minecraft/src/net/minecraft/util/datafix/fixes/SignStrictJSON.java
++++ src/main/java/net/minecraft/util/datafix/fixes/SignStrictJSON.java
+@@ -14,19 +14,19 @@
+ import net.minecraft.util.text.ITextComponent;
+ import net.minecraft.util.text.TextComponentString;
+ 
+ public class SignStrictJSON implements IFixableData {
+    public static final Gson a = (new GsonBuilder()).registerTypeAdapter(ITextComponent.class, new JsonDeserializer<ITextComponent>() {
+-      public ITextComponent a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public ITextComponent deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          if(var1.isJsonPrimitive()) {
+             return new TextComponentString(var1.getAsString());
+          } else if(var1.isJsonArray()) {
+             JsonArray var4 = var1.getAsJsonArray();
+             ITextComponent var5 = null;
+ 
+             for(JsonElement var7 : var4) {
+-               ITextComponent var8 = this.a(var7, var7.getClass(), var3);
++               ITextComponent var8 = this.deserialize(var7, var7.getClass(), var3);
+                if(var5 == null) {
+                   var5 = var8;
+                } else {
+                   var5.addSibling(var8);
+                }

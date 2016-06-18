@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagList.java
++++ src/main/java/net/minecraft/nbt/NBTTagList.java
+@@ -191,11 +191,11 @@
+ 
+    public int size() {
+       return this.list.size();
+    }
+ 
+-   public NBTTagList d() {
++   public NBTTagList clone() {
+       NBTTagList var1 = new NBTTagList();
+       var1.type = this.type;
+ 
+       for(NBTBase var3 : this.list) {
+          NBTBase var4 = var3.clone();

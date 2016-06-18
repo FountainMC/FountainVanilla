@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/block/properties/PropertyEnum.java
 +++ src/main/java/net/minecraft/block/properties/PropertyEnum.java
-@@ -17,11 +17,11 @@
- 
-    protected PropertyEnum(String var1, Class<T> var2, Collection<T> var3) {
-       super(var1, var2);
-       this.allowedValues = ImmutableSet.copyOf(var3);
- 
--      for(Enum var5 : var3) {
-+      for(T var5 : var3) {
+@@ -24,11 +24,11 @@
           String var6 = ((IStringSerializable)var5).getName();
-          if(this.nameToValue.containsKey(var6)) {
+          if(this.b.containsKey(var6)) {
              throw new IllegalArgumentException("Multiple values have the same name \'" + var6 + "\'");
           }
  
+-         this.b.put(var6, var5);
++         this.b.put(var6, (T) var5);
+       }
+ 
+    }
+ 
+    public Collection<T> c() {

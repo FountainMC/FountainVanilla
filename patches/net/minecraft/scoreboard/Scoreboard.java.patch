@@ -6,41 +6,36 @@
              throw new IllegalArgumentException("An objective with the name \'" + var1 + "\' already exists!");
           } else {
              var3 = new ScoreObjective(this, var1, var2);
--            Object var4 = (List)this.scoreObjectiveCriterias.get(var2);
-+            List<ScoreObjective> var4 = this.scoreObjectiveCriterias.get(var2);
+-            Object var4 = (List)this.objectivesByCriteria.get(var2);
++            List<ScoreObjective> var4 = this.objectivesByCriteria.get(var2);
              if(var4 == null) {
                 var4 = Lists.newArrayList();
-                this.scoreObjectiveCriterias.put(var2, var4);
+                this.objectivesByCriteria.put(var2, var4);
              }
  
 @@ -73,11 +73,11 @@
  
-    public Score getOrCreateScore(String var1, ScoreObjective var2) {
+    public Score getPlayerScoreForObjective(String var1, ScoreObjective var2) {
        if(var1.length() > 40) {
           throw new IllegalArgumentException("The player name \'" + var1 + "\' is too long!");
        } else {
--         Object var3 = (Map)this.entitiesScoreObjectives.get(var1);
-+         Map<ScoreObjective, Score> var3 = this.entitiesScoreObjectives.get(var1);
+-         Object var3 = (Map)this.playerScores.get(var1);
++         Map<ScoreObjective, Score> var3 = this.playerScores.get(var1);
           if(var3 == null) {
              var3 = Maps.newHashMap();
-             this.entitiesScoreObjectives.put(var1, var3);
+             this.playerScores.put(var1, var3);
           }
  
-@@ -135,14 +135,14 @@
+@@ -135,11 +135,11 @@
        }
  
     }
  
     public Collection<Score> getScores() {
--      Collection var1 = this.entitiesScoreObjectives.values();
--      ArrayList var2 = Lists.newArrayList();
-+      Collection<Map<ScoreObjective, Score>> var1 = this.entitiesScoreObjectives.values();
-+      ArrayList<Score> var2 = Lists.newArrayList();
+-      Collection var1 = this.playerScores.values();
++      Collection<Map<ScoreObjective, Score>> var1 = this.playerScores.values();
+       ArrayList var2 = Lists.newArrayList();
  
--      for(Map var4 : var1) {
-+      for(Map<ScoreObjective, Score> var4 : var1) {
+       for(Map var4 : var1) {
           var2.addAll(var4.values());
        }
- 
-       return var2;
-    }

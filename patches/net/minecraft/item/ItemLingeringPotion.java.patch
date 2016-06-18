@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/ItemLingeringPotion.java
++++ src/main/java/net/minecraft/item/ItemLingeringPotion.java
+@@ -26,11 +26,11 @@
+    public ActionResult<ItemStack> a(ItemStack var1, World var2, EntityPlayer var3, EnumHand var4) {
+       if(!var3.abilities.canInstantlyBuild) {
+          --var1.count;
+       }
+ 
+-      var2.a((EntityPlayer)null, var3.locX, var3.locY, var3.locZ, SoundEvents.do, SoundCategory.NEUTRAL, 0.5F, 0.4F / (j.nextFloat() * 0.4F + 0.8F));
++      var2.a((EntityPlayer)null, var3.locX, var3.locY, var3.locZ, SoundEvents.do_soundEvent, SoundCategory.NEUTRAL, 0.5F, 0.4F / (j.nextFloat() * 0.4F + 0.8F));
+       if(!var2.isClientSide) {
+          EntityPotion var5 = new EntityPotion(var2, var3, var1);
+          var5.a(var3, var3.pitch, var3.yaw, -20.0F, 0.5F, 1.0F);
+          var2.addEntity(var5);
+       }

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockTorch.java
++++ src/main/java/net/minecraft/block/BlockTorch.java
+@@ -20,11 +20,11 @@
+ import net.minecraft.world.IBlockAccess;
+ import net.minecraft.world.World;
+ 
+ public class BlockTorch extends Block {
+    public static final PropertyDirection FACING = PropertyDirection.of("facing", new Predicate<EnumFacing>() {
+-      public boolean a(@Nullable EnumFacing var1) {
++      public boolean apply(@Nullable EnumFacing var1) {
+          return var1 != EnumFacing.DOWN;
+       }
+    });
+    protected static final AxisAlignedBB b = new AxisAlignedBB(0.4000000059604645D, 0.0D, 0.4000000059604645D, 0.6000000238418579D, 0.6000000238418579D, 0.6000000238418579D);
+    protected static final AxisAlignedBB c = new AxisAlignedBB(0.3499999940395355D, 0.20000000298023224D, 0.699999988079071D, 0.6499999761581421D, 0.800000011920929D, 1.0D);

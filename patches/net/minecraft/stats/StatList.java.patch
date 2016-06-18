@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/stats/StatList.java
 +++ src/main/java/net/minecraft/stats/StatList.java
 @@ -126,11 +126,11 @@
-       AchievementList.init();
-       EntityList.init();
+       AchievementList.a();
+       EntityList.a();
     }
  
-    private static void initCraftableStats() {
+    private static void b() {
 -      HashSet var0 = Sets.newHashSet();
 +      HashSet<Item> var0 = Sets.newHashSet();
  
-       for(IRecipe var2 : CraftingManager.getInstance().getRecipeList()) {
-          if(var2.getRecipeOutput() != null) {
-             var0.add(var2.getRecipeOutput().getItem());
+       for(IRecipe var2 : CraftingManager.getInstance().getRecipes()) {
+          if(var2.b() != null) {
+             var0.add(var2.b().getItem());
           }

@@ -1,14 +1,14 @@
 --- minecraft/src/net/minecraft/command/CommandStats.java
 +++ src/main/java/net/minecraft/command/CommandStats.java
 @@ -143,12 +143,12 @@
-    public List<String> getTabCompletionOptions(MinecraftServer var1, ICommandSender var2, String[] var3, @Nullable BlockPos var4) {
-       return var3.length == 1?getListOfStringsMatchingLastWord(var3, new String[]{"entity", "block"}):(var3.length == 2 && var3[0].equals("entity")?getListOfStringsMatchingLastWord(var3, var1.getAllUsernames()):(var3.length >= 2 && var3.length <= 4 && var3[0].equals("block")?getTabCompletionCoordinate(var3, 1, var4):((var3.length != 3 || !var3[0].equals("entity")) && (var3.length != 5 || !var3[0].equals("block"))?((var3.length != 4 || !var3[0].equals("entity")) && (var3.length != 6 || !var3[0].equals("block"))?((var3.length != 6 || !var3[0].equals("entity")) && (var3.length != 8 || !var3[0].equals("block"))?Collections.emptyList():getListOfStringsMatchingLastWord(var3, this.getObjectiveNames(var1))):getListOfStringsMatchingLastWord(var3, CommandResultStats.a.getTypeNames())):getListOfStringsMatchingLastWord(var3, new String[]{"set", "clear"}))));
+    public List<String> tabComplete(MinecraftServer var1, ICommandSender var2, String[] var3, @Nullable BlockPos var4) {
+       return var3.length == 1?a(var3, new String[]{"entity", "block"}):(var3.length == 2 && "entity".equals(var3[0])?a(var3, var1.getPlayers()):(var3.length >= 2 && var3.length <= 4 && "block".equals(var3[0])?a(var3, 1, var4):((var3.length != 3 || !"entity".equals(var3[0])) && (var3.length != 5 || !"block".equals(var3[0]))?((var3.length != 4 || !"entity".equals(var3[0])) && (var3.length != 6 || !"block".equals(var3[0]))?((var3.length != 6 || !"entity".equals(var3[0])) && (var3.length != 8 || !"block".equals(var3[0]))?Collections.emptyList():a(var3, this.a(var1))):a(var3, CommandResultStats.EnumCommandResult.c())):a(var3, new String[]{"set", "clear"}))));
     }
  
-    protected List<String> getObjectiveNames(MinecraftServer var1) {
--      Collection var2 = var1.worldServerForDimension(0).getScoreboard().getScoreObjectives();
+    protected List<String> a(MinecraftServer var1) {
+-      Collection var2 = var1.getWorldServer(0).getScoreboard().getObjectives();
 -      ArrayList var3 = Lists.newArrayList();
-+      Collection<ScoreObjective> var2 = var1.worldServerForDimension(0).getScoreboard().getScoreObjectives();
++      Collection<ScoreObjective> var2 = var1.getWorldServer(0).getScoreboard().getObjectives();
 +      ArrayList<String> var3 = Lists.newArrayList();
  
        for(ScoreObjective var5 : var2) {

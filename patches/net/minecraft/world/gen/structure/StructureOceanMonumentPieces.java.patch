@@ -1,28 +1,33 @@
 --- minecraft/src/net/minecraft/world/gen/structure/StructureOceanMonumentPieces.java
 +++ src/main/java/net/minecraft/world/gen/structure/StructureOceanMonumentPieces.java
-@@ -574,11 +574,11 @@
-             this.boundingBox = new StructureBoundingBox(var2, 39, var3, var2 + 58 - 1, 61, var3 + 58 - 1);
+@@ -575,15 +575,15 @@
+             this.l = new StructureBoundingBox(var2, 39, var3, var2 + 58 - 1, 61, var3 + 58 - 1);
           } else {
-             this.boundingBox = new StructureBoundingBox(var2, 39, var3, var2 + 58 - 1, 61, var3 + 58 - 1);
+             this.l = new StructureBoundingBox(var2, 39, var3, var2 + 58 - 1, 61, var3 + 58 - 1);
           }
  
--         List var6 = this.generateRoomGraph(var1);
-+         List<StructureOceanMonumentPieces.v> var6 = this.generateRoomGraph(var1);
-          this.sourceRoom.claimed = true;
-          this.childPieces.add(new StructureOceanMonumentPieces.p(var5, this.sourceRoom));
-          this.childPieces.add(new StructureOceanMonumentPieces.j(var5, this.coreRoom, var1));
-          ArrayList var7 = Lists.newArrayList();
-          var7.add(new StructureOceanMonumentPieces.b());
-@@ -698,11 +698,11 @@
-          this.coreRoom.connections[EnumFacing.EAST.getIndex()].connections[EnumFacing.NORTH.getIndex()].claimed = true;
-          this.coreRoom.connections[EnumFacing.UP.getIndex()].claimed = true;
-          this.coreRoom.connections[EnumFacing.EAST.getIndex()].connections[EnumFacing.UP.getIndex()].claimed = true;
-          this.coreRoom.connections[EnumFacing.NORTH.getIndex()].connections[EnumFacing.UP.getIndex()].claimed = true;
-          this.coreRoom.connections[EnumFacing.EAST.getIndex()].connections[EnumFacing.NORTH.getIndex()].connections[EnumFacing.UP.getIndex()].claimed = true;
+-         List var6 = this.a(var1);
++         List<StructureOceanMonumentPieces.WorldGenMonumentStateTracker> var6 = this.a(var1);
+          this.n.d = true;
+          this.p.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceEntry(var5, this.n));
+          this.p.add(new StructureOceanMonumentPieces.WorldGenMonumentPiece2(var5, this.o, var1));
+-         ArrayList var7 = Lists.newArrayList();
++         ArrayList<StructureOceanMonumentPieces.IWorldGenMonumentPieceSelector> var7 = Lists.newArrayList();
+          var7.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceSelector6());
+          var7.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceSelector4());
+          var7.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceSelector3());
+          var7.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceSelector7());
+          var7.add(new StructureOceanMonumentPieces.WorldGenMonumentPieceSelector5());
+@@ -699,11 +699,11 @@
+          this.o.b[EnumFacing.EAST.a()].b[EnumFacing.NORTH.a()].d = true;
+          this.o.b[EnumFacing.UP.a()].d = true;
+          this.o.b[EnumFacing.EAST.a()].b[EnumFacing.UP.a()].d = true;
+          this.o.b[EnumFacing.NORTH.a()].b[EnumFacing.UP.a()].d = true;
+          this.o.b[EnumFacing.EAST.a()].b[EnumFacing.NORTH.a()].b[EnumFacing.UP.a()].d = true;
 -         ArrayList var30 = Lists.newArrayList();
-+         ArrayList<StructureOceanMonumentPieces.v> var30 = Lists.newArrayList();
++         ArrayList<StructureOceanMonumentPieces.WorldGenMonumentStateTracker> var30 = Lists.newArrayList();
  
-          for(StructureOceanMonumentPieces.v var37 : var2) {
+          for(StructureOceanMonumentPieces.WorldGenMonumentStateTracker var37 : var2) {
              if(var37 != null) {
-                var37.updateOpenings();
+                var37.a();
                 var30.add(var37);

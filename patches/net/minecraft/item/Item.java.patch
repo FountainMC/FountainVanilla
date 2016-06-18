@@ -1,35 +1,167 @@
 --- minecraft/src/net/minecraft/item/Item.java
 +++ src/main/java/net/minecraft/item/Item.java
-@@ -130,10 +130,13 @@
- import net.minecraft.util.registry.RegistryNamespaced;
- import net.minecraft.util.registry.RegistrySimple;
- import net.minecraft.util.text.translation.I18n;
- import net.minecraft.world.World;
- 
-+import org.fountainmc.WetItemType;
-+import org.fountainmc.WetServer;
-+
- public class Item {
-    public static final RegistryNamespaced<ResourceLocation, Item> REGISTRY = new RegistryNamespaced();
-    private static final Map<Block, Item> BLOCK_TO_ITEM = Maps.newHashMap();
-    private static final IItemPropertyGetter DAMAGED_GETTER = new IItemPropertyGetter() {
-    };
-@@ -152,11 +155,18 @@
-    private int maxDamage;
-    protected boolean bFull3D;
-    protected boolean hasSubtypes;
-    private Item containerItem;
-    private String unlocalizedName;
-+   // Fountain start
-+   private final WetItemType fountainType = new WetItemType(WetServer.getInstance(), this);
- 
-+   public WetItemType getFountainType() {
-+      return fountainType;
-+   }
-+   // Fountain end
-+
-    public static int getIdFromItem(Item var0) {
-       return var0 == null?0:REGISTRY.getIDForObject(var0);
+@@ -380,72 +380,72 @@
     }
  
-    public static Item getItemById(int var0) {
+    public static void t() {
+       a((Block)Blocks.STONE, (Item)(new ItemMultiTexture(Blocks.STONE, Blocks.STONE, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockStone.EnumStoneVariant.a(var1.getData()).d();
+          }
+       })).b("stone"));
+       a((Block)Blocks.GRASS, (Item)(new ItemColored(Blocks.GRASS, false)));
+       a((Block)Blocks.DIRT, (Item)(new ItemMultiTexture(Blocks.DIRT, Blocks.DIRT, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockDirt.EnumDirtVariant.a(var1.getData()).c();
+          }
+       })).b("dirt"));
+       b(Blocks.COBBLESTONE);
+       a((Block)Blocks.PLANKS, (Item)(new ItemMultiTexture(Blocks.PLANKS, Blocks.PLANKS, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockPlanks.EnumLogVariant.a(var1.getData()).d();
+          }
+       })).b("wood"));
+       a((Block)Blocks.SAPLING, (Item)(new ItemMultiTexture(Blocks.SAPLING, Blocks.SAPLING, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockPlanks.EnumLogVariant.a(var1.getData()).d();
+          }
+       })).b("sapling"));
+       b(Blocks.BEDROCK);
+       a((Block)Blocks.SAND, (Item)(new ItemMultiTexture(Blocks.SAND, Blocks.SAND, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockSand.EnumSandVariant.a(var1.getData()).e();
+          }
+       })).b("sand"));
+       b(Blocks.GRAVEL);
+       b(Blocks.GOLD_ORE);
+       b(Blocks.IRON_ORE);
+       b(Blocks.COAL_ORE);
+       a((Block)Blocks.LOG, (Item)(new ItemMultiTexture(Blocks.LOG, Blocks.LOG, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockPlanks.EnumLogVariant.a(var1.getData()).d();
+          }
+       })).b("log"));
+       a((Block)Blocks.LOG2, (Item)(new ItemMultiTexture(Blocks.LOG2, Blocks.LOG2, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockPlanks.EnumLogVariant.a(var1.getData() + 4).d();
+          }
+       })).b("log"));
+       a((Block)Blocks.LEAVES, (Item)(new ItemLeaves(Blocks.LEAVES)).b("leaves"));
+       a((Block)Blocks.LEAVES2, (Item)(new ItemLeaves(Blocks.LEAVES2)).b("leaves"));
+       a((Block)Blocks.SPONGE, (Item)(new ItemMultiTexture(Blocks.SPONGE, Blocks.SPONGE, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return (var1.getData() & 1) == 1?"wet":"dry";
+          }
+       })).b("sponge"));
+       b(Blocks.GLASS);
+       b(Blocks.LAPIS_ORE);
+       b(Blocks.LAPIS_BLOCK);
+       b(Blocks.DISPENSER);
+       a((Block)Blocks.SANDSTONE, (Item)(new ItemMultiTexture(Blocks.SANDSTONE, Blocks.SANDSTONE, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockSandStone.EnumSandstoneVariant.a(var1.getData()).c();
+          }
+       })).b("sandStone"));
+       b(Blocks.NOTEBLOCK);
+       b(Blocks.GOLDEN_RAIL);
+@@ -456,17 +456,17 @@
+       b((Block)Blocks.DEADBUSH);
+       a((Block)Blocks.PISTON, (Item)(new ItemPiston(Blocks.PISTON)));
+       a((Block)Blocks.WOOL, (Item)(new ItemCloth(Blocks.WOOL)).b("cloth"));
+       a((Block)Blocks.YELLOW_FLOWER, (Item)(new ItemMultiTexture(Blocks.YELLOW_FLOWER, Blocks.YELLOW_FLOWER, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockFlower.EnumFlowerVarient.a(BlockFlower.EnumFlowerType.YELLOW, var1.getData()).d();
+          }
+       })).b("flower"));
+       a((Block)Blocks.RED_FLOWER, (Item)(new ItemMultiTexture(Blocks.RED_FLOWER, Blocks.RED_FLOWER, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockFlower.EnumFlowerVarient.a(BlockFlower.EnumFlowerType.RED, var1.getData()).d();
+          }
+       })).b("rose"));
+       b((Block)Blocks.BROWN_MUSHROOM);
+       b((Block)Blocks.RED_MUSHROOM);
+@@ -521,17 +521,17 @@
+       b(Blocks.GLOWSTONE);
+       b(Blocks.LIT_PUMPKIN);
+       b(Blocks.TRAPDOOR);
+       a((Block)Blocks.MONSTER_EGG, (Item)(new ItemMultiTexture(Blocks.MONSTER_EGG, Blocks.MONSTER_EGG, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockSilverfish.EnumMonsterEggVarient.a(var1.getData()).c();
+          }
+       })).b("monsterStoneEgg"));
+       a((Block)Blocks.STONEBRICK, (Item)(new ItemMultiTexture(Blocks.STONEBRICK, Blocks.STONEBRICK, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockStoneBrick.EnumStonebrickType.a(var1.getData()).c();
+          }
+       })).b("stonebricksmooth"));
+       b(Blocks.BROWN_MUSHROOM_BLOCK);
+       b(Blocks.RED_MUSHROOM_BLOCK);
+@@ -569,11 +569,11 @@
+       b(Blocks.JUNGLE_STAIRS);
+       b(Blocks.COMMAND_BLOCK);
+       b((Block)Blocks.BEACON);
+       a((Block)Blocks.COBBLESTONE_WALL, (Item)(new ItemMultiTexture(Blocks.COBBLESTONE_WALL, Blocks.COBBLESTONE_WALL, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockWall.EnumCobbleVariant.a(var1.getData()).c();
+          }
+       })).b("cobbleWall"));
+       b(Blocks.WOODEN_BUTTON);
+       a((Block)Blocks.ANVIL, (Item)(new ItemAnvilBlock(Blocks.ANVIL)).b("anvil"));
+@@ -600,26 +600,26 @@
+       b(Blocks.DARK_OAK_STAIRS);
+       b(Blocks.SLIME);
+       b(Blocks.GRASS_PATH);
+       a((Block)Blocks.DOUBLE_PLANT, (Item)(new ItemMultiTexture(Blocks.DOUBLE_PLANT, Blocks.DOUBLE_PLANT, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockDoublePlant.EnumTallFlowerVariants.a(var1.getData()).c();
+          }
+       })).b("doublePlant"));
+       a((Block)Blocks.STAINED_GLASS, (Item)(new ItemCloth(Blocks.STAINED_GLASS)).b("stainedGlass"));
+       a((Block)Blocks.STAINED_GLASS_PANE, (Item)(new ItemCloth(Blocks.STAINED_GLASS_PANE)).b("stainedGlassPane"));
+       a((Block)Blocks.PRISMARINE, (Item)(new ItemMultiTexture(Blocks.PRISMARINE, Blocks.PRISMARINE, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockPrismarine.EnumPrismarineVariant.a(var1.getData()).c();
+          }
+       })).b("prismarine"));
+       b(Blocks.SEA_LANTERN);
+       a((Block)Blocks.RED_SANDSTONE, (Item)(new ItemMultiTexture(Blocks.RED_SANDSTONE, Blocks.RED_SANDSTONE, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             return BlockRedSandstone.EnumRedSandstoneVariant.a(var1.getData()).c();
+          }
+       })).b("redSandStone"));
+       b(Blocks.RED_SANDSTONE_STAIRS);
+       a((Block)Blocks.STONE_SLAB2, (Item)(new ItemSlab(Blocks.STONE_SLAB2, Blocks.STONE_SLAB2, Blocks.DOUBLE_STONE_SLAB2)).b("stoneSlab2"));

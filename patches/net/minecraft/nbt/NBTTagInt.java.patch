@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagInt.java
++++ src/main/java/net/minecraft/nbt/NBTTagInt.java
+@@ -31,11 +31,11 @@
+ 
+    public String toString() {
+       return "" + this.data;
+    }
+ 
+-   public NBTTagInt c() {
++   public NBTTagInt clone() {
+       return new NBTTagInt(this.data);
+    }
+ 
+    public boolean equals(Object var1) {
+       if(super.equals(var1)) {

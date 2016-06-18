@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/util/EnumFacing.java
++++ src/main/java/net/minecraft/util/EnumFacing.java
+@@ -184,11 +184,11 @@
+ 
+       public String toString() {
+          return this.e;
+       }
+ 
+-      public boolean a(@Nullable EnumFacing var1) {
++      public boolean apply(@Nullable EnumFacing var1) {
+          return var1 != null && var1.k() == this;
+       }
+ 
+       public EnumFacing.EnumDirectionLimit d() {
+          return this.f;
+@@ -248,11 +248,11 @@
+       public EnumFacing a(Random var1) {
+          EnumFacing[] var2 = this.a();
+          return var2[var1.nextInt(var2.length)];
+       }
+ 
+-      public boolean a(@Nullable EnumFacing var1) {
++      public boolean apply(@Nullable EnumFacing var1) {
+          return var1 != null && var1.k().d() == this;
+       }
+ 
+       public Iterator<EnumFacing> iterator() {
+          return Iterators.forArray(this.a());

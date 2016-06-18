@@ -1,0 +1,57 @@
+--- minecraft/src/net/minecraft/server/management/PlayerChunkMap.java
++++ src/main/java/net/minecraft/server/management/PlayerChunkMap.java
+@@ -22,16 +22,16 @@
+ import net.minecraft.world.WorldServer;
+ import net.minecraft.world.chunk.Chunk;
+ 
+ public class PlayerChunkMap {
+    private static final Predicate<EntityPlayerMP> a = new Predicate<EntityPlayerMP>() {
+-      public boolean a(@Nullable EntityPlayerMP var1) {
++      public boolean apply(@Nullable EntityPlayerMP var1) {
+          return var1 != null && !var1.isSpectator();
+       }
+    };
+    private static final Predicate<EntityPlayerMP> b = new Predicate<EntityPlayerMP>() {
+-      public boolean a(@Nullable EntityPlayerMP var1) {
++      public boolean apply(@Nullable EntityPlayerMP var1) {
+          return var1 != null && (!var1.isSpectator() || var1.x().getGameRules().getBoolean("spectatorsGenerateChunks"));
+       }
+    };
+    private final WorldServer world;
+    private final List<EntityPlayerMP> managedPlayers = Lists.newArrayList();
+@@ -55,11 +55,11 @@
+    }
+ 
+    public Iterator<Chunk> b() {
+       final Iterator var1 = this.i.iterator();
+       return new AbstractIterator<Chunk>() {
+-         protected Chunk a() {
++         protected Chunk computeNext() {
+             while(true) {
+                if(var1.hasNext()) {
+                   PlayerChunkMapEntry var1x = (PlayerChunkMapEntry)var1.next();
+                   Chunk var2 = var1x.f();
+                   if(var2 == null) {
+@@ -108,20 +108,20 @@
+       }
+ 
+       if(this.l && var1 % 4L == 0L) {
+          this.l = false;
+          Collections.sort(this.h, new Comparator<PlayerChunkMapEntry>() {
+-            public int a(PlayerChunkMapEntry var1, PlayerChunkMapEntry var2) {
++            public int compare(PlayerChunkMapEntry var1, PlayerChunkMapEntry var2) {
+                return ComparisonChain.start().compare(var1.g(), var2.g()).result();
+             }
+          });
+       }
+ 
+       if(this.m && var1 % 4L == 2L) {
+          this.m = false;
+          Collections.sort(this.g, new Comparator<PlayerChunkMapEntry>() {
+-            public int a(PlayerChunkMapEntry var1, PlayerChunkMapEntry var2) {
++            public int compare(PlayerChunkMapEntry var1, PlayerChunkMapEntry var2) {
+                return ComparisonChain.start().compare(var1.g(), var2.g()).result();
+             }
+          });
+       }
+ 

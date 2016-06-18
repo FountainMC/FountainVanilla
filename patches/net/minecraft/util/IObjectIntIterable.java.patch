@@ -1,0 +1,8 @@
+--- minecraft/src/net/minecraft/util/IObjectIntIterable.java
++++ src/main/java/net/minecraft/util/IObjectIntIterable.java
+@@ -1,4 +1,4 @@
+ package net.minecraft.util;
+ 
+-public interface IObjectIntIterable extends Iterable {
++public interface IObjectIntIterable<V> extends Iterable<V> {
+ }

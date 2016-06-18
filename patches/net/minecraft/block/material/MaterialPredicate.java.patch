@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/block/material/MaterialPredicate.java
++++ src/main/java/net/minecraft/block/material/MaterialPredicate.java
+@@ -14,9 +14,9 @@
+ 
+    public static MaterialPredicate a(Material var0) {
+       return new MaterialPredicate(var0);
+    }
+ 
+-   public boolean a(@Nullable IBlockState var1) {
++   public boolean apply(@Nullable IBlockState var1) {
+       return var1 != null && var1.getMaterial() == this.a;
+    }
+ }

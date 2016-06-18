@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockHopper.java
++++ src/main/java/net/minecraft/block/BlockHopper.java
+@@ -32,11 +32,11 @@
+ import net.minecraft.world.IBlockAccess;
+ import net.minecraft.world.World;
+ 
+ public class BlockHopper extends BlockContainer {
+    public static final PropertyDirection FACING = PropertyDirection.of("facing", new Predicate<EnumFacing>() {
+-      public boolean a(@Nullable EnumFacing var1) {
++      public boolean apply(@Nullable EnumFacing var1) {
+          return var1 != EnumFacing.UP;
+       }
+    });
+    public static final PropertyBool ENABLED = PropertyBool.of("enabled");
+    protected static final AxisAlignedBB c = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D);

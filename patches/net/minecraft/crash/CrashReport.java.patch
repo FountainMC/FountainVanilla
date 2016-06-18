@@ -1,10 +1,50 @@
 --- minecraft/src/net/minecraft/crash/CrashReport.java
 +++ src/main/java/net/minecraft/crash/CrashReport.java
-@@ -69,11 +69,11 @@
+@@ -35,31 +35,31 @@
+       this.h();
+    }
+ 
+    private void h() {
+       this.d.a("Minecraft Version", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return "1.10";
           }
        });
-       this.theReportCategory.setDetail("JVM Flags", new ICrashReportDetail<String>() {
-          public String call() {
+       this.d.a("Operating System", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return System.getProperty("os.name") + " (" + System.getProperty("os.arch") + ") version " + System.getProperty("os.version");
+          }
+       });
+       this.d.a("Java Version", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return System.getProperty("java.version") + ", " + System.getProperty("java.vendor");
+          }
+       });
+       this.d.a("Java VM Version", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return System.getProperty("java.vm.name") + " (" + System.getProperty("java.vm.info") + "), " + System.getProperty("java.vm.vendor");
+          }
+       });
+       this.d.a("Memory", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             Runtime var1 = Runtime.getRuntime();
+             long var2 = var1.maxMemory();
+             long var4 = var1.totalMemory();
+             long var6 = var1.freeMemory();
+             long var8 = var2 / 1024L / 1024L;
+@@ -67,13 +67,13 @@
+             long var12 = var6 / 1024L / 1024L;
+             return var6 + " bytes (" + var12 + " MB) / " + var4 + " bytes (" + var10 + " MB) up to " + var2 + " bytes (" + var8 + " MB)";
+          }
+       });
+       this.d.a("JVM Flags", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
              RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
 -            List var2 = var1.getInputArguments();
 +            List<String> var2 = var1.getInputArguments();
@@ -13,3 +53,16 @@
  
              for(String var6 : var2) {
                 if(var6.startsWith("-X")) {
+@@ -87,11 +87,11 @@
+ 
+             return String.format("%d total; %s", new Object[]{Integer.valueOf(var3), var4.toString()});
+          }
+       });
+       this.d.a("IntCache", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return IntCache.b();
+          }
+       });
+    }
+ 

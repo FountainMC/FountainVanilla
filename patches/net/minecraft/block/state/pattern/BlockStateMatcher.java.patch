@@ -1,15 +1,41 @@
 --- minecraft/src/net/minecraft/block/state/pattern/BlockStateMatcher.java
 +++ src/main/java/net/minecraft/block/state/pattern/BlockStateMatcher.java
+@@ -10,11 +10,11 @@
+ import net.minecraft.block.state.BlockStateContainer;
+ import net.minecraft.block.state.IBlockState;
+ 
+ public class BlockStateMatcher implements Predicate<IBlockState> {
+    public static final Predicate<IBlockState> a = new Predicate<IBlockState>() {
+-      public boolean a(@Nullable IBlockState var1) {
++      public boolean apply(@Nullable IBlockState var1) {
+          return true;
+       }
+    };
+    private final BlockStateContainer b;
+    private final Map<IProperty<?>, Predicate<?>> c = Maps.newHashMap();
+@@ -25,11 +25,11 @@
+ 
+    public static BlockStateMatcher a(Block var0) {
+       return new BlockStateMatcher(var0.t());
+    }
+ 
+-   public boolean a(@Nullable IBlockState var1) {
++   public boolean apply(@Nullable IBlockState var1) {
+       if(var1 != null && var1.getBlock().equals(this.b.getBlock())) {
+          for(Entry var3 : this.c.entrySet()) {
+             if(!this.a(var1, (IProperty)var3.getKey(), (Predicate)var3.getValue())) {
+                return false;
+             }
 @@ -39,11 +39,11 @@
        } else {
           return false;
        }
     }
  
--   protected <T extends Comparable<T>> boolean matches(IBlockState var1, IProperty<T> var2, Predicate<?> var3) {
-+   protected <T extends Comparable<T>> boolean matches(IBlockState var1, IProperty<T> var2, Predicate<T> var3) {
-       return var3.apply(var1.getValue(var2));
+-   protected <T extends Comparable<T>> boolean a(IBlockState var1, IProperty<T> var2, Predicate<?> var3) {
++   protected <T extends Comparable<T>> boolean a(IBlockState var1, IProperty<T> var2, Predicate<T> var3) {
+       return var3.apply(var1.get(var2));
     }
  
-    public <V extends Comparable<V>> BlockStateMatcher where(IProperty<V> var1, Predicate<? extends V> var2) {
-       if(!this.blockstate.getProperties().contains(var1)) {
+    public <V extends Comparable<V>> BlockStateMatcher a(IProperty<V> var1, Predicate<? extends V> var2) {
+       if(!this.b.d().contains(var1)) {

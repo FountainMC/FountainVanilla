@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagString.java
++++ src/main/java/net/minecraft/nbt/NBTTagString.java
+@@ -36,11 +36,11 @@
+ 
+    public String toString() {
+       return "\"" + this.data.replace("\"", "\\\"") + "\"";
+    }
+ 
+-   public NBTTagString c() {
++   public NBTTagString clone() {
+       return new NBTTagString(this.data);
+    }
+ 
+    public boolean isEmpty() {
+       return this.data.isEmpty();

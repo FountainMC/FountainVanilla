@@ -1,0 +1,20 @@
+--- minecraft/src/net/minecraft/entity/monster/IMob.java
++++ src/main/java/net/minecraft/entity/monster/IMob.java
+@@ -5,15 +5,15 @@
+ import net.minecraft.entity.Entity;
+ import net.minecraft.entity.passive.IAnimals;
+ 
+ public interface IMob extends IAnimals {
+    Predicate<Entity> d = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof IMob;
+       }
+    };
+    Predicate<Entity> e = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof IMob && !var1.isInvisible();
+       }
+    };
+ }

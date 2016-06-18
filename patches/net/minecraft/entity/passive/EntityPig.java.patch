@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityPig.java
++++ src/main/java/net/minecraft/entity/passive/EntityPig.java
+@@ -182,11 +182,11 @@
+    }
+ 
+    public void e(float var1, float var2) {
+       super.e(var1, var2);
+       if(var1 > 5.0F) {
+-         for(EntityPlayer var4 : this.b((Class)EntityPlayer.class)) {
++         for(EntityPlayer var4 : this.b(EntityPlayer.class)) {
+             var4.b((StatBase)AchievementList.u);
+          }
+       }
+ 
+    }
+@@ -246,11 +246,11 @@
+          this.bC = this.getRandom().nextInt(841) + 140;
+          return true;
+       }
+    }
+ 
+-   public EntityPig b(EntityAgeable var1) {
++   public EntityPig createChild(EntityAgeable var1) {
+       return new EntityPig(this.world);
+    }
+ 
+    public boolean e(@Nullable ItemStack var1) {
+       return var1 != null && by.contains(var1.getItem());

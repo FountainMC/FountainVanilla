@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/scoreboard/Score.java
++++ src/main/java/net/minecraft/scoreboard/Score.java
+@@ -4,11 +4,11 @@
+ import net.minecraft.scoreboard.ScoreObjective;
+ import net.minecraft.scoreboard.Scoreboard;
+ 
+ public class Score {
+    public static final Comparator<Score> a = new Comparator<Score>() {
+-      public int a(Score var1, Score var2) {
++      public int compare(Score var1, Score var2) {
+          return var1.getScore() > var2.getScore()?1:(var1.getScore() < var2.getScore()?-1:var2.getPlayerName().compareToIgnoreCase(var1.getPlayerName()));
+       }
+    };
+    private final Scoreboard b;
+    private final ScoreObjective c;

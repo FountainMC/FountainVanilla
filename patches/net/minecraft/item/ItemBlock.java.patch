@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/ItemBlock.java
++++ src/main/java/net/minecraft/item/ItemBlock.java
+@@ -70,11 +70,11 @@
+                if(!var0.isClientSide && var5.isFilteredNBT() && (var1 == null || !var1.dh())) {
+                   return false;
+                }
+ 
+                NBTTagCompound var6 = var5.save(new NBTTagCompound());
+-               NBTTagCompound var7 = var6.g();
++               NBTTagCompound var7 = var6.clone();
+                NBTTagCompound var8 = (NBTTagCompound)var3.getTag().get("BlockEntityTag");
+                var6.a(var8);
+                var6.setInt("x", var2.getX());
+                var6.setInt("y", var2.getY());
+                var6.setInt("z", var2.getZ());

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/util/text/TextComponentSelector.java
++++ src/main/java/net/minecraft/util/text/TextComponentSelector.java
+@@ -16,11 +16,11 @@
+ 
+    public String getText() {
+       return this.b;
+    }
+ 
+-   public TextComponentSelector h() {
++   public TextComponentSelector f() {
+       TextComponentSelector var1 = new TextComponentSelector(this.b);
+       var1.setChatModifier(this.getChatModifier().clone());
+ 
+       for(ITextComponent var3 : this.a()) {
+          var1.addSibling(var3.f());

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/tileentity/TileEntityBanner.java
++++ src/main/java/net/minecraft/tileentity/TileEntityBanner.java
+@@ -26,11 +26,11 @@
+    public void a(ItemStack var1) {
+       this.patterns = null;
+       if(var1.hasTag() && var1.getTag().hasKeyOfType("BlockEntityTag", 10)) {
+          NBTTagCompound var2 = var1.getTag().getCompound("BlockEntityTag");
+          if(var2.hasKey("Patterns")) {
+-            this.patterns = var2.getList("Patterns", 10).d();
++            this.patterns = var2.getList("Patterns", 10).clone();
+          }
+ 
+          if(var2.hasKeyOfType("Base", 99)) {
+             this.color = var2.getInt("Base");
+          } else {

@@ -2,14 +2,14 @@
 +++ src/main/java/net/minecraft/util/ObjectIntIdentityMap.java
 @@ -24,11 +24,11 @@
  
-    public void put(T var1, int var2) {
-       this.identityMap.put(var1, Integer.valueOf(var2));
+    public void a(T var1, int var2) {
+       this.a.put(var1, Integer.valueOf(var2));
  
-       while(this.objectList.size() <= var2) {
--         this.objectList.add((Object)null);
-+         this.objectList.add(null);
+       while(this.b.size() <= var2) {
+-         this.b.add((Object)null);
++         this.b.add(null);
        }
  
-       this.objectList.set(var2, var1);
+       this.b.set(var2, var1);
     }
  

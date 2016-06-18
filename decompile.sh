@@ -8,14 +8,11 @@ if [ -d "minecraft/bin" ]; then
 fi;
 mkdir -p "minecraft/bin"
 
-VANILLA_JAR="minecraft/${MINECRAFT_VERSION}.jar"
-if [ ! -d "$VANILLA_JAR" ]; then
-    echo "Downloading $MINECRAFT_VERSION"
-    wget "https://s3.amazonaws.com/Minecraft.Download/versions/${MINECRAFT_VERSION}/minecraft_server.${MINECRAFT_VERSION}.jar" -O $VANILLA_JAR || exit 1;
-fi;
+pushd "Mountain"
+./map.sh
+popd
 
-echo "Applying mappings..."
-java -XX:+UseG1GC -jar lib/SpecialSource.jar map -i "minecraft/${MINECRAFT_VERSION}.jar" -m "mappings/obf2mcp.srg" -o "minecraft/${MINECRAFT_VERSION}-mapped.jar" > /dev/null || exit 1
+mv "Mountain/minecraft/${MINECRAFT_VERSION}-mountain.jar" "minecraft/${MINECRAFT_VERSION}-mapped.jar"
 
 echo "Extracting Minecraft classes"
 pushd "minecraft/bin"

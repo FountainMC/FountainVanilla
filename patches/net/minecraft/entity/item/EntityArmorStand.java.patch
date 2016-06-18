@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/item/EntityArmorStand.java
++++ src/main/java/net/minecraft/entity/item/EntityArmorStand.java
+@@ -53,11 +53,11 @@
+    public static final DataParameter<Rotations> d = EntityDataManager.a(EntityArmorStand.class, DataSerializers.i);
+    public static final DataParameter<Rotations> e = EntityDataManager.a(EntityArmorStand.class, DataSerializers.i);
+    public static final DataParameter<Rotations> f = EntityDataManager.a(EntityArmorStand.class, DataSerializers.i);
+    public static final DataParameter<Rotations> g = EntityDataManager.a(EntityArmorStand.class, DataSerializers.i);
+    private static final Predicate<Entity> bx = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof EntityMinecart && ((EntityMinecart)var1).v() == EntityMinecart.EnumMinecartType.RIDEABLE;
+       }
+    };
+    private final ItemStack[] by;
+    private final ItemStack[] bz;

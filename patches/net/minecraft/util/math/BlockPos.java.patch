@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/util/math/BlockPos.java
++++ src/main/java/net/minecraft/util/math/BlockPos.java
+@@ -139,11 +139,11 @@
+       return new Iterable<BlockPos>() {
+          public Iterator<BlockPos> iterator() {
+             return new AbstractIterator<BlockPos>() {
+                private BlockPos b;
+ 
+-               protected BlockPos a() {
++               protected BlockPos computeNext() {
+                   if(this.b == null) {
+                      this.b = var2;
+                      return this.b;
+                   } else if(this.b.equals(var3)) {
+                      return (BlockPos)this.endOfData();
+@@ -181,11 +181,11 @@
+       return new Iterable<BlockPos.MutableBlockPosition>() {
+          public Iterator<BlockPos.MutableBlockPosition> iterator() {
+             return new AbstractIterator<BlockPos.MutableBlockPosition>() {
+                private BlockPos.MutableBlockPosition b;
+ 
+-               protected BlockPos.MutableBlockPosition a() {
++               protected BlockPos.MutableBlockPosition computeNext() {
+                   if(this.b == null) {
+                      this.b = new BlockPos.MutableBlockPosition(var2.getX(), var2.getY(), var2.getZ());
+                      return this.b;
+                   } else if(this.b.equals(var3)) {
+                      return (BlockPos.MutableBlockPosition)this.endOfData();

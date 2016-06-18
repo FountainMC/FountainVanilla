@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/command/CommandBlockData.java
++++ src/main/java/net/minecraft/command/CommandBlockData.java
+@@ -47,11 +47,11 @@
+             TileEntity var7 = var5.getTileEntity(var4);
+             if(var7 == null) {
+                throw new CommandException("commands.blockdata.notValid", new Object[0]);
+             } else {
+                NBTTagCompound var8 = var7.save(new NBTTagCompound());
+-               NBTTagCompound var9 = var8.g();
++               NBTTagCompound var9 = var8.clone();
+ 
+                NBTTagCompound var10;
+                try {
+                   var10 = JsonToNBT.parse(a(var2, var3, 3).toPlainText());
+                } catch (NBTException var12) {

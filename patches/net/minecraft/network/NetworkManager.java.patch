@@ -1,30 +1,17 @@
 --- minecraft/src/net/minecraft/network/NetworkManager.java
 +++ src/main/java/net/minecraft/network/NetworkManager.java
-@@ -41,11 +41,11 @@
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
- import org.apache.logging.log4j.Marker;
- import org.apache.logging.log4j.MarkerManager;
- 
--public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
-+public class NetworkManager<T extends INetHandler> extends SimpleChannelInboundHandler<Packet<T>> {
-    private static final Logger LOGGER = LogManager.getLogger();
-    public static final Marker NETWORK_MARKER = MarkerManager.getMarker("NETWORK");
-    public static final Marker NETWORK_PACKETS_MARKER = MarkerManager.getMarker("NETWORK_PACKETS", NETWORK_MARKER);
-    public static final AttributeKey<EnumConnectionState> PROTOCOL_ATTRIBUTE_KEY = AttributeKey.valueOf("protocol");
-    public static final LazyLoadBase<NioEventLoopGroup> CLIENT_NIO_EVENTLOOP = new LazyLoadBase<NioEventLoopGroup>() {
 @@ -110,14 +110,14 @@
  
-       LOGGER.debug(var2);
-       this.closeChannel(var3);
+       g.debug(var2);
+       this.close(var3);
     }
  
--   protected void channelRead0(ChannelHandlerContext var1, Packet<?> var2) throws Exception {
-+   protected void channelRead0(ChannelHandlerContext var1, Packet<T> var2) throws Exception {
+-   protected void a(ChannelHandlerContext var1, Packet<?> var2) throws Exception {
++   protected void channelRead0(ChannelHandlerContext var1, Packet<?> var2) throws Exception {
        if(this.channel.isOpen()) {
           try {
--            var2.processPacket(this.packetListener);
-+            var2.processPacket((T)this.packetListener);
+-            var2.a(this.m);
++            var2.a((PacketBuffer) this.m);
           } catch (ThreadQuickExitException var4) {
              ;
           }

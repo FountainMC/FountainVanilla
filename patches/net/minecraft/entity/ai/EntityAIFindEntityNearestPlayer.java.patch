@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIFindEntityNearestPlayer.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIFindEntityNearestPlayer.java
+@@ -31,11 +31,11 @@
+       if(var1 instanceof EntityCreature) {
+          a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
+       }
+ 
+       this.c = new Predicate<Entity>() {
+-         public boolean a(@Nullable Entity var1) {
++         public boolean apply(@Nullable Entity var1) {
+             if(!(var1 instanceof EntityPlayer)) {
+                return false;
+             } else if(((EntityPlayer)var1).abilities.isInvulnerable) {
+                return false;
+             } else {

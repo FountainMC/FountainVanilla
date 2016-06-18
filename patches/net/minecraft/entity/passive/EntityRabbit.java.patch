@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityRabbit.java
++++ src/main/java/net/minecraft/entity/passive/EntityRabbit.java
+@@ -291,11 +291,11 @@
+ 
+    private boolean a(Item var1) {
+       return var1 == Items.CARROT || var1 == Items.GOLDEN_CARROT || var1 == Item.getItemOf(Blocks.YELLOW_FLOWER);
+    }
+ 
+-   public EntityRabbit b(EntityAgeable var1) {
++   public EntityRabbit createChild(EntityAgeable var1) {
+       EntityRabbit var2 = new EntityRabbit(this.world);
+       int var3 = this.dp();
+       if(this.random.nextInt(20) != 0) {
+          if(var1 instanceof EntityRabbit && this.random.nextBoolean()) {
+             var3 = ((EntityRabbit)var1).getRabbitType();

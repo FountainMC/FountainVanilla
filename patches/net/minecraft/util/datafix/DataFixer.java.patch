@@ -5,7 +5,7 @@
        }
     }
  
-    private <V> List<V> getTypeList(Map<IFixType, List<V>> var1, IFixType var2) {
+    private <V> List<V> a(Map<IFixType, List<V>> var1, IFixType var2) {
 -      Object var3 = (List)var1.get(var2);
 +      List<V> var3 = var1.get(var2);
        if(var3 == null) {

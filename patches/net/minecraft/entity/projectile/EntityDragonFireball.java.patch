@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/projectile/EntityDragonFireball.java
 +++ src/main/java/net/minecraft/entity/projectile/EntityDragonFireball.java
-@@ -23,11 +23,11 @@
-       this.setSize(0.3125F, 0.3125F);
+@@ -28,11 +28,11 @@
+       EntityFireball.a(var0, "DragonFireball");
     }
  
-    protected void onImpact(RayTraceResult var1) {
-       if(!this.worldObj.isRemote) {
--         List var2 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D));
-+         List<EntityLivingBase> var2 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D));
-          EntityAreaEffectCloud var3 = new EntityAreaEffectCloud(this.worldObj, this.posX, this.posY, this.posZ);
-          var3.setOwner(this.shootingEntity);
+    protected void a(RayTraceResult var1) {
+       if(!this.world.isClientSide) {
+-         List var2 = this.world.a(EntityLivingBase.class, this.getBoundingBox().grow(4.0D, 2.0D, 4.0D));
++         List<EntityLivingBase> var2 = this.world.a(EntityLivingBase.class, this.getBoundingBox().grow(4.0D, 2.0D, 4.0D));
+          EntityAreaEffectCloud var3 = new EntityAreaEffectCloud(this.world, this.locX, this.locY, this.locZ);
+          var3.setSource(this.shooter);
           var3.setParticle(EnumParticleTypes.DRAGON_BREATH);
           var3.setRadius(3.0F);
           var3.setDuration(2400);

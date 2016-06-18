@@ -1,15 +1,28 @@
 --- minecraft/src/net/minecraft/entity/monster/EntityShulker.java
 +++ src/main/java/net/minecraft/entity/monster/EntityShulker.java
-@@ -264,11 +264,11 @@
-             this.setEntityBoundingBox(new AxisAlignedBB(this.posX - 0.5D - var24, this.posY, this.posZ - 0.5D, this.posX + 0.5D, this.posY + 1.0D, this.posZ + 0.5D));
+@@ -277,11 +277,11 @@
+             this.a((AxisAlignedBB)(new AxisAlignedBB(this.locX - 0.5D - var24, this.locY, this.locZ - 0.5D, this.locX + 0.5D, this.locY + 1.0D, this.locZ + 0.5D)));
              var9 = -var27;
           }
  
           if(var27 > 0.0D) {
--            List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox());
-+            List<Entity> var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox());
+-            List var16 = this.world.getEntities(this, this.getBoundingBox());
++            List<Entity> var16 = this.world.getEntities(this, this.getBoundingBox());
              if(!var16.isEmpty()) {
                 for(Entity var18 : var16) {
-                   if(!(var18 instanceof EntityShulker) && !var18.noClip) {
-                      var18.moveEntity(var9, var11, var13);
+                   if(!(var18 instanceof EntityShulker) && !var18.noclip) {
+                      var18.move(var9, var11, var13);
                    }
+@@ -510,11 +510,11 @@
+    }
+ 
+    static class c extends EntityAINearestAttackableTarget<EntityLivingBase> {
+       public c(EntityShulker var1) {
+          super(var1, EntityLivingBase.class, 10, true, false, new Predicate<EntityLivingBase>() {
+-            public boolean a(@Nullable EntityLivingBase var1) {
++            public boolean apply(@Nullable EntityLivingBase var1) {
+                return var1 instanceof IMob;
+             }
+          });
+       }
+ 

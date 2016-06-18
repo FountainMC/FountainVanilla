@@ -1,26 +1,35 @@
 --- minecraft/src/net/minecraft/block/state/BlockStateBase.java
 +++ src/main/java/net/minecraft/block/state/BlockStateBase.java
-@@ -22,20 +22,20 @@
+@@ -13,29 +13,29 @@
+ 
+ public abstract class BlockStateBase implements IBlockState {
+    private static final Joiner a = Joiner.on(',');
+    private static final Function<Entry<IProperty<?>, Comparable<?>>, String> b = new Function<Entry<IProperty<?>, Comparable<?>>, String>() {
+       @Nullable
+-      public String a(@Nullable Entry<IProperty<?>, Comparable<?>> var1) {
++      public String apply(@Nullable Entry<IProperty<?>, Comparable<?>> var1) {
+          if(var1 == null) {
+             return "<NULL>";
+          } else {
              IProperty var2 = (IProperty)var1.getKey();
-             return var2.getName() + "=" + this.getPropertyName(var2, (Comparable)var1.getValue());
+             return var2.a() + "=" + this.a(var2, (Comparable)var1.getValue());
           }
        }
  
--      private <T extends Comparable<T>> String getPropertyName(IProperty<T> var1, Comparable<?> var2) {
--         return var1.getName(var2);
-+      private <T extends Comparable<T>> String getPropertyName(IProperty<T> var1, Comparable<T> var2) {
-+         return var1.getName((T) var2);
+       private <T extends Comparable<T>> String a(IProperty<T> var1, Comparable<?> var2) {
+-         return var1.a(var2);
++         return var1.a((T) var2);
        }
     };
  
     public BlockStateBase() {
     }
  
-    public <T extends Comparable<T>> IBlockState cycleProperty(IProperty<T> var1) {
--      return this.withProperty(var1, (Comparable)cyclePropertyValue(var1.getAllowedValues(), this.getValue(var1)));
-+      return this.withProperty(var1, cyclePropertyValue(var1.getAllowedValues(), this.getValue(var1)));
+    public <T extends Comparable<T>> IBlockState a(IProperty<T> var1) {
+-      return this.set(var1, (Comparable)a(var1.c(), this.get(var1)));
++      return this.set(var1, a(var1.c(), this.get(var1)));
     }
  
-    protected static <T> T cyclePropertyValue(Collection<T> var0, T var1) {
+    protected static <T> T a(Collection<T> var0, T var1) {
        Iterator var2 = var0.iterator();
  

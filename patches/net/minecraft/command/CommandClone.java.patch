@@ -1,7 +1,7 @@
 --- minecraft/src/net/minecraft/command/CommandClone.java
 +++ src/main/java/net/minecraft/command/CommandClone.java
-@@ -80,14 +80,14 @@
-                               var12 = parseInt(var3[12], 0, 15);
+@@ -81,14 +81,14 @@
+                               var12 = a(var3[12], 0, 15);
                             }
                          }
                       }
@@ -10,43 +10,43 @@
 -                     ArrayList var16 = Lists.newArrayList();
 -                     ArrayList var17 = Lists.newArrayList();
 -                     LinkedList var18 = Lists.newLinkedList();
-+                     ArrayList<CommandClone.a> var15 = Lists.newArrayList();
-+                     ArrayList<CommandClone.a> var16 = Lists.newArrayList();
-+                     ArrayList<CommandClone.a> var17 = Lists.newArrayList();
++                     ArrayList<CommandClone.CommandCloneStoredTileEntity> var15 = Lists.newArrayList();
++                     ArrayList<CommandClone.CommandCloneStoredTileEntity> var16 = Lists.newArrayList();
++                     ArrayList<CommandClone.CommandCloneStoredTileEntity> var17 = Lists.newArrayList();
 +                     LinkedList<BlockPos> var18 = Lists.newLinkedList();
-                      BlockPos var19 = new BlockPos(var8.minX - var7.minX, var8.minY - var7.minY, var8.minZ - var7.minZ);
+                      BlockPos var19 = new BlockPos(var8.a - var7.a, var8.b - var7.b, var8.c - var7.c);
  
-                      for(int var20 = var7.minZ; var20 <= var7.maxZ; ++var20) {
-                         for(int var21 = var7.minY; var21 <= var7.maxY; ++var21) {
-                            for(int var22 = var7.minX; var22 <= var7.maxX; ++var22) {
-@@ -125,15 +125,15 @@
+                      for(int var20 = var7.c; var20 <= var7.f; ++var20) {
+                         for(int var21 = var7.b; var21 <= var7.e; ++var21) {
+                            for(int var22 = var7.a; var22 <= var7.d; ++var22) {
+@@ -126,15 +126,15 @@
                          for(BlockPos var33 : var18) {
-                            var13.setBlockState(var33, Blocks.AIR.getDefaultState(), 3);
+                            var13.setTypeAndData(var33, Blocks.AIR.getBlockData(), 3);
                          }
                       }
  
 -                     ArrayList var31 = Lists.newArrayList();
-+                     ArrayList<CommandClone.a> var31 = Lists.newArrayList();
++                     ArrayList<CommandClone.CommandCloneStoredTileEntity> var31 = Lists.newArrayList();
                       var31.addAll(var15);
                       var31.addAll(var16);
                       var31.addAll(var17);
 -                     List var34 = Lists.reverse(var31);
-+                     List<CommandClone.a> var34 = Lists.reverse(var31);
++                     List<CommandClone.CommandCloneStoredTileEntity> var34 = Lists.reverse(var31);
  
-                      for(CommandClone.a var41 : var34) {
-                         TileEntity var46 = var13.getTileEntity(var41.pos);
+                      for(CommandClone.CommandCloneStoredTileEntity var41 : var34) {
+                         TileEntity var46 = var13.getTileEntity(var41.a);
                          if(var46 instanceof IInventory) {
-                            ((IInventory)var46).clear();
-@@ -165,11 +165,11 @@
+                            ((IInventory)var46).initWorldChunkLoad();
+@@ -166,11 +166,11 @@
  
-                      for(CommandClone.a var44 : var34) {
-                         var13.notifyNeighborsRespectDebug(var44.pos, var44.blockState.getBlock());
+                      for(CommandClone.CommandCloneStoredTileEntity var44 : var34) {
+                         var13.update(var44.a, var44.b.getBlock());
                       }
  
--                     List var40 = var13.getPendingBlockUpdates(var7, false);
-+                     List<NextTickListEntry> var40 = var13.getPendingBlockUpdates(var7, false);
+-                     List var40 = var13.a(var7, false);
++                     List<NextTickListEntry> var40 = var13.a(var7, false);
                       if(var40 != null) {
                          for(NextTickListEntry var48 : var40) {
-                            if(var7.isVecInside(var48.position)) {
-                               BlockPos var49 = var48.position.add(var19);
-                               var13.scheduleBlockUpdate(var49, var48.getBlock(), (int)(var48.scheduledTime - var13.getWorldInfo().getWorldTotalTime()), var48.priority);
+                            if(var7.b((Vec3i)var48.a)) {
+                               BlockPos var49 = var48.a.a(var19);
+                               var13.b(var49, var48.a(), (int)(var48.b - var13.getWorldData().getTime()), var48.c);

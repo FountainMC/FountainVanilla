@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/monster/EntitySkeleton.java
 +++ src/main/java/net/minecraft/entity/monster/EntitySkeleton.java
-@@ -56,11 +56,11 @@
+@@ -63,11 +63,11 @@
  
  public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
-    private static final DataParameter<Integer> SKELETON_VARIANT = EntityDataManager.<Integer>createKey(EntitySkeleton.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntitySkeleton.class, DataSerializers.BOOLEAN);
-    private final EntityAIAttackRangedBow aiArrowAttack = new EntityAIAttackRangedBow(this, 1.0D, 20, 15.0F);
--   private final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.2D, var5) {
-+   private final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.2D, false) {
-       public void resetTask() {
-          super.resetTask();
-          EntitySkeleton.this.setSwingingArms(false);
+    private static final DataParameter<Integer> a = EntityDataManager.a(EntitySkeleton.class, DataSerializers.b);
+    private static final DataParameter<Boolean> b = EntityDataManager.a(EntitySkeleton.class, DataSerializers.h);
+    private final EntityAIAttackRangedBow c = new EntityAIAttackRangedBow(this, 1.0D, 20, 15.0F);
+-   private final EntityAIAttackMelee bx = new EntityAIAttackMelee(this, 1.2D, var5) {
++   private final EntityAIAttackMelee bx = new EntityAIAttackMelee(this, 1.2D, false) {
+       public void d() {
+          super.d();
+          EntitySkeleton.this.a(false);
        }
  

@@ -1,15 +1,28 @@
 --- minecraft/src/net/minecraft/world/end/DragonFightManager.java
 +++ src/main/java/net/minecraft/world/end/DragonFightManager.java
-@@ -287,11 +287,11 @@
-       for(EntityPlayerMP var3 : this.world.getPlayers(EntityPlayerMP.class, VALID_PLAYER)) {
-          this.bossInfo.addPlayer(var3);
+@@ -292,11 +292,11 @@
+       for(EntityPlayerMP var3 : this.d.b(EntityPlayerMP.class, b)) {
+          this.c.addPlayer(var3);
           var1.add(var3);
        }
  
--      HashSet var5 = Sets.newHashSet(this.bossInfo.getPlayers());
-+      HashSet<EntityPlayerMP> var5 = Sets.newHashSet(this.bossInfo.getPlayers());
+-      HashSet var5 = Sets.newHashSet(this.c.getPlayers());
++      HashSet<EntityPlayerMP> var5 = Sets.newHashSet(this.c.getPlayers());
        var5.removeAll(var1);
  
        for(EntityPlayerMP var4 : var5) {
-          this.bossInfo.removePlayer(var4);
+          this.c.removePlayer(var4);
        }
+@@ -454,11 +454,11 @@
+ 
+    }
+ 
+    public void f() {
+       for(WorldGenSpikes.Spike var4 : BiomeEndDecorator.a(this.d)) {
+-         for(EntityEnderCrystal var7 : this.d.a((Class)EntityEnderCrystal.class, (AxisAlignedBB)var4.f())) {
++         for(EntityEnderCrystal var7 : this.d.a(EntityEnderCrystal.class, (AxisAlignedBB)var4.f())) {
+             var7.setInvulnerable(false);
+             var7.setBeamTarget((BlockPos)null);
+          }
+       }
+ 

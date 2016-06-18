@@ -1,0 +1,51 @@
+--- minecraft/src/net/minecraft/crash/CrashReportCategory.java
++++ src/main/java/net/minecraft/crash/CrashReportCategory.java
+@@ -151,43 +151,43 @@
+    }
+ 
+    public static void a(CrashReportCategory var0, final BlockPos var1, final Block var2, final int var3) {
+       final int var4 = Block.getId(var2);
+       var0.a("Block type", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             try {
+                return String.format("ID #%d (%s // %s)", new Object[]{Integer.valueOf(var4), var2.a(), var2.getClass().getCanonicalName()});
+             } catch (Throwable var2x) {
+                return "ID #" + var4;
+             }
+          }
+       });
+       var0.a("Block data value", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             if(var3 < 0) {
+                return "Unknown? (Got " + var3 + ")";
+             } else {
+                String var1 = String.format("%4s", new Object[]{Integer.toBinaryString(var3)}).replace(" ", "0");
+                return String.format("%1$d / 0x%1$X / 0b%2$s", new Object[]{Integer.valueOf(var3), var1});
+             }
+          }
+       });
+       var0.a("Block location", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return CrashReportCategory.a(var1);
+          }
+       });
+    }
+ 
+    public static void a(CrashReportCategory var0, final BlockPos var1, final IBlockState var2) {
+       var0.a("Block", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return var2.toString();
+          }
+       });
+       var0.a("Block location", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return CrashReportCategory.a(var1);
+          }
+       });
+    }
+ 

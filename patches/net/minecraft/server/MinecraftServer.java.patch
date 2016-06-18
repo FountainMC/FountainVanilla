@@ -1,193 +1,35 @@
 --- minecraft/src/net/minecraft/server/MinecraftServer.java
 +++ src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -80,10 +80,16 @@
- import net.minecraft.world.storage.ISaveHandler;
- import net.minecraft.world.storage.WorldInfo;
- import org.apache.commons.lang3.Validate;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
-+import org.fountainmc.api.Blocks;
-+import org.fountainmc.api.Fountain;
-+import org.fountainmc.api.event.server.ServerStartEvent;
-+import org.fountainmc.api.event.server.ServerStopEvent;
-+import org.fountainmc.plugin.WetPluginManager;
-+import org.fountainmc.world.block.WetBlockState;
- 
- public abstract class MinecraftServer implements Runnable, ICommandSender, IThreadListener, ISnooperInfo {
-    private static final Logger LOG = LogManager.getLogger();
-    public static final File USER_CACHE_FILE = new File("usercache.json");
-    private final ISaveFormat anvilConverterForAnvilFile;
-@@ -135,10 +141,16 @@
-    private long nanoTimeSinceStatusRefresh = 0L;
-    protected final Queue<FutureTask<?>> futureTaskQueue = Queues.newArrayDeque();
-    private Thread serverThread;
-    private long currentTime = getCurrentTimeMillis();
- 
-+   private static DedicatedServer dedicatedServer = null;
-+
-+   public static DedicatedServer getDedicatedServer() {
-+       return dedicatedServer;
-+   }
-+
-    public MinecraftServer(File var1, Proxy var2, DataFixer var3, YggdrasilAuthenticationService var4, MinecraftSessionService var5, GameProfileRepository var6, PlayerProfileCache var7) {
-       this.serverProxy = var2;
-       this.authService = var4;
-       this.sessionService = var5;
-       this.profileRepo = var6;
-@@ -243,14 +255,10 @@
-       this.setDifficultyForAllWorlds(this.getDifficulty());
-       this.initialWorldChunkLoad();
-    }
- 
-    protected void initialWorldChunkLoad() {
--      boolean var1 = true;
--      boolean var2 = true;
--      boolean var3 = true;
--      boolean var4 = true;
-       int var5 = 0;
-       this.setUserMessage("menu.generatingTerrain");
-       byte var6 = 0;
-       LOG.info("Preparing start region for level " + var6);
-       WorldServer var7 = this.worldServers[var6];
-@@ -322,10 +330,11 @@
-       }
- 
-    }
- 
-    protected void stopServer() {
-+      Fountain.getServer().getEventManager().fire(ServerStopEvent.create(Fountain.getServer())); // Fountain - ServerStopEvent
-       LOG.info("Stopping server");
-       if(this.getNetworkSystem() != null) {
-          this.getNetworkSystem().terminateEndpoints();
-       }
- 
-@@ -532,11 +541,11 @@
- 
-    public void updateTimeLightAndEntities() {
-       this.theProfiler.startSection("jobs");
-       synchronized(this.futureTaskQueue) {
-          while(!this.futureTaskQueue.isEmpty()) {
--            Util.runTask((FutureTask)this.futureTaskQueue.poll(), LOG);
-+            Util.runTask((FutureTask<?>)this.futureTaskQueue.poll(), LOG);
-          }
-       }
- 
-       this.theProfiler.endStartSection("levels");
- 
-@@ -599,14 +608,18 @@
-    public void registerTickable(ITickable var1) {
-       this.tickables.add(var1);
-    }
- 
-    public static void main(String[] var0) {
-+      if (Fountain.getServer() == null) {
-+          System.out.println("You ran the wrong class! You need to run org.fountainmc.Main");
-+          return;
-+      }
-       Bootstrap.register();
- 
-       try {
--         boolean var1 = true;
-+         boolean var1 = false;
-          String var2 = null;
-          String var3 = ".";
-          String var4 = null;
-          boolean var5 = false;
-          boolean var6 = false;
-@@ -614,11 +627,11 @@
- 
-          for(int var8 = 0; var8 < var0.length; ++var8) {
-             String var9 = var0[var8];
-             String var10 = var8 == var0.length - 1?null:var0[var8 + 1];
-             boolean var11 = false;
--            if(!var9.equals("nogui") && !var9.equals("--nogui")) {
-+            if(var9.equals("gui") && var9.equals("nogui")) {
-                if(var9.equals("--port") && var10 != null) {
-                   var11 = true;
- 
-                   try {
-                      var7 = Integer.parseInt(var10);
-@@ -676,10 +689,18 @@
-          if(var1 && !GraphicsEnvironment.isHeadless()) {
-             var12.setGuiEnabled();
-          }
- 
-          var12.startServerThread();
-+         // Fountain start
-+         dedicatedServer = var12;
-+         WetBlockState.createFactories();
-+         Blocks.registerBlocks();
-+         LogManager.getLogger().info("Loading plugins...");
-+         ((WetPluginManager)Fountain.getServer().getPluginManager()).loadPlugins(new File("plugins"));
-+         Fountain.getServer().getEventManager().fire(ServerStartEvent.create(Fountain.getServer()));
-+         // Fountain end
-          Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
-             public void run() {
-                var12.stopServer();
-             }
-          });
-@@ -744,11 +765,11 @@
-       }
- 
-    }
- 
-    public String getServerModName() {
--      return "vanilla";
-+      return "fountain"; // Fountain
+@@ -751,17 +751,17 @@
+       return "vanilla";
     }
  
     public CrashReport addServerInfoToCrashReport(CrashReport var1) {
-       var1.getCategory().setDetail("Profiler Position", new ICrashReportDetail<String>() {
-          public String call() throws Exception {
-@@ -765,11 +786,11 @@
- 
-       return var1;
-    }
- 
-    public List<String> getTabCompletions(ICommandSender var1, String var2, @Nullable BlockPos var3, boolean var4) {
--      ArrayList var5 = Lists.newArrayList();
-+      ArrayList<String> var5 = Lists.newArrayList();
-       boolean var6 = var2.startsWith("/");
-       if(var6) {
-          var2 = var2.substring(1);
+       var1.g().a("Profiler Position", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return MinecraftServer.this.methodProfiler.a?MinecraftServer.this.methodProfiler.c():"N/A (disabled)";
+          }
+       });
+       if(this.playerList != null) {
+          var1.g().a("Player Count", new ICrashReportDetail<String>() {
+-            public String a() {
++            public String call() {
+                return MinecraftServer.this.playerList.getPlayerCount() + " / " + MinecraftServer.this.playerList.getMaxPlayers() + "; " + MinecraftServer.this.playerList.v();
+             }
+          });
        }
  
-@@ -784,11 +805,11 @@
+@@ -786,11 +786,11 @@
           }
  
           return var5;
        } else {
           boolean var7 = !var2.contains(" ");
--         List var8 = this.commandManager.getTabCompletionOptions(var1, var2, var3);
-+         List<String> var8 = this.commandManager.getTabCompletionOptions(var1, var2, var3);
+-         List var8 = this.commandManager.a(var1, var2, var3);
++         List<String> var8 = this.commandManager.a(var1, var2, var3);
           if(!var8.isEmpty()) {
              for(String var10 : var8) {
                 if(var7) {
                    var5.add("/" + var10);
                 } else {
-@@ -950,11 +971,11 @@
-       var1.addStatToSnooper("gui_supported", GraphicsEnvironment.isHeadless()?"headless":"supported");
-       var1.addStatToSnooper("dedicated", Boolean.valueOf(this.isDedicatedServer()));
-    }
- 
-    public boolean isSnooperEnabled() {
--      return true;
-+      return org.fountainmc.FountainConfig.getInstance().isSnooperEnabled();
-    }
- 
-    public abstract boolean isDedicatedServer();
- 
-    public boolean isServerInOnlineMode() {
-@@ -1160,11 +1181,11 @@
-    }
- 
-    public <V> ListenableFuture<V> callFromMainThread(Callable<V> var1) {
-       Validate.notNull(var1);
-       if(!this.isCallingFromMinecraftThread() && !this.isServerStopped()) {
--         ListenableFutureTask var2 = ListenableFutureTask.create(var1);
-+         ListenableFutureTask<V> var2 = ListenableFutureTask.create(var1);
-          synchronized(this.futureTaskQueue) {
-             this.futureTaskQueue.add(var2);
-             return var2;
-          }
-       } else {

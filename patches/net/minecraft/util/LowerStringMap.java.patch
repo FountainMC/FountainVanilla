@@ -1,15 +1,27 @@
 --- minecraft/src/net/minecraft/util/LowerStringMap.java
 +++ src/main/java/net/minecraft/util/LowerStringMap.java
-@@ -39,11 +39,11 @@
+@@ -30,21 +30,21 @@
+ 
+    public V get(Object var1) {
+       return (V)this.a.get(var1.toString().toLowerCase());
+    }
+ 
+-   public V a(String var1, V var2) {
++   public V put(String var1, V var2) {
+       return (V)this.a.put(var1.toLowerCase(), var2);
+    }
+ 
     public V remove(Object var1) {
-       return (V)this.internalMap.remove(var1.toString().toLowerCase());
+       return (V)this.a.remove(var1.toString().toLowerCase());
     }
  
     public void putAll(Map<? extends String, ? extends V> var1) {
 -      for(Entry var3 : var1.entrySet()) {
+-         this.a((String)var3.getKey(), var3.getValue());
 +      for(Entry<? extends String, ? extends V> var3 : var1.entrySet()) {
-          this.put((String)var3.getKey(), var3.getValue());
++         this.put((String)var3.getKey(), var3.getValue());
        }
  
     }
  
+    public void clear() {

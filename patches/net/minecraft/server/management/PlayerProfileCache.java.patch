@@ -1,15 +1,38 @@
 --- minecraft/src/net/minecraft/server/management/PlayerProfileCache.java
 +++ src/main/java/net/minecraft/server/management/PlayerProfileCache.java
 @@ -179,11 +179,11 @@
-    public void load() {
+    public void b() {
        BufferedReader var1 = null;
  
        try {
-          var1 = Files.newReader(this.usercacheFile, Charsets.UTF_8);
--         List var2 = (List)this.gson.fromJson(var1, TYPE);
-+         List<PlayerProfileCache.a> var2 = this.gson.fromJson(var1, TYPE);
-          this.usernameToProfileEntryMap.clear();
-          this.uuidToProfileEntryMap.clear();
-          this.gameProfiles.clear();
+          var1 = Files.newReader(this.h, Charsets.UTF_8);
+-         List var2 = (List)this.b.fromJson(var1, i);
++         List<PlayerProfileCache.UserCacheEntry> var2 = this.b.fromJson(var1, i);
+          this.d.clear();
+          this.e.clear();
+          this.f.clear();
           if(var2 != null) {
-             for(PlayerProfileCache.a var4 : Lists.reverse(var2)) {
+             for(PlayerProfileCache.UserCacheEntry var4 : Lists.reverse(var2)) {
+@@ -253,20 +253,20 @@
+ 
+    class BanEntrySerializer implements JsonDeserializer<PlayerProfileCache.UserCacheEntry>, JsonSerializer<PlayerProfileCache.UserCacheEntry> {
+       private BanEntrySerializer() {
+       }
+ 
+-      public JsonElement a(PlayerProfileCache.UserCacheEntry var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(PlayerProfileCache.UserCacheEntry var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          var4.addProperty("name", var1.a().getName());
+          UUID var5 = var1.a().getId();
+          var4.addProperty("uuid", var5 == null?"":var5.toString());
+          var4.addProperty("expiresOn", PlayerProfileCache.a.format(var1.b()));
+          return var4;
+       }
+ 
+-      public PlayerProfileCache.UserCacheEntry a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public PlayerProfileCache.UserCacheEntry deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          if(var1.isJsonObject()) {
+             JsonObject var4 = var1.getAsJsonObject();
+             JsonElement var5 = var4.get("name");
+             JsonElement var6 = var4.get("uuid");
+             JsonElement var7 = var4.get("expiresOn");

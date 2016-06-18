@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagIntArray.java
++++ src/main/java/net/minecraft/nbt/NBTTagIntArray.java
+@@ -50,11 +50,11 @@
+       }
+ 
+       return var1 + "]";
+    }
+ 
+-   public NBTTagIntArray c() {
++   public NBTTagIntArray clone() {
+       int[] var1 = new int[this.data.length];
+       System.arraycopy(this.data, 0, var1, 0, this.data.length);
+       return new NBTTagIntArray(var1);
+    }
+ 

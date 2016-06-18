@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/inventory/InventoryHelper.java
++++ src/main/java/net/minecraft/inventory/InventoryHelper.java
+@@ -41,11 +41,11 @@
+          }
+ 
+          var7.count -= var11;
+          EntityItem var12 = new EntityItem(var0, var1 + (double)var8, var3 + (double)var9, var5 + (double)var10, new ItemStack(var7.getItem(), var11, var7.getData()));
+          if(var7.hasTag()) {
+-            var12.getItemStack().setTag(var7.getTag().g());
++            var12.getItemStack().setTag(var7.getTag().clone());
+          }
+ 
+          float var13 = 0.05F;
+          var12.motX = a.nextGaussian() * 0.05000000074505806D;
+          var12.motY = a.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D;

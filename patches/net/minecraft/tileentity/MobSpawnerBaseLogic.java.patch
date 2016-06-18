@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/tileentity/MobSpawnerBaseLogic.java
++++ src/main/java/net/minecraft/tileentity/MobSpawnerBaseLogic.java
+@@ -182,11 +182,11 @@
+          var1.setShort("MaxSpawnDelay", (short)this.maxSpawnDelay);
+          var1.setShort("SpawnCount", (short)this.spawnCount);
+          var1.setShort("MaxNearbyEntities", (short)this.maxNearbyEntities);
+          var1.setShort("RequiredPlayerRange", (short)this.requiredPlayerRange);
+          var1.setShort("SpawnRange", (short)this.spawnRange);
+-         var1.set("SpawnData", this.spawnData.b().g());
++         var1.set("SpawnData", this.spawnData.b().clone());
+          NBTTagList var3 = new NBTTagList();
+          if(this.mobs.isEmpty()) {
+             var3.add(this.spawnData.a());
+          } else {
+             for(WeightedSpawnerEntity var5 : this.mobs) {

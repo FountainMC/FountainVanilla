@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/projectile/EntityArrow.java
++++ src/main/java/net/minecraft/entity/projectile/EntityArrow.java
+@@ -33,11 +33,11 @@
+ import net.minecraft.util.math.Vec3d;
+ import net.minecraft.world.World;
+ 
+ public abstract class EntityArrow extends Entity implements IProjectile {
+    private static final Predicate<Entity> f = Predicates.and(new Predicate[]{EntitySelectors.e, EntitySelectors.a, new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1.isInteractable();
+       }
+    }});
+    private static final DataParameter<Byte> g = EntityDataManager.a(EntityArrow.class, DataSerializers.a);
+    private int h;

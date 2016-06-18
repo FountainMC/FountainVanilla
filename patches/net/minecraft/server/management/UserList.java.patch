@@ -1,32 +1,101 @@
 --- minecraft/src/net/minecraft/server/management/UserList.java
 +++ src/main/java/net/minecraft/server/management/UserList.java
-@@ -147,26 +147,26 @@
+@@ -67,11 +67,11 @@
+    public File c() {
+       return this.c;
+    }
+ 
+    public void add(V var1) {
+-      this.d.put(this.a(var1.getKey()), var1);
++      this.d.put(this.getObjectKey(var1.getKey()), var1);
+ 
+       try {
+          this.save();
+       } catch (IOException var3) {
+          a.warn("Could not save the list after adding a user.", var3);
+@@ -79,15 +79,15 @@
+ 
+    }
+ 
+    public V get(K var1) {
+       this.h();
+-      return (V)((UserListEntry)this.d.get(this.a(var1)));
++      return (V)((UserListEntry)this.d.get(this.getObjectKey(var1)));
+    }
+ 
+    public void remove(K var1) {
+-      this.d.remove(this.a(var1));
++      this.d.remove(this.getObjectKey(var1));
+ 
+       try {
+          this.save();
+       } catch (IOException var3) {
+          a.warn("Could not save the list after removing a user.", var3);
+@@ -101,16 +101,16 @@
+ 
+    public boolean isEmpty() {
+       return this.d.size() < 1;
+    }
+ 
+-   protected String a(K var1) {
++   protected String getObjectKey(K var1) {
+       return var1.toString();
+    }
+ 
+    protected boolean d(K var1) {
+-      return this.d.containsKey(this.a(var1));
++      return this.d.containsKey(this.getObjectKey(var1));
+    }
+ 
+    private void h() {
+       ArrayList var1 = Lists.newArrayList();
+ 
+@@ -147,43 +147,43 @@
        }
  
     }
  
-    public void readSavedFile() throws FileNotFoundException {
+    public void load() throws FileNotFoundException {
 -      Collection var1 = null;
 +      Collection<UserListEntry> var1 = null;
        BufferedReader var2 = null;
  
        try {
-          var2 = Files.newReader(this.saveFile, Charsets.UTF_8);
--         var1 = (Collection)this.gson.fromJson(var2, USER_LIST_ENTRY_TYPE);
-+         var1 = this.gson.fromJson(var2, USER_LIST_ENTRY_TYPE);
+          var2 = Files.newReader(this.c, Charsets.UTF_8);
+-         var1 = (Collection)this.b.fromJson(var2, f);
++         var1 = this.b.fromJson(var2, f);
        } finally {
           IOUtils.closeQuietly(var2);
        }
  
        if(var1 != null) {
-          this.values.clear();
+          this.d.clear();
  
           for(UserListEntry var4 : var1) {
-             if(var4.getValue() != null) {
--               this.values.put(this.getObjectKey(var4.getValue()), var4);
-+               this.values.put(this.getObjectKey((K) var4.getValue()), (V) var4);
+             if(var4.getKey() != null) {
+-               this.d.put(this.a(var4.getKey()), var4);
++               this.d.put(this.getObjectKey((K) var4.getKey()), (V) var4);
              }
           }
        }
  
     }
+ 
+    class JsonListEntrySerializer implements JsonDeserializer<UserListEntry<K>>, JsonSerializer<UserListEntry<K>> {
+       private JsonListEntrySerializer() {
+       }
+ 
+-      public JsonElement a(UserListEntry<K> var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(UserListEntry<K> var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          var1.a(var4);
+          return var4;
+       }
+ 
+-      public UserListEntry<K> a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public UserListEntry<K> deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          if(var1.isJsonObject()) {
+             JsonObject var4 = var1.getAsJsonObject();
+             return UserList.this.a(var4);
+          } else {
+             return null;

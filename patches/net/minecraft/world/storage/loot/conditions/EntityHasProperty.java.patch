@@ -1,20 +1,24 @@
 --- minecraft/src/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java
 +++ src/main/java/net/minecraft/world/storage/loot/conditions/EntityHasProperty.java
-@@ -57,15 +57,15 @@
+@@ -54,17 +54,17 @@
+ 
           var1.add("properties", var4);
-          var1.add("entity", var3.serialize(var2.target));
+          var1.add("entity", var3.serialize(var2.b));
        }
  
-       public EntityHasProperty deserialize(JsonObject var1, JsonDeserializationContext var2) {
--         Set var3 = JsonUtils.getJsonObject(var1, "properties").entrySet();
-+         Set<Entry<String, JsonElement>> var3 = JsonUtils.getJsonObject(var1, "properties").entrySet();
+-      public EntityHasProperty a(JsonObject var1, JsonDeserializationContext var2) {
+-         Set var3 = JsonUtils.t(var1, "properties").entrySet();
++      public EntityHasProperty b(JsonObject var1, JsonDeserializationContext var2) {
++         Set<Entry<String, JsonElement>> var3 = JsonUtils.t(var1, "properties").entrySet();
           EntityProperty[] var4 = new EntityProperty[var3.size()];
           int var5 = 0;
  
 -         for(Entry var7 : var3) {
+-            var4[var5++] = EntityPropertyManager.a(new ResourceLocation((String)var7.getKey())).a((JsonElement)var7.getValue(), var2);
 +         for(Entry<String, JsonElement> var7 : var3) {
-             var4[var5++] = EntityPropertyManager.getSerializerForName(new ResourceLocation((String)var7.getKey())).deserialize((JsonElement)var7.getValue(), var2);
++            var4[var5++] = EntityPropertyManager.a(new ResourceLocation(var7.getKey())).a(var7.getValue(), var2);
           }
  
-          return new EntityHasProperty(var4, (LootContext.b)JsonUtils.deserializeClass(var1, "entity", var2, LootContext.b.class));
+          return new EntityHasProperty(var4, (LootContext.EntityTarget)JsonUtils.a(var1, "entity", var2, LootContext.EntityTarget.class));
        }
+    }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MINECRAFT_VERSION="1.9.4";
+MINECRAFT_VERSION="1.10";
 JDIFF_JAR="work/JDiff.jar";
 
 mkdir -p work

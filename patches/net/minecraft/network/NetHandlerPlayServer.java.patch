@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/NetHandlerPlayServer.java
++++ src/main/java/net/minecraft/network/NetHandlerPlayServer.java
+@@ -685,11 +685,11 @@
+          this.networkManager.sendPacket(var1);
+       } catch (Throwable var5) {
+          CrashReport var6 = CrashReport.a(var5, "Sending packet");
+          CrashReportCategory var4 = var6.a("Packet being sent");
+          var4.a("Packet class", new ICrashReportDetail<String>() {
+-            public String a() throws Exception {
++            public String call() throws Exception {
+                return var1.getClass().getCanonicalName();
+             }
+          });
+          throw new ReportedException(var6);
+       }

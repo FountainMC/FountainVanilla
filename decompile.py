@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import shutil
 from os import path
 from scripts.core import minecraft_version
 from urllib.request import urlretrieve
@@ -13,13 +14,10 @@ if path.exists("minecraft/bin"):
     rmtree("minecraft/bin")
 os.makedirs("minecraft/bin")
 
-vanillaJar=path.join("minecraft", minecraft_version + ".jar")
-if not path.exists(vanillaJar):
-    print("Downloading", minecraft_version)
-    urlretrieve("https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar".format(minecraft_version), "minecraft/" + minecraft_version + ".jar")
+if not path.exists("minecraft/{0}-mapped.jar".format(minecraft_version)):
+    shutil.copy("Mountain/minecraft/{0}-mountain.jar".format(minecraft_version), "minecraft")
+    os.rename("minecraft/{0}-mountain.jar".format(minecraft_version), "minecraft/{0}-mapped.jar".format(minecraft_version))
 
-print("Applying mappings...")
-run(["java", "-XX:+UseG1GC", "-jar", "lib/SpecialSource.jar", "map", "-i", "minecraft/{}.jar".format(minecraft_version), "-m", "mappings/obf2mcp.srg", "-o", "minecraft/{0}-mapped.jar".format(minecraft_version)], check=True, stdout=DEVNULL)
 
 print("Extracting Minecraft classes")
 with ZipFile("minecraft/{0}-mapped.jar".format(minecraft_version), "r") as minecraftJar:

@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/entity/player/InventoryPlayer.java
++++ src/main/java/net/minecraft/entity/player/InventoryPlayer.java
+@@ -155,11 +155,11 @@
+       } else {
+          ItemStack var5 = this.getItem(var4);
+          if(var5 == null) {
+             var5 = new ItemStack(var2, 0, var1.getData());
+             if(var1.hasTag()) {
+-               var5.setTag(var1.getTag().g());
++               var5.setTag(var1.getTag().clone());
+             }
+ 
+             this.setItem(var4, var5);
+          }
+ 
+@@ -247,11 +247,11 @@
+             CrashReport var3 = CrashReport.a(var5, "Adding item to inventory");
+             CrashReportCategory var4 = var3.a("Item being added");
+             var4.a((String)"Item ID", Integer.valueOf(Item.getId(var1.getItem())));
+             var4.a((String)"Item data", Integer.valueOf(var1.getData()));
+             var4.a("Item name", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   return var1.getName();
+                }
+             });
+             throw new ReportedException(var3);
+          }

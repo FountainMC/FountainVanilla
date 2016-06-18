@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockOldLog.java
++++ src/main/java/net/minecraft/block/BlockOldLog.java
+@@ -12,11 +12,11 @@
+ import net.minecraft.item.Item;
+ import net.minecraft.item.ItemStack;
+ 
+ public class BlockOldLog extends BlockLog {
+    public static final PropertyEnum<BlockPlanks.EnumLogVariant> VARIANT = PropertyEnum.a("variant", BlockPlanks.EnumLogVariant.class, new Predicate<BlockPlanks.EnumLogVariant>() {
+-      public boolean a(@Nullable BlockPlanks.EnumLogVariant var1) {
++      public boolean apply(@Nullable BlockPlanks.EnumLogVariant var1) {
+          return var1.a() < 4;
+       }
+    });
+ 
+    public BlockOldLog() {

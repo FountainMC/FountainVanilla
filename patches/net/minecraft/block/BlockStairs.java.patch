@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/block/BlockStairs.java
 +++ src/main/java/net/minecraft/block/BlockStairs.java
-@@ -220,11 +220,11 @@
-       return var3 != EnumFacing.DOWN && (var3 == EnumFacing.UP || (double)var5 <= 0.5D)?var9.withProperty(HALF, BlockStairs.a.BOTTOM):var9.withProperty(HALF, BlockStairs.a.TOP);
+@@ -221,11 +221,11 @@
+       return var3 != EnumFacing.DOWN && (var3 == EnumFacing.UP || (double)var5 <= 0.5D)?var9.set(HALF, BlockStairs.EnumHalf.BOTTOM):var9.set(HALF, BlockStairs.EnumHalf.TOP);
     }
  
     @Nullable
-    public RayTraceResult collisionRayTrace(IBlockState var1, World var2, BlockPos var3, Vec3d var4, Vec3d var5) {
+    public RayTraceResult a(IBlockState var1, World var2, BlockPos var3, Vec3d var4, Vec3d var5) {
 -      ArrayList var6 = Lists.newArrayList();
 +      ArrayList<RayTraceResult> var6 = Lists.newArrayList();
  
-       for(AxisAlignedBB var8 : getCollisionBoxList(this.getActualState(var1, var2, var3))) {
-          var6.add(this.rayTrace(var3, var4, var5, var8));
+       for(AxisAlignedBB var8 : x(this.updateState(var1, var2, var3))) {
+          var6.add(this.a(var3, var4, var5, var8));
        }
  

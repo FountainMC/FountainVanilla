@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/util/text/TextComponentScore.java
++++ src/main/java/net/minecraft/util/text/TextComponentScore.java
+@@ -48,11 +48,11 @@
+       }
+ 
+       this.d = "";
+    }
+ 
+-   public TextComponentScore i() {
++   public TextComponentScore f() {
+       TextComponentScore var1 = new TextComponentScore(this.b, this.c);
+       var1.b(this.d);
+       var1.setChatModifier(this.getChatModifier().clone());
+ 
+       for(ITextComponent var3 : this.a()) {

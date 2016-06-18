@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/NetworkSystem.java
++++ src/main/java/net/minecraft/network/NetworkSystem.java
+@@ -127,11 +127,11 @@
+                   } catch (Exception var8) {
+                      if(var3.isLocal()) {
+                         CrashReport var10 = CrashReport.a(var8, "Ticking memory connection");
+                         CrashReportCategory var6 = var10.a("Ticking connection");
+                         var6.a("Connection", new ICrashReportDetail<String>() {
+-                           public String a() throws Exception {
++                           public String call() throws Exception {
+                               return var3.toString();
+                            }
+                         });
+                         throw new ReportedException(var10);
+                      }

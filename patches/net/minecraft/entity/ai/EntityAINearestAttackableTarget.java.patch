@@ -1,39 +1,66 @@
 --- minecraft/src/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java
 +++ src/main/java/net/minecraft/entity/ai/EntityAINearestAttackableTarget.java
-@@ -51,20 +51,20 @@
+@@ -42,32 +42,32 @@
+       this.a = var2;
+       this.i = var3;
+       this.b = new EntityAINearestAttackableTarget.DistanceComparator(var1);
+       this.a(1);
+       this.c = new Predicate<T>() {
+-         public boolean a(@Nullable T var1) {
++         public boolean apply(@Nullable T var1) {
+             return var1 == null?false:(var6 != null && !var6.apply(var1)?false:(!EntitySelectors.e.apply(var1)?false:EntityAINearestAttackableTarget.this.a(var1, false)));
+          }
+       };
+    }
  
-    public boolean shouldExecute() {
-       if(this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
+    public boolean a() {
+       if(this.i > 0 && this.e.getRandom().nextInt(this.i) != 0) {
           return false;
-       } else if(this.targetClass != EntityPlayer.class && this.targetClass != EntityPlayerMP.class) {
--         List var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
-+         List<T> var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
+       } else if(this.a != EntityPlayer.class && this.a != EntityPlayerMP.class) {
+-         List var1 = this.e.world.a(this.a, this.a(this.i()), this.c);
++         List<T> var1 = this.e.world.a(this.a, this.a(this.i()), this.c);
           if(var1.isEmpty()) {
              return false;
           } else {
-             Collections.sort(var1, this.theNearestAttackableTargetSorter);
--            this.targetEntity = (EntityLivingBase)var1.get(0);
-+            this.targetEntity = var1.get(0);
+             Collections.sort(var1, this.b);
+-            this.d = (EntityLivingBase)var1.get(0);
++            this.d = var1.get(0);
              return true;
           }
        } else {
--         this.targetEntity = this.taskOwner.worldObj.getNearestAttackablePlayer(this.taskOwner.posX, this.taskOwner.posY + (double)this.taskOwner.getEyeHeight(), this.taskOwner.posZ, this.getTargetDistance(), this.getTargetDistance(), new Function<EntityPlayer, Double>() {
-+         this.targetEntity = (T) this.taskOwner.worldObj.getNearestAttackablePlayer(this.taskOwner.posX, this.taskOwner.posY + (double)this.taskOwner.getEyeHeight(), this.taskOwner.posZ, this.getTargetDistance(), this.getTargetDistance(), new Function<EntityPlayer, Double>() {
+-         this.d = this.e.world.a(this.e.locX, this.e.locY + (double)this.e.getHeadHeight(), this.e.locZ, this.i(), this.i(), new Function<EntityPlayer, Double>() {
++         this.d = (T) this.e.world.a(this.e.locX, this.e.locY + (double)this.e.getHeadHeight(), this.e.locZ, this.i(), this.i(), new Function<EntityPlayer, Double>() {
              @Nullable
-             public Double apply(@Nullable EntityPlayer var1) {
-                ItemStack var2 = var1.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+-            public Double a(@Nullable EntityPlayer var1) {
++            public Double apply(@Nullable EntityPlayer var1) {
+                ItemStack var2 = var1.getEquipment(EntityEquipmentSlot.HEAD);
                 if(var2 != null && var2.getItem() == Items.SKULL) {
-                   int var3 = var2.getItemDamage();
-@@ -76,11 +76,11 @@
+                   int var3 = var2.h();
+                   boolean var4 = EntityAINearestAttackableTarget.this.e instanceof EntitySkeleton && ((EntitySkeleton)EntityAINearestAttackableTarget.this.e).getSkeletonType() == EnumSkeletonType.NORMAL && var3 == 0;
+                   boolean var5 = EntityAINearestAttackableTarget.this.e instanceof EntityZombie && var3 == 2;
+@@ -77,11 +77,11 @@
                    }
                 }
  
                 return Double.valueOf(1.0D);
              }
--         }, this.targetEntitySelector);
-+         }, (Predicate<EntityPlayer>)((Predicate<T>) this.targetEntitySelector));
-          return this.targetEntity != null;
+-         }, this.c);
++         }, (Predicate<EntityPlayer>)((Predicate<T>) this.c));
+          return this.d != null;
        }
     }
  
-    protected AxisAlignedBB getTargetableArea(double var1) {
+    protected AxisAlignedBB a(double var1) {
+@@ -98,11 +98,11 @@
+ 
+       public DistanceComparator(Entity var1) {
+          this.a = var1;
+       }
+ 
+-      public int a(Entity var1, Entity var2) {
++      public int compare(Entity var1, Entity var2) {
+          double var3 = this.a.h(var1);
+          double var5 = this.a.h(var2);
+          return var3 < var5?-1:(var3 > var5?1:0);
+       }
+    }

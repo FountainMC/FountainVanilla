@@ -1,11 +1,11 @@
 --- minecraft/src/net/minecraft/server/management/PreYggdrasilConverter.java
 +++ src/main/java/net/minecraft/server/management/PreYggdrasilConverter.java
 @@ -47,11 +47,11 @@
-    public static final File OLD_PLAYERBAN_FILE = new File("banned-players.txt");
-    public static final File OLD_OPS_FILE = new File("ops.txt");
-    public static final File OLD_WHITELIST_FILE = new File("white-list.txt");
+    public static final File b = new File("banned-players.txt");
+    public static final File c = new File("ops.txt");
+    public static final File d = new File("white-list.txt");
  
-    static List<String> readFile(File var0, Map<String, String[]> var1) throws IOException {
+    static List<String> a(File var0, Map<String, String[]> var1) throws IOException {
 -      List var2 = Files.readLines(var0, Charsets.UTF_8);
 +      List<String> var2 = Files.readLines(var0, Charsets.UTF_8);
  
@@ -13,16 +13,29 @@
           var4 = var4.trim();
           if(!var4.startsWith("#") && var4.length() >= 1) {
              String[] var5 = var4.split("\\|");
+@@ -62,11 +62,11 @@
+       return var2;
+    }
+ 
+    private static void a(MinecraftServer var0, Collection<String> var1, ProfileLookupCallback var2) {
+       String[] var3 = (String[])Iterators.toArray(Iterators.filter(var1.iterator(), new Predicate<String>() {
+-         public boolean a(@Nullable String var1) {
++         public boolean apply(@Nullable String var1) {
+             return !StringUtils.b(var1);
+          }
+       }), String.class);
+       if(var0.getOnlineMode()) {
+          var0.getGameProfileRepository().findProfilesByNames(var3, Agent.MINECRAFT, var2);
 @@ -143,11 +143,11 @@
-                LOGGER.warn("Could not load existing file " + var1.getSaveFile().getName(), var11);
+                e.warn("Could not load existing file {}", new Object[]{var1.c().getName(), var11});
              }
           }
  
           try {
 -            HashMap var2 = Maps.newHashMap();
 +            HashMap<String, String[]> var2 = Maps.newHashMap();
-             readFile(OLD_IPBAN_FILE, var2);
+             a((File)a, var2);
  
              for(String var4 : var2.keySet()) {
                 String[] var5 = (String[])var2.get(var4);
-                Date var6 = var5.length > 1?parseDate(var5[1], (Date)null):null;
+                Date var6 = var5.length > 1?b(var5[1], (Date)null):null;

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntitySheep.java
++++ src/main/java/net/minecraft/entity/passive/EntitySheep.java
+@@ -224,11 +224,11 @@
+    public static EnumDyeColor a(Random var0) {
+       int var1 = var0.nextInt(100);
+       return var1 < 5?EnumDyeColor.BLACK:(var1 < 10?EnumDyeColor.GRAY:(var1 < 15?EnumDyeColor.SILVER:(var1 < 18?EnumDyeColor.BROWN:(var0.nextInt(500) == 0?EnumDyeColor.PINK:EnumDyeColor.WHITE))));
+    }
+ 
+-   public EntitySheep b(EntityAgeable var1) {
++   public EntitySheep createChild(EntityAgeable var1) {
+       EntitySheep var2 = (EntitySheep)var1;
+       EntitySheep var3 = new EntitySheep(this.world);
+       var3.setColor(this.a((EntityAnimal)this, (EntityAnimal)var2));
+       return var3;
+    }

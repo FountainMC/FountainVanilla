@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/boss/EntityDragon.java
 +++ src/main/java/net/minecraft/entity/boss/EntityDragon.java
-@@ -323,11 +323,11 @@
+@@ -329,11 +329,11 @@
              this.setHealth(this.getHealth() + 1.0F);
           }
        }
  
-       if(this.rand.nextInt(10) == 0) {
--         List var1 = this.worldObj.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().expandXyz(32.0D));
-+         List<EntityEnderCrystal> var1 = this.worldObj.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().expandXyz(32.0D));
+       if(this.random.nextInt(10) == 0) {
+-         List var1 = this.world.a(EntityEnderCrystal.class, this.getBoundingBox().g(32.0D));
++         List<EntityEnderCrystal> var1 = this.world.a(EntityEnderCrystal.class, this.getBoundingBox().g(32.0D));
           EntityEnderCrystal var2 = null;
           double var3 = Double.MAX_VALUE;
  
           for(EntityEnderCrystal var6 : var1) {
-             double var7 = var6.getDistanceSqToEntity(this);
+             double var7 = var6.h(this);

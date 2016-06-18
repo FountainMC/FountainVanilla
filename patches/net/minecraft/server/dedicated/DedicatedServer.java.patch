@@ -1,15 +1,55 @@
 --- minecraft/src/net/minecraft/server/dedicated/DedicatedServer.java
 +++ src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -302,11 +302,11 @@
+@@ -77,11 +77,11 @@
+             }
+          }
+       };
+    }
  
-    protected void systemExitNow() {
+-   protected boolean init() throws IOException {
++   public boolean init() throws IOException {
+       Thread var1 = new Thread("Server console handler") {
+          public void run() {
+             BufferedReader var1 = new BufferedReader(new InputStreamReader(System.in));
+ 
+             String var2;
+@@ -280,34 +280,34 @@
+ 
+    public boolean isHardcore() {
+       return this.propertyManager.getBoolean("hardcore", false);
+    }
+ 
+-   protected void finalTick(CrashReport var1) {
++   public void finalTick(CrashReport var1) {
+    }
+ 
+    public CrashReport addServerInfoToCrashReport(CrashReport var1) {
+       var1 = super.addServerInfoToCrashReport(var1);
+       var1.g().a("Is Modded", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             String var1 = DedicatedServer.this.getServerModName();
+             return !"vanilla".equals(var1)?"Definitely; Server brand changed to \'" + var1 + "\'":"Unknown (can\'t tell)";
+          }
+       });
+       var1.g().a("Type", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return "Dedicated Server (map_server.txt)";
+          }
+       });
+       return var1;
+    }
+ 
+-   protected void B() {
++   public void B() {
        System.exit(0);
     }
  
--   protected void updateTimeLightAndEntities() {
-+   public void updateTimeLightAndEntities() {
-       super.updateTimeLightAndEntities();
-       this.executePendingCommands();
+-   protected void D() {
++   public void D() {
+       super.D();
+       this.aL();
     }
  
     public boolean getAllowNether() {

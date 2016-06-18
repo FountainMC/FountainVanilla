@@ -1,0 +1,14 @@
+--- minecraft/src/net/minecraft/potion/PotionEffect.java
++++ src/main/java/net/minecraft/potion/PotionEffect.java
+@@ -172,10 +172,9 @@
+ 
+          return new PotionEffect(var2, var4, var3, var5, var6);
+       }
+    }
+ 
+-   public int b(PotionEffect var1) {
+-      boolean var2 = true;
++   public int compareTo(PotionEffect var1) {
+       return (this.getDuration() <= 32147 || var1.getDuration() <= 32147) && (!this.isAmbient() || !var1.isAmbient())?ComparisonChain.start().compare(Boolean.valueOf(this.isAmbient()), Boolean.valueOf(var1.isAmbient())).compare(this.getDuration(), var1.getDuration()).compare(this.getMobEffect().getColor(), var1.getMobEffect().getColor()).result():ComparisonChain.start().compare(Boolean.valueOf(this.isAmbient()), Boolean.valueOf(var1.isAmbient())).compare(this.getMobEffect().getColor(), var1.getMobEffect().getColor()).result();
+    }
+ }

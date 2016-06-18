@@ -1,28 +1,28 @@
 --- minecraft/src/net/minecraft/entity/projectile/EntityPotion.java
 +++ src/main/java/net/minecraft/entity/projectile/EntityPotion.java
-@@ -76,11 +76,11 @@
+@@ -80,11 +80,11 @@
  
-    protected void onImpact(RayTraceResult var1) {
-       if(!this.worldObj.isRemote) {
-          ItemStack var2 = this.getPotion();
-          PotionType var3 = PotionUtils.getPotionFromItem(var2);
--         List var4 = PotionUtils.getEffectsFromStack(var2);
-+         List<PotionEffect> var4 = PotionUtils.getEffectsFromStack(var2);
-          if(var1.typeOfHit == RayTraceResult.a.BLOCK && var3 == PotionTypes.WATER && var4.isEmpty()) {
-             BlockPos var18 = var1.getBlockPos().offset(var1.sideHit);
-             this.extinguishFires(var18);
+    protected void a(RayTraceResult var1) {
+       if(!this.world.isClientSide) {
+          ItemStack var2 = this.getItem();
+          PotionType var3 = PotionUtils.c(var2);
+-         List var4 = PotionUtils.getEffects(var2);
++         List<PotionEffect> var4 = PotionUtils.getEffects(var2);
+          if(var1.type == RayTraceResult.EnumMovingObjectType.BLOCK && var3 == PotionTypes.b && var4.isEmpty()) {
+             BlockPos var18 = var1.a().shift(var1.direction);
+             this.a(var18);
  
-             for(EnumFacing var22 : EnumFacing.c.HORIZONTAL) {
-@@ -105,11 +105,11 @@
+             for(EnumFacing var22 : EnumFacing.EnumDirectionLimit.HORIZONTAL) {
+@@ -109,11 +109,11 @@
                    }
  
-                   this.worldObj.spawnEntityInWorld(var5);
+                   this.world.addEntity(var5);
                 } else {
-                   AxisAlignedBB var17 = this.getEntityBoundingBox().expand(4.0D, 2.0D, 4.0D);
--                  List var19 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var17);
-+                  List<EntityLivingBase> var19 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var17);
+                   AxisAlignedBB var17 = this.getBoundingBox().grow(4.0D, 2.0D, 4.0D);
+-                  List var19 = this.world.a(EntityLivingBase.class, var17);
++                  List<EntityLivingBase> var19 = this.world.a(EntityLivingBase.class, var17);
                    if(!var19.isEmpty()) {
                       for(EntityLivingBase var8 : var19) {
-                         if(var8.canBeHitWithPotion()) {
-                            double var9 = this.getDistanceSqToEntity(var8);
+                         if(var8.cI()) {
+                            double var9 = this.h(var8);
                             if(var9 < 16.0D) {

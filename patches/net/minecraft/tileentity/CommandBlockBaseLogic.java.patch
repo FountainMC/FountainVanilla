@@ -1,0 +1,21 @@
+--- minecraft/src/net/minecraft/tileentity/CommandBlockBaseLogic.java
++++ src/main/java/net/minecraft/tileentity/CommandBlockBaseLogic.java
+@@ -107,16 +107,16 @@
+                this.b = var3.a(this, this.e);
+             } catch (Throwable var7) {
+                CrashReport var5 = CrashReport.a(var7, "Executing command block");
+                CrashReportCategory var6 = var5.a("Command to be executed");
+                var6.a("Command", new ICrashReportDetail<String>() {
+-                  public String a() throws Exception {
++                  public String call() throws Exception {
+                      return CommandBlockBaseLogic.this.getCommand();
+                   }
+                });
+                var6.a("Name", new ICrashReportDetail<String>() {
+-                  public String a() throws Exception {
++                  public String call() throws Exception {
+                      return CommandBlockBaseLogic.this.getName();
+                   }
+                });
+                throw new ReportedException(var5);
+             }

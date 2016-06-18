@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockPumpkin.java
++++ src/main/java/net/minecraft/block/BlockPumpkin.java
+@@ -29,11 +29,11 @@
+    private BlockPattern snowGolemPart;
+    private BlockPattern snowGolem;
+    private BlockPattern ironGolemPart;
+    private BlockPattern ironGolem;
+    private static final Predicate<IBlockState> e = new Predicate<IBlockState>() {
+-      public boolean a(@Nullable IBlockState var1) {
++      public boolean apply(@Nullable IBlockState var1) {
+          return var1 != null && (var1.getBlock() == Blocks.PUMPKIN || var1.getBlock() == Blocks.LIT_PUMPKIN);
+       }
+    };
+ 
+    protected BlockPumpkin() {

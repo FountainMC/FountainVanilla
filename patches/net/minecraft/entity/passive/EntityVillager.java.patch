@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityVillager.java
++++ src/main/java/net/minecraft/entity/passive/EntityVillager.java
+@@ -560,11 +560,11 @@
+ 
+    public void di() {
+       this.bL = true;
+    }
+ 
+-   public EntityVillager b(EntityAgeable var1) {
++   public EntityVillager createChild(EntityAgeable var1) {
+       EntityVillager var2 = new EntityVillager(this.world);
+       var2.prepare(this.world.D(new BlockPos(var2)), (IEntityLivingData)null);
+       return var2;
+    }
+ 

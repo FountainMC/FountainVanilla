@@ -1,0 +1,17 @@
+--- minecraft/src/net/minecraft/block/BlockRedstoneComparator.java
++++ src/main/java/net/minecraft/block/BlockRedstoneComparator.java
+@@ -125,12 +125,12 @@
+       return var4;
+    }
+ 
+    @Nullable
+    private EntityItemFrame a(World var1, final EnumFacing var2, BlockPos var3) {
+-      List var4 = var1.a(EntityItemFrame.class, new AxisAlignedBB((double)var3.getX(), (double)var3.getY(), (double)var3.getZ(), (double)(var3.getX() + 1), (double)(var3.getY() + 1), (double)(var3.getZ() + 1)), new Predicate<Entity>() {
+-         public boolean a(@Nullable Entity var1) {
++      List<EntityItemFrame> var4 = var1.a(EntityItemFrame.class, new AxisAlignedBB((double)var3.getX(), (double)var3.getY(), (double)var3.getZ(), (double)(var3.getX() + 1), (double)(var3.getY() + 1), (double)(var3.getZ() + 1)), new Predicate<Entity>() {
++         public boolean apply(@Nullable Entity var1) {
+             return var1 != null && var1.getDirection() == var2;
+          }
+       });
+       return var4.size() == 1?(EntityItemFrame)var4.get(0):null;
+    }

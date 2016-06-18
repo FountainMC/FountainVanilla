@@ -48,12 +48,12 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
     @Override
     @Nonnull
     public Location getLocation() {
-        return new Location(this.getWorld(), getHandle().posX, getHandle().posY, getHandle().posZ);
+        return new Location(this.getWorld(), getHandle().locX, getHandle().locY, getHandle().locZ);
     }
 
     @Nonnull
     public WetWorld getWorld() {
-        return getHandle().worldObj.getFountainWorld();
+        return getHandle().world.getFountainWorld();
     }
 
     @Override
@@ -79,21 +79,21 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
         checkArgument(Double.isFinite(z), "Z position '%s' isn't finite", z);
         checkArgument(Float.isFinite(yaw), "Yaw position '%s' isn't finite", yaw);
         checkArgument(Float.isFinite(pitch), "Pitch position '%s' isn't finite", pitch);
-        if (getHandle().isDead) return;
-        if (getHandle().isBeingRidden()) this.ejectAll();
+        if (getHandle().dead) return;
+        if (getHandle().isVehicle()) this.ejectAll();
         this.dismountVehicle();
 
-        getHandle().worldObj = world;
-        getHandle().setPositionAndRotation(x, y, z, yaw, pitch);
+        getHandle().world = world;
+        getHandle().setPositionRotation(x, y, z, yaw, pitch);
     }
 
     public void teleportRotation(float yaw, float pitch) {
         AsyncCatcher.checkAsyncOp("set rotation");
         this.teleport(
-                getHandle().worldObj,
-                getHandle().posX,
-                getHandle().posY,
-                getHandle().posZ,
+                getHandle().world,
+                getHandle().locX,
+                getHandle().locY,
+                getHandle().locZ,
                 yaw,
                 pitch
         );
@@ -101,7 +101,7 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
 
     @Override
     public float getPitch() {
-        return getHandle().rotationPitch;
+        return getHandle().pitch;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
 
     @Override
     public float getYaw() {
-        return getHandle().rotationYaw;
+        return getHandle().yaw;
     }
 
     @Override
@@ -122,19 +122,19 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
     @Nullable
     @Override
     public WetEntity getPrimaryPassenger() {
-        Entity ridingEntity = getHandle().getRidingEntity();
+        Entity ridingEntity = getHandle().getP();
         return ridingEntity == null ? null : ridingEntity.getFountainEntity();
     }
 
     @Nonnull
     @Override
     public ImmutableList<org.fountainmc.api.entity.Entity> getPassengers() {
-        return ImmutableLists.transform(getHandle().getPassengers(), Entity::getFountainEntity);
+        return ImmutableLists.transform(getHandle().bx(), Entity::getFountainEntity);
     }
 
     @Override
     public boolean hasPassengers() {
-        return getHandle().isBeingRidden();
+        return getHandle().isVehicle();
     }
 
     @Override
@@ -156,13 +156,13 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
 
     @Override
     public void dismountVehicle() {
-        getHandle().dismountRidingEntity();
+        getHandle().stopRiding();
     }
 
     @Override
     public void ejectAll() {
         AsyncCatcher.checkAsyncOp("eject all passengers");
-        getHandle().removePassengers();
+        getHandle().az();
     }
 
     @Override
@@ -180,7 +180,7 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
     @Nullable
     @Override
     public WetEntity getVehicle() {
-        Entity ridingEntity = getHandle().getRidingEntity();
+        Entity ridingEntity = getHandle().getVehicle();
         return ridingEntity == null ? null : ridingEntity.getFountainEntity();
     }
 
@@ -193,14 +193,14 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
 
     @Override
     public void leaveVehicle() {
-        getHandle().dismountRidingEntity();
+        getHandle().az();
     }
 
     @Override
     public ImmutableCollection<org.fountainmc.api.entity.Entity> getNearbyEntities(double v) {
         AsyncCatcher.checkAsyncOp("get nearby entities");
         return ImmutableLists.transform(
-                getWorld().getHandle().getEntitiesInAABBexcluding(getHandle(), getHandle().getEntityBoundingBox().expandXyz(v), null),
+                getWorld().getHandle().getEntitiesInAABBexcluding(getHandle(), getHandle().getBoundingBox().grow(v), null),
                 Entity::getFountainEntity
         );
     }
@@ -208,7 +208,7 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
     @Nonnull
     @Override
     public EntityType<?> getEntityType() {
-        return getWorld().getServer().getEntityType(EntityList.getEntityStringFromClass(getHandle().getClass()));
+        return getWorld().getServer().getEntityType(EntityList.getName(getHandle().getClass()));
     }
 
     @Override
@@ -218,7 +218,7 @@ public class WetEntity implements org.fountainmc.api.entity.Entity {
 
     @Override
     public String toString() {
-        return getHandle().getName() + " in " + getWorld() + " at " + getHandle().posX + " " + getHandle().posY + " " + getHandle().posZ;
+        return getHandle().getName() + " in " + getWorld() + " at " + getHandle().locX + " " + getHandle().locY + " " + getHandle().locZ;
     }
 
     @Override

@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/network/NettyEncryptingEncoder.java
++++ src/main/java/net/minecraft/network/NettyEncryptingEncoder.java
+@@ -11,9 +11,9 @@
+ 
+    public NettyEncryptingEncoder(Cipher var1) {
+       this.a = new NettyEncryptionTranslator(var1);
+    }
+ 
+-   protected void a(ChannelHandlerContext var1, ByteBuf var2, ByteBuf var3) throws Exception {
++   protected void encode(ChannelHandlerContext var1, ByteBuf var2, ByteBuf var3) throws Exception {
+       this.a.a(var2, var3);
+    }
+ }

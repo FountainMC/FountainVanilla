@@ -1,15 +1,38 @@
 --- minecraft/src/net/minecraft/world/storage/loot/LootPool.java
 +++ src/main/java/net/minecraft/world/storage/loot/LootPool.java
 @@ -34,11 +34,11 @@
-       this.rolls = var3;
-       this.bonusRolls = var4;
+       this.c = var3;
+       this.d = var4;
     }
  
-    protected void createLootRoll(Collection<ItemStack> var1, Random var2, LootContext var3) {
+    protected void a(Collection<ItemStack> var1, Random var2, LootContext var3) {
 -      ArrayList var4 = Lists.newArrayList();
 +      ArrayList<LootEntry> var4 = Lists.newArrayList();
        int var5 = 0;
  
-       for(LootEntry var9 : this.lootEntries) {
-          if(LootConditionManager.testAllConditions(var9.conditions, var2, var3)) {
-             int var10 = var9.getEffectiveWeight(var3.getLuck());
+       for(LootEntry var9 : this.a) {
+          if(LootConditionManager.a(var9.e, var2, var3)) {
+             int var10 = var9.a(var3.f());
+@@ -76,20 +76,20 @@
+ 
+    public static class a implements JsonDeserializer<LootPool>, JsonSerializer<LootPool> {
+       public a() {
+       }
+ 
+-      public LootPool a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public LootPool deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          JsonObject var4 = JsonUtils.m(var1, "loot pool");
+          LootEntry[] var5 = (LootEntry[])JsonUtils.a(var4, "entries", var3, LootEntry[].class);
+          LootCondition[] var6 = (LootCondition[])JsonUtils.a(var4, "conditions", new LootCondition[0], var3, LootCondition[].class);
+          RandomValueRange var7 = (RandomValueRange)JsonUtils.a(var4, "rolls", var3, RandomValueRange.class);
+          RandomValueRange var8 = (RandomValueRange)JsonUtils.a(var4, "bonus_rolls", new RandomValueRange(0.0F, 0.0F), var3, RandomValueRange.class);
+          return new LootPool(var5, var6, var7, var8);
+       }
+ 
+-      public JsonElement a(LootPool var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(LootPool var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          var4.add("entries", var3.serialize(var1.a));
+          var4.add("rolls", var3.serialize(var1.c));
+          if(var1.d.a() != 0.0F && var1.d.b() != 0.0F) {
+             var4.add("bonus_rolls", var3.serialize(var1.d));

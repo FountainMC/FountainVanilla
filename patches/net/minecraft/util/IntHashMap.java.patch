@@ -3,13 +3,13 @@
 @@ -22,11 +22,11 @@
  
     @Nullable
-    public V lookup(int var1) {
-       int var2 = computeHash(var1);
+    public V get(int var1) {
+       int var2 = g(var1);
  
--      for(IntHashMap.a var3 = this.slots[getSlotIndex(var2, this.slots.length)]; var3 != null; var3 = var3.nextEntry) {
-+      for(IntHashMap.a<V> var3 = this.slots[getSlotIndex(var2, this.slots.length)]; var3 != null; var3 = var3.nextEntry) {
-          if(var3.hashEntry == var1) {
-             return var3.valueEntry;
+-      for(IntHashMap.IntHashMapEntry var3 = this.a[a(var2, this.a.length)]; var3 != null; var3 = var3.c) {
++      for(IntHashMap.IntHashMapEntry<V> var3 = this.a[a(var2, this.a.length)]; var3 != null; var3 = var3.c) {
+          if(var3.a == var1) {
+             return var3.b;
           }
        }
  

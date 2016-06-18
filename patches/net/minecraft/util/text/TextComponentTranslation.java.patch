@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/util/text/TextComponentTranslation.java
++++ src/main/java/net/minecraft/util/text/TextComponentTranslation.java
+@@ -159,11 +159,11 @@
+       }
+ 
+       return var1.toString();
+    }
+ 
+-   public TextComponentTranslation h() {
++   public TextComponentTranslation f() {
+       Object[] var1 = new Object[this.e.length];
+ 
+       for(int var2 = 0; var2 < this.e.length; ++var2) {
+          if(this.e[var2] instanceof ITextComponent) {
+             var1[var2] = ((ITextComponent)this.e[var2]).f();

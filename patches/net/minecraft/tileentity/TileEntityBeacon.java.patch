@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/tileentity/TileEntityBeacon.java
 +++ src/main/java/net/minecraft/tileentity/TileEntityBeacon.java
-@@ -75,11 +75,11 @@
-          int var4 = (9 + this.levels * 2) * 20;
-          int var5 = this.pos.getX();
-          int var6 = this.pos.getY();
-          int var7 = this.pos.getZ();
-          AxisAlignedBB var8 = (new AxisAlignedBB((double)var5, (double)var6, (double)var7, (double)(var5 + 1), (double)(var6 + 1), (double)(var7 + 1))).expandXyz(var1).addCoord(0.0D, (double)this.worldObj.getHeight(), 0.0D);
--         List var9 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, var8);
-+         List<EntityPlayer> var9 = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, var8);
+@@ -76,11 +76,11 @@
+          int var4 = (9 + this.k * 2) * 20;
+          int var5 = this.position.getX();
+          int var6 = this.position.getY();
+          int var7 = this.position.getZ();
+          AxisAlignedBB var8 = (new AxisAlignedBB((double)var5, (double)var6, (double)var7, (double)(var5 + 1), (double)(var6 + 1), (double)(var7 + 1))).g(var1).a(0.0D, (double)this.world.getHeight(), 0.0D);
+-         List var9 = this.world.a(EntityPlayer.class, var8);
++         List<EntityPlayer> var9 = this.world.a(EntityPlayer.class, var8);
  
           for(EntityPlayer var11 : var9) {
-             var11.addPotionEffect(new PotionEffect(this.primaryEffect, var4, var3, true, true));
+             var11.addEffect(new PotionEffect(this.l, var4, var3, true, true));
           }
  

@@ -2,27 +2,28 @@
 +++ src/main/java/net/minecraft/command/server/CommandAchievement.java
 @@ -66,11 +66,11 @@
                       if(var6) {
-                         if(var5.getStatFile().hasAchievementUnlocked(var8)) {
-                            throw new CommandException("commands.achievement.alreadyHave", new Object[]{var5.getName(), var4.createChatComponent()});
+                         if(var5.getStatisticManager().hasAchievement(var8)) {
+                            throw new CommandException("commands.achievement.alreadyHave", new Object[]{var5.getName(), var4.j()});
                          }
  
 -                        ArrayList var9;
 +                        ArrayList<Achievement> var9;
-                         for(var9 = Lists.newArrayList(); var8.parentAchievement != null && !var5.getStatFile().hasAchievementUnlocked(var8.parentAchievement); var8 = var8.parentAchievement) {
-                            var9.add(var8.parentAchievement);
+                         for(var9 = Lists.newArrayList(); var8.c != null && !var5.getStatisticManager().hasAchievement(var8.c); var8 = var8.c) {
+                            var9.add(var8.c);
                          }
  
                          for(Achievement var11 : Lists.reverse(var9)) {
 @@ -79,16 +79,16 @@
                       } else if(var7) {
-                         if(!var5.getStatFile().hasAchievementUnlocked(var8)) {
-                            throw new CommandException("commands.achievement.dontHave", new Object[]{var5.getName(), var4.createChatComponent()});
+                         if(!var5.getStatisticManager().hasAchievement(var8)) {
+                            throw new CommandException("commands.achievement.dontHave", new Object[]{var5.getName(), var4.j()});
                          }
  
--                        ArrayList var17 = Lists.newArrayList(Iterators.filter(AchievementList.ACHIEVEMENTS.iterator(), new Predicate<Achievement>() {
-+                        ArrayList<Achievement> var17 = Lists.newArrayList(Iterators.filter(AchievementList.ACHIEVEMENTS.iterator(), new Predicate<Achievement>() {
-                            public boolean apply(@Nullable Achievement var1) {
-                               return var5.getStatFile().hasAchievementUnlocked(var1) && var1 != var4;
+-                        ArrayList var17 = Lists.newArrayList(Iterators.filter(AchievementList.e.iterator(), new Predicate<Achievement>() {
+-                           public boolean a(@Nullable Achievement var1) {
++                        ArrayList<Achievement> var17 = Lists.newArrayList(Iterators.filter(AchievementList.e.iterator(), new Predicate<Achievement>() {
++                           public boolean apply(@Nullable Achievement var1) {
+                               return var5.getStatisticManager().hasAchievement(var1) && var1 != var4;
                             }
                          }));
 -                        ArrayList var20 = Lists.newArrayList(var17);

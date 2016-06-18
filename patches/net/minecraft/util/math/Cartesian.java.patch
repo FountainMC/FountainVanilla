@@ -1,15 +1,30 @@
 --- minecraft/src/net/minecraft/util/math/Cartesian.java
 +++ src/main/java/net/minecraft/util/math/Cartesian.java
-@@ -43,11 +43,11 @@
-    static class a<T> implements Function<Object[], List<T>> {
-       private a() {
+@@ -42,12 +42,12 @@
+ 
+    static class ArrayToList<T> implements Function<Object[], List<T>> {
+       private ArrayToList() {
        }
  
-       public List<T> apply(@Nullable Object[] var1) {
+-      public List<T> a(@Nullable Object[] var1) {
 -         return Arrays.asList((Object[])var1);
++      public List<T> apply(@Nullable Object[] var1) {
 +         return Arrays.asList((T[])var1);
        }
     }
  
-    static class b<T> implements Iterable<T[]> {
-       private final Class<T> clazz;
+    static class ClassIterable<T> implements Iterable<T[]> {
+       private final Class<T> a;
+@@ -122,11 +122,11 @@
+ 
+                return this.a >= 0;
+             }
+          }
+ 
+-         public T[] a() {
++         public T[] next() {
+             if(!this.hasNext()) {
+                throw new NoSuchElementException();
+             } else {
+                while(this.a < this.c.length) {
+                   this.d[this.a] = this.c[this.a].next();

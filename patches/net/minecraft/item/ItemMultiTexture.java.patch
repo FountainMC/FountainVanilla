@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/ItemMultiTexture.java
++++ src/main/java/net/minecraft/item/ItemMultiTexture.java
+@@ -19,11 +19,11 @@
+    }
+ 
+    public ItemMultiTexture(Block var1, Block var2, final String[] var3) {
+       this(var1, var2, new Function<ItemStack, String>() {
+          @Nullable
+-         public String a(@Nullable ItemStack var1) {
++         public String apply(@Nullable ItemStack var1) {
+             int var2 = var1.getData();
+             if(var2 < 0 || var2 >= var3.length) {
+                var2 = 0;
+             }
+ 

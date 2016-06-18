@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/crafting/CraftingManager.java
++++ src/main/java/net/minecraft/item/crafting/CraftingManager.java
+@@ -207,11 +207,11 @@
+       this.registerShapedRecipe(new ItemStack(Blocks.HOPPER), new Object[]{"I I", "ICI", " I ", Character.valueOf('I'), Items.IRON_INGOT, Character.valueOf('C'), Blocks.CHEST});
+       this.registerShapedRecipe(new ItemStack(Items.ARMOR_STAND, 1), new Object[]{"///", " / ", "/_/", Character.valueOf('/'), Items.STICK, Character.valueOf('_'), new ItemStack(Blocks.STONE_SLAB, 1, BlockStoneSlab.EnumStoneSlabVariant.STONE.a())});
+       this.registerShapedRecipe(new ItemStack(Blocks.END_ROD, 4), new Object[]{"/", "#", Character.valueOf('/'), Items.BLAZE_ROD, Character.valueOf('#'), Items.CHORUS_FRUIT_POPPED});
+       this.registerShapedRecipe(new ItemStack(Blocks.di, 1), new Object[]{"XXX", "XXX", "XXX", Character.valueOf('X'), new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getInvColorIndex())});
+       Collections.sort(this.recipes, new Comparator<IRecipe>() {
+-         public int a(IRecipe var1, IRecipe var2) {
++         public int compare(IRecipe var1, IRecipe var2) {
+             return var1 instanceof ShapelessRecipes && var2 instanceof ShapedRecipes?1:(var2 instanceof ShapelessRecipes && var1 instanceof ShapedRecipes?-1:(var2.a() < var1.a()?-1:(var2.a() > var1.a()?1:0)));
+          }
+       });
+    }
+ 

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/crafting/ShieldRecipes.java
++++ src/main/java/net/minecraft/item/crafting/ShieldRecipes.java
+@@ -76,11 +76,11 @@
+ 
+          ItemStack var6 = new ItemStack(Items.SHIELD, 1, 0);
+          EnumDyeColor var5;
+          NBTTagCompound var7;
+          if(var2.hasTag()) {
+-            var7 = var2.getTag().g();
++            var7 = var2.getTag().clone();
+             var5 = EnumDyeColor.fromInvColorIndex(TileEntityBanner.b(var2));
+          } else {
+             var7 = new NBTTagCompound();
+             var5 = EnumDyeColor.fromInvColorIndex(var2.h());
+          }

@@ -5,13 +5,33 @@
        return var3;
     }
  
-    public void fillInventory(IInventory var1, Random var2, LootContext var3) {
--      List var4 = this.generateLootForPools(var2, var3);
--      List var5 = this.getEmptySlotsRandomized(var1, var2);
-+      List<ItemStack> var4 = this.generateLootForPools(var2, var3);
-+      List<Integer> var5 = this.getEmptySlotsRandomized(var1, var2);
-       this.shuffleItems(var4, var5.size(), var2);
+    public void a(IInventory var1, Random var2, LootContext var3) {
+-      List var4 = this.a(var2, var3);
+-      List var5 = this.a(var1, var2);
++      List<ItemStack> var4 = this.a(var2, var3);
++      List<Integer> var5 = this.a(var1, var2);
+       this.a(var4, var5.size(), var2);
  
        for(ItemStack var7 : var4) {
           if(var5.isEmpty()) {
-             LOGGER.warn("Tried to over-fill a container");
+             b.warn("Tried to over-fill a container");
+@@ -121,17 +121,17 @@
+ 
+    public static class a implements JsonDeserializer<LootTable>, JsonSerializer<LootTable> {
+       public a() {
+       }
+ 
+-      public LootTable a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public LootTable deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          JsonObject var4 = JsonUtils.m(var1, "loot table");
+          LootPool[] var5 = (LootPool[])JsonUtils.a(var4, "pools", new LootPool[0], var3, LootPool[].class);
+          return new LootTable(var5);
+       }
+ 
+-      public JsonElement a(LootTable var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(LootTable var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          var4.add("pools", var3.serialize(var1.c));
+          return var4;
+       }
+    }

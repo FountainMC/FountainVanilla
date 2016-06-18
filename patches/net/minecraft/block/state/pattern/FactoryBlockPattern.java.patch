@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/block/state/pattern/FactoryBlockPattern.java
 +++ src/main/java/net/minecraft/block/state/pattern/FactoryBlockPattern.java
 @@ -41,11 +41,11 @@
-                   throw new IllegalArgumentException("Not all rows in the given aisle are the correct width (expected " + this.rowWidth + ", found one with " + var5.length() + ")");
+                   throw new IllegalArgumentException("Not all rows in the given aisle are the correct width (expected " + this.e + ", found one with " + var5.length() + ")");
                 }
  
                 for(char var9 : var5.toCharArray()) {
-                   if(!this.symbolMap.containsKey(Character.valueOf(var9))) {
--                     this.symbolMap.put(Character.valueOf(var9), (Object)null);
-+                     this.symbolMap.put(Character.valueOf(var9), null);
+                   if(!this.c.containsKey(Character.valueOf(var9))) {
+-                     this.c.put(Character.valueOf(var9), (Object)null);
++                     this.c.put(var9, null);
                    }
                 }
              }
  
-             this.depth.add(var1);
+             this.b.add(var1);

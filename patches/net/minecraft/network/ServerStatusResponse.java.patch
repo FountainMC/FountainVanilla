@@ -1,17 +1,73 @@
 --- minecraft/src/net/minecraft/network/ServerStatusResponse.java
 +++ src/main/java/net/minecraft/network/ServerStatusResponse.java
-@@ -79,12 +79,12 @@
+@@ -83,11 +83,11 @@
  
-       public void setPlayers(GameProfile[] var1) {
-          this.players = var1;
-       }
- 
--      public static class a implements JsonDeserializer<ServerStatusResponse.a>, JsonSerializer<ServerStatusResponse.a> {
--         public a() {
-+      public static class d implements JsonDeserializer<ServerStatusResponse.a>, JsonSerializer<ServerStatusResponse.a> {
-+         public d() {
+       public static class ServerPingPlayerSample$Serializer implements JsonDeserializer<ServerStatusResponse.ServerPingPlayerSample>, JsonSerializer<ServerStatusResponse.ServerPingPlayerSample> {
+          public ServerPingPlayerSample$Serializer() {
           }
  
-          public ServerStatusResponse.a deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
-             JsonObject var4 = JsonUtils.getJsonObject(var1, "players");
-             ServerStatusResponse.a var5 = new ServerStatusResponse.a(JsonUtils.getInt(var4, "max"), JsonUtils.getInt(var4, "online"));
+-         public ServerStatusResponse.ServerPingPlayerSample a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++         public ServerStatusResponse.ServerPingPlayerSample deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+             JsonObject var4 = JsonUtils.m(var1, "players");
+             ServerStatusResponse.ServerPingPlayerSample var5 = new ServerStatusResponse.ServerPingPlayerSample(JsonUtils.n(var4, "max"), JsonUtils.n(var4, "online"));
+             if(JsonUtils.d(var4, "sample")) {
+                JsonArray var6 = JsonUtils.u(var4, "sample");
+                if(var6.size() > 0) {
+@@ -104,11 +104,11 @@
+             }
+ 
+             return var5;
+          }
+ 
+-         public JsonElement a(ServerStatusResponse.ServerPingPlayerSample var1, Type var2, JsonSerializationContext var3) {
++         public JsonElement serialize(ServerStatusResponse.ServerPingPlayerSample var1, Type var2, JsonSerializationContext var3) {
+             JsonObject var4 = new JsonObject();
+             var4.addProperty("max", Integer.valueOf(var1.a()));
+             var4.addProperty("online", Integer.valueOf(var1.b()));
+             if(var1.c() != null && var1.c().length > 0) {
+                JsonArray var5 = new JsonArray();
+@@ -131,11 +131,11 @@
+ 
+    public static class Serializer implements JsonDeserializer<ServerStatusResponse>, JsonSerializer<ServerStatusResponse> {
+       public Serializer() {
+       }
+ 
+-      public ServerStatusResponse a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public ServerStatusResponse deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          JsonObject var4 = JsonUtils.m(var1, "status");
+          ServerStatusResponse var5 = new ServerStatusResponse();
+          if(var4.has("description")) {
+             var5.setMOTD((ITextComponent)var3.deserialize(var4.get("description"), ITextComponent.class));
+          }
+@@ -153,11 +153,11 @@
+          }
+ 
+          return var5;
+       }
+ 
+-      public JsonElement a(ServerStatusResponse var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(ServerStatusResponse var1, Type var2, JsonSerializationContext var3) {
+          JsonObject var4 = new JsonObject();
+          if(var1.a() != null) {
+             var4.add("description", var3.serialize(var1.a()));
+          }
+ 
+@@ -196,16 +196,16 @@
+ 
+       public static class ServerData$Serializer implements JsonDeserializer<ServerStatusResponse.ServerData>, JsonSerializer<ServerStatusResponse.ServerData> {
+          public ServerData$Serializer() {
+          }
+ 
+-         public ServerStatusResponse.ServerData a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++         public ServerStatusResponse.ServerData deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+             JsonObject var4 = JsonUtils.m(var1, "version");
+             return new ServerStatusResponse.ServerData(JsonUtils.h(var4, "name"), JsonUtils.n(var4, "protocol"));
+          }
+ 
+-         public JsonElement a(ServerStatusResponse.ServerData var1, Type var2, JsonSerializationContext var3) {
++         public JsonElement serialize(ServerStatusResponse.ServerData var1, Type var2, JsonSerializationContext var3) {
+             JsonObject var4 = new JsonObject();
+             var4.addProperty("name", var1.a());
+             var4.addProperty("protocol", Integer.valueOf(var1.getProtocolVersion()));
+             return var4;
+          }

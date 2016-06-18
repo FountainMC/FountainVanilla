@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagDouble.java
++++ src/main/java/net/minecraft/nbt/NBTTagDouble.java
+@@ -32,11 +32,11 @@
+ 
+    public String toString() {
+       return "" + this.data + "d";
+    }
+ 
+-   public NBTTagDouble c() {
++   public NBTTagDouble clone() {
+       return new NBTTagDouble(this.data);
+    }
+ 
+    public boolean equals(Object var1) {
+       if(super.equals(var1)) {

@@ -1,36 +1,28 @@
 --- minecraft/src/net/minecraft/scoreboard/ServerScoreboard.java
 +++ src/main/java/net/minecraft/scoreboard/ServerScoreboard.java
-@@ -156,14 +156,14 @@
+@@ -156,11 +156,11 @@
  
        return var2;
     }
  
-    public void addObjective(ScoreObjective var1) {
--      List var2 = this.getCreatePackets(var1);
-+      List<Packet<?>> var2 = this.getCreatePackets(var1);
+    public void e(ScoreObjective var1) {
+-      List var2 = this.getScoreboardScorePacketsForObjective(var1);
++      List<Packet<?>> var2 = this.getScoreboardScorePacketsForObjective(var1);
  
-       for(EntityPlayerMP var4 : this.scoreboardMCServer.getPlayerList().getPlayerList()) {
--         for(Packet var6 : var2) {
-+         for(Packet<?> var6 : var2) {
-             var4.connection.sendPacket(var6);
+       for(EntityPlayerMP var4 : this.a.getPlayerList().v()) {
+          for(Packet var6 : var2) {
+             var4.playerConnection.sendPacket(var6);
           }
-       }
- 
-       this.addedObjectives.add(var1);
-@@ -181,14 +181,14 @@
+@@ -181,11 +181,11 @@
  
        return var2;
     }
  
-    public void sendDisplaySlotRemovalPackets(ScoreObjective var1) {
--      List var2 = this.getDestroyPackets(var1);
-+      List<Packet<?>> var2 = this.getDestroyPackets(var1);
+    public void g(ScoreObjective var1) {
+-      List var2 = this.f(var1);
++      List<Packet<?>> var2 = this.f(var1);
  
-       for(EntityPlayerMP var4 : this.scoreboardMCServer.getPlayerList().getPlayerList()) {
--         for(Packet var6 : var2) {
-+         for(Packet<?> var6 : var2) {
-             var4.connection.sendPacket(var6);
+       for(EntityPlayerMP var4 : this.a.getPlayerList().v()) {
+          for(Packet var6 : var2) {
+             var4.playerConnection.sendPacket(var6);
           }
-       }
- 
-       this.addedObjectives.remove(var1);

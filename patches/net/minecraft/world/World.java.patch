@@ -1,73 +1,73 @@
 --- minecraft/src/net/minecraft/world/World.java
 +++ src/main/java/net/minecraft/world/World.java
-@@ -68,10 +68,14 @@
- import net.minecraft.world.storage.ISaveHandler;
- import net.minecraft.world.storage.MapStorage;
- import net.minecraft.world.storage.WorldInfo;
- import net.minecraft.world.storage.loot.LootTableManager;
+@@ -139,11 +139,11 @@
+             return var2.getBiome(var1, this.worldProvider.k());
+          } catch (Throwable var6) {
+             CrashReport var4 = CrashReport.a(var6, "Getting biome");
+             CrashReportCategory var5 = var4.a("Coordinates of biome request");
+             var5.a("Location", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   return CrashReportCategory.a(var1);
+                }
+             });
+             throw new ReportedException(var4);
+          }
+@@ -393,11 +393,11 @@
+             var3.doPhysics(this, var1, var2);
+          } catch (Throwable var7) {
+             CrashReport var5 = CrashReport.a(var7, "Exception while updating neighbours");
+             CrashReportCategory var6 = var5.a("Block being updated");
+             var6.a("Source block type", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   try {
+                      return String.format("ID #%d (%s // %s)", new Object[]{Integer.valueOf(Block.getId(var2)), var2.a(), var2.getClass().getCanonicalName()});
+                   } catch (Throwable var2x) {
+                      return "ID #" + Block.getId(var2);
+                   }
+@@ -1989,11 +1989,11 @@
  
-+import org.fountainmc.WetServer;
-+import org.fountainmc.world.WetWorld;
-+import org.fountainmc.world.WorldHookListener;
-+
- public abstract class World implements IBlockAccess {
-    private int seaLevel = 63;
-    protected boolean scheduledUpdatesAreImmediate;
-    public final List<Entity> loadedEntityList = Lists.newArrayList();
-    protected final List<Entity> unloadedEntityList = Lists.newArrayList();
-@@ -109,13 +113,20 @@
-    protected boolean spawnHostileMobs;
-    protected boolean spawnPeacefulMobs;
-    private boolean processingLoadedTiles;
-    private final WorldBorder worldBorder;
-    int[] lightUpdateBlockList;
-+   // Fountain start
-+   private final WetWorld fountainWorld = new WetWorld(WetServer.getInstance(), this);
+    public <T extends Entity> List<T> a(Class<? extends T> var1, Predicate<? super T> var2) {
+       ArrayList var3 = Lists.newArrayList();
  
-+   public WetWorld getFountainWorld() {
-+      return fountainWorld;
-+   }
-+   // Fountain end
-+
-    protected World(ISaveHandler var1, WorldInfo var2, WorldProvider var3, Profiler var4, boolean var5) {
--      this.eventListeners = Lists.newArrayList(new IWorldEventListener[]{this.pathListener});
-+      this.eventListeners = Lists.newArrayList(new IWorldEventListener[]{this.pathListener, new WorldHookListener()});
-       this.theCalendar = Calendar.getInstance();
-       this.worldScoreboard = new Scoreboard();
-       this.spawnHostileMobs = true;
-       this.spawnPeacefulMobs = true;
-       this.lightUpdateBlockList = new int['\u8000'];
-@@ -1982,27 +1993,27 @@
- 
-       return var4;
-    }
- 
-    public <T extends Entity> List<T> getEntities(Class<? extends T> var1, Predicate<? super T> var2) {
--      ArrayList var3 = Lists.newArrayList();
-+      ArrayList<T> var3 = Lists.newArrayList();
- 
-       for(Entity var5 : this.loadedEntityList) {
+       for(Entity var5 : this.entityList) {
 -         if(var1.isAssignableFrom(var5.getClass()) && var2.apply(var5)) {
--            var3.add(var5);
-+         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T) var5)) {
-+            var3.add((T) var5);
++         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T)var5)) {
+             var3.add(var5);
           }
        }
  
        return var3;
-    }
+@@ -2001,11 +2001,11 @@
  
-    public <T extends Entity> List<T> getPlayers(Class<? extends T> var1, Predicate<? super T> var2) {
--      ArrayList var3 = Lists.newArrayList();
-+      ArrayList<T> var3 = Lists.newArrayList();
+    public <T extends Entity> List<T> b(Class<? extends T> var1, Predicate<? super T> var2) {
+       ArrayList var3 = Lists.newArrayList();
  
-       for(Entity var5 : this.playerEntities) {
+       for(Entity var5 : this.players) {
 -         if(var1.isAssignableFrom(var5.getClass()) && var2.apply(var5)) {
--            var3.add(var5);
-+         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T) var5)) {
-+            var3.add((T) var5);
++         if(var1.isAssignableFrom(var5.getClass()) && var2.apply((T)var5)) {
+             var3.add(var5);
           }
        }
  
        return var3;
-    }
+@@ -2446,16 +2446,16 @@
+ 
+    public CrashReportCategory a(CrashReport var1) {
+       CrashReportCategory var2 = var1.a("Affected level", 1);
+       var2.a((String)"Level name", this.worldData == null?"????":this.worldData.getName());
+       var2.a("All players", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return World.this.players.size() + " total; " + World.this.players;
+          }
+       });
+       var2.a("Chunk stats", new ICrashReportDetail<String>() {
+-         public String a() {
++         public String call() {
+             return World.this.chunkProvider.getName();
+          }
+       });
+ 
+       try {

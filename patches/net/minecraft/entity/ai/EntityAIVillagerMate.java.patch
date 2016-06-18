@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/ai/EntityAIVillagerMate.java
++++ src/main/java/net/minecraft/entity/ai/EntityAIVillagerMate.java
+@@ -83,11 +83,11 @@
+          return this.a.e() < var1;
+       }
+    }
+ 
+    private void i() {
+-      EntityVillager var1 = this.b.b((EntityAgeable)this.c);
++      EntityVillager var1 = this.b.createChild((EntityAgeable)this.c);
+       this.c.setAgeRaw(6000);
+       this.b.setAgeRaw(6000);
+       this.c.s(false);
+       this.b.s(false);
+       var1.setAgeRaw(-24000);

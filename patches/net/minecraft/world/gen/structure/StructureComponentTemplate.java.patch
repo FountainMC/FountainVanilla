@@ -3,13 +3,13 @@
 @@ -47,11 +47,11 @@
     }
  
-    public boolean addComponentParts(World var1, Random var2, StructureBoundingBox var3) {
-       this.placeSettings.setBoundingBox(var3);
-       this.template.addBlocksToWorld(var1, this.templatePosition, this.placeSettings);
--      Map var4 = this.template.getDataBlocks(this.templatePosition, this.placeSettings);
-+      Map<BlockPos, String> var4 = this.template.getDataBlocks(this.templatePosition, this.placeSettings);
+    public boolean a(World var1, Random var2, StructureBoundingBox var3) {
+       this.b.a(var3);
+       this.a.b(var1, this.c, this.b);
+-      Map var4 = this.a.a(this.c, this.b);
++      Map<BlockPos, String> var4 = this.a.a(this.c, this.b);
  
        for(BlockPos var6 : var4.keySet()) {
           String var7 = (String)var4.get(var6);
-          this.handleDataMarker(var7, var6, var1, var2, var3);
+          this.a(var7, var6, var1, var2, var3);
        }

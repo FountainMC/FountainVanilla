@@ -1,0 +1,35 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityGuardian.java
++++ src/main/java/net/minecraft/entity/monster/EntityGuardian.java
+@@ -313,19 +313,15 @@
+    }
+ 
+    protected void M() {
+       super.M();
+       if(this.isElder()) {
+-         boolean var1 = true;
+-         boolean var2 = true;
+-         boolean var3 = true;
+-         boolean var4 = true;
+          if((this.ticksLived + this.getId()) % 1200 == 0) {
+             Potion var5 = MobEffects.SLOWER_DIG;
+ 
+             for(EntityPlayerMP var8 : this.world.b(EntityPlayerMP.class, new Predicate<EntityPlayerMP>() {
+-               public boolean a(@Nullable EntityPlayerMP var1) {
++               public boolean apply(@Nullable EntityPlayerMP var1) {
+                   return EntityGuardian.this.h(var1) < 2500.0D && var1.playerInteractManager.c();
+                }
+             })) {
+                if(!var8.hasEffect(var5) || var8.getEffect(var5).getAmplifier() < 2 || var8.getEffect(var5).getDuration() < 1200) {
+                   var8.playerConnection.sendPacket(new SPacketChangeGameState(10, 0.0F));
+@@ -515,10 +511,10 @@
+ 
+       public EntitySelectorGuardianTargetHumanSquid(EntityGuardian var1) {
+          this.a = var1;
+       }
+ 
+-      public boolean a(@Nullable EntityLivingBase var1) {
++      public boolean apply(@Nullable EntityLivingBase var1) {
+          return (var1 instanceof EntityPlayer || var1 instanceof EntitySquid) && var1.h(this.a) > 9.0D;
+       }
+    }
+ }

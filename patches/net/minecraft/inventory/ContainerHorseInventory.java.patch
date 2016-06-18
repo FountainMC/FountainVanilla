@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/inventory/ContainerHorseInventory.java
++++ src/main/java/net/minecraft/inventory/ContainerHorseInventory.java
+@@ -49,11 +49,11 @@
+       }
+ 
+    }
+ 
+    public boolean a(EntityPlayer var1) {
+-      return this.a.a(var1) && this.f.isAlive() && this.f.g(var1) < 8.0F;
++      return this.a.a(var1) && this.f.isAlive() && this.f.g((net.minecraft.entity.Entity)var1) < 8.0F;
+    }
+ 
+    @Nullable
+    public ItemStack b(EntityPlayer var1, int var2) {
+       ItemStack var3 = null;

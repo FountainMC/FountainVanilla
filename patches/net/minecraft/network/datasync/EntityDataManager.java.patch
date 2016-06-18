@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/datasync/EntityDataManager.java
++++ src/main/java/net/minecraft/network/datasync/EntityDataManager.java
+@@ -213,11 +213,11 @@
+          DataSerializer var4 = DataSerializers.a(var3);
+          if(var4 == null) {
+             throw new DecoderException("Unknown serializer type " + var3);
+          }
+ 
+-         var1.add(new EntityDataManager.Item(var4.a(var2), var4.a(var0)));
++         var1.add(new EntityDataManager.Item(var4.a(var2), var4.b(var0)));
+       }
+ 
+       return var1;
+    }
+ 

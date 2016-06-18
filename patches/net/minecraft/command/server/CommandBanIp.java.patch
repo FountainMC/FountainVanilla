@@ -3,13 +3,13 @@
 @@ -64,11 +64,11 @@
     }
  
-    protected void banIp(MinecraftServer var1, ICommandSender var2, String var3, @Nullable String var4) {
+    protected void a(MinecraftServer var1, ICommandSender var2, String var3, @Nullable String var4) {
        UserListIPBansEntry var5 = new UserListIPBansEntry(var3, (Date)null, var2.getName(), (Date)null, var4);
-       var1.getPlayerList().getBannedIPs().addEntry(var5);
--      List var6 = var1.getPlayerList().getPlayersMatchingAddress(var3);
-+      List<EntityPlayerMP> var6 = var1.getPlayerList().getPlayersMatchingAddress(var3);
+       var1.getPlayerList().getIPBans().add(var5);
+-      List var6 = var1.getPlayerList().b(var3);
++      List<EntityPlayerMP> var6 = var1.getPlayerList().b(var3);
        String[] var7 = new String[var6.size()];
        int var8 = 0;
  
        for(EntityPlayerMP var10 : var6) {
-          var10.connection.kickPlayerFromServer("You have been IP banned.");
+          var10.playerConnection.disconnect("You have been IP banned.");

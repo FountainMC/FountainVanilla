@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/block/state/pattern/BlockMatcher.java
++++ src/main/java/net/minecraft/block/state/pattern/BlockMatcher.java
+@@ -14,9 +14,9 @@
+ 
+    public static BlockMatcher a(Block var0) {
+       return new BlockMatcher(var0);
+    }
+ 
+-   public boolean a(@Nullable IBlockState var1) {
++   public boolean apply(@Nullable IBlockState var1) {
+       return var1 != null && var1.getBlock() == this.a;
+    }
+ }

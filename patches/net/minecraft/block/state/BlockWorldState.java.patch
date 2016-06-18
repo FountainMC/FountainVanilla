@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/state/BlockWorldState.java
++++ src/main/java/net/minecraft/block/state/BlockWorldState.java
+@@ -43,11 +43,11 @@
+       return this.b;
+    }
+ 
+    public static Predicate<BlockWorldState> a(final Predicate<IBlockState> var0) {
+       return new Predicate<BlockWorldState>() {
+-         public boolean a(@Nullable BlockWorldState var1) {
++         public boolean apply(@Nullable BlockWorldState var1) {
+             return var1 != null && var0.apply(var1.a());
+          }
+       };
+    }
+ }

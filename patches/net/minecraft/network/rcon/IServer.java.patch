@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/rcon/IServer.java
++++ src/main/java/net/minecraft/network/rcon/IServer.java
+@@ -23,11 +23,11 @@
+ 
+    int I();
+ 
+    String[] getPlayers();
+ 
+-   String S();
++   String getFolderName();
+ 
+    String getPlugins();
+ 
+    String executeRemoteCommand(String var1);
+ 

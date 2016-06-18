@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockOldLeaf.java
++++ src/main/java/net/minecraft/block/BlockOldLeaf.java
+@@ -18,11 +18,11 @@
+ import net.minecraft.util.math.BlockPos;
+ import net.minecraft.world.World;
+ 
+ public class BlockOldLeaf extends BlockLeaves {
+    public static final PropertyEnum<BlockPlanks.EnumLogVariant> VARIANT = PropertyEnum.a("variant", BlockPlanks.EnumLogVariant.class, new Predicate<BlockPlanks.EnumLogVariant>() {
+-      public boolean a(@Nullable BlockPlanks.EnumLogVariant var1) {
++      public boolean apply(@Nullable BlockPlanks.EnumLogVariant var1) {
+          return var1.a() < 4;
+       }
+    });
+ 
+    public BlockOldLeaf() {

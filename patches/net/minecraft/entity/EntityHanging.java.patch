@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/EntityHanging.java
++++ src/main/java/net/minecraft/entity/EntityHanging.java
+@@ -20,11 +20,11 @@
+ import net.minecraft.world.World;
+ import org.apache.commons.lang3.Validate;
+ 
+ public abstract class EntityHanging extends Entity {
+    private static final Predicate<Entity> c = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof EntityHanging;
+       }
+    };
+    private int d;
+    public BlockPos blockPosition;

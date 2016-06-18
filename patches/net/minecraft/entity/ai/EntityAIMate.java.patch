@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/ai/EntityAIMate.java
 +++ src/main/java/net/minecraft/entity/ai/EntityAIMate.java
-@@ -54,11 +54,11 @@
+@@ -56,11 +56,11 @@
        }
  
     }
  
-    private EntityAnimal getNearbyMate() {
--      List var1 = this.theWorld.getEntitiesWithinAABB(this.theAnimal.getClass(), this.theAnimal.getEntityBoundingBox().expandXyz(8.0D));
-+      List<EntityAnimal> var1 = this.theWorld.getEntitiesWithinAABB(this.theAnimal.getClass(), this.theAnimal.getEntityBoundingBox().expandXyz(8.0D));
+    private EntityAnimal f() {
+-      List var1 = this.a.a(this.animal.getClass(), this.animal.getBoundingBox().g(8.0D));
++      List<EntityAnimal> var1 = this.a.a(this.animal.getClass(), this.animal.getBoundingBox().g(8.0D));
        double var2 = Double.MAX_VALUE;
        EntityAnimal var4 = null;
  
        for(EntityAnimal var6 : var1) {
-          if(this.theAnimal.canMateWith(var6) && this.theAnimal.getDistanceSqToEntity(var6) < var2) {
+          if(this.animal.mate(var6) && this.animal.h(var6) < var2) {

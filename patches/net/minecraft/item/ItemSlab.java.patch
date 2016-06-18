@@ -6,9 +6,9 @@
        return false;
     }
  
--   protected <T extends Comparable<T>> IBlockState makeState(IProperty<T> var1, Comparable<?> var2) {
--      return this.doubleSlab.getDefaultState().withProperty(var1, var2);
-+   protected <T extends Comparable<T>> IBlockState makeState(IProperty<T> var1, Comparable<T> var2) {
-+      return this.doubleSlab.getDefaultState().withProperty(var1, (T) var2);
+-   protected <T extends Comparable<T>> IBlockState a(IProperty<T> var1, Comparable<?> var2) {
+-      return this.c.getBlockData().set(var1, var2);
++   protected <T extends Comparable<T>> IBlockState a(IProperty<T> var1, Comparable<T> var2) {
++      return this.c.getBlockData().set(var1, (T) var2);
     }
  }

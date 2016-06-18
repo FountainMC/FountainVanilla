@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/ItemGlassBottle.java
++++ src/main/java/net/minecraft/item/ItemGlassBottle.java
+@@ -26,11 +26,11 @@
+       this.a(CreativeTabs.k);
+    }
+ 
+    public ActionResult<ItemStack> a(ItemStack var1, World var2, EntityPlayer var3, EnumHand var4) {
+       List var5 = var2.a(EntityAreaEffectCloud.class, var3.getBoundingBox().g(2.0D), new Predicate<EntityAreaEffectCloud>() {
+-         public boolean a(@Nullable EntityAreaEffectCloud var1) {
++         public boolean apply(@Nullable EntityAreaEffectCloud var1) {
+             return var1 != null && var1.isAlive() && var1.y() instanceof EntityDragon;
+          }
+       });
+       if(!var5.isEmpty()) {
+          EntityAreaEffectCloud var8 = (EntityAreaEffectCloud)var5.get(0);

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockSkull.java
++++ src/main/java/net/minecraft/block/BlockSkull.java
+@@ -42,11 +42,11 @@
+ 
+ public class BlockSkull extends BlockContainer {
+    public static final PropertyDirection FACING = BlockDirectional.FACING;
+    public static final PropertyBool NODROP = PropertyBool.of("nodrop");
+    private static final Predicate<BlockWorldState> B = new Predicate<BlockWorldState>() {
+-      public boolean a(@Nullable BlockWorldState var1) {
++      public boolean apply(@Nullable BlockWorldState var1) {
+          return var1.a() != null && var1.a().getBlock() == Blocks.SKULL && var1.b() instanceof TileEntitySkull && ((TileEntitySkull)var1.b()).getSkullType() == 1;
+       }
+    };
+    protected static final AxisAlignedBB c = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5D, 0.75D);
+    protected static final AxisAlignedBB d = new AxisAlignedBB(0.25D, 0.25D, 0.5D, 0.75D, 0.75D, 1.0D);

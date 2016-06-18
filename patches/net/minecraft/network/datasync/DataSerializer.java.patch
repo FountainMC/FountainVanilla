@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/network/datasync/DataSerializer.java
++++ src/main/java/net/minecraft/network/datasync/DataSerializer.java
+@@ -4,9 +4,9 @@
+ import net.minecraft.network.datasync.DataParameter;
+ 
+ public interface DataSerializer<T> {
+    void a(PacketBuffer var1, T var2);
+ 
+-   T a(PacketBuffer var1);
++   T b(PacketBuffer var1);
+ 
+    DataParameter<T> a(int var1);
+ }

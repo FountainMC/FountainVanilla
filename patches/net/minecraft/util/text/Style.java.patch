@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/util/text/Style.java
++++ src/main/java/net/minecraft/util/text/Style.java
+@@ -312,11 +312,11 @@
+    public static class ChatModifierSerializer implements JsonDeserializer<Style>, JsonSerializer<Style> {
+       public ChatModifierSerializer() {
+       }
+ 
+       @Nullable
+-      public Style a(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
++      public Style deserialize(JsonElement var1, Type var2, JsonDeserializationContext var3) throws JsonParseException {
+          if(var1.isJsonObject()) {
+             Style var4 = new Style();
+             JsonObject var5 = var1.getAsJsonObject();
+             if(var5 == null) {
+                return null;
+@@ -380,11 +380,11 @@
+             return null;
+          }
+       }
+ 
+       @Nullable
+-      public JsonElement a(Style var1, Type var2, JsonSerializationContext var3) {
++      public JsonElement serialize(Style var1, Type var2, JsonSerializationContext var3) {
+          if(var1.g()) {
+             return null;
+          } else {
+             JsonObject var4 = new JsonObject();
+             if(var1.c != null) {

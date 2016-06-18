@@ -1,0 +1,35 @@
+--- minecraft/src/net/minecraft/tileentity/TileEntity.java
++++ src/main/java/net/minecraft/tileentity/TileEntity.java
+@@ -190,29 +190,29 @@
+       this.h = -1;
+    }
+ 
+    public void a(CrashReportCategory var1) {
+       var1.a("Name", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return (String)TileEntity.g.get(TileEntity.this.getClass()) + " // " + TileEntity.this.getClass().getCanonicalName();
+          }
+       });
+       if(this.world != null) {
+          CrashReportCategory.a(var1, this.position, this.getBlock(), this.u());
+          var1.a("Actual block type", new ICrashReportDetail<String>() {
+-            public String a() throws Exception {
++            public String call() throws Exception {
+                int var1 = Block.getId(TileEntity.this.world.getType(TileEntity.this.position).getBlock());
+ 
+                try {
+                   return String.format("ID #%d (%s // %s)", new Object[]{Integer.valueOf(var1), Block.getById(var1).a(), Block.getById(var1).getClass().getCanonicalName()});
+                } catch (Throwable var3) {
+                   return "ID #" + var1;
+                }
+             }
+          });
+          var1.a("Actual block data value", new ICrashReportDetail<String>() {
+-            public String a() throws Exception {
++            public String call() throws Exception {
+                IBlockState var1 = TileEntity.this.world.getType(TileEntity.this.position);
+                int var2 = var1.getBlock().toLegacyData(var1);
+                if(var2 < 0) {
+                   return "Unknown? (Got " + var2 + ")";
+                } else {

@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityPolarBear.java
++++ src/main/java/net/minecraft/entity/passive/EntityPolarBear.java
+@@ -170,11 +170,11 @@
+       return (IEntityLivingData)var2;
+    }
+ 
+    class a extends EntityAINearestAttackableTarget<EntityPlayer> {
+       public a() {
+-         super(EntityPolarBear.this, EntityPlayer.class, 20, true, true, (Predicate<? super T>)null);
++         super(EntityPolarBear.this, EntityPlayer.class, 20, true, true, null);
+       }
+ 
+       public boolean a() {
+          if(EntityPolarBear.this.isBaby()) {
+             return false;

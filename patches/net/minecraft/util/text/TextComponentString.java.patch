@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/util/text/TextComponentString.java
++++ src/main/java/net/minecraft/util/text/TextComponentString.java
+@@ -16,11 +16,11 @@
+ 
+    public String getText() {
+       return this.b;
+    }
+ 
+-   public TextComponentString h() {
++   public TextComponentString f() {
+       TextComponentString var1 = new TextComponentString(this.b);
+       var1.setChatModifier(this.getChatModifier().clone());
+ 
+       for(ITextComponent var3 : this.a()) {
+          var1.addSibling(var3.f());

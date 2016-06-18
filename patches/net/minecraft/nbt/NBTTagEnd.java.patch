@@ -1,0 +1,13 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagEnd.java
++++ src/main/java/net/minecraft/nbt/NBTTagEnd.java
+@@ -23,9 +23,9 @@
+ 
+    public String toString() {
+       return "END";
+    }
+ 
+-   public NBTTagEnd c() {
++   public NBTTagEnd clone() {
+       return new NBTTagEnd();
+    }
+ }

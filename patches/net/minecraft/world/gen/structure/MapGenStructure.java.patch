@@ -1,15 +1,41 @@
 --- minecraft/src/net/minecraft/world/gen/structure/MapGenStructure.java
 +++ src/main/java/net/minecraft/world/gen/structure/MapGenStructure.java
-@@ -154,11 +154,11 @@
+@@ -49,22 +49,22 @@
+ 
+          } catch (Throwable var10) {
+             CrashReport var8 = CrashReport.a(var10, "Exception preparing structure feature");
+             CrashReportCategory var9 = var8.a("Feature being prepared");
+             var9.a("Is feature chunk", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   return MapGenStructure.this.a(var2, var3)?"True":"False";
+                }
+             });
+             var9.a((String)"Chunk location", String.format("%d,%d", new Object[]{Integer.valueOf(var2), Integer.valueOf(var3)}));
+             var9.a("Chunk pos hash", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   return String.valueOf(ChunkPos.a(var2, var3));
+                }
+             });
+             var9.a("Structure type", new ICrashReportDetail<String>() {
+-               public String a() throws Exception {
++               public String call() throws Exception {
+                   return MapGenStructure.this.getClass().getCanonicalName();
+                }
+             });
+             throw new ReportedException(var8);
+          }
+@@ -156,11 +156,11 @@
        }
  
        if(var13 != null) {
           return var13;
        } else {
--         List var20 = this.getCoordList();
-+         List<BlockPos> var20 = this.getCoordList();
+-         List var20 = this.G_();
++         List<BlockPos> var20 = this.G_();
           if(var20 != null) {
              BlockPos var21 = null;
  
              for(BlockPos var23 : var20) {
-                double var24 = var23.distanceSq(var2);
+                double var24 = var23.n(var2);

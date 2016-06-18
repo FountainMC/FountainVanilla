@@ -1,15 +1,34 @@
 --- minecraft/src/net/minecraft/world/gen/structure/template/Template.java
 +++ src/main/java/net/minecraft/world/gen/structure/template/Template.java
-@@ -94,11 +94,11 @@
+@@ -60,13 +60,13 @@
+    }
+ 
+    public void a(World var1, BlockPos var2, BlockPos var3, boolean var4, @Nullable Block var5) {
+       if(var3.getX() >= 1 && var3.getY() >= 1 && var3.getZ() >= 1) {
+          BlockPos var6 = var2.a(var3).a(-1, -1, -1);
+-         ArrayList var7 = Lists.newArrayList();
+-         ArrayList var8 = Lists.newArrayList();
+-         ArrayList var9 = Lists.newArrayList();
++         ArrayList<Template.BlockInfo> var7 = Lists.newArrayList();
++         ArrayList<Template.BlockInfo> var8 = Lists.newArrayList();
++         ArrayList<Template.BlockInfo> var9 = Lists.newArrayList();
+          BlockPos var10 = new BlockPos(Math.min(var2.getX(), var6.getX()), Math.min(var2.getY(), var6.getY()), Math.min(var2.getZ(), var6.getZ()));
+          BlockPos var11 = new BlockPos(Math.max(var2.getX(), var6.getX()), Math.max(var2.getY(), var6.getY()), Math.max(var2.getZ(), var6.getZ()));
+          this.c = var3;
+ 
+          for(BlockPos.MutableBlockPosition var13 : BlockPos.b(var10, var11)) {
+@@ -100,12 +100,12 @@
  
        }
     }
  
-    private void takeEntitiesFromWorld(World var1, BlockPos var2, BlockPos var3) {
--      List var4 = var1.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
-+      List<Entity> var4 = var1.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
-          public boolean apply(@Nullable Entity var1) {
+    private void a(World var1, BlockPos var2, BlockPos var3) {
+-      List var4 = var1.a(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
+-         public boolean a(@Nullable Entity var1) {
++      List<Entity> var4 = var1.a(Entity.class, new AxisAlignedBB(var2, var3), new Predicate<Entity>() {
++         public boolean apply(@Nullable Entity var1) {
              return !(var1 instanceof EntityPlayer);
           }
        });
-       this.entities.clear();
+       this.b.clear();
+ 

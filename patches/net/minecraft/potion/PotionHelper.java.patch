@@ -1,0 +1,31 @@
+--- minecraft/src/net/minecraft/potion/PotionHelper.java
++++ src/main/java/net/minecraft/potion/PotionHelper.java
+@@ -16,13 +16,13 @@
+ public class PotionHelper {
+    private static final List<PotionHelper.PredicatedCombination<PotionType>> a = Lists.newArrayList();
+    private static final List<PotionHelper.PredicatedCombination<Item>> b = Lists.newArrayList();
+    private static final List<PotionHelper.PredicateItem> c = Lists.newArrayList();
+    private static final Predicate<ItemStack> d = new Predicate<ItemStack>() {
+-      public boolean a(@Nullable ItemStack var1) {
++      public boolean apply(@Nullable ItemStack var1) {
+          for(PotionHelper.PredicateItem var3 : PotionHelper.c) {
+-            if(var3.a(var1)) {
++            if(var3.apply(var1)) {
+                return true;
+             }
+          }
+ 
+          return false;
+@@ -209,11 +209,11 @@
+       public PredicateItem(Item var1, int var2) {
+          this.a = var1;
+          this.b = var2;
+       }
+ 
+-      public boolean a(@Nullable ItemStack var1) {
++      public boolean apply(@Nullable ItemStack var1) {
+          return var1 != null && var1.getItem() == this.a && (this.b == -1 || this.b == var1.getData());
+       }
+    }
+ 
+    static class PredicatedCombination<T> {

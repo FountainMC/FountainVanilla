@@ -2,14 +2,14 @@
 +++ src/main/java/net/minecraft/command/CommandHandler.java
 @@ -50,11 +50,11 @@
           TextComponentTranslation var8 = new TextComponentTranslation("commands.generic.notFound", new Object[0]);
-          var8.getStyle().setColor(TextFormatting.RED);
-          var1.addChatMessage(var8);
-       } else if(var5.checkPermission(this.getServer(), var1)) {
+          var8.getChatModifier().setColor(TextFormatting.RED);
+          var1.sendMessage(var8);
+       } else if(var5.canUse(this.a(), var1)) {
           if(var6 > -1) {
--            List var14 = EntitySelector.matchEntities(var1, var3[var6], Entity.class);
-+            List<Entity> var14 = EntitySelector.matchEntities(var1, var3[var6], Entity.class);
+-            List var14 = EntitySelector.getPlayers(var1, var3[var6], Entity.class);
++            List<Entity> var14 = EntitySelector.getPlayers(var1, var3[var6], Entity.class);
              String var9 = var3[var6];
-             var1.setCommandStat(CommandResultStats.a.AFFECTED_ENTITIES, var14.size());
+             var1.a(CommandResultStats.EnumCommandResult.AFFECTED_ENTITIES, var14.size());
  
              for(Entity var11 : var14) {
-                var3[var6] = var11.getCachedUniqueIdString();
+                var3[var6] = var11.bf();

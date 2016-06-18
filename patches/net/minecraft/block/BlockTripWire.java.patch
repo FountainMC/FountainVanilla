@@ -2,14 +2,14 @@
 +++ src/main/java/net/minecraft/block/BlockTripWire.java
 @@ -130,11 +130,11 @@
  
-    private void updateState(World var1, BlockPos var2) {
-       IBlockState var3 = var1.getBlockState(var2);
-       boolean var4 = ((Boolean)var3.getValue(POWERED)).booleanValue();
+    private void b(World var1, BlockPos var2) {
+       IBlockState var3 = var1.getType(var2);
+       boolean var4 = ((Boolean)var3.get(POWERED)).booleanValue();
        boolean var5 = false;
--      List var6 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3.getBoundingBox(var1, var2).offset(var2));
-+      List<Entity> var6 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3.getBoundingBox(var1, var2).offset(var2));
+-      List var6 = var1.getEntities((Entity)null, var3.c(var1, var2).a(var2));
++      List<Entity> var6 = var1.getEntities((Entity)null, var3.c(var1, var2).a(var2));
        if(!var6.isEmpty()) {
           for(Entity var8 : var6) {
-             if(!var8.doesEntityNotTriggerPressurePlate()) {
+             if(!var8.isIgnoreBlockTrigger()) {
                 var5 = true;
                 break;

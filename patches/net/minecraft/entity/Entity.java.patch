@@ -1,114 +1,86 @@
 --- minecraft/src/net/minecraft/entity/Entity.java
 +++ src/main/java/net/minecraft/entity/Entity.java
-@@ -1,7 +1,9 @@
- package net.minecraft.entity;
- 
-+import lombok.*;
-+
- import com.google.common.collect.Iterables;
- import com.google.common.collect.Lists;
- import com.google.common.collect.Sets;
- import java.util.Collection;
- import java.util.Collections;
-@@ -74,10 +76,11 @@
- import net.minecraft.world.Teleporter;
- import net.minecraft.world.World;
- import net.minecraft.world.WorldServer;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
-+import org.fountainmc.entity.WetEntity;
- 
- public abstract class Entity implements ICommandSender {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final AxisAlignedBB ZERO_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-    private static double renderDistanceWeight = 1.0D;
-@@ -157,10 +160,14 @@
-    private final CommandResultStats cmdResultStats;
-    private final List<ItemStack> emptyItemStackList;
-    protected boolean glowing;
-    private final Set<String> tags;
-    private boolean isPositionDirty;
-+   // Fountain start
-+   @Getter(lazy = true)
-+   private final WetEntity fountainEntity = WetEntity.createEntity(this);
-+   // Fountain end
- 
-    public Entity(World var1) {
-       this.entityId = nextEntityID++;
-       this.riddenByEntities = Lists.newArrayList();
-       this.boundingBox = ZERO_AABB;
-@@ -228,11 +235,11 @@
-    public boolean equals(Object var1) {
-       return var1 instanceof Entity?((Entity)var1).entityId == this.entityId:false;
-    }
- 
-    public int hashCode() {
--      return this.entityId;
-+      return this.getUniqueID().hashCode(); // Fountain -> switch from 'entityId' to 'getUniqueId().hashCode()' for a higher quality hash code
-    }
- 
-    public void setDead() {
-       this.isDead = true;
-    }
-@@ -484,11 +491,11 @@
+@@ -485,11 +485,11 @@
           for(int var23 = var54.size(); var22 < var23; ++var22) {
-             var3 = ((AxisAlignedBB)var54.get(var22)).calculateYOffset(this.getEntityBoundingBox(), var3);
+             var3 = ((AxisAlignedBB)var54.get(var22)).b(this.getBoundingBox(), var3);
           }
  
-          this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0D, var3, 0.0D));
+          this.a(this.getBoundingBox().c(0.0D, var3, 0.0D));
 -         var22 = this.onGround || var15 != var3 && var15 < 0.0D;
 +         boolean var22b = this.onGround || var15 != var3 && var15 < 0.0D;
           int var56 = 0;
  
           for(int var24 = var54.size(); var56 < var24; ++var56) {
-             var1 = ((AxisAlignedBB)var54.get(var56)).calculateXOffset(this.getEntityBoundingBox(), var1);
+             var1 = ((AxisAlignedBB)var54.get(var56)).a(this.getBoundingBox(), var1);
           }
-@@ -499,11 +506,11 @@
+@@ -500,11 +500,11 @@
           for(int var60 = var54.size(); var56 < var60; ++var56) {
-             var5 = ((AxisAlignedBB)var54.get(var56)).calculateZOffset(this.getEntityBoundingBox(), var5);
+             var5 = ((AxisAlignedBB)var54.get(var56)).c(this.getBoundingBox(), var5);
           }
  
-          this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0D, 0.0D, var5));
--         if(this.stepHeight > 0.0F && var22 && (var13 != var1 || var17 != var5)) {
-+         if(this.stepHeight > 0.0F && var22b && (var13 != var1 || var17 != var5)) {
+          this.a(this.getBoundingBox().c(0.0D, 0.0D, var5));
+-         if(this.P > 0.0F && var22 && (var13 != var1 || var17 != var5)) {
++         if(this.P > 0.0F && var22b && (var13 != var1 || var17 != var5)) {
              double var58 = var1;
              double var25 = var3;
              double var27 = var5;
-             AxisAlignedBB var29 = this.getEntityBoundingBox();
-             this.setEntityBoundingBox(var21);
-@@ -1426,14 +1433,20 @@
-          this.riddenByEntities.remove(var1);
-          var1.rideCooldown = 60;
-       }
+             AxisAlignedBB var29 = this.getBoundingBox();
+             this.a(var21);
+@@ -1823,30 +1823,30 @@
+       return false;
     }
  
--   protected boolean canFitPassenger(Entity var1) {
--      return this.getPassengers().size() < 1;
-+   // Foutain start
-+   public int getMaxPassengers() {
-+      return 1;
+    public void appendEntityCrashDetails(CrashReportCategory var1) {
+       var1.a("Entity Type", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return EntityList.b(Entity.this) + " (" + Entity.this.getClass().getCanonicalName() + ")";
+          }
+       });
+       var1.a((String)"Entity ID", Integer.valueOf(this.id));
+       var1.a("Entity Name", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return Entity.this.getName();
+          }
+       });
+       var1.a((String)"Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[]{Double.valueOf(this.locX), Double.valueOf(this.locY), Double.valueOf(this.locZ)}));
+       var1.a((String)"Entity\'s Block location", CrashReportCategory.a(MathHelper.floor(this.locX), MathHelper.floor(this.locY), MathHelper.floor(this.locZ)));
+       var1.a((String)"Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[]{Double.valueOf(this.motX), Double.valueOf(this.motY), Double.valueOf(this.motZ)}));
+       var1.a("Entity\'s Passengers", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return Entity.this.bx().toString();
+          }
+       });
+       var1.a("Entity\'s Vehicle", new ICrashReportDetail<String>() {
+-         public String a() throws Exception {
++         public String call() throws Exception {
+             return Entity.this.bB().toString();
+          }
+       });
     }
  
-+   public final boolean canFitPassenger(Entity var1) {
-+      return this.getPassengers().size() < getMaxPassengers();
-+      // Fountain end
-+   }
-+
-    public float getCollisionBorderSize() {
-       return 0.0F;
+@@ -2080,19 +2080,19 @@
+       this.a((Class)Entity.class, (Set)var1);
+       return var1;
     }
  
-    public Vec3d getLookVec() {
-@@ -2058,11 +2071,11 @@
+    public <T extends Entity> Collection<T> b(Class<T> var1) {
+-      HashSet var2 = Sets.newHashSet();
+-      this.a((Class)var1, (Set)var2);
++      HashSet<T> var2 = Sets.newHashSet();
++      this.a(var1, var2);
+       return var2;
     }
  
-    private <T extends Entity> void getRecursivePassengersByType(Class<T> var1, Set<T> var2) {
-       for(Entity var4 : this.getPassengers()) {
+    private <T extends Entity> void a(Class<T> var1, Set<T> var2) {
+       for(Entity var4 : this.bx()) {
           if(var1.isAssignableFrom(var4.getClass())) {
 -            var2.add(var4);
-+            var2.add((T)var4);
++            var2.add((T) var4);
           }
  
-          var4.getRecursivePassengersByType(var1, var2);
+          var4.a(var1, var2);
        }
  

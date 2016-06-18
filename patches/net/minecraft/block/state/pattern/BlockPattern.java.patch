@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/state/pattern/BlockPattern.java
++++ src/main/java/net/minecraft/block/state/pattern/BlockPattern.java
+@@ -105,11 +105,11 @@
+       public BlockLoader(World var1, boolean var2) {
+          this.a = var1;
+          this.b = var2;
+       }
+ 
+-      public BlockWorldState a(BlockPos var1) throws Exception {
++      public BlockWorldState load(BlockPos var1) throws Exception {
+          return new BlockWorldState(this.a, var1, this.b);
+       }
+    }
+ 
+    public static class ShapeDetectorCollection {

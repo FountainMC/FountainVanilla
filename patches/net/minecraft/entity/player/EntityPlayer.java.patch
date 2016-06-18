@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/player/EntityPlayer.java
 +++ src/main/java/net/minecraft/entity/player/EntityPlayer.java
-@@ -484,11 +484,11 @@
+@@ -495,11 +495,11 @@
     }
  
-    public void addToPlayerScore(Entity var1, int var2) {
+    public void b(Entity var1, int var2) {
        if(var1 != this) {
           this.addScore(var2);
--         Collection var3 = this.getWorldScoreboard().getObjectivesFromCriteria(IScoreCriteria.TOTAL_KILL_COUNT);
-+         Collection<ScoreObjective> var3 = this.getWorldScoreboard().getObjectivesFromCriteria(IScoreCriteria.TOTAL_KILL_COUNT);
+-         Collection var3 = this.getScoreboard().getObjectivesForCriteria(IScoreCriteria.f);
++         Collection<ScoreObjective> var3 = this.getScoreboard().getObjectivesForCriteria(IScoreCriteria.f);
           if(var1 instanceof EntityPlayer) {
-             this.addStat(StatList.PLAYER_KILLS);
-             var3.addAll(this.getWorldScoreboard().getObjectivesFromCriteria(IScoreCriteria.PLAYER_KILL_COUNT));
+             this.b(StatList.D);
+             var3.addAll(this.getScoreboard().getObjectivesForCriteria(IScoreCriteria.e));
           } else {
-             this.addStat(StatList.MOB_KILLS);
+             this.b(StatList.B);

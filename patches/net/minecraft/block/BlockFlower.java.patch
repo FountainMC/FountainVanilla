@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/block/BlockFlower.java
++++ src/main/java/net/minecraft/block/BlockFlower.java
+@@ -31,11 +31,11 @@
+    public abstract BlockFlower.EnumFlowerType e();
+ 
+    public IProperty<BlockFlower.EnumFlowerVarient> g() {
+       if(this.TYPE == null) {
+          this.TYPE = PropertyEnum.a("type", BlockFlower.EnumFlowerVarient.class, new Predicate<BlockFlower.EnumFlowerVarient>() {
+-            public boolean a(@Nullable BlockFlower.EnumFlowerVarient var1) {
++            public boolean apply(@Nullable BlockFlower.EnumFlowerVarient var1) {
+                return var1.a() == BlockFlower.this.e();
+             }
+          });
+       }
+ 
+@@ -121,11 +121,11 @@
+       }
+ 
+       static {
+          for(final BlockFlower.EnumFlowerType var3 : BlockFlower.EnumFlowerType.values()) {
+             Collection var4 = Collections2.filter(Lists.newArrayList(values()), new Predicate<BlockFlower.EnumFlowerVarient>() {
+-               public boolean a(@Nullable BlockFlower.EnumFlowerVarient var1) {
++               public boolean apply(@Nullable BlockFlower.EnumFlowerVarient var1) {
+                   return var1.a() == var3;
+                }
+             });
+             k[var3.ordinal()] = (BlockFlower.EnumFlowerVarient[])var4.toArray(new BlockFlower.EnumFlowerVarient[var4.size()]);
+          }

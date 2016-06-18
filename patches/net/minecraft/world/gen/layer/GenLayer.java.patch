@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/world/gen/layer/GenLayer.java
 +++ src/main/java/net/minecraft/world/gen/layer/GenLayer.java
-@@ -67,11 +67,11 @@
-       GenLayerRiverInit var32 = new GenLayerRiverInit(100L, var8);
+@@ -66,11 +66,11 @@
+       GenLayerRiverInit var31 = new GenLayerRiverInit(100L, var8);
        GenLayerBiome var9 = new GenLayerBiome(200L, var30, var2, var3);
-       GenLayer var37 = GenLayerZoom.magnify(1000L, var9, 2);
-       GenLayerBiomeEdge var38 = new GenLayerBiomeEdge(1000L, var37);
-       GenLayer var10 = GenLayerZoom.magnify(1000L, var32, 2);
--      GenLayerHills var39 = new GenLayerHills(1000L, var38, var10);
-+      GenLayer var39 = new GenLayerHills(1000L, var38, var10);
-       GenLayer var33 = GenLayerZoom.magnify(1000L, var32, 2);
-       var33 = GenLayerZoom.magnify(1000L, var33, var7);
-       GenLayerRiver var35 = new GenLayerRiver(1L, var33);
-       GenLayerSmooth var36 = new GenLayerSmooth(1000L, var35);
-       var39 = new GenLayerRareBiome(1001L, var39);
+       GenLayer var36 = GenLayerZoom.b(1000L, var9, 2);
+       GenLayerBiomeEdge var37 = new GenLayerBiomeEdge(1000L, var36);
+       GenLayer var10 = GenLayerZoom.b(1000L, var31, 2);
+-      GenLayerHills var38 = new GenLayerHills(1000L, var37, var10);
++      GenLayer var38 = new GenLayerHills(1000L, var37, var10);
+       GenLayer var32 = GenLayerZoom.b(1000L, var31, 2);
+       var32 = GenLayerZoom.b(1000L, var32, var7);
+       GenLayerRiver var34 = new GenLayerRiver(1L, var32);
+       GenLayerSmooth var35 = new GenLayerSmooth(1000L, var34);
+       var38 = new GenLayerRareBiome(1001L, var38);

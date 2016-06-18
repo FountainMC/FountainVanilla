@@ -4,12 +4,12 @@
  
     }
  
-    protected int computeRedstoneStrength(World var1, BlockPos var2) {
-       AxisAlignedBB var3 = PRESSURE_AABB.offset(var2);
+    protected int e(World var1, BlockPos var2) {
+       AxisAlignedBB var3 = c.a(var2);
 -      List var4;
 +      List<Entity> var4;
-       switch(this.sensitivity) {
+       switch(this.e) {
        case EVERYTHING:
-          var4 = var1.getEntitiesWithinAABBExcludingEntity((Entity)null, var3);
+          var4 = var1.getEntities((Entity)null, var3);
           break;
        case MOBS:

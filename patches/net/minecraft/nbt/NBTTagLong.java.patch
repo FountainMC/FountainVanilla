@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/nbt/NBTTagLong.java
++++ src/main/java/net/minecraft/nbt/NBTTagLong.java
+@@ -31,11 +31,11 @@
+ 
+    public String toString() {
+       return "" + this.data + "L";
+    }
+ 
+-   public NBTTagLong c() {
++   public NBTTagLong clone() {
+       return new NBTTagLong(this.data);
+    }
+ 
+    public boolean equals(Object var1) {
+       if(super.equals(var1)) {

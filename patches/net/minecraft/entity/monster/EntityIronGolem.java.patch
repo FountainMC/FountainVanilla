@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityIronGolem.java
++++ src/main/java/net/minecraft/entity/monster/EntityIronGolem.java
+@@ -62,11 +62,11 @@
+       this.goalSelector.a(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+       this.goalSelector.a(8, new EntityAILookIdle(this));
+       this.targetSelector.a(1, new EntityAIDefendVillage(this));
+       this.targetSelector.a(2, new EntityAIHurtByTarget(this, false, new Class[0]));
+       this.targetSelector.a(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>() {
+-         public boolean a(@Nullable EntityLiving var1) {
++         public boolean apply(@Nullable EntityLiving var1) {
+             return var1 != null && IMob.e.apply(var1) && !(var1 instanceof EntityCreeper);
+          }
+       }));
+    }
+ 

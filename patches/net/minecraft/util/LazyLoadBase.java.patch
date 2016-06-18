@@ -1,0 +1,18 @@
+--- minecraft/src/net/minecraft/util/LazyLoadBase.java
++++ src/main/java/net/minecraft/util/LazyLoadBase.java
+@@ -8,13 +8,13 @@
+    }
+ 
+    public T c() {
+       if(!this.b) {
+          this.b = true;
+-         this.a = this.init();
++         this.a = this.a();
+       }
+ 
+       return this.a;
+    }
+ 
+-   protected abstract T init();
++   protected abstract T a();
+ }

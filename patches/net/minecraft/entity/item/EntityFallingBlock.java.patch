@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/item/EntityFallingBlock.java
 +++ src/main/java/net/minecraft/entity/item/EntityFallingBlock.java
-@@ -151,11 +151,11 @@
-    public void fall(float var1, float var2) {
-       Block var3 = this.fallTile.getBlock();
+@@ -155,11 +155,11 @@
+    public void e(float var1, float var2) {
+       Block var3 = this.block.getBlock();
        if(this.hurtEntities) {
-          int var4 = MathHelper.ceiling_float_int(var1 - 1.0F);
+          int var4 = MathHelper.f(var1 - 1.0F);
           if(var4 > 0) {
--            ArrayList var5 = Lists.newArrayList(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox()));
-+            ArrayList<Entity> var5 = Lists.newArrayList(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox()));
+-            ArrayList var5 = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
++            ArrayList<Entity> var5 = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
              boolean var6 = var3 == Blocks.ANVIL;
-             DamageSource var7 = var6?DamageSource.anvil:DamageSource.fallingBlock;
+             DamageSource var7 = var6?DamageSource.ANVIL:DamageSource.FALLING_BLOCK;
  
              for(Entity var9 : var5) {
-                var9.attackEntityFrom(var7, (float)Math.min(MathHelper.floor_float((float)var4 * this.fallHurtAmount), this.fallHurtMax));
+                var9.damageEntity(var7, (float)Math.min(MathHelper.d((float)var4 * this.fallHurtAmount), this.fallHurtMax));

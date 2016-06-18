@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/ai/EntityAIPlay.java
 +++ src/main/java/net/minecraft/entity/ai/EntityAIPlay.java
-@@ -23,11 +23,11 @@
-       if(this.villagerObj.getGrowingAge() >= 0) {
+@@ -24,11 +24,11 @@
+       if(this.a.getAge() >= 0) {
           return false;
-       } else if(this.villagerObj.getRNG().nextInt(400) != 0) {
+       } else if(this.a.getRandom().nextInt(400) != 0) {
           return false;
        } else {
--         List var1 = this.villagerObj.worldObj.getEntitiesWithinAABB(EntityVillager.class, this.villagerObj.getEntityBoundingBox().expand(6.0D, 3.0D, 6.0D));
-+         List<EntityVillager> var1 = this.villagerObj.worldObj.getEntitiesWithinAABB(EntityVillager.class, this.villagerObj.getEntityBoundingBox().expand(6.0D, 3.0D, 6.0D));
+-         List var1 = this.a.world.a(EntityVillager.class, this.a.getBoundingBox().grow(6.0D, 3.0D, 6.0D));
++         List<EntityVillager> var1 = this.a.world.a(EntityVillager.class, this.a.getBoundingBox().grow(6.0D, 3.0D, 6.0D));
           double var2 = Double.MAX_VALUE;
  
           for(EntityVillager var5 : var1) {
-             if(var5 != this.villagerObj && !var5.isPlaying() && var5.getGrowingAge() < 0) {
-                double var6 = var5.getDistanceSqToEntity(this.villagerObj);
+             if(var5 != this.a && !var5.dg() && var5.getAge() < 0) {
+                double var6 = var5.h(this.a);

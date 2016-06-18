@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/server/network/NetHandlerLoginServer.java
++++ src/main/java/net/minecraft/server/network/NetHandlerLoginServer.java
+@@ -91,11 +91,11 @@
+          this.disconnect(var1);
+       } else {
+          this.g = NetHandlerLoginServer.EnumProtocolState.ACCEPTED;
+          if(this.server.aF() >= 0 && !this.networkManager.isLocal()) {
+             this.networkManager.sendPacket(new SPacketEnableCompression(this.server.aF()), new ChannelFutureListener() {
+-               public void a(ChannelFuture var1) throws Exception {
++               public void operationComplete(ChannelFuture var1) throws Exception {
+                   NetHandlerLoginServer.this.networkManager.setCompressionLevel(NetHandlerLoginServer.this.server.aF());
+                }
+             }, new GenericFutureListener[0]);
+          }
+ 

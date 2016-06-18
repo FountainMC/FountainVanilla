@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/tileentity/TileEntityStructure.java
++++ src/main/java/net/minecraft/tileentity/TileEntityStructure.java
+@@ -247,11 +247,11 @@
+       }
+    }
+ 
+    private List<TileEntityStructure> a(List<TileEntityStructure> var1) {
+       Iterable var2 = Iterables.filter(var1, new Predicate<TileEntityStructure>() {
+-         public boolean a(@Nullable TileEntityStructure var1) {
++         public boolean apply(@Nullable TileEntityStructure var1) {
+             return var1.l == TileEntityStructure.UsageMode.CORNER && TileEntityStructure.this.a.equals(var1.a);
+          }
+       });
+       return Lists.newArrayList(var2);
+    }

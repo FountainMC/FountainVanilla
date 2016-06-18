@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityChicken.java
++++ src/main/java/net/minecraft/entity/passive/EntityChicken.java
+@@ -117,11 +117,11 @@
+    @Nullable
+    protected ResourceLocation J() {
+       return LootTableList.C;
+    }
+ 
+-   public EntityChicken b(EntityAgeable var1) {
++   public EntityChicken createChild(EntityAgeable var1) {
+       return new EntityChicken(this.world);
+    }
+ 
+    public boolean e(@Nullable ItemStack var1) {
+       return var1 != null && bF.contains(var1.getItem());

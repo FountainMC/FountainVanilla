@@ -1,36 +1,15 @@
 --- minecraft/src/net/minecraft/block/BlockSponge.java
 +++ src/main/java/net/minecraft/block/BlockSponge.java
-@@ -50,28 +50,28 @@
-       }
+@@ -51,11 +51,11 @@
  
     }
  
-    private boolean absorb(World var1, BlockPos var2) {
--      LinkedList var3 = Lists.newLinkedList();
+    private boolean b(World var1, BlockPos var2) {
+       LinkedList var3 = Lists.newLinkedList();
 -      ArrayList var4 = Lists.newArrayList();
--      var3.add(new Tuple(var2, Integer.valueOf(0)));
-+      LinkedList<Tuple<BlockPos, Integer>> var3 = Lists.newLinkedList();
 +      ArrayList<BlockPos> var4 = Lists.newArrayList();
-+      var3.add(new Tuple<BlockPos, Integer>(var2, Integer.valueOf(0)));
+       var3.add(new Tuple(var2, Integer.valueOf(0)));
        int var5 = 0;
  
        while(!var3.isEmpty()) {
--         Tuple var6 = (Tuple)var3.poll();
-+         Tuple<BlockPos, Integer> var6 = var3.poll();
-          BlockPos var7 = (BlockPos)var6.getFirst();
-          int var8 = ((Integer)var6.getSecond()).intValue();
- 
-          for(EnumFacing var12 : EnumFacing.values()) {
-             BlockPos var13 = var7.offset(var12);
-             if(var1.getBlockState(var13).getMaterial() == Material.WATER) {
-                var1.setBlockState(var13, Blocks.AIR.getDefaultState(), 2);
-                var4.add(var13);
-                ++var5;
-                if(var8 < 6) {
--                  var3.add(new Tuple(var13, Integer.valueOf(var8 + 1)));
-+                  var3.add(new Tuple<BlockPos, Integer>(var13, Integer.valueOf(var8 + 1)));
-                }
-             }
-          }
- 
-          if(var5 > 64) {
+          Tuple var6 = (Tuple)var3.poll();

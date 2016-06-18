@@ -1,77 +1,62 @@
 --- minecraft/src/net/minecraft/block/state/BlockStateContainer.java
 +++ src/main/java/net/minecraft/block/state/BlockStateContainer.java
-@@ -40,10 +40,13 @@
- import net.minecraft.util.math.RayTraceResult;
- import net.minecraft.util.math.Vec3d;
- import net.minecraft.world.IBlockAccess;
- import net.minecraft.world.World;
+@@ -44,11 +44,11 @@
  
-+import org.fountainmc.WetServer;
-+import org.fountainmc.world.block.WetBlockState;
-+
  public class BlockStateContainer {
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-z0-9_]+$");
-    private static final Function<IProperty<?>, String> GET_NAME_FUNC = new Function<IProperty<?>, String>() {
+    private static final Pattern a = Pattern.compile("^[a-z0-9_]+$");
+    private static final Function<IProperty<?>, String> b = new Function<IProperty<?>, String>() {
        @Nullable
-       public String apply(@Nullable IProperty<?> var1) {
-@@ -63,11 +66,11 @@
-          var3.put(var7.getName(), var7);
+-      public String a(@Nullable IProperty<?> var1) {
++      public String apply(@Nullable IProperty<?> var1) {
+          return var1 == null?"<NULL>":var1.a();
+       }
+    };
+    private final Block c;
+    private final ImmutableSortedMap<String, IProperty<?>> d;
+@@ -63,11 +63,11 @@
+          var3.put(var7.a(), var7);
        }
  
-       this.properties = ImmutableSortedMap.copyOf(var3);
+       this.d = ImmutableSortedMap.copyOf(var3);
        LinkedHashMap var11 = Maps.newLinkedHashMap();
 -      ArrayList var12 = Lists.newArrayList();
-+      ArrayList<BlockStateContainer.a> var12 = Lists.newArrayList();
++      ArrayList<BlockStateContainer.BlockData> var12 = Lists.newArrayList();
  
-       for(List var8 : Cartesian.cartesianProduct(this.getAllowedValues())) {
-          Map var9 = MapPopulator.createMap(this.properties.values(), var8);
-          BlockStateContainer.a var10 = new BlockStateContainer.a(var1, ImmutableMap.copyOf(var9));
+       for(List var8 : Cartesian.a(this.e())) {
+          Map var9 = MapPopulator.b(this.d.values(), var8);
+          BlockStateContainer.BlockData var10 = new BlockStateContainer.BlockData(var1, ImmutableMap.copyOf(var9));
           var11.put(var9, var10);
-@@ -84,12 +87,12 @@
-    public static <T extends Comparable<T>> String validateProperty(Block var0, IProperty<T> var1) {
-       String var2 = var1.getName();
-       if(!NAME_PATTERN.matcher(var2).matches()) {
+@@ -85,11 +85,11 @@
+       String var2 = var1.a();
+       if(!a.matcher(var2).matches()) {
           throw new IllegalArgumentException("Block: " + var0.getClass() + " has invalidly named property: " + var2);
        } else {
--         for(Comparable var4 : var1.getAllowedValues()) {
--            String var5 = var1.getName(var4);
-+         for(Comparable<T> var4 : var1.getAllowedValues()) {
-+            String var5 = var1.getName((T) var4);
-             if(!NAME_PATTERN.matcher(var5).matches()) {
+          for(Comparable var4 : var1.c()) {
+-            String var5 = var1.a(var4);
++            String var5 = var1.a((T) var4);
+             if(!a.matcher(var5).matches()) {
                 throw new IllegalArgumentException("Block: " + var0.getClass() + " has property: " + var2 + " with invalidly named value: " + var5);
              }
           }
  
-@@ -172,10 +175,14 @@
+@@ -189,16 +189,16 @@
  
-       public Block getBlock() {
-          return this.block;
-       }
- 
-+      // Fountain start
-+      @lombok.Getter(lazy=true) private final WetBlockState fountainState = WetBlockState.createState(WetServer.getInstance(), this);
-+      // Fountain end
-+
-       public boolean equals(Object var1) {
-          return this == var1;
-       }
- 
-       public int hashCode() {
-@@ -186,14 +193,14 @@
-          if(this.propertyValueTable != null) {
+       public void a(Map<Map<IProperty<?>, Comparable<?>>, BlockStateContainer.BlockData> var1) {
+          if(this.c != null) {
              throw new IllegalStateException();
           } else {
-             HashBasedTable var2 = HashBasedTable.create();
+-            HashBasedTable var2 = HashBasedTable.create();
++            HashBasedTable<IProperty<?>, Comparable<?>, BlockStateContainer.BlockData> var2 = HashBasedTable.create();
  
--            for(Entry var4 : this.properties.entrySet()) {
+-            for(Entry var4 : this.b.entrySet()) {
 -               IProperty var5 = (IProperty)var4.getKey();
-+            for(Entry<IProperty<?>, Comparable<?>> var4 : this.properties.entrySet()) {
++            for(Entry<IProperty<?>, Comparable<?>> var4 : this.b.entrySet()) {
 +               IProperty<?> var5 = var4.getKey();
  
--               for(Comparable var7 : var5.getAllowedValues()) {
-+               for(Comparable<?> var7 : var5.getAllowedValues()) {
+-               for(Comparable var7 : var5.c()) {
++               for(Comparable<?> var7 : var5.c()) {
                    if(var7 != var4.getValue()) {
-                      var2.put(var5, var7, var1.get(this.getPropertiesWithValue(var5, var7)));
+                      var2.put(var5, var7, var1.get(this.b(var5, var7)));
                    }
                 }
              }

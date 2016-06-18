@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/block/BlockRedstoneWire.java
 +++ src/main/java/net/minecraft/block/BlockRedstoneWire.java
 @@ -120,11 +120,11 @@
-       return var1.getBlockState(var2.down()).isFullyOpaque() || var1.getBlockState(var2.down()).getBlock() == Blocks.GLOWSTONE;
+       return var1.getType(var2.down()).q() || var1.getType(var2.down()).getBlock() == Blocks.GLOWSTONE;
     }
  
-    private IBlockState updateSurroundingRedstone(World var1, BlockPos var2, IBlockState var3) {
-       var3 = this.calculateCurrentChanges(var1, var2, var2, var3);
--      ArrayList var4 = Lists.newArrayList(this.blocksNeedingUpdate);
-+      ArrayList<BlockPos> var4 = Lists.newArrayList(this.blocksNeedingUpdate);
-       this.blocksNeedingUpdate.clear();
+    private IBlockState e(World var1, BlockPos var2, IBlockState var3) {
+       var3 = this.a(var1, var2, var2, var3);
+-      ArrayList var4 = Lists.newArrayList(this.B);
++      ArrayList<BlockPos> var4 = Lists.newArrayList(this.B);
+       this.B.clear();
  
        for(BlockPos var6 : var4) {
-          var1.notifyNeighborsOfStateChange(var6, this);
+          var1.applyPhysics(var6, this);
        }

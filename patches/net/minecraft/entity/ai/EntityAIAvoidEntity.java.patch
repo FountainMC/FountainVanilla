@@ -1,20 +1,33 @@
 --- minecraft/src/net/minecraft/entity/ai/EntityAIAvoidEntity.java
 +++ src/main/java/net/minecraft/entity/ai/EntityAIAvoidEntity.java
-@@ -44,15 +44,15 @@
-       this.entityPathNavigate = var1.getNavigator();
-       this.setMutexBits(1);
+@@ -29,11 +29,11 @@
+       this(var1, var2, Predicates.alwaysTrue(), var3, var4, var6);
     }
  
-    public boolean shouldExecute() {
--      List var1 = this.theEntity.worldObj.getEntitiesWithinAABB(this.classToAvoid, this.theEntity.getEntityBoundingBox().expand((double)this.avoidDistance, 3.0D, (double)this.avoidDistance), Predicates.and(new Predicate[]{EntitySelectors.CAN_AI_TARGET, this.canBeSeenSelector, this.avoidTargetSelector}));
-+      List<T> var1 = this.theEntity.worldObj.getEntitiesWithinAABB(this.classToAvoid, this.theEntity.getEntityBoundingBox().expand((double)this.avoidDistance, 3.0D, (double)this.avoidDistance), Predicates.and(new Predicate[]{EntitySelectors.CAN_AI_TARGET, this.canBeSeenSelector, this.avoidTargetSelector}));
+    public EntityAIAvoidEntity(EntityCreature var1, Class<T> var2, Predicate<? super T> var3, float var4, double var5, double var7) {
+       this.c = new Predicate<Entity>() {
+-         public boolean a(@Nullable Entity var1) {
++         public boolean apply(@Nullable Entity var1) {
+             return var1.isAlive() && EntityAIAvoidEntity.this.a.getEntitySenses().a(var1);
+          }
+       };
+       this.a = var1;
+       this.i = var2;
+@@ -44,15 +44,15 @@
+       this.h = var1.getNavigation();
+       this.a(1);
+    }
+ 
+    public boolean a() {
+-      List var1 = this.a.world.a(this.i, this.a.getBoundingBox().grow((double)this.f, 3.0D, (double)this.f), Predicates.and(new Predicate[]{EntitySelectors.d, this.c, this.j}));
++      List<Entity> var1 = this.a.world.a(this.i, this.a.getBoundingBox().grow((double)this.f, 3.0D, (double)this.f), Predicates.and(new Predicate[]{EntitySelectors.d, this.c, this.j}));
        if(var1.isEmpty()) {
           return false;
        } else {
--         this.closestLivingEntity = (Entity)var1.get(0);
-+         this.closestLivingEntity = var1.get(0);
-          Vec3d var2 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, new Vec3d(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+-         this.b = (Entity)var1.get(0);
++         this.b = (T)var1.get(0);
+          Vec3d var2 = RandomPositionGenerator.b(this.a, 16, 7, new Vec3d(this.b.locX, this.b.locY, this.b.locZ));
           if(var2 == null) {
              return false;
-          } else if(this.closestLivingEntity.getDistanceSq(var2.xCoord, var2.yCoord, var2.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
+          } else if(this.b.e(var2.x, var2.y, var2.z) < this.b.h(this.a)) {
              return false;

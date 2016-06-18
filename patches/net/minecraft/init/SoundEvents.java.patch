@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/init/SoundEvents.java
++++ src/main/java/net/minecraft/init/SoundEvents.java
+@@ -225,11 +225,11 @@
+    public static final SoundEvent dj;
+    public static final SoundEvent dk;
+    public static final SoundEvent dl;
+    public static final SoundEvent dm;
+    public static final SoundEvent dn;
+-   public static final SoundEvent do;
++   public static final SoundEvent do_soundEvent;
+    public static final SoundEvent dp;
+    public static final SoundEvent dq;
+    public static final SoundEvent dr;
+    public static final SoundEvent ds;
+    public static final SoundEvent dt;
+@@ -702,11 +702,11 @@
+          dj = a("entity.leashknot.break");
+          dk = a("entity.leashknot.place");
+          dl = a("block.lever.click");
+          dm = a("entity.lightning.impact");
+          dn = a("entity.lightning.thunder");
+-         do = a("entity.lingeringpotion.throw");
++         do_soundEvent = a("entity.lingeringpotion.throw");
+          dp = a("entity.magmacube.death");
+          dq = a("entity.magmacube.hurt");
+          dr = a("entity.magmacube.jump");
+          ds = a("entity.magmacube.squish");
+          dt = a("block.metal.break");

@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/item/ItemStack.java
++++ src/main/java/net/minecraft/item/ItemStack.java
+@@ -100,11 +100,11 @@
+ 
+    public ItemStack cloneAndSubtract(int var1) {
+       var1 = Math.min(var1, this.count);
+       ItemStack var2 = new ItemStack(this.item, var1, this.damage);
+       if(this.tag != null) {
+-         var2.tag = this.tag.g();
++         var2.tag = this.tag.clone();
+       }
+ 
+       this.count -= var1;
+       return var2;
+    }
+@@ -276,11 +276,11 @@
+    }
+ 
+    public ItemStack cloneItemStack() {
+       ItemStack var1 = new ItemStack(this.item, this.count, this.damage);
+       if(this.tag != null) {
+-         var1.tag = this.tag.g();
++         var1.tag = this.tag.clone();
+       }
+ 
+       return var1;
+    }
+ 

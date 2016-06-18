@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityMagmaCube.java
++++ src/main/java/net/minecraft/entity/monster/EntityMagmaCube.java
+@@ -36,11 +36,11 @@
+ 
+    public boolean canSpawn() {
+       return this.world.a((AxisAlignedBB)this.getBoundingBox(), (Entity)this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && !this.world.containsLiquid(this.getBoundingBox());
+    }
+ 
+-   protected void setSize(int var1) {
++   public void setSize(int var1) {
+       super.setSize(var1);
+       this.getAttributeInstance(SharedMonsterAttributes.g).setValue((double)(var1 * 3));
+    }
+ 
+    public float e(float var1) {

@@ -1,15 +1,15 @@
 --- minecraft/src/net/minecraft/entity/SharedMonsterAttributes.java
 +++ src/main/java/net/minecraft/entity/SharedMonsterAttributes.java
 @@ -38,11 +38,11 @@
-    private static NBTTagCompound writeAttributeInstanceToNBT(IAttributeInstance var0) {
+    private static NBTTagCompound a(IAttributeInstance var0) {
        NBTTagCompound var1 = new NBTTagCompound();
        IAttribute var2 = var0.getAttribute();
-       var1.setString("Name", var2.getAttributeUnlocalizedName());
-       var1.setDouble("Base", var0.getBaseValue());
--      Collection var3 = var0.getModifiers();
-+      Collection<AttributeModifier> var3 = var0.getModifiers();
+       var1.setString("Name", var2.getName());
+       var1.setDouble("Base", var0.b());
+-      Collection var3 = var0.c();
++      Collection<AttributeModifier> var3 = var0.c();
        if(var3 != null && !var3.isEmpty()) {
           NBTTagList var4 = new NBTTagList();
  
           for(AttributeModifier var6 : var3) {
-             if(var6.isSaved()) {
+             if(var6.e()) {

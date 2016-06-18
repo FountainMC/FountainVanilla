@@ -1,0 +1,21 @@
+--- minecraft/src/net/minecraft/util/text/TextComponentBase.java
++++ src/main/java/net/minecraft/util/text/TextComponentBase.java
+@@ -67,16 +67,16 @@
+       return var1.toString();
+    }
+ 
+    public static Iterator<ITextComponent> a(Iterable<ITextComponent> var0) {
+       Iterator var1 = Iterators.concat(Iterators.transform(var0.iterator(), new Function<ITextComponent, Iterator<ITextComponent>>() {
+-         public Iterator<ITextComponent> a(@Nullable ITextComponent var1) {
++         public Iterator<ITextComponent> apply(@Nullable ITextComponent var1) {
+             return var1.iterator();
+          }
+       }));
+       var1 = Iterators.transform(var1, new Function<ITextComponent, ITextComponent>() {
+-         public ITextComponent a(@Nullable ITextComponent var1) {
++         public ITextComponent apply(@Nullable ITextComponent var1) {
+             ITextComponent var2 = var1.f();
+             var2.setChatModifier(var2.getChatModifier().n());
+             return var2;
+          }
+       });

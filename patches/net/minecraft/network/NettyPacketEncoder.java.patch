@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/network/NettyPacketEncoder.java
++++ src/main/java/net/minecraft/network/NettyPacketEncoder.java
+@@ -21,11 +21,11 @@
+ 
+    public NettyPacketEncoder(EnumPacketDirection var1) {
+       this.c = var1;
+    }
+ 
+-   protected void a(ChannelHandlerContext var1, Packet<?> var2, ByteBuf var3) throws Exception {
++   protected void encode(ChannelHandlerContext var1, Packet<?> var2, ByteBuf var3) throws Exception {
+       Integer var4 = ((EnumConnectionState)var1.channel().attr(NetworkManager.c).get()).a(this.c, var2);
+       if(a.isDebugEnabled()) {
+          a.debug(b, "OUT: [{}:{}] {}", new Object[]{var1.channel().attr(NetworkManager.c).get(), var4, var2.getClass().getName()});
+       }
+ 

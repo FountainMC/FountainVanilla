@@ -1,44 +1,39 @@
 --- minecraft/src/net/minecraft/enchantment/EnchantmentHelper.java
 +++ src/main/java/net/minecraft/enchantment/EnchantmentHelper.java
-@@ -158,11 +158,11 @@
+@@ -159,11 +159,11 @@
        }
  
     }
  
-    public static int getMaxEnchantmentLevel(Enchantment var0, EntityLivingBase var1) {
--      Iterable var2 = var0.getEntityEquipment(var1);
-+      Iterable<ItemStack> var2 = var0.getEntityEquipment(var1);
+    public static int a(Enchantment var0, EntityLivingBase var1) {
+-      Iterable var2 = var0.a(var1);
++      Iterable<ItemStack> var2 = var0.a(var1);
        if(var2 == null) {
           return 0;
        } else {
           int var3 = 0;
  
-@@ -213,15 +213,15 @@
-       return getMaxEnchantmentLevel(Enchantments.AQUA_AFFINITY, var0) > 0;
+@@ -218,11 +218,11 @@
+       return a(Enchantments.j, var0) > 0;
     }
  
     @Nullable
-    public static ItemStack getEnchantedItem(Enchantment var0, EntityLivingBase var1) {
--      Iterable var2 = var0.getEntityEquipment(var1);
-+      Iterable<ItemStack> var2 = var0.getEntityEquipment(var1);
+    public static ItemStack b(Enchantment var0, EntityLivingBase var1) {
+-      Iterable var2 = var0.a(var1);
++      Iterable<ItemStack> var2 = var0.a(var1);
        if(var2 == null) {
           return null;
        } else {
--         ArrayList var3 = Lists.newArrayList();
-+         ArrayList<ItemStack> var3 = Lists.newArrayList();
+          ArrayList var3 = Lists.newArrayList();
  
-          for(ItemStack var5 : var2) {
-             if(var5 != null && getEnchantmentLevel(var0, var5) > 0) {
-                var3.add(var5);
-             }
-@@ -246,11 +246,11 @@
+@@ -251,11 +251,11 @@
        }
     }
  
-    public static ItemStack addRandomEnchantment(Random var0, ItemStack var1, int var2, boolean var3) {
+    public static ItemStack a(Random var0, ItemStack var1, int var2, boolean var3) {
        boolean var4 = var1.getItem() == Items.BOOK;
--      List var5 = buildEnchantmentList(var0, var1, var2, var3);
-+      List<EnchantmentData> var5 = buildEnchantmentList(var0, var1, var2, var3);
+-      List var5 = b(var0, var1, var2, var3);
++      List<EnchantmentData> var5 = b(var0, var1, var2, var3);
        if(var4) {
           var1.setItem(Items.ENCHANTED_BOOK);
        }

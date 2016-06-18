@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/entity/monster/EntityEnderman.java
++++ src/main/java/net/minecraft/entity/monster/EntityEnderman.java
+@@ -75,11 +75,11 @@
+       this.goalSelector.a(10, new EntityEnderman.PathfinderGoalEndermanPlaceBlock(this));
+       this.goalSelector.a(11, new EntityEnderman.PathfinderGoalEndermanPickupBlock(this));
+       this.targetSelector.a(1, new EntityEnderman.PathfinderGoalPlayerWhoLookedAtTarget(this));
+       this.targetSelector.a(2, new EntityAIHurtByTarget(this, false, new Class[0]));
+       this.targetSelector.a(3, new EntityAINearestAttackableTarget(this, EntityEndermite.class, 10, true, false, new Predicate<EntityEndermite>() {
+-         public boolean a(@Nullable EntityEndermite var1) {
++         public boolean apply(@Nullable EntityEndermite var1) {
+             return var1.o();
+          }
+       }));
+    }
+ 
+@@ -328,11 +328,11 @@
+       }
+ 
+       public boolean a() {
+          double var1 = this.i();
+          this.j = this.i.world.a(this.i.locX, this.i.locY, this.i.locZ, var1, var1, (Function<EntityPlayer, Double>)null, new Predicate<EntityPlayer>() {
+-            public boolean a(@Nullable EntityPlayer var1) {
++            public boolean apply(@Nullable EntityPlayer var1) {
+                return var1 != null && PathfinderGoalPlayerWhoLookedAtTarget.this.i.c(var1);
+             }
+          });
+          return this.j != null;
+       }

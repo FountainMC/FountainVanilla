@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/stats/Achievement.java
++++ src/main/java/net/minecraft/stats/Achievement.java
+@@ -28,19 +28,21 @@
+ 
+    public Achievement(String var1, String var2, int var3, int var4, ItemStack var5, Achievement var6) {
+       super(var1, new TextComponentTranslation("achievement." + var2, new Object[0]));
+       this.d = var5;
+       this.k = "achievement." + var2 + ".desc";
+-      this.a = var3;
+-      this.b = var4;
++      int a_proxy = var3;
++      int b_proxy = var4;
+       if(var3 < AchievementList.a) {
+-         a = var3;
++          a_proxy = var3;
+       }
++      this.a = a_proxy;
+ 
+       if(var4 < AchievementList.b) {
+-         b = var4;
++         b_proxy = var4;
+       }
++      this.b = b_proxy;
+ 
+       if(var3 > AchievementList.c) {
+          AchievementList.c = var3;
+       }
+ 

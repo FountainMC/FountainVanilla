@@ -1,0 +1,28 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityOcelot.java
++++ src/main/java/net/minecraft/entity/passive/EntityOcelot.java
+@@ -163,11 +163,11 @@
+       return LootTableList.L;
+    }
+ 
+    public boolean a(EntityPlayer var1, EnumHand var2, @Nullable ItemStack var3) {
+       if(this.isTamed()) {
+-         if(this.d(var1) && !this.world.isClientSide && !this.e(var3)) {
++         if(this.d((net.minecraft.entity.EntityLivingBase)var1) && !this.world.isClientSide && !this.e(var3)) {
+             this.goalSit.setSitting(!this.isSitting());
+          }
+       } else if((this.bD == null || this.bD.f()) && var3 != null && var3.getItem() == Items.FISH && var1.h(this) < 9.0D) {
+          if(!var1.abilities.canInstantlyBuild) {
+             --var3.count;
+@@ -191,11 +191,11 @@
+       }
+ 
+       return super.a(var1, var2, var3);
+    }
+ 
+-   public EntityOcelot b(EntityAgeable var1) {
++   public EntityOcelot createChild(EntityAgeable var1) {
+       EntityOcelot var2 = new EntityOcelot(this.world);
+       if(this.isTamed()) {
+          var2.setOwnerUUID(this.getOwnerUUID());
+          var2.setTamed(true);
+          var2.setCatType(this.getCatType());

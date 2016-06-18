@@ -1,27 +1,32 @@
 --- minecraft/src/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
 +++ src/main/java/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
-@@ -160,10 +160,11 @@
+@@ -160,15 +160,11 @@
  
-          while(true) {
-             if(this.writeNextIO()) {
-                continue;
-             }
-+            break; // Fountain - Fix infinite loop
-          }
+    public void b() {
+       try {
+          this.f = true;
+ 
+-         while(true) {
+-            if(this.c()) {
+-               continue;
+-            }
+-         }
++         while(this.c());
        } finally {
-          this.savingExtraData = false;
+          this.f = false;
        }
  
-@@ -227,11 +228,11 @@
-          NBTTagCompound var27 = var24.writeToNBT(new NBTTagCompound());
-          var19.appendTag(var27);
+    }
+@@ -258,11 +254,11 @@
+          NBTTagCompound var27 = var24.save(new NBTTagCompound());
+          var19.add(var27);
        }
  
-       var3.setTag("TileEntities", var19);
--      List var22 = var2.getPendingBlockUpdates(var1, false);
-+      List<NextTickListEntry> var22 = var2.getPendingBlockUpdates(var1, false);
+       var3.set("TileEntities", var19);
+-      List var22 = var2.a(var1, false);
++      List<NextTickListEntry> var22 = var2.a(var1, false);
        if(var22 != null) {
-          long var25 = var2.getTotalWorldTime();
+          long var25 = var2.getTime();
           NBTTagList var28 = new NBTTagList();
  
           for(NextTickListEntry var30 : var22) {

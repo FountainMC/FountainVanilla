@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockRailPowered.java
++++ src/main/java/net/minecraft/block/BlockRailPowered.java
+@@ -14,11 +14,11 @@
+ import net.minecraft.util.math.BlockPos;
+ import net.minecraft.world.World;
+ 
+ public class BlockRailPowered extends BlockRailBase {
+    public static final PropertyEnum<BlockRailBase.EnumTrackPosition> SHAPE = PropertyEnum.a("shape", BlockRailBase.EnumTrackPosition.class, new Predicate<BlockRailBase.EnumTrackPosition>() {
+-      public boolean a(@Nullable BlockRailBase.EnumTrackPosition var1) {
++      public boolean apply(@Nullable BlockRailBase.EnumTrackPosition var1) {
+          return var1 != BlockRailBase.EnumTrackPosition.NORTH_EAST && var1 != BlockRailBase.EnumTrackPosition.NORTH_WEST && var1 != BlockRailBase.EnumTrackPosition.SOUTH_EAST && var1 != BlockRailBase.EnumTrackPosition.SOUTH_WEST;
+       }
+    });
+    public static final PropertyBool POWERED = PropertyBool.of("powered");
+ 

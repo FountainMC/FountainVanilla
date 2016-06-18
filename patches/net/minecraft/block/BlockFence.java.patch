@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/block/BlockFence.java
++++ src/main/java/net/minecraft/block/BlockFence.java
+@@ -42,11 +42,11 @@
+       this.w(this.blockStateList.getBlockData().set(NORTH, Boolean.valueOf(false)).set(EAST, Boolean.valueOf(false)).set(SOUTH, Boolean.valueOf(false)).set(WEST, Boolean.valueOf(false)));
+       this.a(CreativeTabs.c);
+    }
+ 
+    public void a(IBlockState var1, World var2, BlockPos var3, AxisAlignedBB var4, List<AxisAlignedBB> var5, @Nullable Entity var6) {
+-      var1 = var1.b(var2, var3);
++      var1 = var1.b((IBlockAccess)var2, var3);
+       a(var3, var4, var5, f);
+       if(((Boolean)var1.get(NORTH)).booleanValue()) {
+          a(var3, var4, var5, C);
+       }
+ 

@@ -1,13 +1,13 @@
 --- minecraft/src/net/minecraft/command/EntitySelector.java
 +++ src/main/java/net/minecraft/command/EntitySelector.java
-@@ -56,15 +56,15 @@
+@@ -56,40 +56,40 @@
        return (T)(var3.size() == 1?(Entity)var3.get(0):null);
     }
  
     @Nullable
-    public static ITextComponent matchEntitiesToTextComponent(ICommandSender var0, String var1) {
--      List var2 = matchEntities(var0, var1, Entity.class);
-+      List<Entity> var2 = matchEntities(var0, var1, Entity.class);
+    public static ITextComponent getPlayerNames(ICommandSender var0, String var1) {
+-      List var2 = getPlayers(var0, var1, Entity.class);
++      List<Entity> var2 = getPlayers(var0, var1, Entity.class);
        if(var2.isEmpty()) {
           return null;
        } else {
@@ -15,105 +15,111 @@
 +         ArrayList<ITextComponent> var3 = Lists.newArrayList();
  
           for(Entity var5 : var2) {
-             var3.add(var5.getDisplayName());
+             var3.add(var5.getScoreboardDisplayName());
           }
  
-@@ -73,23 +73,23 @@
+-         return CommandBase.a((List)var3);
++         return CommandBase.a(var3);
+       }
     }
  
-    public static <T extends Entity> List<T> matchEntities(ICommandSender var0, String var1, Class<? extends T> var2) {
-       Matcher var3 = TOKEN_PATTERN.matcher(var1);
-       if(var3.matches() && var0.canCommandSenderUseCommand(1, "@")) {
--         Map var4 = getArgumentMap(var3.group(2));
-+         Map<String, String> var4 = getArgumentMap(var3.group(2));
-          if(!isEntityTypeValid(var0, var4)) {
+    public static <T extends Entity> List<T> getPlayers(ICommandSender var0, String var1, Class<? extends T> var2) {
+       Matcher var3 = a.matcher(var1);
+       if(var3.matches() && var0.a(1, "@")) {
+-         Map var4 = c(var3.group(2));
++         Map<String, String> var4 = c(var3.group(2));
+          if(!b(var0, var4)) {
              return Collections.emptyList();
           } else {
              String var5 = var3.group(1);
-             BlockPos var6 = getBlockPosFromArguments(var4, var0.getPosition());
-             Vec3d var7 = getPosFromArguments(var4, var0.getPositionVector());
--            List var8 = getWorlds(var0, var4);
--            ArrayList var9 = Lists.newArrayList();
-+            List<World> var8 = getWorlds(var0, var4);
-+            ArrayList<Entity> var9 = Lists.newArrayList();
+             BlockPos var6 = a(var4, var0.getChunkCoordinates());
+             Vec3d var7 = b(var4, var0.d());
+-            List var8 = a(var0, var4);
++            List<World> var8 = a(var0, var4);
+             ArrayList var9 = Lists.newArrayList();
  
              for(World var11 : var8) {
                 if(var11 != null) {
 -                  ArrayList var12 = Lists.newArrayList();
 +                  ArrayList<Predicate<Entity>> var12 = Lists.newArrayList();
-                   var12.addAll(getTypePredicates(var4, var5));
-                   var12.addAll(getXpLevelPredicates(var4));
-                   var12.addAll(getGamemodePredicates(var4));
-                   var12.addAll(getTeamPredicates(var4));
-                   var12.addAll(getScorePredicates(var0, var4));
-@@ -99,11 +99,11 @@
-                   var12.addAll(getRotationsPredicates(var4));
-                   var9.addAll(filterResults(var4, var2, var12, var5, var11, var6));
-                }
-             }
- 
--            return getEntitiesFromPredicates(var9, var4, var0, var2, var5, var7);
-+            return (List<T>) getEntitiesFromPredicates(var9, var4, var0, var2, var5, var7);
-          }
-       } else {
-          return Collections.emptyList();
-       }
-    }
-@@ -132,16 +132,16 @@
+                   var12.addAll(a(var4, var5));
+                   var12.addAll(b(var4));
+                   var12.addAll(c(var4));
+                   var12.addAll(d(var4));
+                   var12.addAll(c(var0, var4));
+@@ -132,30 +132,31 @@
        }
     }
  
-    private static List<Predicate<Entity>> getTypePredicates(Map<String, String> var0, String var1) {
+    private static List<Predicate<Entity>> a(Map<String, String> var0, String var1) {
        ArrayList var2 = Lists.newArrayList();
--      final String var3 = getArgument(var0, "type");
-+      String var3 = getArgument(var0, "type");
+-      final String var3 = b(var0, "type");
++      String var3 = b(var0, "type");
        final boolean var4 = var3 != null && var3.startsWith("!");
        if(var4) {
           var3 = var3.substring(1);
        }
--
 +      final String var3f = var3;
+ 
        boolean var6 = !var1.equals("e");
        boolean var7 = var1.equals("r") && var3 != null;
        if((var3 == null || !var1.equals("e")) && !var7) {
           if(var6) {
              var2.add(new Predicate<Entity>() {
-@@ -151,11 +151,11 @@
+-               public boolean a(@Nullable Entity var1) {
++               public boolean apply(@Nullable Entity var1) {
+                   return var1 instanceof EntityPlayer;
+                }
              });
           }
        } else {
           var2.add(new Predicate<Entity>() {
-             public boolean apply(@Nullable Entity var1) {
--               return EntityList.isStringEntityName(var1, var3) != var4;
-+               return EntityList.isStringEntityName(var1, var3f) != var4;
+-            public boolean a(@Nullable Entity var1) {
+-               return EntityList.a(var1, var3) != var4;
++            public boolean apply(@Nullable Entity var1) {
++               return EntityList.a(var1, var3f) != var4;
              }
           });
        }
  
        return var2;
-@@ -190,61 +190,62 @@
+@@ -165,11 +166,11 @@
+       ArrayList var1 = Lists.newArrayList();
+       final int var2 = a(var0, "lm", -1);
+       final int var3 = a(var0, "l", -1);
+       if(var2 > -1 || var3 > -1) {
+          var1.add(new Predicate<Entity>() {
+-            public boolean a(@Nullable Entity var1) {
++            public boolean apply(@Nullable Entity var1) {
+                if(!(var1 instanceof EntityPlayerMP)) {
+                   return false;
+                } else {
+                   EntityPlayerMP var2x = (EntityPlayerMP)var1;
+                   return (var2 <= -1 || var2x.expLevel >= var2) && (var3 <= -1 || var2x.expLevel <= var3);
+@@ -190,63 +191,65 @@
           final boolean var3 = var2.startsWith("!");
           if(var3) {
              var2 = var2.substring(1);
           }
  
--         final WorldSettings.a var4;
-+         WorldSettings.a var4;
+-         final EnumGamemode var4;
++         EnumGamemode var4;
           try {
              int var5 = Integer.parseInt(var2);
-             var4 = WorldSettings.a.parseGameTypeWithDefault(var5, WorldSettings.a.NOT_SET);
+             var4 = EnumGamemode.a(var5, EnumGamemode.NOT_SET);
           } catch (Throwable var6) {
-             var4 = WorldSettings.a.parseGameTypeWithDefault(var2, WorldSettings.a.NOT_SET);
+             var4 = EnumGamemode.a(var2, EnumGamemode.NOT_SET);
           }
++         final EnumGamemode var4f = var4; 
  
-+         final WorldSettings.a var4f = var4;
           var1.add(new Predicate<Entity>() {
-             public boolean apply(@Nullable Entity var1) {
+-            public boolean a(@Nullable Entity var1) {
++            public boolean apply(@Nullable Entity var1) {
                 if(!(var1 instanceof EntityPlayerMP)) {
                    return false;
                 } else {
                    EntityPlayerMP var2 = (EntityPlayerMP)var1;
-                   WorldSettings.a var3x = var2.interactionManager.getGameType();
+                   EnumGamemode var3x = var2.playerInteractManager.getGameMode();
 -                  return var3?var3x != var4:var3x == var4;
 +                  return var3?var3x != var4f:var3x == var4f;
                 }
@@ -123,25 +129,26 @@
        }
     }
  
-    private static List<Predicate<Entity>> getTeamPredicates(Map<String, String> var0) {
+    private static List<Predicate<Entity>> d(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
--      final String var2 = getArgument(var0, "team");
-+      String var2 = getArgument(var0, "team");
+-      final String var2 = b(var0, "team");
++      String var2 = b(var0, "team");
        final boolean var3 = var2 != null && var2.startsWith("!");
        if(var3) {
           var2 = var2.substring(1);
        }
--
 +      final String var2f = var2;
+ 
        if(var2 != null) {
           var1.add(new Predicate<Entity>() {
-             public boolean apply(@Nullable Entity var1) {
+-            public boolean a(@Nullable Entity var1) {
++            public boolean apply(@Nullable Entity var1) {
                 if(!(var1 instanceof EntityLivingBase)) {
                    return false;
                 } else {
                    EntityLivingBase var2x = (EntityLivingBase)var1;
-                   Team var3x = var2x.getTeam();
-                   String var4 = var3x == null?"":var3x.getRegisteredName();
+                   Team var3x = var2x.aQ();
+                   String var4 = var3x == null?"":var3x.getName();
 -                  return var4.equals(var2) != var3;
 +                  return var4.equals(var2f) != var3;
                 }
@@ -152,32 +159,36 @@
        return var1;
     }
  
-    private static List<Predicate<Entity>> getScorePredicates(final ICommandSender var0, Map<String, String> var1) {
--      final Map var2 = getScoreMap(var1);
-+      final Map<String, Integer> var2 = getScoreMap(var1);
+    private static List<Predicate<Entity>> c(final ICommandSender var0, Map<String, String> var1) {
+-      final Map var2 = a(var1);
++      final Map<String, Integer> var2 = a(var1);
        return (List<Predicate<Entity>>)(var2.isEmpty()?Collections.emptyList():Lists.newArrayList(new Predicate[]{new Predicate<Entity>() {
-          public boolean apply(@Nullable Entity var1) {
+-         public boolean a(@Nullable Entity var1) {
++         public boolean apply(@Nullable Entity var1) {
              if(var1 == null) {
                 return false;
              } else {
-@@ -285,39 +286,39 @@
+                Scoreboard var2x = var0.h().getWorldServer(0).getScoreboard();
+ 
+@@ -285,39 +288,41 @@
        }}));
     }
  
-    private static List<Predicate<Entity>> getNamePredicates(Map<String, String> var0) {
+    private static List<Predicate<Entity>> e(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
--      final String var2 = getArgument(var0, "name");
-+      String var2 = getArgument(var0, "name");
+-      final String var2 = b(var0, "name");
++      String var2 = b(var0, "name");
        final boolean var3 = var2 != null && var2.startsWith("!");
        if(var3) {
           var2 = var2.substring(1);
        }
--
 +      final String var2f = var2;
+ 
        if(var2 != null) {
           var1.add(new Predicate<Entity>() {
-             public boolean apply(@Nullable Entity var1) {
+-            public boolean a(@Nullable Entity var1) {
 -               return var1 != null && var1.getName().equals(var2) != var3;
++            public boolean apply(@Nullable Entity var1) {
 +               return var1 != null && var1.getName().equals(var2f) != var3;
              }
           });
@@ -186,31 +197,93 @@
        return var1;
     }
  
-    private static List<Predicate<Entity>> getTagPredicates(Map<String, String> var0) {
+    private static List<Predicate<Entity>> f(Map<String, String> var0) {
        ArrayList var1 = Lists.newArrayList();
--      final String var2 = getArgument(var0, "tag");
-+      String var2 = getArgument(var0, "tag");
+-      final String var2 = b(var0, "tag");
++      String var2 = b(var0, "tag");
        final boolean var3 = var2 != null && var2.startsWith("!");
        if(var3) {
           var2 = var2.substring(1);
        }
--
 +      final String var2f = var2;
+ 
        if(var2 != null) {
           var1.add(new Predicate<Entity>() {
-             public boolean apply(@Nullable Entity var1) {
--               return var1 == null?false:("".equals(var2)?var1.getTags().isEmpty() != var3:var1.getTags().contains(var2) != var3);
-+               return var1 == null?false:("".equals(var2f)?var1.getTags().isEmpty() != var3:var1.getTags().contains(var2f) != var3);
+-            public boolean a(@Nullable Entity var1) {
+-               return var1 == null?false:("".equals(var2)?var1.P().isEmpty() != var3:var1.P().contains(var2) != var3);
++            public boolean apply(@Nullable Entity var1) {
++               return var1 == null?false:("".equals(var2f)?var1.P().isEmpty() != var3:var1.P().contains(var2f) != var3);
              }
           });
        }
  
        return var1;
-@@ -444,11 +445,11 @@
+@@ -334,11 +339,11 @@
+          double var8 = Math.max(var2, 1.0E-4D);
+          final double var10 = var8 * var8;
+          double var12 = Math.max(var4, 1.0E-4D);
+          final double var14 = var12 * var12;
+          return Lists.newArrayList(new Predicate[]{new Predicate<Entity>() {
+-            public boolean a(@Nullable Entity var1x) {
++            public boolean apply(@Nullable Entity var1x) {
+                if(var1x == null) {
+                   return false;
+                } else {
+                   double var2 = var1.c(var1x.locX, var1x.locY, var1x.locZ);
+                   return (var6 || var2 >= var10) && (var7 || var2 <= var14);
+@@ -352,11 +357,11 @@
+       ArrayList var1 = Lists.newArrayList();
+       if(var0.containsKey("rym") || var0.containsKey("ry")) {
+          final int var2 = MathHelper.b(a(var0, "rym", 0));
+          final int var3 = MathHelper.b(a(var0, "ry", 359));
+          var1.add(new Predicate<Entity>() {
+-            public boolean a(@Nullable Entity var1) {
++            public boolean apply(@Nullable Entity var1) {
+                if(var1 == null) {
+                   return false;
+                } else {
+                   int var2x = MathHelper.b(MathHelper.d(var1.yaw));
+                   return var2 > var3?var2x >= var2 || var2x <= var3:var2x >= var2 && var2x <= var3;
+@@ -367,11 +372,11 @@
+ 
+       if(var0.containsKey("rxm") || var0.containsKey("rx")) {
+          final int var4 = MathHelper.b(a(var0, "rxm", 0));
+          final int var5 = MathHelper.b(a(var0, "rx", 359));
+          var1.add(new Predicate<Entity>() {
+-            public boolean a(@Nullable Entity var1) {
++            public boolean apply(@Nullable Entity var1) {
+                if(var1 == null) {
+                   return false;
+                } else {
+                   int var2 = MathHelper.b(MathHelper.d(var1.pitch));
+                   return var4 > var5?var2 >= var4 || var2 <= var5:var2 >= var4 && var2 <= var5;
+@@ -415,11 +420,11 @@
+          }
+       } else {
+          final AxisAlignedBB var19 = a(var5, var10, var11, var12);
+          if(var8 && var18 && !var9) {
+             Predicate var20 = new Predicate<Entity>() {
+-               public boolean a(@Nullable Entity var1) {
++               public boolean apply(@Nullable Entity var1) {
+                   return var1 != null && var19.b(var1.getBoundingBox());
+                }
+             };
+             var6.addAll(var4.b(var1, Predicates.and(var15, var20)));
+          } else {
+@@ -436,19 +441,19 @@
+          if(var4.equals("r")) {
+             Collections.shuffle((List)var0);
+          }
+       } else {
+          Collections.sort((List)var0, new Comparator<Entity>() {
+-            public int a(Entity var1, Entity var2) {
++            public int compare(Entity var1, Entity var2) {
+                return ComparisonChain.start().compare(var1.e(var5.x, var5.y, var5.z), var2.e(var5.x, var5.y, var5.z)).result();
+             }
           });
        }
  
-       Entity var7 = var2.getCommandSenderEntity();
+       Entity var7 = var2.f();
        if(var7 != null && var3.isAssignableFrom(var7.getClass()) && var6 == 1 && ((List)var0).contains(var7) && !"r".equals(var4)) {
 -         var0 = Lists.newArrayList(new Entity[]{var7});
 +         var0 = (List<T>) Lists.newArrayList(new Entity[]{var7});

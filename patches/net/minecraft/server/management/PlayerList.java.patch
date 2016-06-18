@@ -1,45 +1,15 @@
 --- minecraft/src/net/minecraft/server/management/PlayerList.java
 +++ src/main/java/net/minecraft/server/management/PlayerList.java
-@@ -291,10 +291,11 @@
-       this.uuidToPlayerMap.put(var1.getUniqueID(), var1);
-       this.sendPacketToAllPlayers(new SPacketPlayerListItem(SPacketPlayerListItem.a.ADD_PLAYER, new EntityPlayerMP[]{var1}));
-       WorldServer var2 = this.mcServer.worldServerForDimension(var1.dimension);
- 
-       for(int var3 = 0; var3 < this.playerEntityList.size(); ++var3) {
-+         if (!var1.getFountainEntity().canSee(var1)) continue; // Fountain
-          var1.connection.sendPacket(new SPacketPlayerListItem(SPacketPlayerListItem.a.ADD_PLAYER, new EntityPlayerMP[]{(EntityPlayerMP)this.playerEntityList.get(var3)}));
-       }
- 
-       var2.spawnEntityInWorld(var1);
-       this.preparePlayer(var1, (WorldServer)null);
-@@ -360,11 +361,11 @@
+@@ -363,11 +363,11 @@
        }
     }
  
-    public EntityPlayerMP createPlayerForUser(GameProfile var1) {
-       UUID var2 = EntityPlayer.getUUID(var1);
+    public EntityPlayerMP processLogin(GameProfile var1) {
+       UUID var2 = EntityPlayer.a(var1);
 -      ArrayList var3 = Lists.newArrayList();
 +      ArrayList<EntityPlayerMP> var3 = Lists.newArrayList();
  
-       for(int var4 = 0; var4 < this.playerEntityList.size(); ++var4) {
-          EntityPlayerMP var5 = (EntityPlayerMP)this.playerEntityList.get(var4);
+       for(int var4 = 0; var4 < this.players.size(); ++var4) {
+          EntityPlayerMP var5 = (EntityPlayerMP)this.players.get(var4);
           if(var5.getUniqueID().equals(var2)) {
              var3.add(var5);
-@@ -802,13 +803,15 @@
- 
-       var1.interactionManager.initializeGameType(var3.getWorldInfo().getGameType());
-    }
- 
-    public void removeAllPlayers() {
--      for(int var1 = 0; var1 < this.playerEntityList.size(); ++var1) {
--         ((EntityPlayerMP)this.playerEntityList.get(var1)).connection.kickPlayerFromServer("Server closed");
-+      // Fountain start
-+      for(EntityPlayerMP player : com.google.common.collect.ImmutableList.copyOf(playerEntityList)) {
-+         player.connection.kickPlayerFromServer(org.fountainmc.FountainConfig.getInstance().getServerClosedMessage());
-       }
-+      // Fountain end
- 
-    }
- 
-    public void sendChatMsgImpl(ITextComponent var1, boolean var2) {
-       this.mcServer.addChatMessage(var1);

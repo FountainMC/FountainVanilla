@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/item/crafting/ShapedRecipes.java
++++ src/main/java/net/minecraft/item/crafting/ShapedRecipes.java
+@@ -93,11 +93,11 @@
+       ItemStack var2 = this.b().cloneItemStack();
+       if(this.e) {
+          for(int var3 = 0; var3 < var1.getSize(); ++var3) {
+             ItemStack var4 = var1.getItem(var3);
+             if(var4 != null && var4.hasTag()) {
+-               var2.setTag(var4.getTag().g());
++               var2.setTag(var4.getTag().clone());
+             }
+          }
+       }
+ 
+       return var2;

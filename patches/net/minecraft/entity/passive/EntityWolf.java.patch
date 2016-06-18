@@ -1,0 +1,41 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityWolf.java
++++ src/main/java/net/minecraft/entity/passive/EntityWolf.java
+@@ -85,11 +85,11 @@
+       this.goalSelector.a(9, new EntityAILookIdle(this));
+       this.targetSelector.a(1, new EntityAIOwnerHurtByTarget(this));
+       this.targetSelector.a(2, new EntityAIOwnerHurtTarget(this));
+       this.targetSelector.a(3, new EntityAIHurtByTarget(this, true, new Class[0]));
+       this.targetSelector.a(4, new EntityAITargetNonTamed(this, EntityAnimal.class, false, new Predicate<Entity>() {
+-         public boolean a(@Nullable Entity var1) {
++         public boolean apply(@Nullable Entity var1) {
+             return var1 instanceof EntitySheep || var1 instanceof EntityRabbit;
+          }
+       }));
+       this.targetSelector.a(5, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, false));
+    }
+@@ -297,11 +297,11 @@
+                   return true;
+                }
+             }
+          }
+ 
+-         if(this.d(var1) && !this.world.isClientSide && !this.e(var3)) {
++         if(this.d((EntityLivingBase)var1) && !this.world.isClientSide && !this.e(var3)) {
+             this.goalSit.setSitting(!this.isSitting());
+             this.be = false;
+             this.navigation.o();
+             this.setGoalTarget((EntityLivingBase)null);
+          }
+@@ -360,11 +360,11 @@
+ 
+    public void setCollarColor(EnumDyeColor var1) {
+       this.datawatcher.set(bD, Integer.valueOf(var1.getInvColorIndex()));
+    }
+ 
+-   public EntityWolf b(EntityAgeable var1) {
++   public EntityWolf createChild(EntityAgeable var1) {
+       EntityWolf var2 = new EntityWolf(this.world);
+       UUID var3 = this.getOwnerUUID();
+       if(var3 != null) {
+          var2.setOwnerUUID(var3);
+          var2.setTamed(true);

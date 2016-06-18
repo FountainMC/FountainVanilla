@@ -1,0 +1,15 @@
+--- minecraft/src/net/minecraft/entity/passive/EntityHorse.java
++++ src/main/java/net/minecraft/entity/passive/EntityHorse.java
+@@ -64,11 +64,11 @@
+ import net.minecraft.world.DifficultyInstance;
+ import net.minecraft.world.World;
+ 
+ public class EntityHorse extends EntityAnimal implements IInventoryChangedListener, IJumpingMount {
+    private static final Predicate<Entity> bD = new Predicate<Entity>() {
+-      public boolean a(@Nullable Entity var1) {
++      public boolean apply(@Nullable Entity var1) {
+          return var1 instanceof EntityHorse && ((EntityHorse)var1).dt();
+       }
+    };
+    public static final IAttribute attributeJumpStrength = (new RangedAttribute((IAttribute)null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).a("Jump Strength").a(true);
+    private static final UUID bF = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
