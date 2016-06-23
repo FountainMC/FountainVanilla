@@ -2,7 +2,7 @@
 
 import os
 from os import path
-from scripts.core import minecraft_version
+from scripts.core import minecraft_version, mappings_path
 from urllib.request import urlretrieve
 from subprocess import run, DEVNULL
 from zipfile import ZipFile
@@ -19,7 +19,7 @@ if not path.exists(vanillaJar):
     urlretrieve("https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar".format(minecraft_version), "minecraft/" + minecraft_version + ".jar")
 
 print("Applying mappings...")
-run(["java", "-XX:+UseG1GC", "-jar", "lib/SpecialSource.jar", "map", "-i", "minecraft/{}.jar".format(minecraft_version), "-m", "mappings/obf2mcp.srg", "-o", "minecraft/{0}-mapped.jar".format(minecraft_version)], check=True, stdout=DEVNULL)
+run(["java", "-XX:+UseG1GC", "-jar", "lib/SpecialSource.jar", "map", "-i", "minecraft/{}.jar".format(minecraft_version), "-m", mappings_path, "-o", "minecraft/{0}-mapped.jar".format(minecraft_version)], check=True, stdout=DEVNULL)
 
 print("Extracting Minecraft classes")
 with ZipFile("minecraft/{0}-mapped.jar".format(minecraft_version), "r") as minecraftJar:

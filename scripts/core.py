@@ -9,17 +9,24 @@ from subprocess import run, PIPE
 
 minecraft_version="1.9.4"
 jdiff_jar=path.join("work", "JDiff.jar")
+mappings_path=path.join("mappings", "obf2mcp-" + minecraft_version + ".srg")
 
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
 def setup():
     if not path.exists("work"): os.mkdir("work")
+    if not path.exists("mappings"): os.mkdir("mappings")
+
+    if not path.exists(mappings_path):
+        print("Downloading mappings for", minecraft_version, "to", mappings_path)
+        urlretrieve("https://raw.githubusercontent.com/Techcable/MinecraftMappings/master/" + minecraft_version + "/obf2mcp.srg", mappings_path)
+        print("Done downloading mappings")
 
     if not path.exists(jdiff_jar):
         print("Downloading JDiff jar")
         urlretrieve('https://github.com/Techcable/JDiff/releases/download/v1.0.1/JDiff.jar', jdiff_jar)
-        print("Done downloading")
+        print("Done downloading JDiff")
 
     if not shutil.which("java"):
         eprint("Java not found")
